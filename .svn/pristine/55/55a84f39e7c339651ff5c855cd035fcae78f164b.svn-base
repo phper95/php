@@ -1,0 +1,58 @@
+		<div class="readInfo">
+			欢迎加入图解电影创作团这个有爱的大家庭。在图解电影的乐趣与交流分享的愉悦之外，凡 <span style="font-weight:bold;color:#ee2200;">获取等级评定</span> 的作品，还将获得由图解电影提供的独家稿酬。
+			请认真填写以下信息，以便届时顺利发放稿酬。如有疑问可咨询图解电影GM官方QQ：1470937559喔。
+		</div>
+		<div class="readInfo">
+			Tips：<br />
+			请认真填写你的信息，确保无误，以便我们能及时联系到你；<br />
+			请正确填写银行卡/支付宝信息和手机号码，以便我们能尽快发放稿费给你；<br />
+			请使用正确的通讯地址以便今后寄送相关协议文件。<br />
+			谢谢支持！
+		</div>
+		<if condition="isset($qian)" >
+			<div class="readInfo">
+				编辑部签约信息<br />
+				签约状态：{$qi_state[$qian]}
+				<eq name="qian" value="2">
+					<br />签约到期时间：{$qian_time}
+					<if condition="strtotime($qian_time) lt (NOW_TIME + 86400 * 15)">
+						<span style="color:#ee2200"> 即将到期 </span>
+						<a href="javascript:void(0);" id="xuqian" style="color:#00aaff;"> 申请续签？</a>
+						<script>
+							$('#xuqian').click(function(){
+								var html = '<form style="padding:20px 0px;"  id="form" action="'+"{:U('Bianji/xuqian')}"+'" method="post" enctype="multipart/form-data">';
+								html += '<label><input type="checkbox" value="1" name="agree" id="agree"/> 阅读并同意 </label><a>《蜀黍科技进基协议》</a>';
+								html += '</form>';
+								art.dialog({
+									id:'xuqian_dialog',
+									title:false,
+									content:html,
+									ok:function(){
+										if ($('#agree').attr('checked') != 'checked') {
+											boo_common.showMsg('请阅读并同意《蜀黍科技进基协议》');return false;
+										}
+										$('#form').submit();
+										$('#xuqian').off('click');
+									},
+									cancel:true,
+									okVal:'申请'
+								});
+							});
+						</script>
+					</if>
+				</eq>
+				<eq name="qian" value="3">
+					<br />失败原因：<span style="color:#ee2200;">{$reason}</span>
+				</eq>
+			</div>
+		<elseif condition="isset($idcard)"/>
+			<div class="readInfo">
+				编辑部签约信息<br />
+				签约状态：{$state[$idcard]}
+				<eq name="idcard" value="3">
+					<br />失败原因：<span style="color:#ee2200;">{$reason}</span>
+					<a href="{:U('Bianji/index')}" style="color:#00aaff;"> 继续上传？</a>
+				</eq>
+			</div>
+		</if>
+		

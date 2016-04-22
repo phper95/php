@@ -1,0 +1,123 @@
+<include file="Public:header" />
+<script language="javascript" type="text/javascript" src="__JS__/My97Datepicker/WdatePicker.js"></script>
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<!-- Secondary nav -->
+    <div class="secNav">
+        <div class="secWrapper">
+            <!-- Tabs container -->
+            <form method="get" action="{:U('Feedback/index')}">
+            	<input type="hidden" value="{$Think.MODULE_NAME}" name="m"/>
+            	<input type="hidden" value="{$Think.ACTION_NAME}" name="a"/>
+            <div id="tab-container" class="tab-container">
+
+                <ul class="iconsLine ic1 etabs">
+                    <li><a href="#alt2" title="">搜索条件</a></li>
+                </ul>
+                
+                <div class="divider"><span></span></div>
+                
+                <div id="general"></div>
+                
+                <div id="alt1"></div>
+                <div id="alt2">
+                
+                	<!-- Sidebar forms -->
+                    <div class="sideWidget">
+                        <div class="formRow">
+                            <label>用户ID:</label>
+                            <input type="text" name="user_id" value="{$Think.get.user_id|default=''}"/>
+						</div>
+                        <div class="formRow">
+                            <input type="submit" class="buttonS bLightBlue" value="Just 搜索" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"><span></span></div>
+            </form>
+            
+       </div> 
+       <div class="clear"></div>
+   </div>
+</div>
+<!-- Sidebar ends -->
+
+<!-- Content begins -->
+<div id="content">
+
+  <include file="Public:bav" />
+  
+    <!-- Main content -->
+    <div class="wrapper">
+    	<div class="widget check">
+    		<div class="body"><a href="{:U('Pit/index')}" class="buttonS bGreen">占坑管理</a></div>
+    	</div>
+        <!-- Media table sample -->
+        <div class="widget check">
+            <div class="whead">
+            <h6>占坑用户列表</h6>
+				<div class="clear"></div></div>
+            <table cellpadding="0" cellspacing="0" width="100%" class="tDefault checkAll tMedia" id="checkAll">
+                <thead>
+                    <tr>
+		                <td width="50">编号</td>
+		                <td width="50">用户ID</td>
+		                <td>用户名称</td>
+		                <td>可占坑数量</td>
+		                <td>占坑数量</td>
+		                <td>完成坑数量</td>
+		                <td>未完成数量</td>
+		                <td width="80">操作</td>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td colspan="9">
+                        <empty name="list">
+                        	额。。。木有咧……
+                        <else/>
+                            <div class="tPages">
+                                <ul class="pages">
+                                	{$page}
+                                </ul>
+                            </div>
+                        </empty>
+                        </td>
+                        
+                    </tr>
+                </tfoot>
+                <tbody>
+                    <volist name="list" id="vo">
+		            <tr>
+		                <td>{$vo.id}</td>
+		                <td><a href="{:U('Member/index',array('id'=>$vo['user_id'],'backurl'=>urlencode(__SELF__)))}">{$vo.user_id}</a></td>
+		                <td>{$vo.user_name}</td>
+		                <td><a href="{:U('Pit/index', array('user_id'=>$vo['user_id']))}">{$vo.allow_pit}</a></td>
+		                <td>{$vo.doing_pit} </td>
+		                <td>{$vo.done_pit}</td>
+		                <td>{$vo.undone_pit}</td>
+		                <td>
+		                	<a href="{:U('Pit/editPitUser',array('id'=>$vo['id']))}">查看</a>
+		                </td>
+		            </tr>
+		            </volist>
+                </tbody>
+            </table>
+        </div>
+     
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+<script>
+(function(){
+	searchInitValue ({
+		'feedback_search_s_time' : "{:toDate(strtotime('-1 day'), 'Y-m-d')}"
+	});
+})();
+</script>
+<include file="Public:footer" />

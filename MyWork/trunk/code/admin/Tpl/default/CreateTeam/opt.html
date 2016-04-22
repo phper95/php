@@ -1,0 +1,44 @@
+<!-- Secondary nav -->
+    <div class="secNav">
+        <div class="secWrapper">
+            <!-- Tabs container -->
+            <div id="tab-container" class="tab-container">
+                
+                <div class="divider"><span></span></div>
+				<ul class="iconsLine ic1 etabs">
+                    <li><a href="#alt2" title="">创作团管理:</a></li>
+                </ul>                
+                <div class="divider"><span></span></div>
+                <form method="get" action="{:U('Wei/index')}">
+		            <input type="hidden" value="{$Think.MODULE_NAME}" name="m"/>
+		            <input type="hidden" value="{$Think.ACTION_NAME}" name="a"/>
+	                <eq name="ACTION_NAME" value="teamList">
+	                	<div class="sideWidget">
+	                        <div class="formRow">
+	                            <label>用户ID:</label>
+	                            <input type="text" name="user_id" value="{$Think.get.user_id}" placeholder="用户ID" />
+	                        </div>
+	                        <div class="formRow">
+	                            <input type="submit" class="buttonS bLightBlue" value="搜索成员" />
+	                        </div>
+	                    </div>
+	                	<div class="divider"><span></span></div>
+	                </eq>
+                </form>
+                <div id="alt2">
+                <div id="general">
+                    <ul class="subNav">
+                    	<li><a href="{:U('CreateTeam/teamList')}" title="创作团成员列表" <eq name="ACTION_NAME" value="teamList">class="this"</eq> ><span class="icos-frames"></span>成员列表</a></li>
+                        <li><a href="{:U('CreateTeam/fee')}" title="稿费信息" <eq name="ACTION_NAME" value="fee">class="this"</eq> ><span class="icos-frames"></span>稿费结算</a></li>
+                        <li><a href="{:U('CreateTeam/percent')}" title="合作影片作者稿费分配设置" <eq name="ACTION_NAME" value="percent">class="this"</eq> ><span class="icos-frames"></span>合作稿费分配</a></li>
+                        <li><a href="{:U('CreateTeam/historyFee')}" title="历史稿费结算信息" <eq name="ACTION_NAME" value="historyFee">class="this"</eq> ><span class="icos-frames"></span>稿费历史结算</a></li>
+                        <li><a href="{:U('CreateTeam/addHistoryFee')}" title="历史稿费录入" <eq name="ACTION_NAME" value="addHistoryFee">class="this"</eq> ><span class="icos-frames"></span>稿费手动录入</a></li>
+                        <li><a href="{:U('CreateTeam/bianjiList')}" title="编辑部成员列表" <eq name="ACTION_NAME" value="bianjiList">class="this"</eq> ><span class="icos-frames"></span>编辑部列表</a></li>
+                        <li><a href="{:U('CreateTeam/pingfenList')}" title="编辑部评分结果排序" <eq name="ACTION_NAME" value="pingfenList">class="this"</eq> ><span class="icos-frames"></span>编辑部评分结果</a></li>
+                    </ul>
+                </div>
+                </div>
+            </div>
+       </div> 
+       <div class="clear"></div>
+   </div>

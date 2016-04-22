@@ -1,0 +1,88 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<include file="Statistic:opt" />
+</div>
+<!-- Sidebar ends -->
+    
+<!-- Content begins -->
+<div id="content">
+    <div class="contentTop">
+        <span class="pageTitle">活跃IP地址统计</span>
+        <div class="clear"></div>
+    </div>
+    
+    <!-- Breadcrumbs line -->
+    <include file="Public:bav" />
+    
+    <!-- Main content -->
+    <div class="wrapper">
+    	<div class="widget">
+    		<div class="whead fluid">
+    			<h6>查询</h6>
+				<div class="clear"></div>
+    		</div>
+    		<script language="javascript" type="text/javascript" src="__JS__/My97DatePicker/WdatePicker.js"></script>
+    		<form method='post' id="form1" name="form1" action="{:U('Statistic/ipAddrActive')}"  enctype="multipart/form-data">
+    		<div class="formRow">
+            	<div style="float:left;"><label>日期：</label></div>
+                <div style="float:left;width:120px;">
+                     <span class="grid12"><input type="text" onClick="WdatePicker()" name="day" value="{$Think.post.day|default=''}"></span>
+                </div>
+                <input type="submit" value="提 交" class="buttonM bBlack formSubmit" /><div class="clear"></div>
+                <div class="clear"></div>
+            </div>
+            </form>
+    	</div>
+    	<empty name="error_info">
+    	<div class="widget fluid">
+    		<div class="whead fluid">
+    			<h6 id="statistic_ip_addr_table_head">结果 </h6>
+				<div class="clear"></div>
+    		</div>
+    		<table cellpadding="0" cellspacing="0" width="100%" class="tDefault" id="resize" style="max-height:100px;">
+                <thead>
+                    <tr>
+                    	<td>IP地址</td>
+		                <td width="40">次数</td>
+                    </tr>
+                </thead>
+                <tfoot>
+                	<tr>
+                		<td colspan="2"><a id="statistic_ip_addr_more">加载更多？</a></td>
+                	</tr>
+                </tfoot>
+                <tbody id="statistic_ip_addr_list">
+                </tbody>
+            </table>
+    	</div> 
+    	<else />
+	    	<div class="widget">
+	    	<div class="body">{$error_info}</div>
+	    	</div> 
+    	</empty>
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+<script>
+(function(){
+	var rst = {:json_encode($rst)};
+	var total = rst.length;
+	var current = 0;
+	$('#statistic_ip_addr_more').click(function(){
+		var has = rst.length;
+		var len = Math.min(has,100);
+		var html = '';
+		for(var i=0; i<len; i++,current++) {
+			html += '<tr><td>' + rst[current][0] + '</td><td>' + rst[current][1] + '</td></tr>';
+		}
+		$('#statistic_ip_addr_list').append(html);
+	});
+	$('#statistic_ip_addr_more').click();
+})();
+</script>
+
+<include file="Public:footer" />

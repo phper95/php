@@ -1,0 +1,120 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<script src="__JS__/dialog/artDialog.js?skin=default"></script>
+<div id="sidebar">
+	<include file="Public:left" />
+	<!-- Secondary nav -->
+    <div class="secNav">
+        <div class="secWrapper">
+            <!-- Tabs container -->
+            <form method="get" action="">
+            <input type="hidden" value="{$Think.MODULE_NAME}" name="m"/>
+            <input type="hidden" value="{$Think.ACTION_NAME}" name="a"/>
+            <div id="tab-container" class="tab-container">
+				<ul class="iconsLine ic1 etabs">
+                    <li><a href="#alt2" title="">上线配置搜索:</a></li>
+                </ul>
+                <div class="divider"><span></span></div>
+                <div id="alt2">
+                	<!-- Sidebar forms -->
+                    <div class="sideWidget">
+                        <div class="formRow">
+                            <label>配置ID:</label>
+                            <input type="text" name="id" value="{$Think.get.id}" placeholder="配置ID" />
+                        </div>
+                        <div class="formRow">
+                            <input type="submit" class="buttonS bLightBlue" value="搜索配置" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"><span></span></div>
+            </form>
+            <include file="HomeOnline:opt" />
+       </div> 
+       <div class="clear"></div>
+   </div>
+</div>
+<!-- Sidebar ends -->
+    
+<!-- Content begins -->
+<div id="content">
+    <div class="contentTop">
+        <span class="pageTitle">4.0版本首页列表脚本配置</span>
+       	<div class="clear"></div>
+    </div>
+    
+    <include file="Public:bav" />
+    
+    <!-- Main content -->
+    <div class="wrapper">
+        <!-- Media table sample -->
+        <div class="widget check">
+            <div class="whead">
+            	<h6>首页【推荐】上线配置列表</h6>
+            	<a href="{:U('HomeOnline/addScript')}" class="buttonH bBlue">添加</a>
+            	<div class="clear"></div>
+            </div>
+            <table cellpadding="0" cellspacing="0" width="100%" class="tDefault checkAll tMedia" id="checkAll">
+                <thead>
+                    <tr>
+                        <td width="10">ID</td>
+                        <td width="100">配置名称</td>
+                        <td>备注</td>
+                        <td width="250"><a href="{:U('HomeOnline/onlineScript',array('_order'=>'plan_time'))}">上线时间</a></td>
+                        <td width="200">添加时间</td>
+                        <td width="80">操作</td>
+                        
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td colspan="7">
+                        	<empty name="list">
+                        		木油满足您强烈需求的配置，您可以添加一部咩？
+                        	<else />
+                            <div class="tPages">
+                                <ul class="pages">
+                                    {$page}
+                                </ul>
+                            </div>
+                            </empty>
+                        </td>
+                    </tr>
+                </tfoot>
+                <tbody>
+                	<volist name="list" id="vo">
+		            <tr>
+		                <td>{$vo.id}</td>
+		                <td>{$vo.name}</td>
+		                <td>{$vo.remark}</td>
+		                <td>
+		                	{$vo.plan_time} （预）<br /><br />
+		                	<empty name="vo.online_time"><span class="redBack">未上线</span><else /><span class="greenBack">{$vo.online_time}</span></empty>
+		                </td>
+		                <td>{$vo.add_time}</td>
+		                <td>
+		                	<!-- Simple buttons with caret -->
+	                        <div class="btn-group" style="float: left;">
+	                            <a href="#" class="buttonM bDefault opt" data-toggle="dropdown">点我 <span class="caret"></span></a>
+	                            <ul class="dropdown-menu pull-right">
+	                            	<li><a href="{:U('HomeOnline/editScript', array('id'=>$vo['id']))}"><span class="icos-view"></span>查看</a></li>
+	                                <li><a href="{:U('HomeOnline/online4', array('id'=>$vo['id'],'mname'=>$vo['name']))}"><span class="icos-cross"></span>上/下 线</a></li>
+	                                <li><a href="{:U('HomeOnline/getReadData', array('id'=>$vo['id']))}" target="_blank"><span class="icos-view"></span>查看XX</a></li>
+	                            </ul>
+	                        </div>
+		                </td>
+		            </tr>
+		            </volist>
+                </tbody>
+            </table>
+            <div id="xxsdf" style="display:none;min-width:600px;" class="fluid">sdfsdf</div>
+        </div>
+     
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+<include file="Public:footer" />

@@ -1,0 +1,19 @@
+<!-- Secondary nav -->
+    <div class="secNav">
+        <div class="secWrapper">
+            <!-- Tabs container -->
+            <div id="tab-container" class="tab-container">
+                
+                <div class="divider"><span></span></div>
+                <div id="alt2">
+                <div id="general">
+                    <ul class="subNav">
+                        <li><a href="{:U('Shop/goodsList')}" title="商品列表" <if condition="strstr(ACTION_NAME,'goodsList') != false" >class="this"</if> ><span class="icos-frames"></span>商品管理</a></li>
+                        <li><a href="{:U('Shop/lotterySucc')}" title="抽奖结果查看" <if condition="(ACTION_NAME eq 'lotterySucc')" >class="this"</if> ><span class="icos-frames"></span>中奖结果查看</a></li>
+                    </ul>
+                </div>
+                </div>
+            </div>
+       </div> 
+       <div class="clear"></div>
+   </div>

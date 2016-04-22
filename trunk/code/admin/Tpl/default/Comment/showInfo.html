@@ -1,0 +1,57 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<!-- Secondary nav -->
+</div>
+<!-- Sidebar ends -->
+
+<!-- Content begins -->
+<div id="content">
+    <include file="Public:bav" />
+    <!-- Main content -->
+    <div class="wrapper">
+        <!-- Messages #2 -->
+        <div class="widget">
+            <div class="whead">
+                <h6>【{$obj.name}】评论详情</h6>
+                <a href="{:getCurrentUrl()}" class="buttonH bBlue mb10 mt5">返回</a>
+                <a href="{:U('Comment/add',array('id'=>$obj['id'],'name'=>$obj['name'],'type'=>$_GET['type'],'backurl'=>urlencode(__SELF__)))}" class="buttonH bGreen mb10 mt5">添加评论</a>
+                <div class="clear"></div>
+            </div>
+            
+            <ul class="messagesTwo">
+            	<volist name="list" id="vo">
+            	<li class="by_user">
+            		 <div class="btn-group" style="position:absolute;top:0px;left:1px;">
+	                        <a href="#" class="buttonM bDefault opt nopadding" style="border:0px;" data-toggle="dropdown"><img src="{$members[$vo['user_id']]['avatar']}" width='65px' height="68px" alt="" /></a>
+	                        <div class="dropdown-menu pull-left">
+	                        <span><a href="{:U('Member/addNews',array('id'=>$vo['user_id'],'type'=>'notice','typedata'=>1, 'backurl'=>urlencode(__SELF__)))}"><span class="icos-pencil"></span>下发动态</a></span>
+	                		</div>
+	                </div>
+                    <div class="messageArea">
+                        <div class="infoRow">
+                            <span class="name"><strong>{$members[$vo['user_id']]['name']} ({$vo.user_id})</strong> 说:</span>
+                            <span class="time">{$vo.add_time}</span>
+                            <div class="clear"></div>
+                        </div>
+                        {:htmlspecialchars($vo['comment_content'])}
+                        <span style="float:right;"><a href="{:U('Comment/add',array('id'=>$obj['id'],'name'=>$obj['name'],'type'=>$_GET['type'],'reply_id'=>$vo['id'],'ry_userid'=>$vo['user_id'],'backurl'=>urlencode(__SELF__)))}">回复</a></span>
+                    </div>
+                    <div class="clear"></div>
+                </li>
+            	</volist>
+            </ul>
+        </div>
+        <div class="tPages">
+           	<ul class="pages">
+           		{$page}
+          	</ul>
+        </div>
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+
+<include file="Public:footer" />

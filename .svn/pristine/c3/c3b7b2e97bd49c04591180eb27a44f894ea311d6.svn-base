@@ -1,0 +1,204 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<script src="__JS__/dialog/artDialog.js?skin=default"></script>
+<div id="sidebar">
+	<include file="Public:left" />
+	<!-- Secondary nav -->
+</div>
+<!-- Sidebar ends -->
+
+<style>
+.boo-item {float:left;width:170px;margin:0px;border:1px solid #ccc;height:93px;background-repeat:no-repeat;background-size:100%;}
+</style>
+
+<!-- Content begins -->
+<div id="content">
+    <div class="contentTop">
+        <span class="pageTitle">图册素材管理</span>
+       	<div class="clear"></div>
+    </div>
+    
+    <include file="Public:bav" />
+    
+    <!-- Main content -->
+    <div class="wrapper">
+        <!-- Media table sample -->
+        <div class="widget check">
+            <div class="whead">
+            	<h6>图册素材列表</h6>
+            		<notempty name="Think.get.backurl">
+                   		<a href="{$Think.get.backurl}" class="buttonH bBlue mb10 mt5">返回</a>
+                 	</notempty >
+                 	<a href="javascript:void(0);" id="add_mat_v_img" class="buttonH bGreen mb10 mt5">添加</a>
+            	<div class="clear"></div>
+            </div>
+            <form method='post' id="form1" name="form1" action="{:U('Wei/updateMatUImg')}"  enctype="multipart/form-data">
+            <table cellpadding="0" cellspacing="0" width="100%" class="tDefault checkAll tMedia" id="checkAll">
+                <thead>
+                    <tr>
+                        <td width="10">ID</td>
+                        <td width="100">名称</td>
+                        <td width="120">图片</td>
+                        <td>关键词</td>
+                        <td>标签</td>
+                        <td width="60">排序权重</td>
+                        <td width="80">操作</td>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td colspan="9">
+                        	<empty name="list">
+                        		木油满足您强烈需求的图册了。。
+                        	<else />
+                            <div class="tPages" style="float:left;">
+                                <ul class="pages" >
+                                    {$page}
+                                </ul>
+                            </div>
+                            <input type="submit" value="提 交" onclick="return confirm('确定提交修改么？');" class="buttonM bBlack formSubmit" /><div class="clear"></div>
+                            </empty>
+                        </td>
+                    </tr>
+                </tfoot>
+                <tbody>
+                	<volist name="list" id="vo">
+		            <tr>
+		                <td>{$vo.id}</td>
+		                <td>{$vo.name}</td>
+		                <td><img src="{$vo.url|default='__PUBLIC__/images/quetu.jpg'}" height="70px;" /></td>
+		                <td>{$vo.keywords}</td>
+		                <td>{$vo.tags}</td>
+		                <td>
+		                	<input style="border:1px solid #ccc;padding:3px;" type="text" value="{$vo.sort}" name="sort[{$vo.id}]" size="5"/>
+		                </td>
+		                <td>
+		                	<a href="{:U('Wei/doDelMatUImg',array('id'=>$vo['id']))}" onclick="return confirm('删除将不可恢复，确认删除么？');">删除</a>
+		                </td>
+		            </tr>
+		            </volist>
+                </tbody>
+            </table>
+            </form>
+            <div id="xxsdf" style="display:none;width:900px;line-height:24px;" class="fluid">
+            		<div class="fluid">
+            			<div class="widget nomargin">
+            				<form id="search_img_form" action="" onsubmit="return false;">
+            				<div class="formRow">
+	                            <div class="grid1"><label>图片名称: </label></div>
+	                            <div class="grid3"><input type="text" name="name" class="js_search_input" placeholder="图片名称"/></div>
+	                            <div class="clear"></div>
+	                        </div>
+	                        <div class="formRow">
+	                            <div class="grid1"><label>关键字: </label></div>
+	                            <div class="grid3"><input type="text" name="keywords" class="js_search_input" placeholder="图片名称"/></div>
+	                            <div class="grid1"><label>标签: </label></div>
+	                            <div class="grid3"><input type="text" name="tags" class="js_search_input" placeholder="图片名称"/></div>
+	                            <input type="hidden" name="skip" value="0" id="search_img_skip"/> 
+	                            <input type="submit" id="search_mat_img" value="查询" class="buttonM bBlue formSubmit" /><div class="clear"></div>
+	                            <div class="clear"></div>
+	                        </div>
+	                        </form>
+	                        <form id="post_form" action="{:U('Wei/doAddMatUImg')}" method="POST">
+	                        </form>
+	                        <div style="width:100%;height:400px;overflow-x:hidden;overflow-y:auto;border-top:1px solid #ccc;" id="mat_img_list">
+	                        	
+	                        </div>
+	                        <div id="mat_img_more" style="text-align:center;padding:5px;float:left;width:100%;font-size:2em;font-weight:900;color:#999;cursor:pointer;"> - 点击加载更多 - </div>
+            			</div>
+            		</div>
+            </div>
+        </div>
+     
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+<script type="text/javascript">
+(function(){
+	var loading = false;
+	var loadmore = function(){
+		if (loading) {alert("慢点好伐，还在加载呢！");return;}
+		$('#mat_img_more').html('Loading...');
+		$.ajax({
+			type : 'POST',
+			url : '{:U("Wei/getMatImg")}',
+			data : $('#search_img_form').serialize(),
+			success :function(data){
+				$('#mat_img_more').html(' - 点击加载更多 - ');
+				try {
+					var list = data.data.list;
+					var skip = data.data.skip;
+					$('#search_img_skip').val(skip);
+					var len=list.length;
+					if (len < 20) {
+						$('#mat_img_more').html(' - 没有更多了 - ');
+					}
+					var html = '';
+					for (var i=0; i<len; i++) {
+						html = '<div style="float:left;margin:1px;border:1px solid #ccc;">'
+							 + '<div class="boo-item" onclick="$(this).children(\'.boo-item-img\').toggle();" style="background-image:url(\''+list[i].url+'\')">'
+								+ '<img data-id="'+list[i].id+'" class="boo-item-img" src="__PUBLIC__/images/yes.png" height="50%" style="float:right;display:none;" />'
+							 + '</div>'
+							 + '<div class="clear"></div>'
+							 + '<span style="float:right;line-height:24px;padding-right:3px;">Sort：<input id="mat_img_srot_'+list[i].id+'" value="0" type="text" style="width:30px;border:1px solid #ccc;"/></span>'
+							 + '</div>';
+						$('#mat_img_list').append(html);
+					}
+				}catch(ex) {
+					alert('ajax error');
+				}
+			},
+			error :function(){
+				alert('ajax error');
+				$('#mat_img_more').html(' - 点击加载更多 - ');
+			}
+		});
+	}
+	$('#mat_img_more').click(function(){
+		loadmore();
+	});
+	$('#add_mat_v_img').click(function(){
+		$('#search_img_skip').val(0);
+		$('.js_search_input').val('');
+		$('#mat_img_list').html('');
+		loadmore();
+		art.dialog({
+			id : 'search_img_dialog',
+			padding:0,
+			content:$('#xxsdf')[0],
+			ok : function(){
+				var formObj = $('#post_form');
+				formObj.html('<input type="text" name="mat_id" value="{$Think.get.id}" />');
+				var i = 0;
+				var sub_flat = false;
+				$('.boo-item-img').each(function(){
+					if ($(this).css('display') == 'block'){
+						var img_id = $(this).attr('data-id');
+						var html = '<input type="text" name="'+i+'[img_id]" value="'+img_id+'"/>'
+								 + '<input type="text" name="'+i+'[sort]" value="'+$.trim($('#mat_img_srot_'+img_id).val())+'"/>';
+						formObj.append(html);
+						sub_flat = true;
+						i ++;
+					}
+				});
+				if (!sub_flat) {
+					alert('要选择图片啊啊啊啊 啊啊啊啊啊啊啊啊啊啊啊！');
+				} else {
+					formObj.submit();
+				}
+				return false;
+			},
+			cancel:function(){}
+		});
+	});
+	
+	$('#search_mat_img').click(function(){
+		$('#search_img_skip').val(0);
+		$('#mat_img_list').html('');
+		loadmore();
+	});
+})();
+</script>
+<include file="Public:footer" />

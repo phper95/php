@@ -1,0 +1,80 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<!-- Secondary nav -->
+</div>
+<!-- Sidebar ends -->
+
+<!-- Content begins -->
+<div id="content">
+    <include file="Public:bav" />
+    <!-- Main content -->
+    <div class="wrapper">
+        	<div class="fluid">
+        		<form method='post' id="form1" name="form1" action="{:U('Member/doPutBlackRoom')}"  enctype="multipart/form-data">
+                    <div class="widget ">
+                        <div class="whead">
+                        <h6>给【{$Think.get.name}】 {$Think.get.id} 关小黑屋</h6>
+                        <empty name="Think.get.backurl">
+                        	<a href="{:getCurrentUrl()}" class="buttonH bBlue mb10 mt5">返回</a>
+                        <else />
+                        	<a href="{$Think.get.backurl}" class="buttonH bBlue mb10 mt5">返回</a>
+                        </empty>
+                        
+                        <div class="clear"></div></div>
+                        <div class="body"><div class="redBack">注意：关小黑屋操作会将用户禁言，并且发过的所有消息，都将隐藏，并且不可恢复显示，所以，关小黑屋，请三思。</div></div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>用户君ID：</label></div>
+                            <div class="grid9">
+                            	<input type="text" name="to_user_id" value="{$Think.get.id}">
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>原因：</label></div>
+                            <div class="grid9">
+                            	<input type="text" value="" name="reason" id="put_blackroom_reason"/>
+                            	<span class="red">* 注意，这里的原因，会替换用户发言时，提示语 “你因 XXX 被关入小黑屋，不能再发言” 中的 XXX </span>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>表情：</label></div>
+                            <div class="grid9"><input type="text" value="【ヽ(#`Д´)ﾉ】：" name="pre_str"/></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>动态内容：</label></div>
+                            <div class="grid9">
+                            	<textarea rows="8" cols="" name="comment_content" id="put_blackroom_content"></textarea>
+                            	快速原因插入：<a href="javascript:void(0);" onclick="$('#put_blackroom_content').val('你因乱贴小广告已被关小黑屋，不能发言啦！');$('#put_blackroom_reason').val('乱贴小广告');">广告</a>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        
+                        <div class="formRow">
+                        	<input type="hidden" name="id" value="{$Think.get.id}">
+                        	<notempty name="Think.get.backurl">
+                        	<input type="hidden" name="backurl" value="{$Think.get.backurl}">
+                        	</notempty>
+                        	<input type="submit" value="提 交" onclick="if ($.trim($('#put_blackroom_reason').val()) == ''){alert('请填入原因');return false;}return confirm('三思君说：提交后是不能修改的哦？确定么？');" class="buttonM bBlack formSubmit" />
+                        	<div class="clear"></div>
+                        </div>
+                        <div class="clear"></div>
+                    
+                    </div>
+                    </form>
+            </div>
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+
+<include file="Public:footer" />

@@ -1,0 +1,103 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<!-- Secondary nav -->
+</div>
+<!-- Sidebar ends -->
+
+<!-- Content begins -->
+<div id="content">
+    <include file="Public:bav" />
+    <!-- Main content -->
+    <div class="wrapper">
+        	<div class="fluid">
+        		<form method='post' id="form1" name="form1" action="{:U('Me/update')}"  enctype="multipart/form-data">
+                    <div class="widget ">
+                    	 <div class="whead"><h6>修改头像</h6><div class="clear"></div></div>
+                        <div class="formRow nopadding" align="center">
+		    				<img src="__UPLOAD__/{$vo.info}" id="me_set_info_user_img" width="200" height="200">
+		    			</div>
+		    			<div class="formRow nopadding" align="center">
+		    				<input type="file" name="info" id="me_set_info_upload_user_img" />
+		    			</div>
+                        
+                        <div class="formRow">
+                        	<input type="hidden" name="id" value="{$vo.id}" >
+                        	<input type="submit" value="提 交" class="buttonM bBlack formSubmit" /><div class="clear"></div>
+                        </div>
+                        <div class="clear"></div>
+                    
+                    </div>
+                    </form>
+            </div>
+            
+            <div class="fluid">
+        		<form method='post' id="form1" name="form1" action="{:U('Public/changePwd')}"  enctype="multipart/form-data">
+                    <div class="widget ">
+                        <div class="whead"><h6>修改密码</h6><div class="clear"></div></div>
+                        <div class="formRow">
+                            <div class="grid3"><label>旧密码:</label></div>
+                            <div class="grid3"><input type="text" name="oldpassword" /></div>
+                            <label id="accounterror"></label>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>新密码:</label></div>
+                            <div class="grid3"><input type="text" name="password"/></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>重复新密码:</label></div>
+                            <div class="grid3"><input type="text" name="repassword"/></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                        	<div class="grid3"><label>验证码:</label></div>
+                        	<div class="grid1">
+                        		<input type="text" name="verify">
+                        	</div>
+                        	<div>
+                        	<img id="verifyImg" src="{:U('Public/verify')}"  border="0" alt="点击刷新验证码" style="cursor:pointer; margin-left: 5px;" align="absmiddle">
+                        	</div>
+                        </div>
+                        <div class="formRow">
+                        	<input type="submit" value="提 交" class="buttonM bBlack formSubmit" /><div class="clear"></div>
+                        </div>
+                        <div class="clear"></div>
+                    
+                    </div>
+                    </form>
+            </div>
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+
+<script>
+	/**
+	 * 使用HTML5 File API, 來即時預覽image
+	 */
+$("#me_set_info_upload_user_img").change(function(){
+	var objUrl = booGetObjectURL(this.files[0]) ;
+	if (objUrl) {
+		$("#me_set_info_user_img").attr("src", objUrl) ;
+	}
+}) ;
+	
+$('#verifyImg').click(function(){
+    //重载验证码
+    var timenow = new Date().getTime();
+    var url="{:U('Public/verify',array('t'=>'0'))}";
+    url += timenow;
+    $('#verifyImg').attr('src',url);
+});
+</script>
+
+<include file="Public:footer" />
+

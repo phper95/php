@@ -1,0 +1,359 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+</div>
+<!-- Sidebar ends -->
+
+<!-- Content begins -->
+<div id="content">
+
+  <include file="Public:bav" />
+  
+    <!-- Main content -->
+    <div class="wrapper">
+         <div class="widget fluid">
+        	<div class="whead">
+        		<h6>自选用户通知栏推送消息</h6>
+        		<a href="{:getCurrentUrl()}" class="buttonH bBlue mb10 mt5">返回</a>
+        		<div class="clear"></div>
+        	</div>
+            <div class="body">
+            	<form method='post' id="pushnotice_form" name="form1" onsubmit="return false;" enctype="multipart/form-data">
+            			<div class="formRow">
+                            <div class="grid2"><label>标题（可选）：</label></div>
+                            <div class="grid3">
+                            	<input type="text" name="title" placeholder="如果不填，则默认是APP的名字"/>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="formRow">
+                            <div class="grid2"><label>内容：<span class="req">*</span></label></div>
+                            <div class="grid9">
+                            	<textarea rows="8" name="content" placeholder="内容，必填"></textarea>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid2"><label>设备范围：<span class="req">*</span></label></div>
+                            <div class="grid9">
+                            	<label style="width:140px;">
+                            	<input type="checkbox" class="check" name="os" checked="checked" value="android"/>
+								<img style="margin:0px;" src="http://apps.bdimg.com/developer/static/1404221123/console/push/img/push-icon-and.png">
+								<span> &nbsp;&nbsp;Android</span>
+								</label>
+								<label>
+                            	<input type="checkbox" class="check" name="os" disabled="disabled" value="ios"/>
+								<img style="margin:0px;" src="http://apps.bdimg.com/developer/static/1404221123/console/push/img/push-icon-ios.png">
+								<span> &nbsp;&nbsp;IOS</span>
+								</label>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid2"><label>用户范围：<span class="req">*</span></label></div>
+                            <div class="grid9">
+                            	<input type="text" name="sql" placeholder="填Where条件即可。切记哦，不可以sql注入。"/>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                    <div class="widget togglesGroup">
+                        <div class="whead closed normal"><h6>高级选项  (点我)</h6><div class="clear"></div></div>
+                        <div class="body" style="display: none;">
+                        <div class="divider red"><img src="http://apps.bdimg.com/developer/static/1404221123/console/push/img/push-icon-and-grey.png"><strong>&nbsp;&nbsp;Android</strong><span></span></div>
+                        <div class="fuid">
+                        <div class="formRow">
+                            <div class="grid2"><label>通知栏样式：<span class="req">*</span></label></div>
+                            <div class="grid9">
+                            	<label style="width:140px;">
+                            	<input type="radio" class="check" name="bar_style" checked="checked" value="base"/>
+								<span>基础样式</span>
+								</label>
+                            	<label style="width:140px;">
+                            	<input type="checkbox" class="check" name="basic_style[]" checked="checked" value="ling"/>
+								<span>收到通知后响铃</span>
+								</label>
+								<label style="width:140px;">
+                            	<input type="checkbox" class="check" name="basic_style[]" checked="checked" value="zzz"/>
+								<span>收到通知后震动</span>
+								</label>
+								<label>
+                            	<input type="checkbox" class="check" name="basic_style[]" checked="checked" value="clean"/>
+								<span> 通知可以被清除</span>
+								</label>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        </div>
+                        
+                        <div class="fuid">
+                        <div class="formRow" style="padding-top:0px;">
+                            <div class="grid2"><label></label></div>
+                            <div class="grid9">
+                            	<label style="width:140px;">
+                            	<input type="radio" class="check" name="bar_style" disabled="disabled" value="diy"/>
+								<span>自定义样式</span>
+								</label>
+								<label>
+                            	<input type="text" disabled="disabled" />
+								</label><!--
+								&nbsp;&nbsp;<a target="_blank" href="http://developer.baidu.com/wiki/index.php?title=docs/cplat/push/console#.E8.87.AA.E5.AE.9A.E4.B9.89.E6.A0.B7.E5.BC.8F">了解详情</a>
+                            --></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid2"><label>通知后续行为:</label></div>
+                            <div class="grid9">
+                            	<label style="width:140px;">
+                            	<input type="radio" class="check" name="after_opt" checked="checked" value="app" />
+								<span>直接打开应用</span>
+								</label>
+                            <div class="clear"></div>
+                        </div>
+                        </div>
+                        
+                        </div>
+                        
+                        <div class="fuid">
+                        <div class="formRow">
+                            <div class="grid2"><label></label></div>
+                            <div class="grid9">
+                            	<label style="width:140px;">
+                            	<input type="radio" class="check" name="after_opt" value="url"/>
+								<span>打开网页</span>
+								</label>
+								<div class="grid4 nomargin"><input type="text" name="open_url"/></div>
+								<div class="grid5">
+									<label>
+	                            	<input type="checkbox" class="check" name="open_url_confirm" />
+									<span> 打开网页需要确认</span>
+									</label>
+								</div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        </div>
+                        
+                        <div class="fuid">
+                        <div class="formRow" style="padding-top:0px;">
+                            <div class="grid2"><label></label></div>
+                            <div class="grid9">
+                            	<label style="width:140px;">
+                            	<input type="radio" class="check" name="after_opt" value="diy" disabled="disabled" />
+								<span>自定义打开行为</span>
+								</label>
+								<div class="grid4 nomargin"><input type="text" /></div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        </div>
+                        
+                        <div class="divider"><img src="http://apps.bdimg.com/developer/static/1404221123/console/push/img/push-icon-ios-grey.png"><strong>&nbsp;&nbsp;IOS</strong><span></span></div>
+                        
+                        <div class="fuid">
+                        <div class="formRow" >
+                            <div class="grid2"><label>音频文件</label></div>
+                            <div class="grid9">
+								<label>
+                            	<input type="text" name="ios_mp3" disabled="disabled"/>
+								</label>
+							</div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid2"><label>角标:</label></div>
+                            <div class="grid9">
+                            	<label>
+                            	<input type="text" name="ios_superscript" disabled="disabled"/>
+								</label>
+                            <div class="clear"></div>
+                        </div>
+                        </div>
+                        </div>
+                        
+                        <div class="divider red"><strong>其他...</strong><span></span></div>
+                        
+                        <div class="fuid">
+                        <div class="formRow" >
+                            <div class="grid2"><label>附加字段</label></div>
+                            <div class="grid9">
+                            	<span style="float:left;padding:2px 5px;">键:</span>
+								<label>
+                            	<input type="text" name="keys[]"/>
+								</label>
+								<span style="float:left;padding:2px 5px;">&nbsp;值:</span>
+								<label>
+                            	<input type="text" name="values[]"/>
+								</label>&nbsp;&nbsp;
+								<a class="buttonS bGreen" id="push_notice_add_key_value" href="javascript:void(0);">添加</a>
+							</div>
+                            <div class="clear"></div>
+                        </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                        <div class="formRow">
+                        	<span class="red" id="pushnotice_loading" style="display:none;">
+                       		<img alt="" style="float: left; margin: 5px 0 0 10px;" src="__PUBLIC__/images/elements/loaders/4s.gif">
+                       		&nbsp;&nbsp;正在提交
+                       		</span>
+                       		<span class="red" id="pushnotice_rst" style="display:none;">
+                       		
+                       		</span>
+                       		<span class="red" id="pushnotice_rst_2" style="display:none;">
+                       		
+                       		</span>
+                        	<input type="submit" value=" 发 送 " id="pushnotice_tep1_btn1" class="buttonM bBlack formSubmit" />
+                        	<input type="submit" value=" 暂 停" style="display:none;" id="pushnotice_tep1_btn2" class="buttonM bGreen formSubmit" />
+                        	<div class="clear"></div>
+                        </div>
+             </form>
+             <div id="Pushnotice_errorInfo" style="line-height:30px;"></div>
+            </div>
+        </div>
+        
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+<script>
+(function(){
+	var step1_loading = false;
+	var step2_loading = false;
+	var total_send_num = 0;
+	var error_send_num = 0;
+	var start_time = 0;
+	var xiu_time = 0;
+	var xiu_t_time = 0;
+	var stop_flag = false;
+	var cur_data = null;
+	
+	function gogo(data){
+		$.ajax({
+			url : '{:U("Pushnotice/sendBySelf")}',
+			data : data,
+			type : 'POST',
+			success : function(rst){
+				if (typeof rst == 'object') {
+					if (rst.rst == 1) {
+						if (data.t == 0) {total_send_num = rst.data.num;}
+						data.t = data.t + 1;
+						if (typeof rst.data.error != 'undefined') {
+							var error = 0;
+							for (var a in rst.data.error){
+								error ++;
+								$('#Pushnotice_errorInfo').append('&nbsp;<span class="redBack">' + a + ' : ' +  rst.data.error[a] + '</span>');
+							}
+							error_send_num += error;
+						}
+						var html = '发送总量：' + total_send_num + ' 条, 失败 ' + error_send_num + ' 条, ' + '还有 ' + rst.data.num + ' 条记录 待发送。。。';
+						var end_time = (new Date()).valueOf(); 
+						var total_time = ((end_time - start_time - xiu_t_time)/(1000)).toFixed(3);
+						var pj_time = (total_time / (data.t-1)).toFixed(3);
+						html += ', 总耗时：' + total_time + ' s, 平均耗时 : ' + pj_time + 's';
+						$('#pushnotice_rst').html(html);
+						cur_data = data;
+						if (rst.data.num > 0) {
+							if (!stop_flag)
+								setTimeout(function(){gogo(data);},100);
+						} else {
+							$('#pushnotice_tep1_btn1').show();
+							$('#pushnotice_tep1_btn2').hide();
+						}
+					} else {
+						alert(rst.msg);
+					}
+				}
+			},
+			error : function(ex){
+				alert('Ajax 错误');
+			}
+		});
+	}
+	
+	$('#pushnotice_tep1_btn2').click(function(){
+		stop_flag = !stop_flag;
+		var html = stop_flag == true ? '继 续' : '暂 停';
+		$(this).val(html);
+		if (!stop_flag) {
+			xiu_t_time += (new Date()).valueOf() - xiu_time;
+			gogo(cur_data);
+		} else {
+			xiu_time = (new Date()).valueOf();
+		}
+	});
+	
+	$('#pushnotice_tep1_btn1').click(function(){
+		if (step1_loading) {alert('正在温柔的提交中。。。');return;}
+		step1_loading = true;
+		$('#pushnotice_loading').show(1000);
+		$.ajax({
+			url : '{:U("Pushnotice/getMemberCount")}',
+			data : $('#pushnotice_form').serialize(),
+			type : 'POST',
+			success : function(data){
+				step1_loading = false;
+				if (typeof data == 'object') {
+					if (data.rst == 0) {
+						alert(data.msg);
+					} else {
+						var to_data = {};
+						to_data.md = data.data.md;
+						if (typeof data.data.file != 'undefined') {
+							if (confirm('上次Push还剩 ' + data.data.file + ' 个用户没有推送, 是否继续推送')){
+								to_data.type = 'default';
+							} else {
+								to_data.type = 'all';
+							}
+						}
+						to_data.t = 0;
+						start_time = (new Date()).valueOf(); 
+						$('#pushnotice_tep1_btn1').hide();
+						$('#pushnotice_tep1_btn2').show();
+						gogo(to_data);
+						$('#pushnotice_rst').html('正在发送').show();
+					}
+				} else {
+					alert('接口失败：'+data);
+				}
+				$('#pushnotice_loading').hide();
+			},
+			error : function (ex){
+				step1_loading = false;
+				alert ('Ajax 失败');
+				$('#pushnotice_loading').hide();
+			}
+		});
+	});
+	
+	$('#push_notice_add_key_value').click(function(){
+		var html = '<div class="fuid">'
+            	 + '<div class="formRow noBorderB" style="padding-top:0px;">'
+        		 + '<div class="grid2"><label></label></div>'
+        		 + '<div class="grid9">'
+        		 + '<span style="float:left;padding:2px 5px;">键:</span>'
+				 + '<label>'
+        		 + '<input type="text" name="keys[]"/>'
+				 + '</label>'
+				 + '<span style="float:left;padding:2px 5px;">&nbsp;值:</span>'
+				 + '<label>'
+        		 + '<input type="text" name="values[]"/>'
+				 + '</label>&nbsp;&nbsp;'
+				 + '<a class="buttonS bRed" href="javascript:void(0);" onclick="$(this).parent().parent().parent().remove();">删除</a>'
+				 + '</div>'
+        		 + '<div class="clear"></div>'
+    			 + '</div>'
+    			 + '</div>';
+    	$(this).parent().parent().parent().after($(html));
+	});
+	
+})();
+</script>
+<include file="Public:footer" />

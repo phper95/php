@@ -1,0 +1,107 @@
+<include file="Public/header" />
+	<notpresent  name='Think.get.look'>
+	<else />
+		<eq name="Think.get.look" value="true">
+			<style>
+			<!--
+			.movieList .info span {font-size:12px;}
+			.movieList .right {font-size:12px;}
+			.movieList .rightTime {font-size:10px;}
+			.movieList .info h6 {font-size:14px;}
+			-->
+			</style>
+		</eq>
+	</notpresent>
+	<div id="content">
+		<div class="readInfo">
+			Tips：<br />
+			欢迎参加GraphMovieStudios首次内测！~(～o￣▽￣)～<br />
+			测试期间，通过GMS创建和上传的作品，将会集中展示在此处；<br />
+			你可以通过此处实时了解作品的审核状态；<br />
+			未来GMS正式版本发布前该页面将会弃用，作品管理将会集成在GMS中哟~<br />
+			敬请期待吧！(′～`●)<br />
+		</div>
+		<div class="Tab"><h6>GMS投稿作品</h6><div class="clear"></div></div>
+		<div class="body">
+			<empty name="list">
+				哇塞！苍茫的天涯是我的爱，绵绵的青山脚下花儿正开。。。还等神马，快占坑啊。
+			<else/>
+				<dl class="movieList" id="movieList">
+				<volist name="list" id="doing">
+					<dt>
+						<empty name="doing.bpic">
+							<img src="__IMG__/fail_image.png" class="face"/>
+						<else />
+							<img src="{$doing.bpic}" class="face"/>
+						</empty>
+						<div class="info">
+							<h6>
+							<empty name="doing.db_id">原创<else /><a href="https://movie.douban.com/subject/{$doing.db_id}/" target='_blank' style="color:#00b9ff;">豆瓣</a></empty> |
+							{$doing.title|default='<span style="color:#999;float:none;">未填名称</span>'}</h6><div class="clear"></div>
+							<span>{$doing.sub_title|default='<span style="color:#bbb;">未填描述</span>'}</span>
+							<div class="right">{$doing.right_str|default=''}</div>
+							<div class="rightTime">{$doing.add_time|default=''}</div>
+						</div>
+						<div class="clear"></div>
+					</dt>
+				</volist>
+				</dl>
+			</empty>
+		</div>
+		<div class="more" dat="{$doing.add_time}">更多......</div>
+	</div>
+	<script type="text/javascript">
+<!--
+	$('#document').ready(function(){
+		var loading = false;
+		$('.more').click(function(){
+			if (loading) return;
+			loading = true;
+			$(this).html('正在加载....');
+			$.ajax({
+				url : '{:U("Pcmaker/getMore")}',
+				type : 'POST',
+				data : {time:$(this).attr('dat')},
+				success : function(data){
+					if (typeof(data) == 'object'){
+						if ($.isEmptyObject(data)) {
+							$('.more').html('没有更多咧！');	
+						} else {
+							var html = '';
+							var last_time = '';
+							for (var a in data) {
+								var val = data[a];
+								html += '<dt>';
+								html += '<img src="' + (val.bpic == '' ? '__IMG__/fail_image.png' : (val.bpic)) + '" class="face"/>';
+								html += '<div class="info">';
+								html += '<h6>' +
+									(val.db_id ? '原创':('<a href="https://movie.douban.com/subject/'+val.db_id+'/" target="_blank" style="color:#00b9ff;">豆瓣</a>')) + ' | '
+									+ (val.title || '<span style="color:#999;float:none;">未填名称</span>') + '</h6><div class="clear"></div>';
+								html += '<span>'+ (val.sub_title || '<span style="color:#aaa;">未填描述</span>') + '</span>';
+								html += '<div class="right">' + (val.right_str || '') + '</div>';
+								html += '<div class="rightTime">'+(val.add_time || '') + '</div>';
+								html += '</div><div class="clear"></div></dt>';
+								last_time = val.add_time;
+							}
+							$('#movieList').append(html);
+							$('.more').attr('dat', last_time);
+							if (data.length == 20) {
+								loading = false;
+								$('.more').html('更多......');
+							} else {
+								$('.more').html('没有更多咧！');	
+							}
+						}
+					} else {
+						$(this).html('请刷新页面');
+					}
+				},
+				error : function (ex) {
+					$(this).html('请刷新页面');
+				}
+			});
+		});
+	});
+//-->
+</script>
+<include file="Public/footer" />

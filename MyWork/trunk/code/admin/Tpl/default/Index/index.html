@@ -1,0 +1,77 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<!-- Secondary nav -->
+    <div class="secNav">
+        <div class="secWrapper">
+            <div class="secTop">
+                <div class="balance">
+                    <div class="balInfo">上次登陆:<span>{$Think.session.lastLoginTime|toDate}</span></div>
+                </div>
+            </div>
+
+
+            <div class="divider"><span></span></div>
+            
+       </div> 
+       <div class="clear"></div>
+   </div>
+</div>
+<!-- Sidebar ends -->
+    
+<!-- Content begins -->
+<div id="content">
+    <div class="contentTop">
+        <span class="pageTitle">主页君</span>
+        <div class="clear"></div>
+    </div>
+    
+    <!-- Breadcrumbs line -->
+    <div class="breadLine">
+        <div class="bc">
+            <ul id="breadcrumbs" class="breadcrumbs">
+                <li><a href="#">主页君</a></li>
+                
+            </ul>
+        </div>
+        
+        
+    </div>
+    
+    <!-- Main content -->
+    <div class="wrapper">
+    	<div class="widget">
+	    	<div class="body">
+	    		<present name="df_warning">
+	    			<span id="df_warning" class="redBack">服务器君，磁盘空间预警!!!</span>&nbsp;&nbsp;<span class="redBack"> 还剩  {:getFomartFileSize($df_size)}</span>
+	    			<script type="text/javascript">
+	    				(function(){
+	    					var df_w = function(){
+	    						$('#df_warning').fadeOut(500,function(){
+			    						$('#df_warning').show();
+			    						setTimeout(function(){df_w();},200);
+	    						});
+	    					};
+	    					df_w();
+	    				})();
+	    			</script>
+	    		<else />
+	    			<span class="greenBack">服务器君，磁盘空间尚够用哟。</span>&nbsp;&nbsp;<span class="greenBack"> 还剩  {:getFomartFileSize($df_size)}</span>
+	    		</present>
+	    		&nbsp;&nbsp;<a class="blueBack" href="{:U('Index/diskManage')}">磁盘管理</a>
+	    	</div>
+    	</div>
+    	
+    	<div class="widget">
+	    	<div class="body">
+	    		<a class="blueBack" href="{:U('App/version')}">APP版本管理</a>
+	    	</div>
+    	</div>
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+
+<include file="Public:footer" />

@@ -1,0 +1,47 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<!-- Secondary nav -->
+</div>
+<!-- Sidebar ends -->
+
+<!-- Content begins -->
+<div id="content">
+    <include file="Public:bav" />
+    <!-- Main content -->
+    <div class="wrapper">
+        	<div class="fluid">
+        		<form method='post' id="form1" name="form1" action="{:U('Advht/insert')}"  enctype="multipart/form-data">
+                    <div class="widget ">
+                        <div class="whead">
+                        <h6>添加片头片尾广告</h6>
+                        <a href="{:getCurrentUrl()}" class="buttonH bBlue mb10 mt5">返回</a>
+                        <div class="clear"></div></div>
+                        <div class="formRow">
+                            <div class="grid3"><label>广告名称：<span class="req">*</span> </label></div>
+                            <div class="grid3"><input type="text" name="name" placeholder="广告名称"/></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>广告是否生效：<span class="req">*</span></label></div>
+                            <div class="grid9">
+                            	<label class="nopadding grid1" ><input type="radio" value="1" checked="checked" name="open"/>是</label>
+                            	<label class="nopadding grid1"><input type="radio" value="0" name="open"/>否</label>
+							</div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow"><input type="submit" value="提 交" class="buttonM bBlack formSubmit" /><div class="clear"></div></div>
+                        <div class="clear"></div>
+                    </div>
+                    </form>
+            </div>
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+<include file="Public:footer" />

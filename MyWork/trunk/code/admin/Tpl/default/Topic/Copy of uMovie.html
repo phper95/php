@@ -1,0 +1,133 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<!-- Secondary nav -->
+</div>
+<!-- Sidebar ends -->
+
+<!-- Content begins -->
+<div id="content">
+    
+    <!-- Breadcrumbs line -->
+    <div class="breadLine">
+        <div class="bc">
+            <ul id="breadcrumbs" class="breadcrumbs">
+                <li><a href="#">主页</a></li>
+                <li><a href="#">{}</a>
+                    
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+    <!-- Main content -->
+    <div class="wrapper">
+        	<fieldset>
+                <div class="widget">
+                    <div class="whead">
+                    	<h6>【{$Think.get.name}】配置影片</h6>
+                    	<a href="{:getCurrentUrl()}" class="buttonH bBlue mb10 mt5">取消</a>
+                    	<div class="clear"></div>
+                    </div>
+                    <div class="body">
+                        <div class="leftBox">
+                            <input type="text" id="box1Filter" class="boxFilter" placeholder="Filter entries..." /><button type="button" id="box1Clear" class="dualBtn fltr">x</button><br />
+                            
+                            <select id="box1View" multiple="multiple" class="multiple" style="height:300px;">
+                            <volist name="allMovieList" id="all">
+                            	<option value="{$all.id}">{$all.name} ({$all.id})</option>
+                            </volist>
+                            </select>
+                            <br/>
+                            <span id="box1Counter" class="countLabel"></span>
+                            <div class="displayNone"><select id="box1Storage"></select></div>
+                        </div>
+                                
+                        <div class="dualControl">
+                            <button id="to2" type="button" class="dualBtn mr5 mb15">&nbsp;&gt;&nbsp;</button>
+                            <button id="allTo2" type="button" class="dualBtn">&nbsp;&gt;&gt;&nbsp;</button><br />
+                            <button id="to1" type="button" class="dualBtn mr5">&nbsp;&lt;&nbsp;</button>
+                            <button id="allTo1" type="button" class="dualBtn">&nbsp;&lt;&lt;&nbsp;</button>
+                        </div>
+                                
+                        <div class="rightBox">
+                            <input type="text" id="box2Filter" class="boxFilter" placeholder="Filter entries..." /><button type="button" id="box2Clear" class="dualBtn fltr">x</button><br />
+                            <select id="box2View" multiple="multiple" class="multiple" style="height:300px;">
+                            <volist name="ownMovieList" id="own">
+                            	<option value="{$own.movie_id}">{$own.name} ({$own.movie_id})</option>
+                            </volist>
+                            </select><br/>
+                            <span id="box2Counter" class="countLabel"></span>
+                            
+                            <div class="displayNone"><select id="box2Storage"></select></div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    
+                    <div class="clear"></div>
+                    <div class="formRow">
+                    	<form method='post' id="topic_u_movie_form" name="form1" action="{:U('Topic/doUMovie')}"  enctype="multipart/form-data">
+                    	<input type="hidden" name="topic_id" value="{$Think.get.id|default=''}"/>
+                    	<input type="hidden" name="topic_name" value="{$Think.get.name|default=''}"/>
+                    	<input type="hidden" name="movie_ids" value="" id="topic_u_movie_mids"/>
+                    	<input type="submit" value="提 交" class="buttonM bBlack formSubmit" id="topic_u_movie_sumbit" />
+                    	</form>
+                    	<div class="clear"></div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </fieldset>
+            
+            <table cellpadding="0" cellspacing="0" width="100%" class="tDefault checkAll tMedia" id="checkAll">
+                <thead>
+                    <tr>
+                        <td width="10">ID</td>
+                        <td width="200">名称</td>
+                        <td>影片关键字</td>
+                        <td width="130">添加时间</td>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td colspan="7">
+                        	<empty name="ownMovieList">
+                        		木油影片，您可以添加一部咩？
+                            </empty>
+                        </td>
+                    </tr>
+                </tfoot>
+                <tbody>
+                	<volist name="ownMovieList" id="vo">
+		            <tr>
+		                <td>{$vo.movie_id}</td>
+		                <td>{$vo.name}</td>
+		                <td>{$vo.keyword}</td>
+		                <td>{$vo.add_time}</td>
+		            </tr>
+		            </volist>
+                </tbody>
+            </table>
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+<script>
+(function(){
+	$('#topic_u_movie_sumbit').click(function(){
+		//$('#topic_u_movie_form').sumbit();
+		var value = [];
+		$('#box2View option').each(function(){
+			value.push($(this).val());
+		});
+		var xx = value.join(',');
+		$('#topic_u_movie_mids').val(xx);
+		if (xx == '') {
+			alert('请选择电影'); return false;
+		}
+		return true;
+	});
+})();
+</script>
+<include file="Public:footer" />

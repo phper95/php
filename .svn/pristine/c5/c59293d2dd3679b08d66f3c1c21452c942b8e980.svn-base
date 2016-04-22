@@ -1,0 +1,103 @@
+<include file="Public/header" />
+	<div id="content">
+		<include file="Author/info" />
+					<div class="e_cont a_cont">
+						<div style="color:red;">
+							{$vo.state_str}
+						</div>
+                        <div class="cont_form clearfix">
+                             <div class="form_left">
+                              <p class="m_name"><span>*</span>真实姓名：</p>
+                           </div>
+                           <div class="form_right">
+                            <p><input type="text" name="realname" value="{$vo.realname}" info="姓名" class="short_text txtBlue require"></p>
+                           </div>
+                        </div>
+                        <div class="cont_form clearfix">
+                             <div class="form_left">
+                              <p class="m_name">QQ：</p>
+                           </div>
+                           <div class="form_right">
+                            <p><input type="text" name="qq" value="{$vo.qq}" class="short_text txtBlue"></p>
+                           </div>
+                        </div>
+                        <div class="cont_form clearfix">
+                             <div class="form_left">
+                              <p class="m_name"><span>*</span>手机号：</p>
+                           </div>
+                           <div class="form_right">
+                            <p><input type="text" name="phone" info="手机号" value="{$vo.phone}" class="short_text txtBlue require"></p>
+                           </div>
+                        </div>
+                        <div class="cont_form clearfix">
+                             <div class="form_left">
+                              <p class="m_name"><span>*</span>身份证号码：</p>
+                           </div>
+                           <div class="form_right">
+                            <p><input type="text" name="id_card" info="身份证" value="{$vo.id_card}" class="short_text txtBlue require"></p>
+                           </div>
+                        </div>
+                        <div class="cont_form clearfix">
+                             <div class="form_left">
+                              <p class="m_name"><span>*</span>Email：</p>
+                           </div>
+                           <div class="form_right">
+                            <p><input type="text" name="email" info="Email" value="{$vo.email}" class="short_text txtBlue require"></p>
+                           </div>
+                        </div>
+                        <div class="cont_form clearfix">
+                             <div class="form_left">
+                              <p class="m_name"><span>*</span>通讯地址：</p>
+                           </div>
+                           <div class="form_right">
+                            <p><input type="text" info="通讯地址" placeholder="例如：北京市海淀区中关村东路16号唐宁One1栋8单元3001" value="{$vo.address}" name="address" class="long_text txtBlue require"></p>
+                           </div>
+                        </div>
+                        <eq name="vo.pay_type" value="0">
+	                        <div class="cont_form clearfix">
+	                             <div class="form_left">
+	                              <p class="m_name"><span>*</span>银行卡号：</p>
+	                           </div>
+	                           <div class="form_right">
+	                            <p><input type="text" class="long_text txtBlue" name="yh_card_num" value="{$vo.pay_info.yhc}" placeholder="银行卡号" info="银行卡号"></p>
+	                           </div>
+	                        </div>
+	                        <div class="cont_form clearfix">
+	                             <div class="form_left">
+	                              <p class="m_name"><span>*</span>开户行：</p>
+	                           </div>
+	                           <div class="form_right">
+	                            <p><input type="text" class="long_text txtBlue" name="yh_card_num" value="{$vo.pay_info.khh}" placeholder="开户行" info="开户行"></p>
+	                           </div>
+	                        </div>
+	                        <div class="cont_form clearfix">
+	                             <div class="form_left">
+	                              <p class="m_name"><span>*</span>开户支行：</p>
+	                           </div>
+	                           <div class="form_right">
+	                            <p><input type="text" class="long_text txtBlue" name="yh_card_f_hang" value="{$vo.pay_info.khzh}" placeholder="示例：安联支行 广东 深圳（三项必填）" info="开户支行"></p>
+	                           </div>
+	                        </div>
+                        <else />
+                        	<div class="cont_form clearfix">
+	                             <div class="form_left">
+	                              <p class="m_name"><span>*</span>支付宝账号：</p>
+	                           </div>
+	                           <div class="form_right">
+	                            <p><input type="text" class="long_text txtBlue" name="zfb" value="{$vo.pay_info.zfb}" placeholder="支付宝账号" info="支付宝账号"></p>
+	                           </div>
+	                        </div>
+                        </eq>
+                        <div class="cont_form clearfix">
+                             <div class="form_left">
+                              <p class="m_name">其他：</p>
+                           </div>
+                           <div class="form_right">
+                            <p><input type="text" placeholder="如果还有什么想说的，请写在这里" value="{$vo.remark}" name="remark" class="long_text txtBlue"></p>
+                           </div>
+                        </div>
+
+                    </div>
+                     <br /><br /><br /><br /><br />
+	</div>
+<include file="Public/footer" />

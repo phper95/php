@@ -1,0 +1,244 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<include file="News:opt" />
+</div>
+<!-- Sidebar ends -->
+    <script src="__JS__/dialog/artDialog.js?skin=default"></script>
+    <script src="__JS__/jquery.qrcode.min.js"></script>
+    <script language="javascript" type="text/javascript" src="__JS__/My97DatePicker/WdatePicker.js"></script>
+<!-- Content begins -->
+<div id="content">
+    <div class="contentTop">
+        <span class="pageTitle">资讯管理</span>
+        <div class="clear"></div>
+    </div>
+    <include file="Public:bav" />
+    <!-- Main content -->
+    <div class="wrapper">
+       	<div class="widget check">
+            <div class="whead">
+            <h6>资讯列表</h6>
+            <a href="{:U('Wei/tuijianList')}" target="_blank" class="buttonH bBlue mb10 mt5">查看推荐列表</a>
+            <a href="{:U('News/addNews')}" class="buttonH bGreen mb10 mt5">添加</a>
+				<div class="clear"></div></div>
+            <table cellpadding="0" cellspacing="0" width="100%" class="tDefault checkAll tMedia" id="checkAll">
+                <thead>
+                    <tr>
+		                <td width="50">编号</td>
+		                <td><div style="text-align:left;">标题</div></td>
+		                <td width="200">图片</td>
+		                <td width="180">投稿频道</td>
+		                <td width="180">添加日期</td>
+	                	<td width="80">是否启用</td>
+	                	<td width="80">操作</td>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td colspan="9">
+                        <empty name="list">
+                        	额。。。木有咧……
+                        <else/>
+                            <div class="tPages">
+                                <ul class="pages">
+                                	{$page}
+                                </ul>
+                            </div>
+                        </empty>
+                        </td>
+                        
+                    </tr>
+                </tfoot>
+                <tbody>
+                    <volist name="list" id="vo">
+		            <tr>
+		            	<td>{$vo.id}</td>
+		            	<td style="text-align:left;">
+		            		<a class="js-show-phone" data-id="{$vo.id}" href="javascript:void(0);"><span style="font-size:20px;font-weight:bold;">{$vo.name}</span></a><br />
+		            		<span style="color:#ccc;">——{$vo.sub_title}</span><br /><br />
+		            		[{$vo.played}] 看  [{$vo.ding}] 赞 [{$vo.comment_count}] 评 [{$vo.share}] 分享<br />
+		            		<span style="line-height:20px;">外网链接：{$vo.share_url}</span>
+		            	</td>
+		            	<td><a href="{:U('News/uploadImg',array('id'=>$vo['id']))}"><img src="{$vo.bpic}" width="80" alt="点我编辑"/></a></td>
+		            	<td>
+		            		<span id="news_channel_{$vo.id}">
+		            		<empty name="vo.channel">
+		            		<else/>
+		            			{$vo.channel}
+		            		</empty>
+		            		</span>
+		            		<br/><br/>
+		            		<a class="edit_channel" data-id="{$vo.id}" href="javascript:void(0);">编辑</a>
+		            	</td>
+		            	<td>
+		            		<span class="tipW" original-title="添加时间">{$vo.add_time}</span><br /><br />
+		            		<empty name="vo.online_time">
+		            			<span class="redBack">未上线</span>
+		            		<else />
+		            			<span class="blueBack tipW"  original-title="上线时间">{$vo.online_time}</span>
+		            		</empty>
+		            		<br />
+		            	</td>
+		            	<td><eq name="vo.open" value='1'><span class="greenBack">启用</span><else/><span class="redBack">停用</span></eq></td>
+		            	<td>
+		            		<div class="btn-group" style="float: left;">
+		            			<a href="#" class="buttonM bDefault opt" data-toggle="dropdown">点我 <span class="caret"></span></a>
+		                        <ul class="dropdown-menu pull-right">
+				            		<li><a data-href="{:U('News/doTuijian',array('id'=>$vo['id']))}" href="javascript:void(0);" class="js_tuijian"><i class="fa fa-thumbs-up"></i>&nbsp;推荐进列表</a></li>
+				            		<li><a href="{:U('News/editNews',array('id'=>$vo['id']))}"><i class="fa fa-edit"></i>&nbsp;修改</a></li>
+				            		<eq name="vo.open" value="1">
+	                                	<li><a href="javascript:void(0);" data-id="{$vo.id}" data-time="{$vo.online_time}" class="js-add-tuijian"><i class="fa fa-bullhorn"></i> &nbsp;推荐至首页</a></li>
+	                                <else />
+	                                </eq>
+			            		</ul>
+		            		</div>
+		            	</td>
+		            </tr>
+		            </volist>
+                </tbody>
+            </table>
+        </div>
+     
+    </div>
+    <!-- Main content ends -->
+    
+    		<div id="edit_channel_panel" style="display:none;width:300px;line-height:24px;" class="fluid">
+            		<div class="fluid">
+            			<div class="widget nomargin">
+	                        <div class="formRow">
+	                            <div class="grid4"><label>频道: </label></div>
+	                            <div class="grid6">
+	                            	<select id="news_channel_choose">
+	                            		<option value="">-请选择-</option>
+	                            		<volist name="channel_list" id="cn">
+	                            		<option value="{$cn.id}">{$cn.name}</option>
+	                            		</volist>
+	                            	</select>
+	                            </div>
+	                            <div class="clear"></div>
+	                        </div>
+            			</div>
+            		</div>
+            </div>
+            
+            <div id="jian_choose_time" style="display:none;width:300px;line-height:24px;" class="fluid">
+            		<div class="fluid">
+            			<div class="widget nomargin">
+	                        <div class="formRow">
+	                            <div class="grid4"><label>选择推荐时间: </label></div>
+	                            <div class="grid6">
+	                            	<input onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" type="text" id="tuijian_time" readonly="readonly"/>
+	                            </div>
+	                            <div class="clear"></div>
+	                        </div>
+            			</div>
+            		</div>
+            </div>
+            
+            <div id="add_to_tuijian_panel" style="display:none;width:300px;line-height:24px;" class="fluid">
+       			<form method='post' id="tuijian_news_form" name="form1" action="{:U('HomeOnline/doTuijian')}"  enctype="multipart/form-data">
+       				<input type="hidden" id="news_tuijian_id" name="id"/>
+       				<input type="hidden" id="news_tuijian_type" name="type" value="4"/>
+            		<div class="fluid">
+            			<div class="widget nomargin">
+	                        <div class="formRow">
+	                            <div class="grid4"><label>推荐时间: </label></div>
+	                            <div class="grid6">
+	                            	<input type="text" name="online_time" id="news_tuijian_time"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly"/>
+	                            </div>
+	                            <div class="clear"></div>
+	                        </div>
+            			</div>
+            		</div>
+            	</form>
+            </div>
+    
+</div>
+<!-- Content ends -->
+<script>
+(function(){
+	$('.js-show-phone').click(function(){
+		art.dialog({id:'show-qrcode',content:'<div id="output" style=""></div>'});
+		var id = $(this).attr('data-id');
+		$('#output').html('');
+		$('#output').qrcode({
+			//render: 'table', //table方式
+			width: 200, //宽度
+			height:200, //高度
+			text: 'http://ser3.graphmovie.com/appweb/news/read_'+id+'.html' //任意内容
+		});
+		
+		//art.dialog.open('http://ser3.graphmovie.com/appweb/news/read_{$vo.id}.html',{title: '手机模拟页面 ',resize:false,width: 340, height: 800});
+	});
+	
+	$('.edit_channel').click(function(){
+		var id = $(this).attr('data-id');
+		art.dialog({
+			title : '修改频道',
+			content : $('#edit_channel_panel')[0],
+			padding:0,
+			ok : function(){
+				var channel = $('#news_channel_choose').val();
+				if (channel == '') {alert('先选择频道嘛！'); return;}
+				$.ajax({
+					url : '{:U("News/updateChannel")}',
+					type : 'post',
+					data : {paper_id:id, channel_id:channel},
+					success : function(ret){
+						if (typeof ret == 'object') {
+							if (ret.rst == 1) {
+								$.jGrowl('ID：'+id +' 修改成功!');
+								$('#news_channel_'+id).html($('#news_channel_choose').find("option:selected").text());
+							} else {
+								alert(ret.msg);
+							}
+						} else {
+							alert('截图，并联系BOBO！'+ret);
+						}
+					},
+					error : function(){
+						alert('Ajax错误，有可能是网络连接原因引起的。');
+					}
+				});
+			},
+			cancel : true
+		});
+	});
+	
+	$(".js_tuijian").click(function(){
+		var href = $(this).attr('data-href');
+		art.dialog({
+			padding : 0,
+			title : '推荐该微图解',
+			content:$('#jian_choose_time')[0],
+			ok : function(){
+				var time = $.trim($('#tuijian_time').val());
+				if (time == '') {alert('请输入时间'); return false;}
+				location.href = href+'&online_time='+time;
+			}, cancel: true
+		});
+	});
+	
+	$('.js-add-tuijian').click(function(){
+		var id = ($(this).attr('data-id'));
+		var online_time = ($(this).attr('data-time'));
+		$('#news_tuijian_time').val(online_time);
+		$('#news_tuijian_id').val(id);
+		art.dialog({
+			id: 'add_to_tuijian_dialog',
+			padding:0,
+			content:$('#add_to_tuijian_panel')[0],
+			title:'添加至推荐',
+			ok : function(){
+				$('#tuijian_news_form').submit();
+			},
+			cancel:true
+		});
+		
+	});
+})();
+
+</script>
+<include file="Public:footer" />

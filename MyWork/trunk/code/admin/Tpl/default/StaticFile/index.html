@@ -1,0 +1,48 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+</div>
+<!-- Sidebar ends -->
+    
+<!-- Content begins -->
+<div id="content">
+    <div class="contentTop">
+        <span class="pageTitle">静态页面管理</span>
+        <div class="clear"></div>
+    </div>
+    
+    <!-- Breadcrumbs line -->
+    <include file="Public:bav" />
+    
+    <!-- Main content -->
+    <div class="wrapper">
+    	<div class="fluid">
+        <div class="widget grid3">
+        	<div class="whead ">
+        		<h6>【评级】静态页面</h6>
+				<div class="clear"></div>
+			</div>
+        	<div class="body">
+        		<a target='_blank' href="http://ser3.graphmovie.com/appweb/rank.html">评级页面</a> 
+        		<a href="{:U('StaticFile/rank')}" class="buttonM bBlack">生成</a>
+        	</div>
+        </div>
+        <div class="widget grid3">
+        	<div class="whead ">
+        		<h6>【肥皂榜】静态页面</h6>
+				<div class="clear"></div>
+			</div>
+        	<div class="body">
+        		<a target='_blank' href="http://ser3.graphmovie.com/appweb/soaptop.html">肥皂榜页面</a> 
+        		<a href="{:U('StaticFile/soaptop')}" class="buttonM bBlack">生成</a>
+        	</div>
+        </div>
+     	</div>
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+
+<include file="Public:footer" />

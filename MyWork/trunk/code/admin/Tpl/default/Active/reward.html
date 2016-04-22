@@ -1,0 +1,73 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<script src="__JS__/dialog/artDialog.js?skin=default"></script>
+<div id="sidebar">
+	<include file="Public:left" />
+</div>
+<!-- Sidebar ends -->
+    
+<!-- Content begins -->
+<div id="content">
+    <div class="contentTop">
+        <span class="pageTitle">活动奖励管理</span>
+       	<div class="clear"></div>
+    </div>
+    
+    <include file="Public:bav" />
+    
+    <!-- Main content -->
+    <div class="wrapper">
+        <!-- Media table sample -->
+        <div class="widget check">
+            <div class="whead">
+            	<h6>【{$Think.get.name}】活动奖励</h6>
+            	<a href="{:getCurrentUrl()}" class="buttonH bGreen mb10 mt5">返回</a>
+            	<a href="{:U('Active/addReward',array('act_id'=>$_GET['act_id'],'backurl'=>urlencode(__SELF__)))}" class="buttonH bBlue">添加</a>
+            	<div class="clear"></div>
+            </div>
+            <table cellpadding="0" cellspacing="0" width="100%" class="tDefault checkAll tMedia" id="checkAll">
+                <thead>
+                    <tr>
+                    	<td width="10">id</td>
+                        <td >奖励类型</td>
+                        <td width="50">奖励值</td>
+                        <td width="80">可奖励次数</td>
+                        <td width="150">添加时间</td>
+                        <td width="120">操作</td>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td colspan="7">
+                        	<empty name="list">
+                        		木油奖励 
+                            </empty>
+                        </td>
+                    </tr>
+                </tfoot>
+                <tbody>
+                	<volist name="list" id="vo">
+		            <tr>
+		                <td>{$vo.id}</td>
+		                <td>{$typeList[$vo['reward_type']]}</td>
+		                <td>{$vo.reward_value}</td>
+		                <td>{$vo.activ_times}</td>
+		                <td>{$vo.add_time}</td>
+		                <td>
+		                	<a href="{:U('Active/editReward',array('id'=>$vo['id'],'backurl'=>urlencode(__SELF__)))}">编辑</a>
+		                	&nbsp;&nbsp;
+		                	<a href="{:U('Active/doDeleteReward',array('id'=>$vo['id']))}" onclick="return confirm('是否确定删除');">删除</a>
+		                </td>
+		            </tr>
+		            </volist>
+                </tbody>
+            </table>
+            <div id="xxsdf" style="display:none;min-width:600px;" class="fluid">sdfsdf</div>
+        </div>
+     
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+<include file="Public:footer" />

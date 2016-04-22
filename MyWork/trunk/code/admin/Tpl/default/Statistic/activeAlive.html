@@ -1,0 +1,280 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<include file="Statistic:opt" />
+</div>
+<!-- Sidebar ends -->
+    
+<!-- Content begins -->
+<div id="content">
+    <div class="contentTop">
+        <span class="pageTitle">活跃用户留存统计</span>
+        <div class="clear"></div>
+    </div>
+    
+    <!-- Breadcrumbs line -->
+    <include file="Public:bav" />
+    
+    <!-- Main content -->
+    <div class="wrapper">
+    	<div class="widget">
+    		<div class="whead fluid">
+    			<h6>查询</h6>
+				<div class="clear"></div>
+    		</div>
+    		<script language="javascript" type="text/javascript" src="__JS__/My97DatePicker/WdatePicker.js"></script>
+    		<form method='post' id="form1" name="form1" action="{:U('Statistic/activeAlive')}"  enctype="multipart/form-data">
+    		<div class="formRow">
+            	<div style="float:left;"><label>日期：</label></div>
+                <div style="float:left;width:120px;">
+                     <span class="grid12"><input type="text" onClick="WdatePicker()" name="s_day" value="{$Think.post.s_day|default=''}"></span>
+                </div>
+                <div style="float:left;"><label>&nbsp;&nbsp;到&nbsp;&nbsp;</label></div>
+                <div style="float:left;width:120px;">
+                     <span class="grid12"><input type="text" onClick="WdatePicker()" name="e_day" value="{$Think.post.e_day|default=''}"></span>
+                </div>
+                <div style="float:left;padding-left:20px;"><label>统计方式：</label></div>
+                <select name="type" id="active_alive_search_type">
+                	<option value="day">-天-</option>
+                	<option value="week">-周-</option>
+                	<option value="month">-月-</option>
+                </select>
+                <input type="submit" value="提 交" class="buttonM bBlack formSubmit" /><div class="clear"></div>
+                <div class="clear"></div>
+            </div>
+            </form>
+    	</div>
+    <empty name="error_info">
+    	<div class="widget fluid">
+    		<div id="boo"></div>
+    	</div>
+    	
+    	<div class="widget fluid">
+    		<div id="boo2"></div>
+    	</div>
+    	
+    <else />
+    	<div class="widget">
+    	<div class="body">{$error_info}</div>
+    	</div>
+    </empty>
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<empty name="error_info">
+	<script src="http://echarts.baidu.com/build/echarts-plain.js"></script>
+    <script type="text/javascript">
+    (function(){
+    	var data = {:json_encode($rst)};
+    	
+    	var option = {
+        		title : {
+            	    text: '用户统计分析',
+            	    subtext : '{$total_str|default="xb"}'
+            	},
+            	tooltip : {
+            	    trigger: 'axis',
+            	    axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+            	        type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+            	    }
+            	},
+            	animation:false,
+                toolbox: {
+                    show : true,
+                    feature : {
+                        mark : {show: true},
+                        dataView : {show: true, readOnly: false},
+                        magicType : {show: true, type: ['line', 'bar']},
+                        restore : {show: true},
+                        saveAsImage : {show: true}
+                    }
+                },
+                legend: {
+                	 orient: 'horizontal', // 'vertical'
+                    data:[]
+                },
+                xAxis : [{
+                        type : 'category',
+                        data : []
+                    }
+                ],
+                yAxis : [{
+                        type : 'value'
+                    }
+                ],
+                series : [
+                ]
+            };
+    	
+    	var display = function(option){
+    		var types = {'active':'活跃用户数量','news':'新增量','total':'总量','chas':'活跃除去新增'};
+    		
+    		/*
+    		option.tooltip.formatter = function(params,ticket,callback) {
+                var res = ''; // 0=line，1=X轴，2=Y轴
+                var total_persent = 0; // 总的量
+                var total_num = 0; // 总数，
+                for (var i = 0, l = params.length; i < l; i++) { // i 是线条数
+                	if (params[i][2] > 0) {
+                		total_num ++;
+                		res += '<br/>' + params[i][0] + ' 到 '+data2[params[i][0]][params[i][1]]['day']+': ' + data2[params[i][0]][params[i][1]]['str'] + '%';
+                		total_persent += parseFloat(data2[params[i][0]][params[i][1]]['persent']);
+                	}
+                }
+              
+                res = '第 ' + params[0][1] + ' 天 ( ' + (total_persent/total_num).toFixed(2) + '% )' + res;
+                //console.log(params);
+                //key = key.sort(function(a,b){return b-a;});
+                //for (var a in key) {
+                	//res += '<br/>' + st[key[a]].pop() ;
+                	//res += '<br/>' + eval('st.opt'+key[a] +'.pop()') ;
+                //}
+                return res;
+            }  
+    		*/
+    		
+    		for (var i in data) {
+    			option.xAxis[0].data.push(i);
+    		}
+    		for (var a in types) {
+    			option.legend.data.push(types[a]);
+    			var opt = {markPoint : {
+                    data : [
+                            {type : 'max', name: '最大值'},
+                            {type : 'min', name: '最小值'}
+                        ]
+                    },markLine : {
+                        data : [
+                                {type : 'average', name: '平均值'}
+                            ]
+                        }
+        		};
+        		opt.name = types[a];
+        		opt.type = 'line';
+        		opt.data = [];
+        		for (var i in data) {
+        			if (a == 'chas') {
+        				opt.data.push(parseInt(data[i].active) - parseInt(data[i].news));
+        			} else {
+        				opt.data.push(parseInt(data[i][a]));
+        			}
+        		}
+        		option.series.push(opt);
+    		}
+        	
+        	$('#boo').height('500px');
+        	// 基于准备好的dom，初始化echarts图表
+            var myChart = echarts.init(document.getElementById('boo')); 
+         	// 为echarts对象加载数据 
+            myChart.setOption(option);
+    	};
+    	display(option);
+    	
+    	var data2 = {:json_encode($rst2)};
+    	var option2 = {
+        		title : {
+            	    text: '用户留存分析',
+            	    subtext : ''
+            	},
+            	tooltip : {
+            	    trigger: 'axis',
+            	    axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+            	        type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+            	    }
+            	},
+            	animation:false,
+                toolbox: {
+                    show : true,
+                    feature : {
+                        mark : {show: true},
+                        dataView : {show: true, readOnly: false},
+                        magicType : {show: true, type: ['line', 'bar']},
+                        restore : {show: true},
+                        saveAsImage : {show: true}
+                    }
+                },
+                legend: {
+                	 orient: 'horizontal', // 'vertical'
+                	 data : []
+                },
+                xAxis : [{
+                        type : 'category',
+                        data : []
+                    }
+                ],
+                yAxis : [{
+                        type : 'value'
+                    }
+                ],
+                series : [
+                ]
+            };
+    	
+    	var display2 = function(option){
+    		var max_len = {$max_len};
+    		for (var i=1; i<max_len; i++) {
+    			option.xAxis[0].data.push(i);
+    		}
+    		
+    		option.tooltip.formatter = function(params,ticket,callback) {
+                var res = ''; // 0=line，1=X轴，2=Y轴
+                var total_persent = 0; // 总的量
+                var total_num = 0; // 总数，
+                for (var i = 0, l = params.length; i < l; i++) { // i 是线条数
+                	if (params[i][2] > 0) {
+                		total_num ++;
+                		res += '<br/>' + params[i][0] + ' 到 '+data2[params[i][0]][params[i][1]]['day']+': ' + data2[params[i][0]][params[i][1]]['str'] + '%';
+                		total_persent += parseFloat(data2[params[i][0]][params[i][1]]['persent']);
+                	}
+                }
+              
+                res = '第 ' + params[0][1] + ' 天 ( ' + (total_persent/total_num).toFixed(2) + '% )' + res;
+                //console.log(params);
+                //key = key.sort(function(a,b){return b-a;});
+                //for (var a in key) {
+                	//res += '<br/>' + st[key[a]].pop() ;
+                	//res += '<br/>' + eval('st.opt'+key[a] +'.pop()') ;
+                //}
+                return res;
+            }    
+    		
+    		for (var a in data2) {
+    			option.legend.data.push(a);
+    			var opt = {markPoint : {
+                    data : [
+                            {type : 'max', name: '最大值'},
+                            {type : 'min', name: '最小值'}
+                        ]
+                    },markLine : {
+                        data : [
+                                //{type : 'average', name: '平均值'}
+                            ]
+                        }
+        		};
+        		opt.name = a;
+        		opt.type = 'line';
+        		opt.data = [];
+        		for (var i=1; i<max_len; i++) {
+        			if (typeof data2[a][i] == 'undefined'){
+        				opt.data.push('-');
+        			} else {
+        				opt.data.push(parseFloat(data2[a][i]['persent']));
+        			}
+        		}
+        		option.series.push(opt);
+    		}
+        	
+        	$('#boo2').height('500px');
+        	// 基于准备好的dom，初始化echarts图表
+            var myChart = echarts.init(document.getElementById('boo2')); 
+         	// 为echarts对象加载数据 
+            myChart.setOption(option);
+    	};
+    	display2(option2);
+    })();
+    </script>
+</empty>
+<!-- Content ends -->
+<include file="Public:footer" />

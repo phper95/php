@@ -1,0 +1,154 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<include file="Comment:search" />
+</div>
+<!-- Sidebar ends -->
+
+<script src="__JS__/dialog/artDialog.js?skin=default"></script>
+
+<!-- Content begins -->
+<div id="content">
+
+  <include file="Public:bav" />
+  
+    <!-- Main content -->
+    <div class="wrapper">
+        <!-- Media table sample -->
+        <div class="widget check">
+            <div class="whead">
+            <h6>广告评论列表</h6>
+				<div class="clear"></div></div>
+            <table cellpadding="0" cellspacing="0" width="100%" class="tDefault checkAll tMedia" id="checkAll">
+                <thead>
+                    <tr>
+		                <td width="50">编号</td>
+		                <td width="50">用户ID</td>
+		                <td width="50">广告ID</td>
+		                <td width="50">章节ID</td>
+		                <td width="50">页面ID</td>
+		                <td>评论内容</td>
+		                <td width="80">评论回复ID</td>
+		                <td width="150">评论时间</td>
+		                <td width="50">回复类型</td>
+		                <present name="Think.get.user_id">
+		                	<td width="80">操作</td>
+		                </present>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td colspan="9">
+                        <empty name="list">
+                        	额。。。木有咧……
+                        <else/>
+                            <div class="tPages">
+                                <ul class="pages">
+                                	{$page}
+                                    <!--<li class="prev"><a href="#" title="">&lt;</a></li>
+                                    <li><a href="#" title="" class="active">1</a></li>
+                                    <li><a href="#" title="">2</a></li>
+                                    <li><a href="#" title="">3</a></li>
+                                    <li><a href="#" title="">4</a></li>
+                                    <li><a href="#" title="">5</a></li>
+                                    <li><a href="#" title="">6</a></li>
+                                    <li>...</li>
+                                    <li><a href="#" title="">20</a></li>
+                                    <li class="next"><a href="#" title="">&gt;</a></li>
+                                --></ul>
+                            </div>
+                        </empty>
+                        </td>
+                        
+                    </tr>
+                </tfoot>
+                <tbody>
+                    <volist name="list" id="vo">
+		            <tr>
+		                <td>{$vo.id}</td>
+		                <td><a href="{:U('Comment/advList', array('user_id'=>$vo['user_id']))}">{$vo.user_id}</a></td>
+		                <td><a href="{:U('Comment/showInfo', array('id'=>$vo['adv_id'],'user_id'=>$vo['user_id'],'type'=>'adv'))}">{$vo.adv_id}</a></td>
+		                <td>{$vo.vol_id} </td>
+		                <td>{$vo.page_index}</td>
+		                <td id="vo_{$vo.id}">{:htmlspecialchars($vo['comment_content'])}</td>
+		                <td>{$vo.reply_comment_id}</td>
+		                <td>{$vo.add_time}</td>
+		                <td>{$vo.reply_comment_from}</td>
+		                <present name="Think.get.user_id">
+		                	<td>
+		                	<div class="btn-group" style="float: left;">
+	                            <a href="#" class="buttonM bDefault opt" data-toggle="dropdown">点我 <span class="caret"></span></a>
+	                            <ul class="dropdown-menu pull-right">
+	                                <li><a href="{:U('Member/addNews',array('id'=>$vo['user_id'],'type'=>'notice','typedata'=>1, 'backurl'=>urlencode(__SELF__)))}"><span class="icos-pencil"></span>下发动态</a></li>
+			                        <li><a href="{:U('Member/putBlackRoom',array('id'=>$vo['user_id'],'name'=>'', 'backurl'=>urlencode(__SELF__)))}"><span class="icos-pencil"></span>关小黑屋</a></li>
+			                        <li><a href="#" data_url="{:U('Comment/heXie',array('id'=>$vo['id'],'type'=>'adv','hexie'=>'one'))}" class="comment_show_box" data_name="{$members[$vo['user_id']]['name']}" data_id="{$vo['id']}" ><span class="icos-pencil"></span>屏蔽此条评论</a></li>
+			                        <li><a href="#" data_url="{:U('Comment/heXie',array('id'=>$vo['id'],'type'=>'adv','hexie'=>'theall'))}" class="comment_show_box" data_name="{$members[$vo['user_id']]['name']}" data_id="" title="屏蔽该用户所有的评论"><span class="icos-pencil"></span>屏蔽该人所有评论</a></li>
+	                            </ul>
+	                        </div>
+		                	</td>
+		                </present>
+		            </tr>
+		            </volist>
+                </tbody>
+            </table>
+        </div>
+     
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+
+<script>
+(function(){
+	$('.comment_show_box').click(function(){
+		var name = $(this).attr('data_name');
+		var id = $(this).attr('data_id');
+		var url = $(this).attr('data_url');
+		var html = '<strong>' + name + '</strong> ' + (id == '' ? ' 该用户的所有弹幕' : (' 说: ' + $('#vo_'+id).html()));
+		html += '<div style="padding:15px 0px;"><select id="showInfo_dialog_reason"><option value="">-选择原因-</option><option value="1">广告</option><option value="2">剧透</option><option value="3">辱骂</option><option value="4">其他</option></select></div>';
+		art.dialog({
+			id : 'dialog_xxx_mmm_nnn',
+			title : id==''?'屏蔽所有弹幕' : '屏蔽该条弹幕',
+			content : html,
+			ok : function(){
+				var reason = $('#showInfo_dialog_reason').val();
+				if (reason == '') {
+					alert('请选择原因'); return false;
+				}
+				$.ajax({
+					type:'POST',
+					url : url,
+					data : {reason:reason},
+					success : function(data){
+						if (typeof data == 'object') {
+							if (data.rst == 1) {
+								var ids = data.data.ids;
+								for (var a in ids) {
+									$('#vo_'+ids[a].id).html(ids[a].content);
+								}
+								if (id=='') {
+									alert('一共屏蔽该用户 ' + ids.length + ' 条记录。');
+								}
+							} else {
+								alert(data.msg);
+							}
+						} else {
+							alert(data);
+						}
+					},
+					error : function(ex){
+						alert('ajax 失败');
+					}
+				});
+			},
+			padding:10,
+			cancel:true
+		});
+		return false;
+	});
+})();
+</script>
+
+<include file="Public:footer" />

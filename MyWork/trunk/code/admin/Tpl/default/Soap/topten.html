@@ -1,0 +1,96 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+</div>
+<!-- Sidebar ends -->
+    <script language="javascript" type="text/javascript" src="__JS__/My97DatePicker/WdatePicker.js"></script>
+<!-- Content begins -->
+<div id="content">
+    <include file="Public:bav" />
+    <!-- Main content -->
+    <div class="wrapper">
+    	<div class="fluid">
+    	<div class="widget grid12">
+    		<div class="whead">
+    			<h6>生成肥皂榜</h6>
+    			<a href="{:U('Soap/index')}" class="buttonH bBlue mb10 mt5">返回</a>
+    			<div class="clear"></div>
+    		</div>
+	    	<div class="body">
+	    	<form method='post' id="form1" name="form1" action="{:U('Soap/execTopten')}"  enctype="multipart/form-data">
+    		<div class="formRow">
+            	<div style="float:left;"><label>日期：</label></div>
+                <div style="float:left;width:150px;">
+                     <span class="grid12"><input type="text" onClick="WdatePicker({dateFmt:'yyyy-MM-dd 00:00:00'})" name="s_time" value=""></span>
+                </div>
+                <div style="float:left;"><label>&nbsp;&nbsp;到&nbsp;&nbsp;</label></div>
+                <div style="float:left;width:150px;">
+                     <span class="grid12"><input type="text" onClick="WdatePicker({dateFmt:'yyyy-MM-dd 23:59:59'})" name="e_time" value=""></span>
+                </div>
+                <div style="float:left;"><label>&nbsp;&nbsp;上榜人数：&nbsp;&nbsp;</label></div>
+                <div style="float:left;width:150px;">
+                     <span class="grid12"><input type="text" name="nums" value=""></span>
+                </div>
+                <input type="submit" value="提 交" class="buttonM bBlack formSubmit" /><div class="clear"></div>
+                <div class="clear"></div>
+            </div>
+            </form>
+	    	</div>
+    	</div>
+    	</div>
+    	<div class="fluid">
+            <div class="widget">
+            <div class="whead">
+            	<h6>生成肥皂榜记录</h6>
+            	<a href="{:U('StaticFile/soapTopten')}" class="buttonH bRed mb10 mt5">发布</a>
+            	<div class="clear"></div>
+            </div>
+	    	<table cellpadding="0" cellspacing="0" width="100%" class="tDefault checkAll tMedia" id="checkAll">
+                <thead>
+                    <tr>
+		                <td width="50">编号</td>
+		                <td >用户</td>
+		                <td width="150">开始时间</td>
+		                <td width="150">结束时间</td>
+		                <td width="150">生成时间</td>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td colspan="5">
+                        <empty name="list">
+                        	额。。。木有咧……
+                        <else/>
+                            <div class="tPages">
+                                <ul class="pages">
+                                	{$page}
+                                </ul>
+                            </div>
+                        </empty>
+                        </td>
+                        
+                    </tr>
+                </tfoot>
+                <tbody>
+                    <volist name="list" id="vo">
+		            <tr>
+		                <td>{$vo.id}</td>
+		                <td>{$vo.info}</td>
+		                <td>{$vo.b_time}</td>
+		                <td>{$vo.e_time}</td>
+		                <td>{$vo.add_time}</td>
+		            </tr>
+		            </volist>
+                </tbody>
+            </table>
+                   
+            </div>
+        </div>
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+
+<include file="Public:footer" />

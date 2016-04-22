@@ -1,0 +1,148 @@
+<!DOCTYPE>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<title>后台人员发送测试百度Push数据</title>
+<link href="__CSS__/styles.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="__JS__/jquery-1.7.1.min.js"></script>
+<style>
+td {padding:10px 18px;}
+</style>
+</head>
+<body>
+<div class="formRow">
+<form method='post' id="form1" name="form1" action="{:U('test/send')}"  enctype="multipart/form-data">
+<table>
+	<tr><td>标题</td><td><input type="text" name="title" placeholder="如果不填，则默认是APP的名字"/></td></tr>
+	<tr><td>内容</td><td><textarea rows="8" name="content" placeholder="内容，必填"></textarea></td></tr>
+	<tr>
+		<td>样式</td>
+		<td>
+                            	<label style="width:140px;">
+                            	<input type="checkbox" class="check" name="basic_style[]" checked="checked" value="ling"/>
+								<span>收到通知后响铃</span>
+								</label>
+								<label style="width:140px;">
+                            	<input type="checkbox" class="check" name="basic_style[]" checked="checked" value="zzz"/>
+								<span>收到通知后震动</span>
+								</label>
+								<label>
+                            	<input type="checkbox" class="check" name="basic_style[]" checked="checked" value="clean"/>
+								<span> 通知可以被清除</span>
+								</label>
+		</td>
+	</tr>
+	<tr>
+		<td>操作</td>
+		<td>
+								<label style="width:140px;">
+                            	<input type="radio" name="after_opt" checked="checked" value="app" />
+								<span>直接打开应用</span>
+								</label><br /><br />
+								<label style="float:left;width:120px;">
+                            		<input type="radio" class="check" name="gm_opt" value="0" checked="checked" />
+									<span style="float:left;">Do-Nothing</span>
+								</label>
+								<label style="float:left;width:120px;">
+                            		<input type="radio" class="check" name="gm_opt" value="1" />
+									<span style="float:left;">打开广告</span>
+								</label>
+								<label style="float:left;width:120px;">
+                            		<input type="radio" class="check" name="gm_opt" value="2" />
+									<span style="float:left;">打开电影</span>
+								</label>
+								<label style="float:left;width:120px;">
+                            		<input type="radio" class="check" name="gm_opt" value="3" />
+									<span style="float:left;">打开专题</span>
+								</label>
+								<label style="float:left;width:120px;">
+                            		<input type="radio" class="check" name="gm_opt" value="4" />
+									<span style="float:left;">打开个人中心</span>
+								</label>
+								<label style="float:left;width:120px;">
+                            		<input type="radio" class="check" name="gm_opt" value="5" />
+									<span style="float:left;">打开链接</span>
+								</label>
+								<label style="float:left;width:120px;">
+                            		<input type="radio" class="check" name="gm_opt" value="6" />
+									<span style="float:left;">打开资讯</span>
+								</label><br /><br />
+								
+								<label style="width:140px;">
+                            	<input type="radio" name="after_opt" value="url"/>
+								<span>打开网页</span>
+								</label>
+								<div class="grid4 nomargin"><input type="text" name="open_url"/>
+								<label style="float:left;">
+	                            	<input type="checkbox" name="open_url_confirm" />
+									<span> 打开网页需要确认</span>
+									</label>
+								</div>
+		</td>
+	</tr>
+	<tr>
+		<td>设备选择</td>
+		<td>
+								<label>
+                            	<input type="checkbox" class="check" name="os" checked="checked" value="ios"/>
+								<img style="margin:0px;" src="http://apps.bdimg.com/developer/static/1404221123/console/push/img/push-icon-ios.png">
+								<span> &nbsp;&nbsp;IOS</span>
+								</label>
+		</td>
+	</tr>
+	<tr>
+		<td>自定义字段</td>
+		<td><a class="buttonS bGreen" id="push_notice_add_key_value" href="javascript:void(0);">添加</a></td>
+	</tr>
+	<tr><td></td><td></td></tr>
+	<tr><td></td><td></td></tr>
+</table>
+<input type="submit" value="提 交" id="pushnotice_tep1_btn1" class="buttonM bBlack formSubmit" />
+</form>
+</div>
+<script>
+$('document').ready(function(){
+	var i = 0;
+	var getKeyVlaueHtml = function(key,value){
+		i++;
+		key = key || '';
+		value = value || ''; 
+		return '<div class="fuid">'
+       	 + '<div class="formRow noBorderB" style="padding-top:0px;">'
+   		 + '<div class="grid2"><label></label></div>'
+   		 + '<div class="grid9">'
+   		 + '<span style="float:left;padding:2px 5px;">键:</span>'
+			 + '<label>'
+   		 + '<input type="text" name="keys[]" data="'+i+'" id="keys_' + i + '" value="' + key + '"/>'
+			 + '</label>'
+			 + '<span style="float:left;padding:2px 5px;">&nbsp;值:</span>'
+			 + '<label>'
+   		 + '<input type="text" name="values[]" value="' + value + '"/>'
+			 + '</label>&nbsp;&nbsp;'
+			 + '<a class="buttonS bRed del_item_key" id="del_' + i + '" href="javascript:void(0);" onclick="$(this).parent().parent().parent().remove();">删除</a>'
+			 + '</div>'
+   		 + '<div class="clear"></div>'
+			 + '</div>'
+			 + '</div>';
+		
+	};
+	
+	$('#push_notice_add_key_value').click(function(){
+    	$(this).after($(getKeyVlaueHtml('','')));
+	});
+	
+	$('.check').click(function(){
+		$('input[name="keys[]"]').each(function(){
+			if ($(this).val() == 'gm_opt'){ 
+				var x = $(this).attr('data');
+				$('#del_'+x).click();
+			}
+		});
+		$('#push_notice_add_key_value').after($(getKeyVlaueHtml('gm_opt',$(this).val())));
+	});
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+</div>
+<!-- Sidebar ends -->
+
+<!-- Content begins -->
+<div id="content">
+
+  <include file="Public:bav" />
+  
+    <!-- Main content -->
+    <div class="wrapper">
+        <!-- Media table sample -->
+        <div class="widget">
+        	<div class="body">
+        		<span class="greenBack"><a href="http://ser3.graphmovie.com/appweb/appswall.php?k=6564Idvhr6b9AkdtiQsYtWwjk716UvFYfx2s5X18KXIptTfqohjCwk5vCjW3udQRmEYhOdWMMJopwir2yR4YBpa2Gpp2k7WB37XafQHs6d2JVKlA3150IjJolF%2BIIpjk8hr9OH3OtTJX" target="_blank">立即查看</a></span>
+        	</div>
+        </div>
+        <div class="widget check">
+            <div class="whead">
+            	<h6>推荐应用列表</h6>
+                 <a href="{:U('Appwall/add')}" class="buttonH bBlue mb10 mt5">添加</a>
+				<div class="clear"></div>
+			</div>
+            <table cellpadding="0" cellspacing="0" width="100%" class="tDefault checkAll tMedia" id="checkAll">
+                <thead>
+                    <tr>
+		                <td width="50">编号</td>
+		                <td width="50">应用图标</td>
+		                <td>应用标题</td>
+		                <td width="150">应用下载地址</td>
+		                <td width="100">按钮名称</td>
+		                <td width="140">添加时间</td>
+		                <td width="50">状态</td>
+		                <td width="80">操作</td>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td colspan="12">
+                        <empty name="list">
+                        	额。。。木有咧……
+                        <else/>
+                            <div class="tPages">
+                                <ul class="pages">
+                                	{$page}
+                                </ul>
+                            </div>
+                        </empty>
+                        </td>
+                        
+                    </tr>
+                </tfoot>
+                <tbody>
+                    <volist name="list" id="vo">
+		            <tr>
+		                <td>{$vo.id}</td>
+		                <td><img src="{$vo.icon}" width="50"/></td>
+		                <td>
+		                	<div style="text-align:left;">
+		                		<h2>{$vo.name}</h2>
+		                	{$vo.subtitle}
+		                	</div>
+		                </td>
+		                <td>{$vo.url}</td>
+		                <td><span class="blueBack">{$vo.btn_title}</span></td>
+		                <td>{$vo.add_time}</td>
+		                <td><eq name="vo.open" value="1"><span class="greenBack">OK</span><else/><span class="redBack">关闭</span></eq></td>
+		                <td>
+		                	<!-- Simple buttons with caret -->
+	                        <div class="btn-group" style="float: left;">
+	                            <a href="#" class="buttonM bDefault opt" data-toggle="dropdown">点我 <span class="caret"></span></a>
+	                            <ul class="dropdown-menu pull-right">
+	                                <li><a href="{:U('Appwall/edit', array('id'=>$vo['id'],'name'=>$vo['name']))}"><span class="icos-pencil"></span>查看</a></li>
+	                                <eq name="vo.open" value="1">
+	                                	<li><a href="{:U('Appwall/closeApp', array('id'=>$vo['id'],'name'=>$vo['name']))}"><span class="icos-view"></span>关闭</a></li>
+	                                <else />
+	                                	<li><a href="{:U('Appwall/openApp', array('id'=>$vo['id'],'name'=>$vo['name']))}"><span class="icos-view"></span>开启</a></li>
+	                                </eq>
+	                            </ul>
+	                        </div>
+		                </td>
+		            </tr>
+		            </volist>
+                </tbody>
+            </table>
+        </div>
+     
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+<include file="Public:footer" />

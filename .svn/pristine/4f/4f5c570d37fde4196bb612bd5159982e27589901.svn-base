@@ -1,0 +1,244 @@
+<include file="Public/header" />
+	<div id="content">
+		<include file="Author/info"/>
+		<div>
+		<if condition="!empty($one) and !empty($one['pay_info']) and $one['pay_state'] eq 1">
+			<span style="float:right;padding:3px 10px; border:1px solid #ccc; border-radius:3px;font-size:12px;color:#666;cursor:pointer;" id="edit_info">编辑</span>
+			<span style="color:#00aaff;">已经通过审核。</span>
+		</if>
+		<if condition="!empty($one) and $one['pay_state'] eq 2">
+			<span style="color:red;">审核未通过：{$one.reason}</span>
+		</if>
+		</div>
+		<form method='post' id="form1" name="form1" action="{:U('Author/add')}"  enctype="multipart/form-data">
+					<div class="e_cont a_cont">
+                        <div class="cont_form clearfix">
+                             <div class="form_left">
+                              <p class="m_name"><span>*</span>真实姓名：</p>
+                           </div>
+                           <div class="form_right">
+                            <p><input type="text" name="realname" info="姓名" value="{$one.realname|default=''}" class="short_text txtBlue require"></p>
+                           </div>
+                        </div>
+                        <div class="cont_form clearfix">
+                             <div class="form_left">
+                              <p class="m_name">QQ：</p>
+                           </div>
+                           <div class="form_right">
+                            <p><input type="text" name="qq" value="{$one.qq|default=''}" class="short_text txtBlue"></p>
+                           </div>
+                        </div>
+                        <div class="cont_form clearfix">
+                             <div class="form_left">
+                              <p class="m_name"><span>*</span>手机号：</p>
+                           </div>
+                           <div class="form_right">
+                            <p><input type="text" name="phone" value="{$one.phone|default=''}" info="手机号" class="short_text txtBlue require"></p>
+                           </div>
+                        </div>
+                        <div class="cont_form clearfix">
+                             <div class="form_left">
+                              <p class="m_name"><span>*</span>身份证号码：</p>
+                           </div>
+                           <div class="form_right">
+                            <p><input type="text" name="id_card" value="{$one.id_card|default=''}" info="身份证" class="short_text txtBlue require"></p>
+                           </div>
+                        </div>
+                        <div class="cont_form clearfix">
+                             <div class="form_left">
+                              <p class="m_name"><span>*</span>Email：</p>
+                           </div>
+                           <div class="form_right">
+                            <p><input type="text" name="email" info="Email" value="{$one.email|default=$user['email']}" class="short_text txtBlue require"></p>
+                           </div>
+                        </div>
+                        <div class="cont_form clearfix">
+                             <div class="form_left">
+                              <p class="m_name"><span>*</span>通讯地址：</p>
+                           </div>
+                           <div class="form_right">
+                            <p><input type="text" value="{$one.address|default=''}" name="address" class="long_text txtBlue require" info="通讯地址" placeholder="例如：深圳市福田区深南大道2008号中国凤凰大厦2号楼11B"></p>
+                           </div>
+                        </div>
+                        <div class="cont_form clearfix">
+                             <div class="form_left">
+                              <p class="m_name"><span>*</span>支付方式：</p>
+                           </div>
+                           <div class="form_right">
+                            <p>
+                            	<label style="line-height:24px;"><input style="margin:2px;" type="radio" name="pay_type" class="pay_type" value="0" <eq name="one.pay_type" value="0">checked="checked"</eq> />&nbsp;银行转账</label>&nbsp;&nbsp;
+                            	<label style="line-height:24px;"><input style="margin:2px;" type="radio" name="pay_type" class="pay_type" value="1" <eq name="one.pay_type" value="1">checked="checked"</eq>/>&nbsp;支付宝转账</label>
+                            </p>
+                           </div>
+                        </div>
+                        <div id="yhcard_info">
+	                        <div class="cont_form clearfix">
+	                             <div class="form_left">
+	                              <p class="m_name"><span>*</span>银行卡号：</p>
+	                           </div>
+	                           <div class="form_right">
+	                            <p><input type="text" class="long_text txtBlue show_hide require" name="yh_card_num" value="{$one.pay_info.yhc|default=''}" placeholder="银行卡号" info="银行卡号"></p>
+	                           </div>
+	                        </div>
+	                        <div class="cont_form clearfix">
+	                             <div class="form_left">
+	                              <p class="m_name"><span>*</span>开户行：</p>
+	                           </div>
+	                           <div class="form_right">
+	                            <p>
+	                            	<select style="margin:3px 0px;" name="bank" class="show_hide require" info="开户行">
+	                            		<option value="">-选择银行-</option>
+	                            		<empty name="one">
+	                            			<volist name="bank" id="vo">
+		                            			<option value="{$vo}">{$vo}</option>
+		                            		</volist>
+		                            	<else />
+		                            		<volist name="bank" id="vo">
+		                            			<if condition="$one['pay_info']['khh'] eq $vo">
+		                            				<option value="{$vo}" selected="selected">{$vo}</option>
+		                            			<else />
+		                            				<option value="{$vo}">{$vo}</option>
+		                            			</if>
+		                            		</volist>
+	                            		</empty>
+	                            	</select>
+	                            </p>
+	                           </div>
+	                        </div>
+	                        <div class="cont_form clearfix">
+	                             <div class="form_left">
+	                              <p class="m_name"><span>*</span>开户支行：</p>
+	                           </div>
+	                           <div class="form_right">
+	                            <p><input type="text" class="long_text txtBlue show_hide require" name="yh_card_f_hang" value="{$one.pay_info.khzh|default=''}" placeholder="示例：安联支行 广东 深圳（三项必填）" info="开户支行"></p>
+	                            <p class="mark-info">--如不清楚，可致电银行客服查询</p>
+	                           </div>
+	                        </div>
+                        </div>
+                        <div id="zfbao_info" style="display:none;">
+                        	<div class="cont_form clearfix">
+	                             <div class="form_left">
+	                              <p class="m_name"><span>*</span>支付宝账号：</p>
+	                           </div>
+	                           <div class="form_right">
+	                            <p><input type="text" class="long_text txtBlue show_hide require" name="zfb" value="{$one.pay_info.zfb|default=''}" placeholder="支付宝账号" info="支付宝账号"></p>
+	                           </div>
+	                        </div>
+                        </div>
+                        <div class="cont_form clearfix">
+                             <div class="form_left">
+                              <p class="m_name">其他：</p>
+                           </div>
+                           <div class="form_right">
+                            <p><input type="text" placeholder="如果还有什么想说的，请写在这里" value="{$one.remark|default=''}" name="remark" class="long_text txtBlue"></p>
+                           </div>
+                        </div>
+
+                    </div>
+                    <div class="set_btn">
+                    	<p class="set_btn_cont">
+                    		<if condition="!empty($one) and !empty($one['pay_info']) and $one['pay_state'] eq 1">
+                    			<input type="submit" class="btn btnBlue" id="submit" style="display:none;" value="确 认" onclick="return false;"/>
+                    		<else/>
+                    			<input type="submit" class="btn btnBlue" id="submit" value="确 认" onclick="return false;"/>
+                    		</if>
+                        </p>
+                        <p class="error">* 标记为必填项</p>
+                         
+                     </div>
+                     <br /><br /><br /><br /><br />
+       </form>
+	</div>
+	<if condition="!empty($one) and !empty($one['pay_info']) and $one['pay_state'] eq 1">
+		<script>
+			$('input').attr('disabled','disabled');
+			$('select').attr('disabled','disabled');
+			$(document).ready(function(){
+				$('#edit_info').click(function(){
+					$('input').attr('disabled',false);
+					$('select').attr('disabled',false);
+					$('#submit').fadeIn();
+					$(this).fadeOut();
+				});
+			});
+		</script>
+	</if>
+	<script type="text/javascript">
+<!--
+$(document).ready(function(){
+	var show = function(val) {
+		if (parseInt(val) == 0) {
+			$('#yhcard_info').show();
+			$('#zfbao_info').hide();
+			$('#yhcard_info .show_hide').addClass('require');
+			$('#zfbao_info .show_hide').removeClass('require');
+		} else {
+			$('#yhcard_info').hide();
+			$('#zfbao_info').show();
+			$('#yhcard_info .show_hide').removeClass('require');
+			$('#zfbao_info .show_hide').addClass('require');
+		}
+	};
+	$('.pay_type').click(function(){
+		var val = $(this).val();
+		show(val);
+	});
+	$('.pay_type').each(function(){
+		if ($(this).attr('checked')=='checked') {
+			show($(this).val()); return false;
+		}
+	});
+	$('#submit').click(function(){
+		var ok = true;
+		$('.require').each(function(){
+			var value = $.trim($(this).val());
+			var name = $(this).attr('name');
+			if (value == '') {
+				ok = false;
+				boo_common.showMsg($(this).attr('info')+' 不能为空'); return false;
+			} else if (name == 'yh_card') {
+				value = value.replace(/，/g,',');
+				var tmp = value.split(',');
+				if (tmp.length != 3) {
+					ok = false;
+					boo_common.showMsg($(this).attr('info')+' 格式有误<br /><span style="color:#f23;font-size:12px;">' + $(this).attr('placeholder')+'</span>'); return false;
+				}
+			} else if (name == 'email') {
+				if (false == boo_common.check_email(value)){
+					ok = false;
+					boo_common.showMsg($(this).attr('info')+' 格式错误'); return false;
+				}
+			}
+		});
+		if (ok) {
+			$.ajax({
+				url : '{:U("Author/add")}',
+				type : 'POST',
+				data : $('#form1').serialize(),
+				success : function(data){
+					loading = false;
+					if (typeof data == 'object') {
+						if (data.rst == 1) {
+							loading = true;
+							boo_common.showMsg(data.msg,'',function(){
+								location.href = '{:U("Index/index")}';
+							});
+							$('#submit').unbind();
+						} else {
+							boo_common.showMsg(data.msg);
+						}
+					}else {
+						boo_common.showMsg('额偶。请刷新页面。。。');
+					}
+				},
+				error : function(ex){
+					loading = false;
+					boo_common.showMsg('额偶。请刷新页面。。。');
+				}
+			});
+		}
+	});
+});
+//-->
+</script>
+<include file="Public/footer" />

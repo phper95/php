@@ -1,0 +1,278 @@
+<include file="Public/header" />
+<style>
+@media only screen and (max-width:340px){
+	.short_text {
+	    width: 70%;
+	}
+}
+</style>
+<script src="__JS__/city.js"></script>
+	<div id="content">
+		<include file="Author/info"/>
+		<div>
+		<if condition="!empty($one) and !empty($one['yh_card']) and $one['state'] eq 1">
+			<!-- <span style="float:right;padding:3px 10px; border:1px solid #ccc; border-radius:3px;font-size:12px;color:#666;cursor:pointer;" id="edit_info">编辑</span>  -->
+			<span style="color:#00aaff;">钱柜信息已经通过审核。</span>
+		</if>
+		<if condition="!empty($one) and $one['state'] eq 2">
+			<span style="color:red;">钱柜信息审核未通过：{$one.reason}</span>
+		</if>
+		</div>
+		<form method='post' id="form1" name="form1" action="{:U('Author/add')}"  enctype="multipart/form-data">
+					<div class="e_cont a_cont">
+                        <div class="cont_form clearfix">
+                             <div class="form_left">
+                              <p class="m_name"><span>*</span>真实姓名：</p>
+                           </div>
+                           <div class="form_right">
+                            <p><input type="text" name="realname" info="姓名" value="{$one.realname|default=''}" class="short_text txtBlue require"></p>
+                           </div>
+                        </div>
+                        <div class="cont_form clearfix">
+                             <div class="form_left">
+                              <p class="m_name">QQ：</p>
+                           </div>
+                           <div class="form_right">
+                            <p><input type="text" name="qq" value="{$one.qq|default=''}" class="short_text txtBlue"></p>
+                           </div>
+                        </div>
+                        <div class="cont_form clearfix">
+                             <div class="form_left">
+                              <p class="m_name"><span>*</span>手机号：</p>
+                           </div>
+                           <div class="form_right">
+                            <p><input type="text" name="phone" value="{$one.phone|default=''}" info="手机号" class="short_text txtBlue require"></p>
+                           </div>
+                        </div>
+                        <div class="cont_form clearfix">
+                             <div class="form_left">
+                              <p class="m_name"><span>*</span>身份证号码：</p>
+                           </div>
+                           <div class="form_right">
+                            <p><input type="text" name="id_card" value="{$one.id_card|default=''}" info="身份证" class="short_text txtBlue require"></p>
+                           </div>
+                        </div>
+                        <div class="cont_form clearfix">
+                             <div class="form_left">
+                              <p class="m_name"><span>*</span>Email：</p>
+                           </div>
+                           <div class="form_right">
+                            <p><input type="text" name="email" info="Email" value="{$one.email|default=$user['email']}" class="short_text txtBlue require"></p>
+                           </div>
+                        </div>
+                        <div class="cont_form clearfix">
+                             <div class="form_left">
+                              <p class="m_name"><span>*</span>通讯地址：</p>
+                           </div>
+                           <div class="form_right">
+                            <p><input type="text" value="{$one.address|default=''}" info="通讯地址" placeholder="例如：深圳市福田区深南大道2008号中国凤凰大厦2号楼11B"  name="address" class="long_text txtBlue require"></p>
+                           </div>
+                        </div>
+                        <div class="cont_form clearfix">
+                             <div class="form_left">
+                              <p class="m_name"><span>*</span>银行和省份：</p>
+                           </div>
+                           <div class="form_right">
+                            <p>
+                            	<select id="bank_list" style="float:left;margin-right:5px;" class="require" info="选择银行">
+                            		<option value="">-选择银行-</option>
+                            	</select>
+                            	<span style="float:left;">
+                            	<select id="province" class="require" info="开户省份">
+                            		<option value="">-选择开户省份-</option>
+                            	</select>
+                            	<select id="city" class="require" info="开户市区">
+                            		<option value="">-选择开户市区-</option>
+                            	</select>
+                            	</span>
+                            </p>
+                          	</div>
+                       </div>
+                       <div class="cont_form clearfix">
+                       	<div class="form_left">
+                       		 <p class="m_name"><span>*</span>卡号和户主：</p>
+                       	</div>
+                       	<div class="form_right">
+                       		<div id="yhcard-big" style="display:none;width:100%;height:35px;position:absolute;top:-28px;left:0px;text-align:center;">
+                       			<span id="yhcard-big-c" style="padding:5px 8px;background-color:#00aaff;color:#fff;font-size:20px; font-weight:bold;border:1px solid #fefefe;border-radius:5px;box-shadow: #00aaff 0px 0px 2px;"></span>
+                       		</div>
+                       		<p>
+	                       		<input type="text" class="short_text txtBlue show_hide require" style="float:left;margin-right:5px;" id="yhcard-num-ipt" placeholder="银行卡号" info="银行卡号" />
+	                       		<span style="float:left;">
+	                       			户主 ：<input type="text" class="short_text txtBlue show_hide require" style="width:135px;" id="yhcard-host" placeholder="户主姓名" info="户主姓名" />
+	                       		</span>
+                       		</p>
+                       	</div>
+                       </div>
+                       <div class="cont_form clearfix">
+                           <div class="form_left">
+                              <p class="m_name"><span>*</span>开户支行：</p>
+                           </div>
+                           <div class="form_right">
+                           	<p>
+                           		<input type="text" class="long_text txtBlue show_hide require" id="yhcard-zh" placeholder="开户支行" info="开户支行">
+                           		<input type="hidden" class="long_text txtBlue show_hide" name="yh_card" id="yh_card" value="{$one.yh_card|default=''}">
+                           	</p>
+                            <p>
+                            	（如不清楚支行信息可致电银行客服查询）<br />
+                            </p>
+                           </div>
+                        </div>
+                        <div class="cont_form clearfix">
+                             <div class="form_left">
+                              <p class="m_name">其他：</p>
+                           </div>
+                           <div class="form_right">
+                            <p><input type="text" placeholder="如果还有什么想说的，请写在这里" value="{$one.remark|default=''}" name="remark" class="long_text txtBlue"></p>
+                           </div>
+                        </div>
+
+                    </div>
+                    <div class="set_btn">
+                    	<p class="set_btn_cont">
+                    		<if condition="!empty($one) and !empty($one['yh_card']) and $one['state'] eq 1">
+                    			<input type="submit" class="btn btnBlue" id="submit" value="确 认" style="display:none;" onclick="return false;"/>
+                    		<else />
+                    			<input type="submit" class="btn btnBlue" id="submit" value="确 认" onclick="return false;"/>
+                    		</if>
+                        </p>
+                        <p class="error">* 标记为必填项</p>
+                         
+                     </div>
+                     <br /><br /><br /><br /><br />
+       </form>
+	</div>
+	<if condition="!empty($one) and !empty($one['yh_card']) and $one['state'] eq 1">
+		<script>
+			$(document).ready(function(){
+				$('input').attr('disabled','disabled');
+				$('select').attr('disabled','disabled');
+				$('textarea').attr('disabled','disabled');
+				$('#edit_info').click(function(){
+					$('input').attr('disabled',false);
+					$('select').attr('disabled',false);
+					$('textarea').attr('disabled',false);
+					$('#submit').fadeIn();
+					$(this).fadeOut();
+				});
+			});
+		</script>
+	</if>
+	<script type="text/javascript">
+<!--
+$(document).ready(function(){
+	
+	var bank_list = '招商银行，中国工商银行，中国农业银行，中国银行，中国建设银行，交通银行，中信银行，上海浦东发展银行，中国民生银行，光大银行，兴业银行，华夏银行，广发银行，中国邮政储蓄银行，平安银行，城市商业银行，城市信用合作社，农村商业银行，农村合作银行，农村信用合作社，恒丰银行，浙商银行，渤海银行，徽商银行，上海农村商业银行，北京银行，南京银行，江苏银行，宁波银行，上海银行，杭州银行，中国农村发展银行，东莞农村商业银行，浙江商业银行，珠海南通银行，宁波国际银行，福建亚洲银行，三峡银行，东亚银行，新韩银行，韩亚银行，花旗银行，友利银行，韩国企业银行，广东华兴银行，汇丰银行，渣打银行，南洋商业银行，永亨银行，国家开发银行，中国进出口银行，村镇银行，恒生银行，中银香港，集友银行，廖创兴银行，亚洲商业银行，道亨银行，上海商业银行，永隆银行，大新银行，中信嘉华银行，美国银行，摩根大通银行，建东银行，美一银行，纽约银行，三菱东京日联银行，日联银行，三井住友银行，瑞惠实业银行，山口银行，日本住友信托银行，韩国外换银行，朝兴银行，韩国产业银行，马来亚银行，首都银行及信托公司，华侨银行，大华银行，星展银行，盘古银行，泰京银行，泰华农民银行，奥地利中央合作银行，比利时联合银行，比利时富通银行，荷兰银行，荷兰商业银行，荷兰万贝银行，苏格兰皇家银行，瑞典商业银行公共有限，瑞典北欧斯安银行有限，法国兴业银行，法国巴黎银行，东方汇理银行，法国里昂信贷银行，法国外贸银行，德累斯顿银行，德意志银行，德国商业银行，西德意志银行，巴伐利亚州银行，德国北德意志州银行，中德住房储蓄银行，罗马银行，意大利联合商业银行，瑞士信贷第一波士顿，瑞士银行有限公司，丰业银行，蒙特利尔银行，澳新银行，葡国储蓄信贷银行，新联商业银行，协和银行，德富泰银行有限公司，荷兰合作银行中国公司，厦门国际银行，上海-巴黎国际银行，华商银行，华一银行，国泰君安证券';
+	var tmp_list = bank_list.split('，');
+	var bank_option = '';
+	for (var i=0, len=tmp_list.length; i< len; i++) {
+		bank_option += '<option value="'+tmp_list[i]+'">'+tmp_list[i]+'</option>';
+	}
+	$(bank_option).appendTo($('#bank_list'));
+	
+	city_refesh.init('province','city');
+	
+	var show_big = function(num){
+		var tmp = num.split('');
+		var str = '';
+		for (var i=0,len=tmp.length; i<len; i++) {
+			if (i>0 && i%4 == 0) {
+				str += '<span style="padding-left:8px;"></span>';
+			}
+			str += tmp[i];
+		}
+		return str;
+	};
+	$('#yhcard-num-ipt').focus(function(){
+		$('#yhcard-big-c').html(show_big($(this).val()));
+		$('#yhcard-big').show();
+	}).blur(function(){
+		$('#yhcard-big').hide();
+	}).keyup(function(){
+		$('#yhcard-big-c').html(show_big($(this).val()));
+	});
+	
+	var yh_card_info = "{$one.yh_card|default=''}";
+	if ($.trim(yh_card_info) != '') {
+		var tmp = yh_card_info.split('|');
+		for(var a in tmp) {
+			var tmp2 = tmp[a].split(',');
+			if ($.trim(tmp2[1]) == '支付宝') {
+				continue;
+			}
+			tmp2[1] = tmp2[1].replace(/（/,'(');
+			var tmp3 = tmp2[1].split('(');
+			$('#bank_list').val($.trim(tmp3[0]));
+			if (tmp3.length > 1) {
+				tmp3[1] = tmp3[1].replace(/[)）]/g,'');
+				var tmp4 = tmp3[1].split('^');
+				if (tmp4.length === 3) {
+					$('#province').val(tmp4[0]);
+					$('#province').change();
+					$('#city').val(tmp4[1]);
+					$('#yhcard-zh').val($.trim(tmp4[2]));
+				} else {
+					$('#yhcard-zh').val($.trim(tmp3[1]));
+				}
+			}
+			$('#yhcard-num-ipt').val($.trim(tmp2[0]));
+			$('#yhcard-host').val($.trim(tmp2[2]));
+		}
+		
+	}
+	
+	$('#submit').click(function(){
+		var ok = true;
+		$('.require').each(function(){
+			var value = $.trim($(this).val());
+			var name = $(this).attr('name');
+			if (value == '') {
+				ok = false;
+				boo_common.showMsg($(this).attr('info')+' 不能为空'); return false;
+			} else if (name == 'email') {
+				if (false == boo_common.check_email(value)){
+					ok = false;
+					boo_common.showMsg($(this).attr('info')+' 格式错误'); return false;
+				}
+			}
+		});
+		
+		if (ok) {
+			var yh_card_info = [
+			    $.trim($('#yhcard-num-ipt').val()),
+			    $('#bank_list').val()+'('+$('#province').val() + '^' + $('#city').val() + '^' + $.trim($('#yhcard-zh').val()) +')',
+			    $.trim($('#yhcard-host').val())
+			];
+			$('#yh_card').val(yh_card_info.join(","));
+			
+			$.ajax({
+				url : '{:U("Author/add")}',
+				type : 'POST',
+				data : $('#form1').serialize(),
+				success : function(data){
+					loading = false;
+					if (typeof data == 'object') {
+						if (data.rst == 1) {
+							loading = true;
+							boo_common.showMsg(data.msg,'',function(){
+								location.href = '{:U("Index/index")}';
+							});
+							$('#submit').unbind();
+						} else {
+							boo_common.showMsg(data.msg);
+						}
+					}else {
+						boo_common.showMsg('额偶。请刷新页面。。。');
+					}
+				},
+				error : function(ex){
+					loading = false;
+					boo_common.showMsg('额偶。请刷新页面。。。');
+				}
+			});
+		}
+	});
+});
+//-->
+</script>
+<include file="Public/footer" />

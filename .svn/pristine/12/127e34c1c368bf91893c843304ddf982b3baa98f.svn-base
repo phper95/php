@@ -1,0 +1,107 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<!-- Secondary nav -->
+</div>
+<!-- Sidebar ends -->
+
+<!-- Content begins -->
+<div id="content">
+    <include file="Public:bav" />
+    <!-- Main content -->
+    <div class="wrapper">
+    	<div class="widget " id="movie_comment_pre_pindex">
+    		正在获取上一页。。。
+    	</div>
+        	<div class="fluid">
+        		<form method='post' id="form1" name="form1" action="{:U('Movie/doAddComment')}"  enctype="multipart/form-data">
+                    <div class="widget ">
+                        <div class="whead">
+                        	<h6>添加电影解说</h6>
+                        	<a href="{:getCurrentUrl()}" class="buttonH bBlue mb10 mt5">取消</a>
+                        	<div class="clear"></div>
+                        </div>
+                        <div class="formRow">
+                            <div class="grid3"><label>前一页页数 :</label></div>
+                            <div class="grid3">
+                            	<input type="text" id="movie_add_comment_pindex" name="pindex" value="{$_GET['pindex']|default=0}" />
+                            </div>
+                            <span> &nbsp;<a href="javascript:void(0);" id="movie_add_comment_get_go">获取</a></span>
+                            <div class="clear"></div>
+                        </div>
+                    
+                        <div class="formRow">
+                            <div class="grid3"><label>图片:</label></div>
+                            <empty name="opt">
+                            <div class="grid3"><input type="text" name="image" /></div>
+                            <div >&nbsp;第三方服务器，只能填入图片链接。</div>
+                            <else />
+                            <div class="grid3">
+                            	<img alt="选择图片" style="max-width:400px;" src="" id="movie_add_comment_img"/>
+                            	<input type="file" name="image" id="movie_add_comment_img_file" />
+                            </div>
+                            </empty>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>解说:</label></div>
+                            <div class="grid9"><textarea rows="8" cols="" name="intro"></textarea></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                        	<input type="hidden" value="{$Think.get.movie_id}" name="movie_id">
+                        	<input type="submit" value="提 交" class="buttonM bBlack formSubmit" /><div class="clear"></div>
+                        </div>
+                        <div class="clear"></div>
+                    
+                    </div>
+                    </form>
+            </div>
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+<script>
+(function(){
+	var xx = function () {
+		var movie_id = {$_GET['movie_id']|default=0};
+		try{
+			var pindex = parseInt($('#movie_add_comment_pindex').val());
+		}catch(ex) {
+			alert('页数格式不对'); return;
+		}
+		if (pindex == 0) {
+			$('#movie_comment_pre_pindex').html('上一页木油了'); return;
+		}
+		$.ajax({
+			type:'POST',
+			url :'{:U("Movie/getOneComment")}',
+			data : {movie_id:movie_id, pindex:pindex, num:-1},
+			success : function(data) {
+				if (data && data.img) {
+					var html = '上一页 '+ (parseInt(data.pindex) + 1) +' <img height="100px;" src="' + data.img + '"/> ' + data.intro;
+					$('#movie_comment_pre_pindex').html(html);
+				} else {
+					$('#movie_comment_pre_pindex').html('上一页木油了');
+				}
+			}
+		});
+	}
+	xx();
+	$('#movie_add_comment_get_go').click(function(){
+		xx();
+	});
+	
+	$("#movie_add_comment_img_file").change(function(){
+		var objUrl = booGetObjectURL(this.files[0]) ;
+		if (objUrl) {
+			$("#movie_add_comment_img").attr("src", objUrl) ;
+		}
+	}) ;
+})();
+</script>
+<include file="Public:footer" />

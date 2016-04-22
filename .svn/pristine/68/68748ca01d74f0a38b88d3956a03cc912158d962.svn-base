@@ -1,0 +1,14 @@
+<div class="widget togglesGroup">
+                <div id="opened" class="whead hand opened inactive"><h6>首页电影配置</h6><div class="clear"></div></div>
+                <div class="body nopadding">
+                	<ul class="subNav noBorderB">
+		                <!-- <li><a title="" style="border-top:0px;" <eq name="ACTION_NAME" value="onlineMovie">class="this"</eq> href="{:U('HomeOnline/onlineMovie')}">&nbsp;&nbsp;&nbsp;&nbsp;| -- 电影配置</a></li>
+		                <li><a title="" <eq name="ACTION_NAME" value="onlineFan">class="this"</eq>  href="{:U('HomeOnline/onlineFan')}">&nbsp;&nbsp;&nbsp;&nbsp;| -- 新番配置</a></li>
+		                <li><a title="" <eq name="ACTION_NAME" value="onlineWei">class="this"</eq>  href="{:U('HomeOnline/onlineWei')}">&nbsp;&nbsp;&nbsp;&nbsp;| -- 微图解配置</a></li> -->
+		                <li><a title="" style="border-top:0px;" <eq name="ACTION_NAME" value="onlineScript">class="this"</eq> href="{:U('HomeOnline/onlineScript')}">&nbsp;&nbsp;&nbsp;&nbsp;| -- 推荐配置<span class="dataNumBlue">茶点</span></a></li>
+		                <li><a title="" style="border-top:0px;" <eq name="ACTION_NAME" value="getReadData2">class="this"</eq> href="{:U('HomeOnline/getReadData2')}">&nbsp;&nbsp;&nbsp;&nbsp;| -- 配置(数据)<span class="dataNumBlue">GM</span></a></li>
+		                <li><a title="" style="border-top:0px;" <eq name="ACTION_NAME" value="homeDialog">class="this"</eq> href="{:U('HomeOnline/homeDialog')}">&nbsp;&nbsp;&nbsp;&nbsp;| -- 首页弹窗设置<span class="dataNumRed">V4.8</span></a></li>
+		                <li><a title="" style="border-top:0px;" <eq name="ACTION_NAME" value="tuijian">class="this"</eq> href="{:U('HomeOnline/tuijian')}">&nbsp;&nbsp;&nbsp;&nbsp;| -- 首页配置<span class="dataNumRed">V4.8</span></a></li>
+		            </ul>
+                </div>
+            </div>

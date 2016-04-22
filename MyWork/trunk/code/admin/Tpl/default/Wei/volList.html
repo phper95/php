@@ -1,0 +1,175 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<script src="__JS__/dialog/artDialog.js?skin=default"></script>
+<div id="sidebar">
+	<include file="Public:left" />
+</div>
+<!-- Sidebar ends -->
+    
+<!-- Content begins -->
+<div id="content">
+    <div class="contentTop">
+        <span class="pageTitle">微图解解说</span>
+       	<div class="clear"></div>
+    </div>
+    
+    <include file="Public:bav" />
+    
+    <!-- Main content -->
+    <div class="wrapper">
+        <!-- Media table sample -->
+        <div class="widget check">
+            <div class="whead">
+            	<h6>微图解解说列表</h6>
+            		<notempty name="Think.get.backurl">
+                   		<a href="{$Think.get.backurl}" class="buttonH bBlue mb10 mt5">返回</a>
+                   	<else />
+                   		<a href="{:getCurrentUrl()}" class="buttonH bBlue mb10 mt5">返回</a>
+                 	</notempty >
+            	<div class="clear"></div>
+            </div>
+            <table cellpadding="0" cellspacing="0" width="100%" class="tDefault checkAll tMedia" id="checkAll">
+                <thead>
+                    <tr>
+                        <td width="10">ID</td>
+                        <td width="120">用户</td>
+                        <td width="50">页码</td>
+                        <td width="50">图片</td>
+                        <td>解说</td>
+                        <td width="80">状态</td>
+                        <td width="80">操作</td>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td colspan="7">
+                        	<empty name="list">
+                        		木油满足您强烈需求的微图解了。。
+                        	<else />
+                            <div class="tPages">
+                                <ul class="pages">
+                                    {$page}
+                                </ul>
+                            </div>
+                            </empty>
+                        </td>
+                    </tr>
+                </tfoot>
+                <tbody>
+                	<volist name="list" id="vo">
+		            <tr>
+		                <td>{$vo.id}</td>
+		                <td id="vol_list_user_{$vo.id}">
+		                	<empty name="vo.image">
+		                		-
+		                	<else />
+		                		<if condition="isset($vol_member[$vo['id']]['avatar'])" >
+		                			<img src="{$vol_member[$vo['id']]['avatar']}" width="50px" style="border-radius:70px;border:2px solid #fefefe;" /><br />{$vol_member[$vo['id']]['name']}
+		                		<else />
+		                			-官方上传-
+		                		</if>
+		                	</empty>
+		                </td>
+		                <td><span class="blueBack" style="font-size:20px;font-weight:900;">{$vo['pindex']+1}</span></td>
+		                <td><img id="vol_list_img_{$vo.id}" src="{$vo.image|default='__PUBLIC__/images/quetu.jpg'}" height="120px;" /></td>
+		                <td style="vertical-align: bottom;">
+		                	<div style="text-align:left;">
+								<div style="font-size:1.8em;">{$vo.intro} </div>
+								<br /><br /><br />
+								<div>【 {$vo.add_time} 】</div>
+		                	</div>
+		                </td>
+		                <td id="vo_list_states_{$vo.id}">
+		                	<if condition="isset($vol_state[$vo['id']]) && $vol_state[$vo['id']]['state']==1">
+		                		<span class="greenBack">通过</span>
+		                	<else />
+		                		<span class="blueBack">未审核</span>
+		                	</if>
+		                </td>
+		                <td id="vol_list_opt_{$vo.id}">
+		                	<if condition="isset($vol_state[$vo['id']])">
+		                		<a href="javascript:void(0);" data-volid="{$vo.id}" data-id="{$vol_state[$vo['id']]['id']}" class="js-shenhe">审核</a>
+		                	<else />
+		                		--
+		                	</if>
+		                </td>
+		            </tr>
+		            </volist>
+                </tbody>
+            </table>
+            <div id="xxsdf" style="display:none;min-width:600px;" class="fluid">sdfsdf</div>
+        </div>
+     
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+<script>
+(function(){
+	$('.js-shenhe').click(function(){
+		var id = $(this).attr('data-id');
+		var vol_id = $(this).attr('data-volid');
+		art.dialog({
+			id : 'shenhevol-list',
+			title : '',
+			content: '审核结果',
+			ok : function(){
+				$.ajax({
+					url : "{:U('Wei/shenheVol',array(''))}",
+					data: {id:id,vol_id:vol_id,state:1},
+					success : function(data){
+						if (typeof data == 'object') {
+							if (data.rst == 1) {
+								art.dialog({id:'shenhevol-list'}).close();
+								$('#vo_list_states_'+vol_id).html('<span class="greenBack">通过</span>');
+							} else {
+								alert(data.msg);
+							}
+						} else {
+							alert(data);
+						}
+					},
+					error:function(ex){
+						alert('ajax错误');
+					}
+				});
+				return false;
+			},
+			button:[
+			   {
+				   name:'不通过',
+				   callback:function(){
+					   if (confirm('不通过会清空这条解说的图片和用户的绑定关系，是否确认')) {
+						   $.ajax({
+								url : "{:U('Wei/shenheVol',array(''))}",
+								data: {id:id,vol_id:vol_id,state:2},
+								success : function(data){
+									if (typeof data == 'object') {
+										if (data.rst == 1) {
+											art.dialog({id:'shenhevol-list'}).close();
+											$('#vol_list_user_'+vol_id).html('--');
+											$('#vol_list_img_'+vol_id).attr("src",'__PUBLIC__/images/quetu.jpg');
+											$('#vol_list_opt_'+vol_id).html('--');
+											$('#vo_list_states_'+vol_id).html('<span class="blueBack">未审核</span>');
+										} else {
+											alert(data.msg);
+										}
+									} else {
+										alert(data);
+									}
+								},
+								error:function(ex){
+									alert('ajax错误');
+								}
+							});
+					   }
+				   }
+			   }
+			],
+			okVal:'通过',
+		});
+	});
+})();
+</script>
+<include file="Public:footer" />

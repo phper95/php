@@ -1,0 +1,121 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<include file="CreateTeam:opt" />
+</div>
+<!-- Sidebar ends -->
+    <script language="javascript" type="text/javascript" src="__JS__/My97DatePicker/WdatePicker.js"></script>
+<!-- Content begins -->
+<div id="content">
+    <div class="contentTop">
+        <span class="pageTitle">创作团管理</span>
+        <div class="clear"></div>
+    </div>
+    <include file="Public:bav" />
+    <!-- Main content -->
+    <div class="wrapper">
+    	<div class="fluid">
+	    	<div class="widget">
+	    		<div class="whead"><h6>电影作者稿酬分配</h6><div class="clear"></div></div>
+	    		<form method='post' id="form1" name="form1" action="{:U('CreateTeam/doAddHistoryFee')}"  enctype="multipart/form-data">
+	    				<div class="formRow searchDrop">
+                            <div class="grid2"><label>选择电影 :</label></div>
+                            <div class="grid3 searchDrop">
+                            	<select id="create_team_movie_list" data-placeholder="选择电影" class="select">
+                            	<option value="0">--下拉我选择--</option>
+                            	<volist name="movie_list" id="m">
+                            	<option value="{$m.id}">{$m.name} ( {$m.id} )</option>
+                            	</volist>
+                        		</select>
+                            </div>
+                            <!-- <div class="grid3 noSearch">
+                            	<select id="create_team_movie_cellcover" data-placeholder="选择评级" class="select">
+                            	<option value="">--默认电影评级--</option>
+                            	<option value="1">略屌</option>
+                            	<option value="2">震精</option>
+                            	<option value=3">神作</option>
+                        		</select>
+                            </div>
+                             -->
+                            <div class="grid3">
+                            	<input id="create_team_fee_time" placeholder="默认稿费发放时间" onClick="WdatePicker({dateFmt:'yyyy-MM-dd 00:00:00'})" type="text" />
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div id="create_team_grapher">
+                        </div>
+                        <div class="formRow">
+                        	<input type="submit" id="create_team_add_percent" value="提 交" class="buttonM bBlack formSubmit" /><div class="clear"></div>
+                        </div>
+               </form>
+	    	</div>
+	    </div>
+        <div class="widget">
+        	<div class="whead"><h6>稿费</h6><div class="clear"></div></div>
+	        <table cellpadding="0" cellspacing="0" width="100%" class="tDefault tMedia">
+	        	<thead>
+	                <tr>
+	                	<td >电影名称</td>
+	                	<td>作者</td>
+			            <td width="40">稿费</td>
+			            <td width="180">发放时间</td>
+	                </tr>
+	            </thead>
+	            <tbody>
+	            	<volist name="list" id="vo">
+	            	<tr>
+	            		<td>{$vo.movie_name} - ( {$vo.movie_id} )</td>
+	            		<td>{$vo.user_name} - ( {$vo.user_id} )</td>
+	            		<td>{$vo.cost|round=###,2}</td>
+	            		<td>{$vo.fee_time}</td>
+	            	</tr>
+	            	</volist>
+	            </tbody>
+	        </table>
+        </div>
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+<script>
+(function(){
+	var movie_list = {$movie_list|json_encode=###,true};
+	$('#create_team_movie_list').change(function(){
+		addInput($(this).val());
+	});
+	$('#create_team_add_percent').click(function(){
+		var error = false;
+		$('.js-cellcover').each(function(){
+			if ($(this).val() == ''){alert('有电影没有选择评级参数哦');error=true;return false;}
+		});
+		if (!error)
+		$('.js-need').each(function(){
+			if ($(this).val() == ''){alert('有电影没有填入稿费发放时间或者稿酬哦');error=true;return false;}
+		});
+		if (error) {return false;}
+	});
+	var addInput = function(movie_id){
+		if ($('#add_history_fee_'+movie_id).length>0) return;
+		var html = '';
+		if (movie_id>0) {
+			//var select_val = $('#create_team_movie_cellcover').val();
+			var fee_time = $('#create_team_fee_time').val();
+			var graphers = movie_list[movie_id].graphers;
+			for (var a in graphers) {
+				html += '<div class="formRow" id="add_history_fee_'+movie_id+'">'
+					+ '<span class="redBack" style="float:left;cursor:pointer;" onclick="$(\'#add_history_fee_'+movie_id+'\').remove();">删除</span>'
+                	+ '<div class="grid4"><label>'+movie_id+'《'+movie_list[movie_id]['name']+'》 —— '+graphers[a]+' ( '+a+' ) 结算：</label></div>'
+                	+ '<div class="grid3" style="width:90px;"><select class="js-cellcover" name="cellcover['+movie_id+','+a+']"><option value="">-选择评级-</option><option value="1">略屌</option><option value="2">震精</option><option value="3">神作</option></select></div>'
+                	+ '<div class="grid3" style="width:150px;"><input class="js-need" name="fee_time['+movie_id+','+a+']" placeholder="稿费发放时间" onClick="WdatePicker({dateFmt:'+"'"+'yyyy-MM-dd 00:00:00'+"'"+'})" type="text" value="' + fee_time + '" /></div>'
+                	+ '<div class="grid1" style="width:60px;"><input type="text" class="js-need" name="cost['+movie_id+','+a+']" placeholder="稿费" /></div>'
+                	+ '<div class="clear"></div></div>';
+			}
+		}
+		$('#create_team_grapher').prepend($(html));
+	};
+	addInput($('#create_team_movie_list').val());
+})();
+</script>
+<include file="Public:footer" />

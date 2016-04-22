@@ -1,0 +1,77 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<!-- Secondary nav -->
+</div>
+<!-- Sidebar ends -->
+
+<!-- Content begins -->
+<div id="content">
+    <include file="Public:bav" />
+    <!-- Main content -->
+    <div class="wrapper">
+        	<div class="fluid">
+        		<form method='post' id="form1" name="form1" action="{:U('Member/doAddNews')}"  enctype="multipart/form-data">
+                    <div class="widget ">
+                        <div class="whead">
+                        <h6>给【{$Think.get.name}】 {$Think.get.id} 添加动态</h6>
+                        <empty name="Think.get.backurl">
+                        	<a href="{:getCurrentUrl()}" class="buttonH bBlue mb10 mt5">返回</a>
+                        <else />
+                        	<a href="{$Think.get.backurl}" class="buttonH bBlue mb10 mt5">返回</a>
+                        </empty>
+                        
+                        <div class="clear"></div></div>
+                        <div class="formRow">
+                            <div class="grid3"><label>用户君ID：</label></div>
+                            <div class="grid9">
+                            	<textarea rows="3" cols="" name="to_user_id">{$Think.get.id}</textarea>
+                            	<span> 多个请用半角逗号 ',' 隔开</span>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="formRow">
+                            <div class="grid3"><label>动态内容：:</label></div>
+                            <div class="grid9"><textarea rows="8" cols="" name="comment_content"></textarea></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>类型:</label></div>
+                            <div class="grid1">
+                            	<select name="reply_from">
+		                            <option value="notice">官方通知</option>
+	                        	</select>
+                        	</div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>类型对应数据:</label></div>
+                            <div class="grid3"><input type="text" value="{$Think.get.typedata|default=1}" readonly="readonly" name="reply_from_data" /></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                        	<notempty name="Think.get.backurl">
+                        	<input type="hidden" name="backurl" value="{$Think.get.backurl}">
+                        	</notempty>
+                        	<notempty name="Think.get.feedback_id">
+                        	<input type="hidden" name="feedback_id" value="{$Think.get.feedback_id}">
+                        	</notempty>
+                        	<input type="submit" value="提 交" onclick="return confirm('三思君说：提交后是不能修改的哦？确定么？');" class="buttonM bBlack formSubmit" />
+                        	<div class="clear"></div>
+                        </div>
+                        <div class="clear"></div>
+                    
+                    </div>
+                    </form>
+            </div>
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+
+<include file="Public:footer" />

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            登录 | 图解电影，十分钟品味精彩电影
+        </title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="copyright" content="Copyright (c) 2014 MailChimp. All Rights Reserved.">
+        <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="apple-itunes-app" content="app-id=366794783">
+        <!--[if IE 8]>
+            <link rel="stylesheet" type="text/css" href="__CSS__/ie8.css" />
+        <![endif]-->
+        <link rel="stylesheet" type="text/css" href="__CSS__/mcd.css">
+        <script src="__JS__/jquery.min.js"></script>
+        <script src="__JS__/artDialog.js?skin=default"></script>
+        <script src="__JS__/common.js"></script>
+        <link rel="stylesheet" type="text/css" href="__CSS__/theone.css">
+        <link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon-iphone.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/apple-touch-icon-ipad.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/apple-touch-icon-iphone4.png">
+        <link rel="icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
+        <link rel="shortcut icon" href="/favicon.ico">
+        <script>
+        	function change_code(obj){
+            	var d = new Date();
+            	obj.src = '{:U('Public/ck')}'+'&'+d.getMilliseconds();
+            }
+        	$(document).ready(function(){
+        		var loading = false;
+        		$('#login-form').submit(function(){
+        			if (loading) {boo_common.showMsg('正在温柔的提交中，请耐心等候。。。');return;}
+        			var username = $('#username').val();
+        			if (!boo_common.check_email(username)){
+        				boo_common.showMsg('邮箱格式错误哦'); return;
+        			}
+        			var pwd = $('#password').val();
+        			var rpwd = $('#repassword').val();
+        			if (!boo_common.check_pwd(pwd)) {
+        				boo_common.showMsg('密码长度6~22位！'); return;
+        			}
+        			if (pwd !== rpwd) {
+        				boo_common.showMsg('两次密码不一样！'); return;
+        			}
+        			var code = $('#code').val();
+        			if (code == '') {
+        				boo_common.showMsg('验证码不能为空！'); return;
+        			}
+        			loading = true;
+        			//boo_common.showMsg('');
+        			$.ajax({
+        				url : '{:U("Public/regist")}',
+        				data : $(this).serialize(),
+        				type : 'POST',
+        				success : function(data){
+        					loading = false;
+        					if (typeof data == 'object') {
+        						if (data.rst == 1) {
+        							loading = true;
+        							boo_common.showMsg(data.msg,'',function(){
+        								location.href = '{:U("Login/index")}';
+        								//location.reload();
+        							});
+        							sendMail(username);
+        						} else {
+        							boo_common.showMsg(data.msg);
+        							$('#img_code').click();
+        							if ($('#send_mail_now').length>0) {
+        								$('#send_mail_now').click(function(){
+        									sendMail(username);
+        								});
+        							}
+        						}
+        					}else {
+        						boo_common.showMsg('额偶。请刷新页面。。。');
+        					}
+        				},
+        				error : function(){
+        					loading = false;
+        					boo_common.showMsg('额偶。请刷新页面。。。');
+        				}
+        			});
+        		});
+        		var sendAgain = function(email, time){
+        			if (time>0){
+        				$('#send_again').html('(' + time + ')秒后可再次发送');
+        				time --;
+        				setTimeout(function(){sendAgain(email,time);},1000);
+        			} else {
+        				$('#send_again').html('再次发送？');
+        				$('#send_again').click(function(){
+        					sendMail(email);
+        				});
+        			}
+        		};
+        		var sendMail = function(email){
+        			boo_common.showMsg('正在发送邮件。。。');
+        			$.ajax({
+						url : '{:U("Public/sendJHMail")}',
+						data : {email:email},
+						type : 'POST',
+						success : function(data){
+							var time = 5;
+							if (typeof data == 'object') {
+								if (data.rst == 1) {
+									time = 10;
+									boo_common.showMsg('激活邮件已发送到邮箱，请登录邮箱进行激活。<br /><a id="send_again"></a>');
+								} else {
+									boo_common.showMsg('邮件发送失败!<br /><a id="send_again"></a>');
+								}
+							} else {
+								boo_common.showMsg('邮件发送失败<br /><a id="send_again"></a>');
+							}
+							sendAgain(email,time);
+						},
+						error : function(ex){
+							boo_common.showMsg('邮件发送失败,快刷新页面再试试吧。');
+						}
+					});
+        		};
+        		
+        	});
+        </script>
+    </head>
+    
+    <body id="login" class="new_teal mcd">
+        <div id="login-box">
+            <div id="outer-content">
+                <div id="inner-content">
+                    <div id="av-flash-block">
+                    </div>
+                    <div id="browser-warning" class="feedback-block warning" style="display: none;">
+                        <div class="unit size1of1">
+                            <div class="media">
+                                <div class="media-image">
+                                    <span class="freddicon warning">
+                                    </span>
+                                </div>
+                                <div class="media-body">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="content">
+                        <div id="login-form-wrap">
+                            <div class="freddie">
+                                <a class="block" style="width:100%;height:100%;" href="{:U('Index/index')}"> </a>
+                            </div>
+                            <div id="av-content" class="line" style="background-color:#F9F9F9;">
+                                <div class="signup-wrap lastUnit">
+                                    <form action="{:U('Public/regist')}" id="login-form" method="POST" onsubmit="return false;" novalidate="novalidate">
+                                        <fieldset>
+                                            <div class="line login-field">
+                                                <div class="field-wrapper">
+                                                    <label for="username" class="">
+                                                        <span class="float-right">
+                                                        </span>
+                                                       	邮箱
+                                                    </label>
+                                                    <input type="email" name="username" tabindex="1" autofocus="autofocus" autocorrect="off" autocapitalize="off" class=" av-text" value="" id="username">
+                                                </div>
+                                            </div>
+                                            <div class="line login-field">
+                                                <div class="field-wrapper">
+                                                    <label for="password" class="">
+                                                        	设置密码
+                                                    </label>
+                                                    <input type="password" name="password" tabindex="2" class=" av-password" value="" id="password">
+                                                </div>
+                                            </div>
+                                            <div class="line login-field">
+                                                <div class="field-wrapper">
+                                                    <label for="password" class="">
+                                                        	确认密码
+                                                    </label>
+                                                    <input type="password" name="repassword" tabindex="2" class=" av-password" value="" id="repassword">
+                                                </div>
+                                            </div>
+                                            <div class="line login-field">
+                                                <div class="field-wrapper">
+                                                    <label for="password" class="">
+                                                        	验证码
+                                                    </label>
+                                                    <div class="input-append">
+                                                    	<input type="text" name="code" tabindex="2" class=" av-password" value="" id="code">
+                                                    	<div class="show-pass-wrap add-on nopadding nomargin" style="margin:0px; padding:0px;">
+                                                    		<img alt="" src="{:U('Public/ck')}" id="img_code" class="nomargin nopadding" onclick="change_code(this)" style="height:100%;width:100%;position:absolute;left:0px;width:88%\9;left:15px\9;">
+                                                    	</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="line below24 login-controls" style="position:relative;">
+                                                <div class="login-button unit nopadding size1of2 nochange">
+                                                    <button type="submit" value="log in" class="button-large p0 size1of1 hide-mobile" tabindex="3" style="margin:0px;"> 立即注册 </button>
+                                                    <button type="submit" value="log in" class="button p0 size1of1 hide-desktop" style="margin:0px;" tabindex="3"> 立即注册 </button>
+                                                </div>
+                                                <span class="float-right" style="position:absolute;right:0px;bottom:22px" >
+                                                    <a href="{:U('Login/index')}" class="login-forgot-toggle show-forgot-pass nowrap"><span style="padding-bottom:0px; border-bottom:1px solid #2C9AB7;">我有账号了！</span></a>
+                                                </span>
+                                            </div>
+                                        </fieldset>
+                                    </form>
+                                    <div class="login-footer">
+                                        <a href="javascript:void(0);" target="_blank" tabindex="-1">
+                                            <div class="footer-scripty centered dim-el below36"></div>
+                                        </a>
+                                        <span class="dim-el">
+                                            &copy;2013&ndash;2014 All Rights Reserved.
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+
+</html>

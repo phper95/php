@@ -1,0 +1,119 @@
+[ 2016-04-13T17:31:52+08:00 ] 192.168.0.104 /php/MyWork/trunk/code/appweb/shop/index.php?m=Index&a=doRotateLottery&userid=99G3HPA2
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.015600s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.015600s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead D:\wamp\www\boo\Core\Lib\Driver\Db\DbMysql.class.php 第 55 行.
+SQL: SHOW COLUMNS FROM `shop_goods` [ RunTime:0.015600s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_goods` WHERE ( `cat_id` = 2 ) AND ( `ku_cun` > 0 ) LIMIT 8   [ RunTime:0.000000s ]
+NOTIC: [8] Use of undefined constant id - assumed 'id' D:\wamp\www\php\MyWork\trunk\code\appweb\shop\Lib\Action\IndexAction.class.php 第 199 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_goods` WHERE ( `id` = 60 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `shop_lottery` [ RunTime:0.000000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_lottery` WHERE ( `g_id` = 60 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `shop_user_lottery` [ RunTime:0.015600s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_user_lottery` WHERE ( `lot_id` = 16 ) AND ( `user_id` = 4005788 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_v_gold` [ RunTime:0.000000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `user_v_gold` WHERE ( `user_id` = 4005788 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: UPDATE `user_v_gold` SET `gold`=gold-30.00 WHERE ( `user_id` = 4005788 ) [ RunTime:0.109200s ]
+SQL: UPDATE `shop_user_lottery` SET `total_times`=total_times+1 WHERE ( `id` = 6 ) [ RunTime:0.031200s ]
+SQL: SHOW COLUMNS FROM `mdb_wisdom` [ RunTime:0.031200s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `mdb_wisdom` WHERE ( `id` = 3356 ) LIMIT 1   [ RunTime:0.020600s ]
+NOTIC: [8] Undefined variable: rand D:\wamp\www\php\MyWork\trunk\code\appweb\shop\Lib\Action\IndexAction.class.php 第 316 行.
+SQL: SHOW COLUMNS FROM `shop_lottery_record` [ RunTime:0.005000s ]
+SQL: INSERT INTO `shop_lottery_record` (`user_id`,`lot_id`,`rand_num`,`rst`,`cost`,`remark`,`add_time`) VALUES (4005788,16,null,0,'30.00','{\"wisdomId\":\"3356\"}','2016-04-13 17:31:52') [ RunTime:0.010000s ]
+ERR: 1048:Le champ 'rand_num' ne peut être vide (null)
+ [ SQL语句 ] : INSERT INTO `shop_lottery_record` (`user_id`,`lot_id`,`rand_num`,`rst`,`cost`,`remark`,`add_time`) VALUES (4005788,16,null,0,'30.00','{\"wisdomId\":\"3356\"}','2016-04-13 17:31:52')
+NOTIC: [8] Undefined index: msg D:\wamp\www\php\MyWork\trunk\code\appweb\shop\Lib\Action\CommonAction.class.php 第 40 行.
+
+[ 2016-04-13T17:33:13+08:00 ] 192.168.0.104 /php/MyWork/trunk/code/appweb/shop/index.php?m=Index&a=lottery
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead D:\wamp\www\boo\Core\Lib\Driver\Db\DbMysql.class.php 第 55 行.
+SQL: SHOW COLUMNS FROM `shop_goods` [ RunTime:0.006000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_goods` WHERE ( `goods_id` = 'GM0X15ZEJ9D1V2C' ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `shop_lottery` [ RunTime:0.003000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_lottery` WHERE ( `g_id` = 39 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `shop_user_lottery` [ RunTime:0.002000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_user_lottery` WHERE ( `lot_id` = 4 ) AND ( `user_id` = 4005788 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_v_gold` [ RunTime:0.003000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `user_v_gold` WHERE ( `user_id` = 4005788 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: UPDATE `user_v_gold` SET `gold`=gold-50.00 WHERE ( `user_id` = 4005788 ) [ RunTime:0.000000s ]
+SQL: UPDATE `shop_user_lottery` SET `total_times`=total_times+1 WHERE ( `id` = 5 ) [ RunTime:0.019001s ]
+SQL: SHOW COLUMNS FROM `mdb_wisdom` [ RunTime:0.002000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `mdb_wisdom` WHERE ( `id` = 4261 ) LIMIT 1   [ RunTime:0.011001s ]
+NOTIC: [8] Undefined variable: rand D:\wamp\www\php\MyWork\trunk\code\appweb\shop\Lib\Action\IndexAction.class.php 第 144 行.
+SQL: SHOW COLUMNS FROM `shop_lottery_record` [ RunTime:0.003000s ]
+SQL: INSERT INTO `shop_lottery_record` (`user_id`,`lot_id`,`rand_num`,`rst`,`cost`,`remark`,`add_time`) VALUES (4005788,4,null,0,'50.00','{\"wisdomId\":\"4261\"}','2016-04-13 17:33:13') [ RunTime:0.001000s ]
+ERR: 1048:Le champ 'rand_num' ne peut être vide (null)
+ [ SQL语句 ] : INSERT INTO `shop_lottery_record` (`user_id`,`lot_id`,`rand_num`,`rst`,`cost`,`remark`,`add_time`) VALUES (4005788,4,null,0,'50.00','{\"wisdomId\":\"4261\"}','2016-04-13 17:33:13')
+NOTIC: [8] Undefined index: msg D:\wamp\www\php\MyWork\trunk\code\appweb\shop\Lib\Action\CommonAction.class.php 第 40 行.
+
+[ 2016-04-13T17:49:19+08:00 ] 192.168.0.19 /php/MyWork/trunk/code/appweb/shop/index.php?m=Index&a=lottery
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead D:\wamp\www\boo\Core\Lib\Driver\Db\DbMysql.class.php 第 55 行.
+SQL: SHOW COLUMNS FROM `shop_goods` [ RunTime:0.002000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_goods` WHERE ( `goods_id` = 'GM0X15ZEJ9D1V2C' ) LIMIT 1   [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `shop_lottery` [ RunTime:0.003000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_lottery` WHERE ( `g_id` = 39 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `shop_user_lottery` [ RunTime:0.002001s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_user_lottery` WHERE ( `lot_id` = 4 ) AND ( `user_id` = 4005788 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_v_gold` [ RunTime:0.003000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `user_v_gold` WHERE ( `user_id` = 4005788 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: UPDATE `user_v_gold` SET `gold`=gold-50.00 WHERE ( `user_id` = 4005788 ) [ RunTime:0.001000s ]
+SQL: UPDATE `shop_user_lottery` SET `total_times`=total_times+1 WHERE ( `id` = 5 ) [ RunTime:0.032002s ]
+SQL: SHOW COLUMNS FROM `mdb_wisdom` [ RunTime:0.003000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `mdb_wisdom` WHERE ( `id` = 1292 ) LIMIT 1   [ RunTime:0.008001s ]
+NOTIC: [8] Undefined variable: rand D:\wamp\www\php\MyWork\trunk\code\appweb\shop\Lib\Action\IndexAction.class.php 第 144 行.
+SQL: SHOW COLUMNS FROM `shop_lottery_record` [ RunTime:0.003000s ]
+SQL: INSERT INTO `shop_lottery_record` (`user_id`,`lot_id`,`rand_num`,`rst`,`cost`,`remark`,`add_time`) VALUES (4005788,4,null,0,'50.00','{\"wisdomId\":\"1292\"}','2016-04-13 17:49:19') [ RunTime:0.000000s ]
+ERR: 1048:Le champ 'rand_num' ne peut être vide (null)
+ [ SQL语句 ] : INSERT INTO `shop_lottery_record` (`user_id`,`lot_id`,`rand_num`,`rst`,`cost`,`remark`,`add_time`) VALUES (4005788,4,null,0,'50.00','{\"wisdomId\":\"1292\"}','2016-04-13 17:49:19')
+NOTIC: [8] Undefined index: msg D:\wamp\www\php\MyWork\trunk\code\appweb\shop\Lib\Action\CommonAction.class.php 第 40 行.
+
+[ 2016-04-13T17:49:21+08:00 ] 192.168.0.19 /php/MyWork/trunk/code/appweb/shop/index.php?m=Index&a=lottery
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead D:\wamp\www\boo\Core\Lib\Driver\Db\DbMysql.class.php 第 55 行.
+SQL: SHOW COLUMNS FROM `shop_goods` [ RunTime:0.005000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_goods` WHERE ( `goods_id` = 'GM0X15ZEJ9D1V2C' ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `shop_lottery` [ RunTime:0.000000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_lottery` WHERE ( `g_id` = 39 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `shop_user_lottery` [ RunTime:0.000000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_user_lottery` WHERE ( `lot_id` = 4 ) AND ( `user_id` = 4005788 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_v_gold` [ RunTime:0.000000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `user_v_gold` WHERE ( `user_id` = 4005788 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: UPDATE `user_v_gold` SET `gold`=gold-50.00 WHERE ( `user_id` = 4005788 ) [ RunTime:0.000000s ]
+SQL: UPDATE `shop_user_lottery` SET `total_times`=total_times+1 WHERE ( `id` = 5 ) [ RunTime:0.015600s ]
+SQL: SHOW COLUMNS FROM `mdb_wisdom` [ RunTime:0.000000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `mdb_wisdom` WHERE ( `id` = 26 ) LIMIT 1   [ RunTime:0.000000s ]
+NOTIC: [8] Undefined variable: rand D:\wamp\www\php\MyWork\trunk\code\appweb\shop\Lib\Action\IndexAction.class.php 第 144 行.
+SQL: SHOW COLUMNS FROM `shop_lottery_record` [ RunTime:0.001000s ]
+SQL: INSERT INTO `shop_lottery_record` (`user_id`,`lot_id`,`rand_num`,`rst`,`cost`,`remark`,`add_time`) VALUES (4005788,4,null,0,'50.00','{\"wisdomId\":\"26\"}','2016-04-13 17:49:21') [ RunTime:0.000000s ]
+ERR: 1048:Le champ 'rand_num' ne peut être vide (null)
+ [ SQL语句 ] : INSERT INTO `shop_lottery_record` (`user_id`,`lot_id`,`rand_num`,`rst`,`cost`,`remark`,`add_time`) VALUES (4005788,4,null,0,'50.00','{\"wisdomId\":\"26\"}','2016-04-13 17:49:21')
+NOTIC: [8] Undefined index: msg D:\wamp\www\php\MyWork\trunk\code\appweb\shop\Lib\Action\CommonAction.class.php 第 40 行.
+

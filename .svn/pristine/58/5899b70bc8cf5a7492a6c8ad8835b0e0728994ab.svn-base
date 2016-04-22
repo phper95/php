@@ -1,0 +1,144 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<!-- Secondary nav -->
+</div>
+<!-- Sidebar ends -->
+
+<!-- Content begins -->
+<div id="content">
+    <include file="Public:bav" />
+    <!-- Main content -->
+    <div class="wrapper">
+        	<div class="fluid">
+        		<form method='post' id="form1" name="form1" action="{:U('Advht/update')}"  enctype="multipart/form-data">
+                    <div class="widget ">
+                        <div class="whead">
+                        <h6>添加片头片尾广告</h6>
+                        <a href="{:getCurrentUrl()}" class="buttonH bBlue mb10 mt5">返回</a>
+                        <div class="clear"></div></div>
+                        <div class="formRow">
+                            <div class="grid3"><label>广告名称：<span class="req">*</span> </label></div>
+                            <div class="grid3"><input type="text" name="name" value="{$vo.name}" placeholder="广告名称"/></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>广告图片：</label></div>
+                            <div class="grid7"><input type="file" id="advht_add_img_file" name="img"/></div>
+                            <div class="clear"></div>
+                            <div class="grid3 nomargin">&nbsp;</div>
+                            <div class="grid7"><img id="advht_add_img" src="{$vo.img}" width="300"/></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>解说：<span class="req">*</span></label></div>
+                            <div class="grid7"><textarea rows="3" cols="" name="intro" placeholder="图片解说">{$vo.intro}</textarea></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>是否显示在片头：</label></div>
+                            <div class="grid9">
+                            	<label class="nopadding grid1"><input type="radio" value="1" <eq name="vo.head_show" value="1">checked="checked"</eq> name="head_show"/>是</label>
+                            	<label class="nopadding grid1"><input type="radio" value="0" <eq name="vo.head_show" value="0">checked="checked"</eq> name="head_show"/>否</label>
+							</div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>片头比重：</label></div>
+                            <div class="grid1"><input type="text" name="head_fill_lv" value="{$vo.head_fill_lv}" placeholder="片头比重" /></div>&nbsp;&nbsp;/ N
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>是否显示在片尾：</label></div>
+                            <div class="grid9">
+                            	<label class="nopadding grid1"><input type="radio" value="1" <eq name="vo.tail_show" value="1">checked="checked"</eq> name="tail_show"/>是</label>
+                            	<label class="nopadding grid1"><input type="radio" value="0" <eq name="vo.tail_show" value="0">checked="checked"</eq> name="tail_show"/>否</label>
+							</div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>片尾比重：</label></div>
+                            <div class="grid1"><input type="text" name="tail_fill_lv" value="{$vo.tail_fill_lv}" placeholder="片尾比重" /></div>&nbsp;&nbsp;/ N
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>制定影片展示：</label></div>
+                            <div class="grid1"><input type="text" name="match_movie" value="{$vo.match_movie}" placeholder="影片ID" /></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>图片响应点击范围-X：</label></div>
+                            <div class="grid1"><input type="text" name="touch_x_min" value="{$vo.touch_x_min|round=###,2}" placeholder="min" /></div>
+                            <div style="float:left;">&nbsp;-&nbsp;</div>
+                            <div class="grid1 nomargin"><input type="text" name="touch_x_max" value="{$vo.touch_x_max|round=###,2}" placeholder="Max" /></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>图片响应点击范围-Y：</label></div>
+                            <div class="grid1"><input type="text" name="touch_y_min" value="{$vo.touch_y_min|round=###,2}" placeholder="min" /></div>
+                            <div style="float:left;">&nbsp;-&nbsp;</div>
+                            <div class="grid1 nomargin"><input type="text" name="touch_y_max" value="{$vo.touch_y_max|round=###,2}" placeholder="Max" /></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>点击事件：</label></div>
+                            <div class="grid1">
+                            	<select name="touch_action">
+                            		<option value="na" selected="selected">-请选择-</option>
+                            		<option value="web" <eq name="vo.touch_action" value="web">selected="selected"</eq> >打开网页</option>
+                            	</select>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>点击后跳转地址URL：</label></div>
+                            <div class="grid7"><input type="text" name="touch_data" value="{$vo.touch_data}" placeholder="带http://的url" /></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>广告是否生效：<span class="req">*</span></label></div>
+                            <div class="grid9">
+                            	<label class="nopadding grid1" ><input type="radio" value="1" <eq name="vo.open" value="1">checked="checked"</eq> name="open"/>是</label>
+                            	<label class="nopadding grid1"><input type="radio" value="0" <eq name="vo.open" value="0">checked="checked"</eq> name="open"/>否</label>
+							</div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                        	<input type="hidden" name="id" value="{$vo.id}" />
+                        	<input type="submit" value="提 交" class="buttonM bBlack formSubmit" /><div class="clear"></div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    </form>
+            </div>
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+<script>
+(function(){
+	$("#advht_add_img_file").change(function(){
+		var objUrl = booGetObjectURL(this.files[0]) ;
+		if (objUrl) {
+			$("#advht_add_img").attr("src", objUrl) ;
+		}
+	}) ;
+})();
+</script>
+
+<include file="Public:footer" />

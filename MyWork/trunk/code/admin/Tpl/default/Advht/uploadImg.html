@@ -1,0 +1,111 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<!-- Secondary nav -->
+</div>
+<!-- Sidebar ends -->
+
+<!-- Content begins -->
+<div id="content">
+    <include file="Public:bav" />
+    <!-- Main content -->
+    <div class="wrapper">
+    <a href="{:getCurrentUrl()}" class="buttonH bBlue mb10 mt5">返回</a>
+    <div class="fluid">
+    	<form method="post" action="{:U('Adv/doUploadImg')}" enctype="multipart/form-data" id="upload_form">
+    	<div class="widget grid3">
+    		<div class="whead"><h6>{$vo.name} -- 图标</h6><div class="clear"></div></div>
+    		<div class="body" align="center">
+    			<div class="formRow">
+    				<img src="{$vo.icon|default=''}" id="movie_upload_icon_img" width="100" height="100">
+    			</div>
+    			<div class="formRow nopadding">
+    				{$vo.icon}<br />
+    				<input type="file" name="icon" id="movie_upload_icon" />
+    			</div>
+    		</div>
+    	</div>
+    	
+    	<div class="widget grid4">
+    		<div class="whead"><h6>{$vo.name} -- 全屏图</h6><div class="clear"></div></div>
+    		<div class="body" align="center">
+    			<div class="formRow">
+    				<img src="{$vo.fullscreen_show_pic|default=''}" id="movie_upload_full_pic_img" width="320" height="537">
+    			</div>
+    			<div class="formRow nopadding">
+    				{$vo.fullscreen_show_pic}<br />
+    				<input type="file" name="fullscreen_show_pic" id="movie_upload_full_pic" />
+    			</div>
+    		</div>
+    	</div>
+    	
+    	<div class="widget grid4">
+    		<div class="whead"><h6>{$vo.name} -- 大图</h6><div class="clear"></div></div>
+    		<div class="body" align="center">
+    			<div class="formRow">
+    				<img src="{$vo.bpic|default=''}" id="movie_upload_bpic_img" width="320" height="230">
+    			</div>
+    			<div class="formRow nopadding">
+    				{$vo.bpic}<br />
+    				<input type="file" name="bpic" id="movie_upload_bpic" />
+    			</div>
+    		</div>
+    	</div>
+    	<div class="widget grid4">
+    		<div class="whead"><h6>{$vo.name} -- 小图</h6><div class="clear"></div></div>
+    		<div class="body" align="center">
+    			<div class="formRow">
+    				<img src="{$vo.spic|default=''}" id="movie_upload_spic_img" width="320" height="115">
+    			</div>
+    			<div class="formRow nopadding">
+    				{$vo.spic}<br />
+    				<input type="file" name="spic" id="movie_upload_spic" />
+    			</div>
+    		</div>
+    	</div>
+    	<div class="clear"></div><br />
+    	<div>
+    		<input type="hidden" value="{$vo.id}" name="id"/>
+    		<input type="submit" value="提 交" class="buttonS bLightBlue">
+    	</div>
+    	</form>
+    </div>
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+<script>
+	/**
+	 * 使用HTML5 File API, 來即時預覽image
+	 */
+	 $("#movie_upload_icon").change(function(){
+			var objUrl = booGetObjectURL(this.files[0]) ;
+			if (objUrl) {
+				$("#movie_upload_icon_img").attr("src", objUrl) ;
+			}
+		}) ;
+	
+$("#movie_upload_bpic").change(function(){
+	var objUrl = booGetObjectURL(this.files[0]) ;
+	if (objUrl) {
+		$("#movie_upload_bpic_img").attr("src", objUrl) ;
+	}
+}) ;
+	
+$("#movie_upload_spic").change(function(){
+	var objUrl = booGetObjectURL(this.files[0]) ;
+	if (objUrl) {
+		$("#movie_upload_spic_img").attr("src", objUrl) ;
+	}
+}) ;
+
+$("#movie_upload_full_pic").change(function(){
+	var objUrl = booGetObjectURL(this.files[0]) ;
+	if (objUrl) {
+		$("#movie_upload_full_pic_img").attr("src", objUrl) ;
+	}
+}) ;
+</script>
+<include file="Public:footer" />

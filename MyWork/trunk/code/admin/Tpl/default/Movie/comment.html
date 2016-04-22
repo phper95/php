@@ -1,0 +1,186 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<include file="Member:commentSearch" />
+</div>
+<!-- Sidebar ends -->
+
+<!-- Content begins -->
+<div id="content">
+
+  <include file="Public:bav" />
+  
+    <!-- Main content -->
+    <div class="wrapper">
+        <!-- Media table sample -->
+        <div class="widget check">
+            <div class="whead">
+            	<h6>编辑影片【{$Think.get.mname}】解说信息</h6>
+            	<present name="Think.get.backurl">
+            		<a href="{$Think.get.backurl}" class="buttonH bGreen mb10 mt5">返回</a>
+            	</present>
+            	<a href="{:U('Movie/addComment', array('movie_id'=>$_GET['movie_id'],'pindex'=>-1))}" class="buttonH bBlue mb10 mt5">添加解说</a>
+            	<noempty name="list">
+            		<a href="{:U('Movie/doCleanComment', array('movie_id'=>$_GET['movie_id']))}" onclick="return confirm('清空解说，将会丢失该电影的所有弹幕，是否清空？');" class="buttonH bRed mb10 mt5">清空解说</a>	
+            	</noempty>
+				<div class="clear"></div>
+			</div>
+            <table cellpadding="0" cellspacing="0" width="100%" class="tDefault checkAll tMedia" id="checkAll">
+            	 <tfoot>
+                    <tr>
+                        <td colspan="12">
+                        <empty name="list">
+                        <form method='post' id="form1" name="form1" action="{:U('Movie/uploadScript')}"  enctype="multipart/form-data">
+                        <div class="fluid">
+                        	<div class="formRow">
+                        		嗯嗯，该影片没有任何解说信息，你可以导入电影脚本，直接生成哟！
+                        		<span id="finnaly_info" class="redBack"></span>
+                        	</div>
+                        	<div class="formRow">
+	                            <div class="grid3" style="width:240px;"><input name="script" type="file" id="movie_script_file" /></div>
+	                            <div class="grid6 red">&nbsp; 注意：文件内容格式必须为UTF-8，否则会乱码哦，可以用其他工具转成utf8 比如 notepad++</div>
+	                            <div class="clear"></div>
+                        	</div>
+                        	<div class="formRow">
+                        		<input type="hidden" name="movie_id" value="{$_GET['movie_id']}"/>
+                        		<input type="submit" value="提 交" id="submit_btn" class="buttonM bBlack formSubmit" />
+                        		<div class="clear"></div>
+                        	</div>
+                        </div>
+                        </form>
+                        <div id="error_imgs_flag" style="display:none;"></div>
+                        <div id="show_script_rst" style="float:left;">图片展示区</div>
+                        <div class="clear"></div>
+                        <else/>
+                            <div class="tPages">
+                                <ul class="pages">
+                                	{$page}
+                                </ul>
+                            </div>
+                        </empty>
+                        </td>
+                        
+                    </tr>
+                </tfoot>
+                <thead>
+                    <tr>
+		                <td width="500px">图片</td>
+		                <td >说明</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <volist name="list" id="vo">
+		            <tr>
+		                <td>
+		                	<img title="{:otherURL2ServerUrl($vo['image'],$_GET['movie_id'], $_GET['serv'])}" src="{:otherURL2ServerUrl($vo['image'],$_GET['movie_id'], $_GET['serv'])}" alt="图片君" width="400px" height="230px"/>
+		                </td>
+		                <td>
+		                	<div style="font-size:48px;" align="left">{++$vo['pindex']}</div>
+		                	<div class="formRow nopadding"><input id="movie_comment_image_{$vo.id}" type="text" value="{$vo.image}"/></div>
+		                	<div class="formRow nopadding"><textarea id="movie_comment_intro_{$vo.id}" rows="4" cols="" style="font-size:14px;">{$vo.intro}</textarea></div>
+		                	<div class="formRow" align="right">
+		                		<!--<a class="buttonS bGreen" href="{:U('Movie/addComment', array('movie_id'=>$_GET['movie_id'],'pindex'=>$vo['pindex']-1))}" data="{$vo.id}">插入</a>&nbsp;
+		                		<a class="buttonS bBlack" href="{:U('Movie/addComment', array('movie_id'=>$_GET['movie_id'],'pindex'=>$vo['pindex']))}" data="{$vo.id}">追加</a>-->&nbsp;
+		                		<a class="buttonS bBlue movie_comment_update" href="javascript:void(0);" data="{$vo.id}">更新</a>&nbsp;
+		                		<a class="buttonS bRed" onclick="return confirm('确定删除咩？');" href="{:U('Movie/foreverdelComment', array('id'=>$vo['id']))}">删除</a>
+		                	</div>
+		                </td>
+		            </tr>
+		            </volist>
+                </tbody>
+            </table>
+        </div>
+     
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+<include file="Public:footer" />
+<empty name="list">
+<script>
+(function(){
+	var story = null;
+	var img_url = "{:otherURL2ServerUrl('0.jpg',$_GET['movie_id'], $_GET['serv'])}";
+	var img_error_flag = false;
+	img_url = img_url.substr(0,img_url.length-5);
+	$('#movie_script_file').click(function(){
+		$(this).val('');
+	});
+	$('#movie_script_file').live('change',function(){
+		story = null;
+		img_error_flag = false;
+		$('#finnaly_info').html('');
+		var file = $(this)[0].files[0];
+	    var reader = new FileReader();
+	    //将文件以文本形式读入页面
+	    reader.readAsText(file);
+	    reader.onload=function(f){
+	        try{
+	            var content = $.trim(this.result);
+	            if (content == '') {alert('文件内容为空哦！'); return;}
+	            var json = $.parseJSON(content);
+	            story = json.story;
+	            var html = '';
+	            var patt = /^[a-zA-Z0-9_.]+$/;
+	            for (var i=0,len=json.story.length; i<len; i++) {
+	            	if(!patt.test(story[i].name)) {
+	            		alert('第 ' + (i+1) +' 页图片地址 "'+story[i].name+'" 可能含有括号，英文逗号等特殊字符，请过滤'); return;
+	            	}
+	            	if (i>=20 && i<(len-20)) {
+	            		continue;
+	            	}
+	            	html += '<div style="border:1px solid #ccc;background-color:#fff;float:left;position:relative;text-align:center;margin:2px;width:300px;height:auto;">'
+	            		 + '<div style="position:absolute;top:3px;left:3px;font-size:32px;text-shadow: 3px 3px 4px #fff,-3px 3px 4px #fff, 0 -3px 3px #fff;font-weight:bold;color:#00aaff;">'+(i+1)+'</div>'
+	            		 + '<img onerror="$('+"'#error_imgs_flag'"+').click();" src="' + img_url+story[i].name + '" title="'+ img_url+story[i].name +'" width="300" height="155"/><br />'
+	            		 + '<div style="position:absolute;bottom:0px;left:0px;width:100%;height:auto;">'+(story[i].intro == null?'':story[i].intro)+'</div>'
+	            		 + '<div style="height:30px;"></div>'
+	            		 + '</div>';
+	            }
+	            $('#finnaly_info').html('共有图片 '+json.story.length+' 页');
+	            $('#show_script_rst').html(html);
+	        }catch(ex) {
+	            alert('你上传的文件是不是有错误啊  啊 啊啊 啊啊啊啊啊');
+	        }
+	    }
+	});
+	$('#error_imgs_flag').click(function(){
+		if (!img_error_flag){img_error_flag = true;alert('有图片获取出错哦');}
+	});
+	$('#submit_btn').click(function(){
+		if (img_error_flag){
+			alert('有图片获取出错哦');
+			return false;
+		} 
+	});
+})();
+</script>
+<else />
+<script>
+(function(){
+	$('.movie_comment_update').click(function(){
+		var id = $(this).attr('data');
+		var image = $.trim($('#movie_comment_image_' + id).val());
+		var intro = $.trim($('#movie_comment_intro_' + id).val());
+		if (image == '') {alert("图片地址不能为空哦！"); return false;}
+		if (intro == '') {alert("说明不能为空哦！"); return false;}
+		$.ajax({
+			type : 'POST',
+			url : '{:U("Movie/updateComment")}',
+			data : {image:image, intro:intro, id:id},
+			success : function(data){
+				if (typeof data.msg == 'undefined') {
+					alert('服务器错误');
+				} else {
+					alert(data.msg);
+				}
+			},
+			error : function (ex) {
+				alert('Ajax 错误');
+			}
+		});
+	});
+})();
+</script>
+</empty>

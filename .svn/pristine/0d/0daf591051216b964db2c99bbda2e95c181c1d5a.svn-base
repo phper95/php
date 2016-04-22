@@ -1,0 +1,74 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<!-- Secondary nav -->
+</div>
+<!-- Sidebar ends -->
+
+<!-- Content begins -->
+<div id="content">
+    <include file="Public:bav" />
+    <!-- Main content -->
+    <div class="wrapper">
+        	<!-- Messages #1 -->
+        <div class="widget">
+            <div class="whead">
+                <h6>【{$movie.name}】弹幕详情</h6>
+                <a href="{:getCurrentUrl()}" class="buttonH bBlue mb10 mt5">返回</a>
+                <div class="clear"></div>
+            </div>
+            <br />
+            <ul class="messagesOne">
+            <volist name="poptxt" id="pop">
+            	<div align="left">
+            	<span style="font-size:30px;float:left;width:80px;" align="center">{++$images[$key]['pindex']}</span>
+            	<div style="padding-bottom:10px;">
+            		<eq name="Think.get.type" value="adv">
+            			<img id="poptxt_show_info_img_{$key}" width="400px;" alt="" src="{$images[$key]['image']}">
+            		<else />
+            			<img id="poptxt_show_info_img_{$key}" width="400px;" alt="" src="{:otherURL2ServerUrl($images[$key]['image'],$movie['id'], $movie['imgserver_use'])}">
+            		</eq>
+            		{$images[$key]['intro']}
+            	</div>
+            	</div>
+            	<volist name="pop" id="txt" key="sb">
+            	<li class="by_user">
+            		<!--<eq name="sb" value="1" ><a href="#" title="">{$txt.user_id}</a></eq>
+                    -->
+                    <div class="btn-group" style="position:absolute;top:0px;left:1px;">
+	                     <a href="#" class="buttonM bDefault opt nopadding" data-toggle="dropdown"><img src="{$members[$txt['user_id']]['avatar']}" width='45px' height="45px" alt="" /></a>
+	                     <div class="dropdown-menu pull-left">
+	                         <span><a href="{:U('Member/addNews',array('id'=>$txt['user_id'],'type'=>'notice','typedata'=>1, 'backurl'=>urlencode(__SELF__)))}"><span class="icos-pencil"></span>下发动态</a></span>
+	                     </div>
+	                </div>
+                    <div class="messageArea">
+                        <span class="aro"></span>
+                        <div class="infoRow">
+                            <span class="name"><strong>{$members[$txt['user_id']]['name']} ({$txt.user_id})</strong> 说:</span>
+                            <span class="time">{$txt.add_time}</span>
+                            <div class="clear"></div>
+                        </div>
+                        {:htmlspecialchars($txt['comment_content'])}
+                    </div>
+                    <div class="clear"></div>
+                </li>
+                </volist>
+                <li class="divider"><span></span></li>
+            </volist>
+            </ul>
+            <div class="tPages">
+            	<ul class="pages">
+            		{$page}
+            	</ul>
+            </div>
+        </div>
+        
+        
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+
+<include file="Public:footer" />

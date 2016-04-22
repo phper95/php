@@ -1,0 +1,78 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<!-- Secondary nav -->
+</div>
+<!-- Sidebar ends -->
+
+<!-- Content begins -->
+<div id="content">
+    <include file="Public:bav" />
+    <!-- Main content -->
+    <div class="wrapper">
+        	<div class="fluid">
+        		<form method='post' id="form1" name="form1" action="{:U('Comment/doAdd')}"  enctype="multipart/form-data">
+                    <div class="widget ">
+                        <div class="whead">
+                        	<empty name="Think.get.ry_userid">
+                        		<h6>【{$Think.get.name}】追加评论</h6>
+                        	<else />
+                        		<h6>【{$Think.get.name}】回复评论</h6>
+                        	</empty>
+                        	<empty name="Think.get.backurl">
+	                        	<a href="{:getCurrentUrl()}" class="buttonH bBlue mb10 mt5">返回</a>
+	                        <else />
+	                        	<a href="{$Think.get.backurl}" class="buttonH bBlue mb10 mt5">返回</a>
+	                        </empty>
+                        	<div class="clear"></div>
+                        </div>
+                        <div>
+                        <empty name="content">
+                        <else />
+                        <div class="formRow">
+                        <strong>{$content.user_id}</strong> ： <span class="blueBack">{$content.comment_content}</span>
+                        </div>
+                        </empty>
+                        </div>
+                        <div class="formRow">
+                            <div class="grid3"><label>选择用户君 :</label></div>
+                            <div class="grid9 noSearch">
+                            	<select name="user_id" class="select">
+                            	<option value="0">--下拉我选择--</option>
+                            	<volist name="testMembers" id="t">
+                            	<option value="{$key}">{$t} ({$key})</option>
+                            	</volist>
+                        		</select>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>评论内容:</label></div>
+                            <div class="grid9"><textarea rows="8" cols="" name="content"></textarea></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                        	<notempty name="Think.get.backurl">
+                        	<input type="hidden" name="backurl" value="{$Think.get.backurl}">
+                        	</notempty>
+                        	<input type="hidden" value="{$Think.get.id}" name="id">
+                        	<input type="hidden" value="{$Think.get.type}" name="type">
+                        	<input type="hidden" value="{$Think.get.reply_id|default=0}" name="reply_id"/>
+                        	<input type="hidden" value="{$Think.get.ry_userid|default=0}" name="ry_userid"/>
+                        	<input type="submit" value="提 交" class="buttonM bBlack formSubmit" /><div class="clear"></div>
+                        </div>
+                        <div class="clear"></div>
+                    
+                    </div>
+                    </form>
+            </div>
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+
+<include file="Public:footer" />

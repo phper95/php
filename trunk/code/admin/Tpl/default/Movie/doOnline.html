@@ -1,0 +1,131 @@
+<include file="Public:header" />
+<script language="javascript" type="text/javascript" src="__JS__/My97Datepicker/WdatePicker.js"></script>
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<!-- Secondary nav -->
+    <div class="secNav">
+        <div class="secWrapper">
+            <!-- Tabs container -->
+            <form method="get" action="{:U('Feedback/index')}">
+            	<input type="hidden" value="{$Think.MODULE_NAME}" name="m"/>
+            	<input type="hidden" value="{$Think.ACTION_NAME}" name="a"/>
+            <div id="tab-container" class="tab-container">
+
+                <ul class="iconsLine ic1 etabs">
+                    <li><a href="#alt2" title="">搜索条件</a></li>
+                </ul>
+                
+                <div class="divider"><span></span></div>
+                
+                <div id="general"></div>
+                
+                <div id="alt1"></div>
+                <div id="alt2">
+                
+                	<!-- Sidebar forms -->
+                    <div class="sideWidget">
+                        <div class="formRow">
+                            <label>时间段查询:</label>
+                            <input type="text" name="s_time" id="feedback_search_s_time" placeholder="开始时间"  onClick="WdatePicker()" value="{$Think.get.s_time}"/>
+                            <input id="d12" name="e_time" type="text" onClick="WdatePicker()" placeholder="结束时间" value="{$Think.get.e_time}"/>
+						</div>
+                        <div class="formRow">
+                            <input type="submit" class="buttonS bLightBlue" value="Just 搜索" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"><span></span></div>
+            </form>
+            
+       </div> 
+       <div class="clear"></div>
+   </div>
+</div>
+<!-- Sidebar ends -->
+
+<!-- Content begins -->
+<div id="content">
+
+  <include file="Public:bav" />
+  
+    <!-- Main content -->
+    <div class="wrapper">
+        <!-- Media table sample -->
+        <div class="widget check">
+            <div class="whead">
+            <h6>用户反馈列表</h6>
+				<div class="clear"></div></div>
+            <table cellpadding="0" cellspacing="0" width="100%" class="tDefault checkAll tMedia" id="checkAll">
+                <thead>
+                    <tr>
+		                <td width="50">编号</td>
+		                <td width="50">用户ID</td>
+		                <td>反馈内容</td>
+		                <td>发布平台</td>
+		                <td>发布渠道</td>
+		                <td width="60">发布版本</td>
+		                <td>用户IP</td>
+		                <td>用户机型</td>
+		                <td>反馈时间</td>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td colspan="9">
+                        <empty name="list">
+                        	额。。。木有咧……
+                        <else/>
+                            <div class="tPages">
+                                <ul class="pages">
+                                	{$page}
+                                    <!--<li class="prev"><a href="#" title="">&lt;</a></li>
+                                    <li><a href="#" title="" class="active">1</a></li>
+                                    <li><a href="#" title="">2</a></li>
+                                    <li><a href="#" title="">3</a></li>
+                                    <li><a href="#" title="">4</a></li>
+                                    <li><a href="#" title="">5</a></li>
+                                    <li><a href="#" title="">6</a></li>
+                                    <li>...</li>
+                                    <li><a href="#" title="">20</a></li>
+                                    <li class="next"><a href="#" title="">&gt;</a></li>
+                                --></ul>
+                            </div>
+                        </empty>
+                        </td>
+                        
+                    </tr>
+                </tfoot>
+                <tbody>
+                    <volist name="list" id="vo">
+		            <tr>
+		                <td>{$vo.id}</td>
+		                <td>{$vo.user_id}</td>
+		                <td>{$vo.feedback}</td>
+		                <td>{$vo.pub_platform}</td>
+		                <td>{$vo.pub_channel} </td>
+		                <td>{$vo.ver}</td>
+		                <td>{$vo.ip}</td>
+		                <td>{$vo.phone_type}</td>
+		                <td>{$vo.add_time}</td>
+		            </tr>
+		            </volist>
+                </tbody>
+            </table>
+        </div>
+     
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+<script>
+(function(){
+	searchInitValue ({
+		'feedback_search_s_time' : "{:toDate(strtotime('-1 day'), 'Y-m-d')}"
+	});
+})();
+</script>
+<include file="Public:footer" />

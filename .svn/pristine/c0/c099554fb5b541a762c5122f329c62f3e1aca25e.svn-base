@@ -1,0 +1,394 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<!-- Secondary nav -->
+</div>
+<!-- Sidebar ends -->
+
+<script src="__JS__/dialog/artDialog.js?skin=default"></script>
+
+<!-- Content begins -->
+<div id="content">
+    <include file="Public:bav" />
+    <!-- Main content -->
+    <div class="wrapper">
+        	<div class="fluid">
+        		<form method='post' id="form1" name="form1" action="{:U('Movie/update')}"  enctype="multipart/form-data">
+                    <div class="widget ">
+                        <div class="whead">
+                        <h6>添加影片</h6>
+                        <a href="{:getCurrentUrl()}" class="buttonH bBlue mb10 mt5">返回</a>
+                        <div class="clear"></div></div>
+                        <div class="formRow">
+                            <div class="grid3"><label>影片名称：</label></div>
+                            <div class="grid3"><input type="text" name="name" value="{$vo.name}" placeholder="电影名称"/></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>影片副标题：</label></div>
+                            <div class="grid7"><input type="text" name="sub_title" value="{$vo.sub_title}" placeholder="电影副标题"/></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>影片编者按：</label></div>
+                            <div class="grid7"><textarea rows="3" cols="" name="editor_note" placeholder="编者按">{$vo.editor_note}</textarea></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>导演：</label></div>
+                            <div class="grid7"><input type="text" name="author" value="{$vo.author}" placeholder="导演"/></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>演员：</label></div>
+                            <div class="grid7"><input type="text" name="actor" value="{$vo.actor}" placeholder="演员"/></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>影片简介：</label></div>
+                            <div class="grid7"><textarea rows="4" cols="" name="intro" placeholder="影片简介">{$vo.intro}</textarea></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>影片评分：</label></div>
+                            <div class="grid3"><input type="text" name="score" value="{$vo.score}" placeholder="影片评分"/></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <!-- 
+                        <div class="formRow">
+                            <div class="grid3"><label>是否精品：</label></div>
+                            <div class="grid9">
+                            	<label class="nopadding grid1" ><input type="radio" value="1" <eq name="vo.jian" value="1">checked="checked"</eq> name="jian"/>是</label>
+                            	<label class="nopadding grid1"><input type="radio" value="0" <eq name="vo.jian" value="0">checked="checked"</eq> name="jian"/>否</label>
+							</div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>是否热门：</label></div>
+                            <div class="grid9">
+                            	<label class="nopadding grid1" ><input type="radio" value="1" <eq name="vo.hot" value="1">checked="checked"</eq> name="hot"/>是</label>
+                            	<label class="nopadding grid1" ><input type="radio" value="0" <eq name="vo.hot" value="0">checked="checked"</eq> name="hot"/>否</label>
+							</div>
+                            <div class="clear"></div>
+                        </div>
+                         -->
+                         
+                         <div class="formRow">
+                            <div class="grid3"><label>是否连载：</label></div>
+                            <div class="grid9">
+                            	<label class="nopadding grid1" ><input type="radio" value="2" id="radio_is_season" <eq name="vo.vol_count" value="2">checked="checked"</eq> name="vol_count"/>是</label>
+                            	<label class="nopadding grid1"><input type="radio" value="1" onclick="$('#movie_season_id').val('');" <eq name="vo.vol_count" value="1">checked="checked"</eq> name="vol_count"/>否</label>
+                            	<input type="text" name="season_id" value="{$vo.season_id}" readonly="readonly" id="movie_season_id" />
+							</div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>影片尺寸：</label></div>
+                            <div class="grid3"><input type="text" name="total_size" value="{$vo.total_size}" placeholder="电影尺寸（Mb）" /></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>影片页数：</label></div>
+                            <div class="grid3"><input type="text" name="total_page" value="{$vo.total_page}" placeholder="影片页数" /></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>影片上映日期：</label></div>
+                            <div class="grid1">
+                            	<select name="showtime">
+		                            {:getMovieShowtimeList($vo['showtime'],'val')}
+	                        	</select>
+                        	</div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>影片上映地区：</label></div>
+                            <div class="grid1">
+                            	<select name="zone">
+		                            {:getMovieZoneList($vo['zone'],'val')}
+	                        	</select>
+                        	</div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>影片类型：</label></div>
+                            <div class="grid9">
+		                        {:getMovieTypeCheckList($vo['tags'],'|','tagsArr[]','val')}
+                        	</div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>影片被标记签字串：</label></div>
+                            <div class="grid9"><input type="text" name="tags_text" value="{$vo.tags_text}" placeholder="多个请用半角逗号隔开"/></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>影片关键字字串：</label></div>
+                            <div class="grid9"><input type="text" name="keyword" value="{$vo.keyword}" placeholder="多个请用半角逗号隔开"/></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <!-- 
+                        <div class="formRow">
+                            <div class="grid3"><label>顶次数：</label></div>
+                            <div class="grid3"><input type="text" name="ding" value="{$vo.ding}" placeholder="顶次数" disabled="disabled"/></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>踩次数：</label></div>
+                            <div class="grid3"><input type="text" name="cai" value="{$vo.cai}" placeholder="踩次数" disabled="disabled"/></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>播放次数：</label></div>
+                            <div class="grid3"><input type="text" name="played" value="{$vo.played}" placeholder="播放次数" disabled="disabled"/></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>分享次数：</label></div>
+                            <div class="grid3"><input type="text" name="share" value="{$vo.share}" placeholder="分享次数" disabled="disabled"/></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>收藏次数：</label></div>
+                            <div class="grid3"><input type="text" name="keep" value="{$vo.keep}" placeholder="收藏次数" disabled="disabled"/></div>
+                            <div class="clear"></div>
+                        </div>
+                         -->
+                        
+                        <!-- 
+                        <div class="formRow">
+                            <div class="grid3"><label>官网是否在线阅读：</label></div>
+                            <div class="grid9">
+                            	<label class="nopadding grid1" ><input type="radio" value="1" <eq name="vo.wp_post_open" value="1">checked="checked"</eq> name="wp_post_open"/>是</label>
+                            	<label class="nopadding grid1"><input type="radio" value="0" <eq name="vo.wp_post_open" value="0">checked="checked"</eq> name="wp_post_open"/>否</label>
+							</div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>官网文章ID：</label></div>
+                            <div class="grid3"><input type="text" value="{$vo.wp_post_id}" name="wp_post_id" placeholder="官网文章ID" /></div>
+                            <div class="clear"></div>
+                        </div>
+                         -->
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>影片是否生效：</label></div>
+                            <div class="grid9">
+                            	<label class="nopadding grid1" ><input type="radio" value="1" <eq name="vo.open" value="1">checked="checked"</eq> name="open"/>是</label>
+                            	<label class="nopadding grid1"><input type="radio" value="0" <eq name="vo.open" value="0">checked="checked"</eq> name="open"/>否</label>
+							</div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>影片使用图片服务器编号：</label></div>
+                            <div class="grid9">
+                            	<!-- <label class="nopadding grid1" ><input type="radio" value="0" <eq name="vo.imgserver_use" value="0">checked="checked"</eq> name="imgserver_use"/>第三方</label>
+                            	<label class="nopadding" style="width:210px;"><input type="radio" value="1" <eq name="vo.imgserver_use" value="1">checked="checked"</eq> name="imgserver_use"/> 【2.0版本】图片服务器-(230)</label>
+                            	<label class="nopadding" style="width:230px;"><input type="radio" value="2" <eq name="vo.imgserver_use" value="2">checked="checked"</eq> name="imgserver_use"/>【3.0版本】图片服务器imgs3-(248)</label>
+                            	<label class="nopadding" style="width:230px;"><input type="radio" value="5" <eq name="vo.imgserver_use" value="5">checked="checked"</eq> name="imgserver_use"/>【3.0版本】图片服务器imgs2-(109)</label>
+                            	<div class="clear"></div>
+                            	<div class="divider"></div> -->
+                            	<label class="nopadding" style="width:230px;"><input type="radio" value="7" <eq name="vo.imgserver_use" value="7">checked="checked"</eq> name="imgserver_use"/>【4.0版本】图片服务器imgs4-(123)</label>
+                            	<label class="nopadding" style="width:220px;"><input type="radio" value="8" <eq name="vo.imgserver_use" value="8">checked="checked"</eq> name="imgserver_use"/>【4.0版本】图片服务器imgs5-(44)</label>
+                            	
+							</div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                        	<div class="grid3">限制影片显示</div>
+                        	<div class="grid9">
+                        		<label style="width:120px;"><input type="checkbox" value="1" <eq name="vo.limit_listshow" value="1">checked="checked"</eq> name="limit_listshow" class="check" />限制-列表</label>
+	                            <label style="width:120px;"><input type="checkbox" value="1" <eq name="vo.limit_search" value="1">checked="checked"</eq> name="limit_search" class="check" />限制-搜索</label>
+	                            <label style="width:120px;"><input type="checkbox" value="1" <eq name="vo.limit_tag" value="1">checked="checked"</eq> name="limit_tag" class="check" />限制-Tag</label>
+	                            <label style="width:120px;"><input type="checkbox" value="1" <eq name="vo.limit_qrcode" value="1">checked="checked"</eq> name="limit_qrcode" class="check" />限制-二维码</label>
+	                            <label style="width:120px;"><input type="checkbox" value="1" <eq name="vo.limit_same" value="1">checked="checked"</eq> name="limit_same" class="check" />限制-推荐</label>
+	                            <label style="width:120px;"><input type="checkbox" value="1" <eq name="vo.limit_grapher" value="1">checked="checked"</eq> name="limit_grapher" class="check" />限制-用户作品</label>
+	                            <label style="width:120px;"><input type="checkbox" value="1" <eq name="vo.limit_topic" value="1">checked="checked"</eq> name="limit_topic" class="check" />限制-专题</label>
+                        	</div>
+                        	<div class="clear"></div>
+                        </div>
+                        
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>影片名称前缀：</label></div>
+                            <div class="grid3"><input type="text" name="name_tag" id="movie_name_tag" value="{$vo.name_tag}" placeholder="影片名称前缀"/></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>影片二级标签：</label></div>
+                            <div class="grid3">
+                            	<input type="text" name="mark" id="input_movie_mark" value="{$vo.mark}"/>
+                            	<span class="note">*多个用竖线'|'隔开，注意不要空格</span>
+                            </div>
+                            <div class="grid3">
+                            	<a href="javascript:void(0);" id="movie_mark">选择</a>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                        	<input type="hidden" value="{$vo.id}" name="id">
+                        	<input type="submit" id="submit_movie_info" value="提 交" class="buttonM bBlack formSubmit" /><div class="clear"></div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    </form>
+                    <div id="xxxxsdf" style="display:none;width:100%;min-width:500px;">
+                    	<div class="fluid">
+                    		<div class="widget nopadding nomargin">
+                    		<div class="formRow">
+                        		<div class="grid9">
+                    				<input type="text" id="search_season_name" placeholder="输入剧集名称查询"/>
+                    			</div>
+                    			<div class="grid3"><a class="buttonM bBlue" id="do_search_season">查询</a></div>
+                    			<div class="clear"></div>
+                    		</div>
+                    		<table cellpadding="0" cellspacing="0" width="100%" class="tDefault" id="search_rst_table">
+                    		</table>
+                    		<div class="clear"></div>
+                    		</div>
+                    	</div> 
+                    	<div id="dialog_select" style="padding:10px 0px;"></div>
+                    </div>
+                    
+                    <div id="mark_list" style="display:none;width:100%;width:600px;">
+                    	<div class="fluid">
+                    		<div class="widget nopadding nomargin">
+                    		<div class="formRow">
+                    			{:getMovieLevelCheckList(0,'|','marksArr[]','val');}
+                    			<div class="clear"></div>
+                    		</div>
+                    		</div>
+                    	</div>
+                    </div>
+            </div>
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+<script>
+(function(){
+	
+	var search_loading = false;
+	$('#do_search_season').click(function(){
+		var name = $('#search_season_name').val();
+		if (name == '') {alert("输入查询内容啊啊啊 啊");return;}
+		if (search_loading) {alert("正在查询啊，你就不能等一下么？");return;}
+		$.ajax({
+			url : '{:U("MovieSeason/getByName")}',
+			type:'POST',
+			data : {name:name},
+			success :function(data){
+				if (data == null || data.length==0) {
+					alert('没有查询记录');
+				} else {
+					var html = '';
+					for (var i=0,len=data.length; i<len; i++) {
+						html += '<tr>'
+							 	+'<td>'+data[i].name+'</td>'
+							 	+'<td onclick="$(\'#select_season\').val('+data[i].id+')"><a href="javascript:void(0);">选择</a></td>'
+							 +'</tr>';
+					}
+					$('#search_rst_table').html(html);
+				}
+			},
+			error : function(ex){
+				alert('ajax 错误');
+			}
+		});
+	});
+	
+	var loading = false;
+	
+	$('#submit_movie_info').click(function(){
+		if($('#radio_is_season').attr('checked') == 'checked'){
+			if($('#movie_season_id').val() == '' || $('#movie_season_id').val() == '0') {
+				alert('连载没选择剧集啊啊啊啊啊啊啊啊啊啊啊啊啊'); return false;
+			}
+		}
+	});
+	
+	var movie_season_data = {};
+	$('#radio_is_season').click(function(){
+		var html = $('#dialog_select').html();
+		if (!loading && html == '') {
+			loading = true;
+			$.ajax({
+				url : '{:U("MovieSeason/getNameList")}',
+				type:'POST',
+				success :function(data){
+					movie_season_data = data;
+					var select_html = '<select id="select_season" style="padding:3px;">';
+					for (var a in data) {
+						select_html += '<option value="'+a+'">'+a+ ' : ' + data[a].name+'</option>';
+					}
+					select_html += '</select>';
+					$('#dialog_select').html(select_html);
+				},
+				error : function(ex){
+					alert('ajax 错误');
+				}
+			});
+		}
+		art.dialog({
+			id : 'dialog_art_season',
+			title : '选择剧集',
+			content: $('#xxxxsdf')[0],
+			ok : function(){
+				if ($('#select_season').length < 1) {
+					alert('Jo duo ma de yi.');return false;
+				}
+				var s_id = $('#select_season').val();
+				$('#movie_season_id').val(s_id);
+				$('#movie_name_tag').val(movie_season_data[s_id].name_tag);
+			},
+			cancel:true
+		});
+	});
+	
+	$('#movie_mark').focus(function(){
+		art.dialog({
+			id : 'dialog_art_mark_list',
+			title : '二级标签选择',
+			content : $('#mark_list')[0],
+			ok : function(){
+				var values = [];
+				$("input[name='marksArr[]']").each(function(){
+					if ($(this).attr('checked') == 'checked') {
+						values.push($(this).val());
+					}
+				});
+				$('#input_movie_mark').val(values.join('|'));
+			},
+			cancel : true
+		});
+	});
+})();
+</script>
+<include file="Public:footer" />

@@ -1,0 +1,164 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<!-- Secondary nav -->
+    <div class="secNav">
+        <div class="secWrapper">
+            <!-- Tabs container -->
+            <form method="get" action="{:U('Feedback/index')}">
+            	<input type="hidden" value="{$Think.MODULE_NAME}" name="m"/>
+            	<input type="hidden" value="{$Think.ACTION_NAME}" name="a"/>
+            <div id="tab-container" class="tab-container">
+
+                <ul class="iconsLine ic1 etabs">
+                    <li><a href="#alt2" title="">搜索条件</a></li>
+                </ul>
+                
+                <div class="divider"><span></span></div>
+                
+                <div id="general"></div>
+                
+                <div id="alt1"></div>
+                <div id="alt2">
+                
+                	<!-- Sidebar forms -->
+                    <div class="sideWidget">
+                        <div class="formRow">
+                            <label>坑名:</label>
+                            <input type="text" name="pit_name" value="{$Think.get.pit_name|default=''}"/>
+						</div>
+						<div class="formRow">
+                            <label>用户ID:</label>
+                            <input type="text" name="user_id" value="{$Think.get.user_id|default=''}"/>
+						</div>
+						<div class="formRow">
+                            <label>邮箱:</label>
+                            <input type="text" name="email" value="{$Think.get.email|default=''}"/>
+						</div>
+						<div class="formRow">
+                            <label>状态:</label>
+                            <select name="state">
+                            	<option value="">-全部-</option>
+                            	<volist name="pitName" id="p">
+                            		<if condition="isset($_GET['state']) && $_GET['state'] !== '' AND $key eq $_GET['state']">
+                            			<option value="{$key}" selected="selected">{$p}</option>
+                            		<else />
+                            			<option value="{$key}">{$p}</option>
+                            		</if>
+                            	</volist>
+                            </select>
+						</div>
+						
+						<div class="formRow">
+                            <label>交稿状态:</label>
+                            <select name="jiaogao">
+                            	<option value="">-全部-</option>
+                            	<if condition="$_GET['jiaogao'] === '1'" >
+                            		<option value="1" selected="selected">已交稿</option>
+                            	<else />
+                            		<option value="1">已交稿</option>
+                            	</if>
+                            	<if condition="$_GET['jiaogao'] === '0'" >
+                            		<option value="0" selected="selected">未交稿</option>
+                            	<else />
+                            		<option value="0">未交稿</option>
+                            	</if>
+                            </select>
+						</div>
+						
+                        <div class="formRow">
+                            <input type="submit" class="buttonS bLightBlue" value="Just 搜索" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"><span></span></div>
+            </form>
+            
+       </div> 
+       <div class="clear"></div>
+   </div>
+</div>
+<!-- Sidebar ends -->
+
+<!-- Content begins -->
+<div id="content">
+
+  <include file="Public:bav" />
+  
+    <!-- Main content -->
+    <div class="wrapper">
+    	<div class="widget check">
+    		<div class="body"><a href="{:U('Pit/member')}" class="buttonS bGreen">占坑用户管理</a> &nbsp;<a href="{:U('Pit/contract')}" class="buttonS bGreen">对账信息</a></div>
+    	</div>
+        <!-- Media table sample -->
+        <div class="widget check">
+            <div class="whead">
+            	<h6>占坑列表</h6>
+            	<a href="{:U('Pit/add')}" class="buttonH bBlue mb10 mt5">挖坑</a>
+				<div class="clear"></div></div>
+            <table cellpadding="0" cellspacing="0" width="100%" class="tDefault checkAll tMedia" id="checkAll">
+                <thead>
+                    <tr>
+		                <td width="50">编号</td>
+		                <td width="50">用户ID</td>
+		                <td>用户名称</td>
+		                <td>坑名</td>
+		                <td>过期时间</td>
+		                <td>冰冻时间</td>
+		                <td>占坑时间</td>
+		                <td width="130">状态</td>
+		                <td width="80">操作</td>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td colspan="9">
+                        <empty name="list">
+                        	额。。。木有咧……
+                        <else/>
+                            <div class="tPages">
+                                <ul class="pages">
+                                	{$page}
+                                </ul>
+                            </div>
+                        </empty>
+                        </td>
+                        
+                    </tr>
+                </tfoot>
+                <tbody>
+                    <volist name="list" id="vo">
+		            <tr>
+		                <td>{$vo.id}</td>
+		                <td><a href="{:U('Member/index',array('id'=>$vo['user_id'],'backurl'=>urlencode(__SELF__)))}">{$vo.user_id}</a></td>
+		                <td><a href="{:U('Pit/index',array('user_id'=>$vo['user_id']))}">{$vo.user_name}</a></td>
+		                <td>{$vo.pit_name}</td>
+		                <td>{$vo.deadline} </td>
+		                <td><?php echo toDate(strtotime($vo['deadline']) - 7*86400); ?> </td>
+		                <td>{$vo.add_time}</td>
+		                <td>{$pitName[$vo['state']]}</td>
+		                <td>
+		                	<a href="{:U('Pit/edit',array('id'=>$vo['id']))}">查看</a>
+		                </td>
+		            </tr>
+		            </volist>
+                </tbody>
+            </table>
+        </div>
+     
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+<script>
+(function(){
+	searchInitValue ({
+		'feedback_search_s_time' : "{:toDate(strtotime('-1 day'), 'Y-m-d')}"
+	});
+})();
+</script>
+<include file="Public:footer" />

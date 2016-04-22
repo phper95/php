@@ -1,0 +1,77 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+</div>
+<!-- Sidebar ends -->
+
+<!-- Content begins -->
+<div id="content">
+
+  <include file="Public:bav" />
+  
+    <!-- Main content -->
+    <div class="wrapper">
+        <!-- Media table sample -->
+        <div class="widget check">
+            <div class="whead">
+            	<h6>【{$Think.get.name} ({$Think.get.id})】<eq name="Think.get.type" value="acc">动态<else/>发布信息</eq>列表</h6>
+            	<a href="{:getCurrentUrl()}" class="buttonH bBlue mb10 mt5">返回</a>
+				<div class="clear"></div>
+			</div>
+            <table cellpadding="0" cellspacing="0" width="100%" class="tDefault checkAll tMedia" id="checkAll">
+                <thead>
+                    <tr>
+		                <td width="50">编号</td>
+		                <td width="50">用户ID</td>
+		                <td>内容</td>
+		                <td width="140">回复ID</td>
+		                <td width="140">发布时间</td>
+		                <td width="140">回复来源</td>
+		                <td width="140">回复来源数据</td>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td colspan="12">
+                        <empty name="list">
+                        	额。。。木有咧……
+                        <else/>
+                            <div class="tPages">
+                                <ul class="pages">
+                                	{$page}
+                                </ul>
+                            </div>
+                        </empty>
+                        </td>
+                        
+                    </tr>
+                </tfoot>
+                <tbody>
+                    <volist name="list" id="vo">
+		            <tr>
+		                <td>{$vo.id}</td>
+		                <td><img src="{$members[$vo[$field]]['avatar']}" width='45px' height="45px" alt="" /></td>
+		                <td>
+		                	<div align="left">
+		                	<eq name="vo.secret_send" value="1"><span class="redBack">私信</span>&nbsp;&nbsp;&nbsp;</eq>
+		                	<span class="blueBack">{$members[$vo[$field]]['name']} ({$vo.user_id}) ：</span>
+		                	{$vo.comment_content}
+		                	</div>
+		                </td>
+		                <td>{$vo.reply_comment_id}</td>
+		                <td>{$vo.add_time}</td>
+		                <td>{$vo.reply_from}</td>
+		                <td>{$vo.reply_from_data}</td>
+		            </tr>
+		            </volist>
+                </tbody>
+            </table>
+        </div>
+     
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+<include file="Public:footer" />

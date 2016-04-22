@@ -1,0 +1,77 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<!-- Secondary nav -->
+</div>
+<!-- Sidebar ends -->
+
+<!-- Content begins -->
+<div id="content">
+    <include file="Public:bav" />
+    <!-- Main content -->
+    <div class="wrapper">
+        	<div class="fluid">
+        		<form method='post' id="form1" name="form1" action="{:U('Active/doEditReward')}"  enctype="multipart/form-data">
+                    <div class="widget ">
+                        <div class="whead">
+                        <h6>添加奖励</h6>
+                        <a href="{$Think.get.backurl}" class="buttonH bBlue mb10 mt5">返回</a>
+                        <div class="clear"></div></div>
+                        <div class="formRow">
+                            <div class="grid3"><label>奖励类型：<span class="req">*</span> </label></div>
+                            <div class="grid3">
+                            	<select name="reward_type">
+                            		<option value="">-请选择奖励类型-</option>
+                            		<volist name="typeList" id="t">
+                            			<if condition="$vo['reward_type'] eq $key">
+                            			<option selected="selected" value="{$key}">{$t}</option>
+                            			<else />
+                            			<option value="{$key}">{$t}</option>
+                            			</if>
+                            		</volist>
+                            	</select>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>奖励值：<span class="req">*</span></label></div>
+                            <div class="grid7">
+                            	<input type="text" name="reward_value" placeholder="奖励值" value="{$vo.reward_value}"/>
+                            	<span class="red">注意: 只有奖励类型为经验，金币等数字类型的值，才填入其中</span>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>可参与次数：<span class="req">*</span></label></div>
+                            <div class="grid7">
+                            	<input type="text" name="activ_times" placeholder="可参与次数" value="{$vo.activ_times}"/>
+                            	<span class="red">当参与次数小于这个数值，每参与一次，获取相应的奖励</span>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>备注：<span class="req">*</span></label></div>
+                            <div class="grid7"><textarea rows="4" name="remark">{$vo.remark}</textarea></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                        	<input type="hidden" name="id" value="{$vo.id}"/>
+                        	<input type="hidden" name="backurl" value="{$Think.get.backurl}"/>
+                        	<input type="submit" value="提 交" class="buttonM bBlack formSubmit" /><div class="clear"></div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    </form>
+            </div>
+            <div id="xxsdf" style="display:none;min-width:600px;" class="fluid">sdfsdf</div>
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+<include file="Public:footer" />

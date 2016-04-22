@@ -1,0 +1,447 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<include file="MovieRank:opt" />
+</div>
+<!-- Sidebar ends -->
+    
+<!-- Content begins -->
+<div id="content">
+    <div class="contentTop">
+        <span class="pageTitle">影片预评级</span>
+        <div class="clear"></div>
+    </div>
+    
+    <!-- Breadcrumbs line -->
+	<include file="Public:bav" />
+	    
+    <!-- Main content -->
+    <div class="wrapper">
+       <div class="widget">
+          <div class="whead"><h6>【{$vo.add_time}】 评级详情</h6>
+          	<a href="{:getCurrentUrl()}" class="buttonH bBlue mb10 mt5">返回</a>
+          <div class="clear"></div></div>
+          <div class="body">
+          	<div>
+          		<h3>
+          			共计参评影片：<span id="movie_rank_Info_total_movies" class="green">{$vo.tm} 部</span>，
+          			其中 【神作】<span id="movie_rank_Info_total_shen" class="red"> {$last.total_rank_a} 部</span>
+          			【震精】<span id="movie_rank_Info_total_jin" class="red">{$last.total_rank_b} 部</span>
+          			【略屌】<span id="movie_rank_Info_total_diao" class="red">{$last.total_rank_c} 部</span>
+          		</h3>
+          		<div class="pt10">
+                <span>单部影片成本期望：</span>
+                <strong style="font-size:22px;" class="red" id="movie_rank_Info_money">￥{$vo.pay|round=###,2}</strong>
+                </div>
+                <div class="clear"></div>
+          	</div>
+          	<div class="divider "></div>
+          	<div class="fluid pt10">
+	          	<div class="grid2" style="border-right:2px solid #ccc;">
+	          		<h1 >神作率：</h1>
+	          		<h4 class="pt5">2.14285 ~ 4.2857%</h4>
+	          		<h1 class="red pt5" id="movie_rank_Info_percent_shen">{:toPercent($last['total_rank_b']/$vo['tm'])}</h1>
+	          	</div>
+	          	<div class="grid2" style="border-right:2px solid #ccc;">
+	          		<h1 >震精率：</h1>
+	          		<h4 class="pt5">4.2857 ~ 8.5714%</h4>
+	          		<h1 class="green pt5" id="movie_rank_Info_percent_jin">{:toPercent($last['total_rank_b']/$vo['tm'])}</h1>
+	          	</div>
+	          	<div class="grid2">
+	          		<h1 >略屌率：</h1>
+	          		<h4 class="pt5">8.5714 ~ 17.1429%</h4>
+	          		<h1 class="red pt5" id="movie_rank_Info_percent_diao">{:toPercent($last['total_rank_c']/$vo['tm'])}</h1>
+	          	</div>
+	          	<div style="height:200px; width:320px;" id="bingtu" class="grid6"></div>
+          	</div>
+          	<div class="divider"></div>
+          	<div class="fluid">
+          		<form method='post' id="form1" name="form1" action="{:U('MovieRank/doRank')}"  enctype="multipart/form-data">
+          		<div class="widget grid8 nomargin" style="width:550px;">       
+                    <ul class="tabs">
+                        <li class="activeTab"><a href="#tab_shen">神作</a></li>
+                        <li class=""><a href="#tab_jin">震精</a></li>
+                        <li class=""><a href="#tab_diao">略屌</a></li>
+                        <li class=""><a href="#tab_po_shen">破格-神作</a></li>
+                        <li class=""><a href="#tab_po_jin">破格-震精</a></li>
+                        <li class=""><a href="#tab_po_diao">破格-略屌</a></li>
+                    </ul>
+                    
+                    <div class="tab_container">
+                        <div class="tab_content" id="tab_shen" style="display: block;">
+                            <volist name="shen" id="s">
+                            	<label style="padding:5px;">
+                            		<input type='radio' name="shen" class="choose_canshu" value="shen,{$s.id}">
+                            		阅读倍率 = {:round($s['rank_value_1'],2)}, 点赞比倍率 = {:round($s['rank_value_2'],2)},;
+                            		阅读次数 &gt; {:round($s['rank_value_1'] * $vo['mr'], 2)}, 
+                            		点赞比 &gt; {:round($s['rank_value_2'] * $vo['mlr'] * 100, 2)}%, 
+                            		<span class="red">共 {$s.movie_count} 部</span>
+                            	</label><br />
+                            </volist>
+                            <label style="padding:5px;">
+                            	<input type='radio' name="shen" class="choose_canshu" value="shen,0">
+                            	不评级
+                            </label>
+                        </div>
+                        <div class="tab_content" id="tab_jin" style="display: none;">
+                        	<volist name="jin" id="s">
+                            	<label style="padding:5px;">
+                            		<input type='radio' name="jin" class="choose_canshu" value="jin,{$s.id}">
+                            		阅读倍率 = {:round($s['rank_value_1'],2)}, 点赞比倍率 = {:round($s['rank_value_2'],2)}; 
+                            		阅读次数 &gt; {:round($s['rank_value_1'] * $vo['mr'], 2)}, 
+                            		点赞比 &gt; {:round($s['rank_value_2'] * $vo['mlr'] * 100, 2)}%, 
+                            		<span class="red">共 {$s.movie_count} 部</span>
+                            	</label><br />
+                            </volist>
+                            <label style="padding:5px;">
+                            	<input type='radio' name="jin" class="choose_canshu" value="jin,0">
+                            	不评级
+                            </label>
+                        </div>
+                        <div class="tab_content" id="tab_diao" style="display: none;">
+                        	<volist name="diao" id="s">
+                            	<label style="padding:5px;">
+                            		<input type='radio' name="diao" class="choose_canshu" value="diao,{$s.id}">
+                            		阅读倍率 = {:round($s['rank_value_1'],2)}, 点赞比倍率 = {:round($s['rank_value_2'],2)}; 
+                            		阅读次数 &gt; {:round($s['rank_value_1'] * $vo['mr'], 2)}, 
+                            		点赞比 &gt; {:round($s['rank_value_2'] * $vo['mlr'] * 100, 2)}%, 
+                            		<span class="red">共 {$s.movie_count} 部</span>
+                            	</label><br />
+                            </volist>
+                            <label style="padding:5px;">
+                            	<input type='radio' name="diao" class="choose_canshu" value="diao,0">
+                            	不评级
+                            </label>
+						</div>
+                        <div class="tab_content" id="tab_po_shen" style="display: none;">
+                        	<volist name="po_shen" id="s">
+                            	<label style="padding:5px;">
+                            		<input type='radio' name="po_shen" class="choose_canshu" value="po_shen,{$s.id}">
+                            		阅读倍率 = {:round($s['rank_value_1'],2)} 或 点赞倍数 = {:round($s['rank_value_2'],2)}; 
+                            		阅读次数 &gt; {:round($s['rank_value_1'] * $vo['mr'], 2)}, 
+                            		点赞次数 &gt; {:round($s['rank_value_2'] * $vo['ml'], 2)}, 
+                            		<span class="red">共 {$s.movie_count} 部</span>
+                            	</label><br />
+                            </volist>
+                            <label style="padding:5px;">
+                            	<input type='radio' name="po_shen" class="choose_canshu" value="po_shen,0">
+                            	不评级
+                            </label>
+                        </div>
+                        <div class="tab_content" id="tab_po_jin" style="display: none;">
+                        	<volist name="po_jin" id="s">
+                            	<label style="padding:5px;">
+                            		<input type='radio' name="po_jin" class="choose_canshu" value="po_jin,{$s.id}">
+                            		阅读倍率 = {:round($s['rank_value_1'],2)} 或 点赞倍数 = {:round($s['rank_value_2'],2)};
+                            		阅读次数 &gt; {:round($s['rank_value_1'] * $vo['mr'], 2)}, 
+                            		点赞次数 &gt; {:round($s['rank_value_2'] * $vo['ml'], 2)}, 
+                            		<span class="red">共 {$s.movie_count} 部</span>
+                            	</label><br />
+                            </volist>
+                            <label style="padding:5px;">
+                            	<input type='radio' name="po_jin" class="choose_canshu" value="po_jin,0">
+                            	不评级
+                            </label>
+                        </div>
+                        <div class="tab_content" id="tab_po_diao" style="display: none;">
+                        	<volist name="po_diao" id="s">
+                            	<label style="padding:5px;">
+                            		<input type='radio' name="po_diao" class="choose_canshu" value="po_diao,{$s.id}">
+                            		阅读倍率 = {:round($s['rank_value_1'],2)} 或 点赞倍数 = {:round($s['rank_value_2'],2)}; 
+                            		阅读次数 &gt; {:round($s['rank_value_1'] * $vo['mr'], 2)}, 
+                            		点赞次数 &gt; {:round($s['rank_value_2'] * $vo['ml'], 2)}, 
+                            		<span class="red">共 {$s.movie_count} 部</span>
+                            	</label><br />
+                            </volist>
+                            <label style="padding:5px;">
+                            	<input type='radio' name="po_diao" class="choose_canshu" value="po_diao,0">
+                            	不评级
+                            </label>
+                        </div>
+                    </div>	
+                    <div class="clear"></div>	
+                </div>
+                
+                <input class="buttonM bBlack formSubmit" type="submit" id="movie_rank_info_submit" value="发 布">
+                </form>
+                
+          		<div style="width:300px;" class="grid2">
+          			<div class="widget nomargin">
+          				<div class="whead"><h6>评级结果预览</h6><div class="clear"></div></div>
+          				<div class="body">
+          					<div class="redBack" onclick="$('#pre_rank_info_shen').toggle(200);">【神作】<span id="pre_rank_info_shen_nums"></span></div>
+          					<div id="pre_rank_info_shen" style="display:none;"> </div>
+          					<div class="divider nomargin"></div>
+          					<div class="blueBack" onclick="$('#pre_rank_info_jin').toggle(200);">【震精】<span id="pre_rank_info_jin_nums"></span></div>
+          					<div id="pre_rank_info_jin" style="display:none;"> </div>
+          					<div class="divider nomargin"></div>
+          					<div class="greenBack" onclick="$('#pre_rank_info_diao').toggle(200);">【略屌】<span id="pre_rank_info_diao_nums"></span></div>
+          					<div id="pre_rank_info_diao" style="display:none;"> </div>
+          				</div>
+          			</div>
+				</div>
+          	</div>
+          </div>
+       </div>
+     
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+<script src="http://echarts.baidu.com/build/echarts-plain.js"></script>
+<script>
+(function(){
+	var shen = {:json_encode($shen)},
+		jin = {:json_encode($jin)},
+		diao = {:json_encode($diao)},
+		po_shen = {:json_encode($po_shen)},
+		po_jin = {:json_encode($po_jin)},
+		po_diao = {:json_encode($po_diao)};
+	var all_movies = {:json_encode($movie)};
+	var last_record = {:json_encode($last)};
+	var total_movie_nums = {$vo.tm};
+	shen[0] = {};
+	jin[0] = {};
+	diao[0] = {};
+	po_shen[0] = {};
+	po_jin[0] = {};
+	po_diao[0] = {};
+	var choose_shen = {}, choose_jin ={}, choose_diao = {}, choose_po_shen = {}, choose_po_jin ={}, choose_po_diao = {};
+	
+	var show = function(movies, type){ 
+		eval ('choose_'+type+'={};');
+		//choose_shen = {}, choose_jin ={}, choose_diao = {}, choose_po_shen = {}, choose_po_jin ={}, choose_po_diao = {};
+		for (var id in movies) {
+			eval ('choose_'+type+'[id] = movies[id];');
+		}
+		var movies_shen = clone(choose_shen);
+		for (var id in choose_po_shen) {
+			if (typeof movies_shen[id] == 'undefined') {
+				movies_shen[id] = choose_po_shen[id];
+			}
+		}
+		
+		var movies_jin = clone(choose_jin);
+		for (var id in choose_po_jin) {
+			if (typeof movies_jin[id] == 'undefined') {
+				movies_jin[id] = choose_po_jin[id];
+			}
+		}
+		
+		var movies_diao = clone(choose_diao);
+		for (var id in choose_po_diao) {
+			if (typeof movies_diao[id] == 'undefined') {
+				movies_diao[id] = choose_po_diao[id];
+			}
+		}
+		
+		var total_shen = parseInt(last_record.total_rank_a);
+		var total_jin = parseInt(last_record.total_rank_b);
+		var total_diao = parseInt(last_record.total_rank_c);
+		
+		var html = ' <table cellpadding="0" cellspacing="0" width="100%" style="border:1px solid #ccc;" class="tDefault checkAll tMedia" id="resize">';
+		var i = 0;
+		for (var id in movies_shen) {
+			i++;
+			var rank_type = is_rank(id);
+			if (rank_type == 3) {
+				total_shen --;
+			}else if (rank_type == 2) {
+				total_jin --;
+			}else if (rank_type == 1) {
+				total_diao --;
+			}
+			html += '<tr>'
+				 + '<td>' + id + '</td>' 
+				 + '<td>' + all_movies[id] + '</td>'
+				 + '<td>' + movies_shen[id].l + '</td>'
+				 + '<td>' + movies_shen[id].p + '</td>'
+				 + '</tr>';
+		}
+		html += '</html>';
+		total_shen += i;
+		$('#pre_rank_info_shen').html(html);
+		$('#pre_rank_info_shen_nums').html(i+' 部');
+		$('#movie_rank_Info_total_shen').html(total_shen + ' 部');
+		
+		var html = ' <table cellpadding="0" cellspacing="0" width="100%" style="border:1px solid #ccc;" class="tDefault checkAll tMedia" id="resize">';
+		var i = 0; // 震精部数
+		var j = 0; // 是否在之前评级影片中的数量，用于总计评级时去重
+		for (var id in movies_jin) {
+			if (typeof movies_shen[id] != 'undefined') continue; // 如果在神作里，则继续
+			i++;
+			var rank_type = is_rank(id);
+			if (rank_type == 3) {
+				total_shen --;
+			}else if (rank_type == 2) {
+				total_jin --;
+			}else if (rank_type == 1) {
+				total_diao --;
+			}
+			html += '<tr>'
+				 + '<td>' + id + '</td>' 
+				 + '<td>' + all_movies[id] + '</td>'
+				 + '<td>' + movies_jin[id].l + '</td>'
+				 + '<td>' + movies_jin[id].p + '</td>'
+				 + '</tr>';
+		}
+		html += '</html>';
+		total_jin += i;
+		$('#pre_rank_info_jin').html(html);
+		$('#pre_rank_info_jin_nums').html(i + ' 部');
+		$('#movie_rank_Info_total_jin').html(total_jin + ' 部');
+		
+		var html = ' <table cellpadding="0" cellspacing="0" width="100%" style="border:1px solid #ccc;" class="tDefault checkAll tMedia" id="resize">';
+		var i = 0;
+		for (var id in movies_diao) {
+			if (typeof movies_shen[id] != 'undefined' || typeof movies_jin[id] != 'undefined') continue; // 如果在神作，或者震精里，则继续
+			i++;
+			var rank_type = is_rank(id);
+			if (rank_type == 3) {
+				total_shen --;
+			}else if (rank_type == 2) {
+				total_jin --;
+			}else if (rank_type == 1) {
+				total_diao --;
+			}
+			html += '<tr>'
+				 + '<td>' + id + '</td>' 
+				 + '<td>' + all_movies[id] + '</td>'
+				 + '<td>' + movies_diao[id].l + '</td>'
+				 + '<td>' + movies_diao[id].p + '</td>'
+				 + '</tr>';
+		}
+		html += '</html>';
+		total_diao += i;
+		$('#pre_rank_info_diao').html(html);
+		$('#pre_rank_info_diao_nums').html(i + ' 部');
+		$('#movie_rank_Info_total_diao').html(total_diao + ' 部');
+		
+		
+		var pay = total_shen * 100 + total_jin * 50 + total_diao * 25;
+		var movie_pay = pay / total_movie_nums;
+		$('#movie_rank_Info_money').html('￥' + movie_pay.toFixed(2));
+		$('#movie_rank_Info_percent_shen').html((total_shen * 100 / total_movie_nums).toFixed(2) + '%');
+		$('#movie_rank_Info_percent_jin').html((total_jin * 100 / total_movie_nums).toFixed(2) + '%');
+		$('#movie_rank_Info_percent_diao').html((total_diao * 100 / total_movie_nums).toFixed(2) + '%');
+		
+		
+		option = {
+			    title : {
+			        text: '',
+			        subtext: '',
+			        x:'center'
+			    },
+			    tooltip : {
+			        trigger: 'item',
+			        formatter: "{a} <br/>{b} : {c} ({d}%)"
+			    },
+			    legend: {
+			        orient : 'vertical',
+			        x : 'left',
+			        data:['神作','震精','略屌','其他']
+			    },
+			    toolbox: {
+			        show : true,
+			        feature : {
+			            dataView : {show: true, readOnly: false},
+			            saveAsImage : {show: true}
+			        }
+			    },
+			    calculable : true,
+			    series : [
+			        {
+			            name:'电影部数',
+			            type:'pie',
+			            radius : '70%',
+			            center: ['50%', 110],
+			            data:[
+			                {value: total_shen, name:'神作'},
+			                {value: total_jin, name:'震精'},
+			                {value: total_diao, name:'略屌'},
+			                {value: total_movie_nums - total_shen - total_jin - total_diao, name:'其他'},
+			            ]
+			        }
+			    ]
+			};
+		var myChart = echarts.init(document.getElementById('bingtu')); 
+			// 为echarts对象加载数据 
+		myChart.setOption(option); 
+	
+		/*
+		console.log('shen',count(movies_shen));
+		console.log('diao',count(movies_diao));
+		console.log('jin',count(movies_jin));
+		*/
+	};
+	
+	/**
+	判断是否已经在评级列表中
+	*/
+	var is_rank = function (m_id) {
+		var rank_m = {:json_encode($rank_m)};
+		var shen = rank_m[3];
+		for (var a in shen) {
+			if (parseInt(shen[a].id) == m_id) {return 3;}
+		}
+		var jin = rank_m[2];
+		for (var a in jin) {
+			if (parseInt(jin[a].id) == m_id) {return 2;}
+		}
+		var diao = rank_m[1];
+		for (var a in diao) {
+			if (parseInt(diao[a].id) == m_id) {return 1;}
+		}
+		return 0;
+	};
+	
+	var clone = function(obj){
+		var rst = {};
+		for (var key in obj) {
+			if (typeof obj[key] == 'Object') {
+				rst[key] = clone(obj[key]);
+			} else {
+				rst[key] = obj[key];
+			}
+		}
+		return rst;
+	}
+	
+	
+	
+	var count = function(obj){
+		var i = 0;
+		for (a in obj) {
+			i++
+		}
+		return i;
+	};
+	$('.choose_canshu').change(function(){
+		var tmp = $(this).val().split(',');
+		var type = tmp[0];
+		var key = tmp[1];
+		eval('show(' + type + '[' + key + '].movie_json,type);');
+		
+	});
+	
+	$('#movie_rank_info_submit').click(function(){
+		return confirm('确定发布咩？发布后，就不能回滚了哦。');
+	});
+	
+	$('.choose_canshu').each(function(){  // 默认所有不评级。
+		var tmp = $(this).val().split(',');
+		if (parseInt(tmp[1]) == 0) {
+			$(this).attr('checked','checked');
+		} else {
+			$(this).attr('checked', false);
+		}
+	});
+	//$('.choose_canshu').attr('checked',false); // 某些浏览器会记住，刷新后，还是会有，所以，这里强制清空
+})();
+
+
+</script>
+
+<include file="Public:footer" />

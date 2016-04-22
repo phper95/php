@@ -1,0 +1,82 @@
+<!-- Secondary nav -->
+    <div class="secNav">
+        <div class="secWrapper">
+        	<div class="secTop">
+                <div class="balance">
+                    <div class="balInfo">查询条件<span>------</span></div>
+                </div>
+            </div>
+            
+        	<!-- Tabs container -->
+            <div id="tab-container" class="tab-container">
+                <ul class="iconsLine ic2 etabs">
+                    <li><a href="#comment_search_adv_alt" title="">广告<span class="icos-user"></span></a></li>
+                    <li><a href="#comment_search_movie_alt" id="comment_search_movie_alt_a" title="">电影<span class="icos-archive"></span></a></li>
+                </ul>
+                <div id="comment_search_adv_alt">
+                    <form method="get" action="{:U('comment/advList')}" id="comment_adv_search_form">
+		            	<input type="hidden" value="{$Think.MODULE_NAME}" name="m"/>
+		            	<input type="hidden" value="advList" name="a"/>
+			            <div id="tab-container" class="tab-container">
+			                <div class="divider"><span></span></div>
+			                    <div class="sideWidget">
+			                        <div class="formRow">
+			                            <label>时间段查询:</label>
+			                            <input type="text" name="s_time" id="comment_adv_search_s_time" placeholder="开始时间"  onClick="WdatePicker()" value="{$Think.get.s_time}"/>
+			                            <input id="d12" name="e_time" type="text" onClick="WdatePicker()" placeholder="结束时间" value="{$Think.get.e_time}"/>
+									</div>
+			                        <div class="formRow">
+			                            <input type="submit" class="buttonS bLightBlue" value="Just 搜索" />
+			                        </div>
+			                    </div>
+			            </div>
+		            </form>
+                </div>
+                
+                <div id="comment_search_movie_alt">
+                    <form method="get" action="{:U('comment/movieList')}" id="comment_movie_search_form">
+		            	<input type="hidden" value="{$Think.MODULE_NAME}" name="m"/>
+		            	<input type="hidden" value="movieList" name="a"/>
+			            <div id="tab-container" class="tab-container">
+			                <div class="divider"><span></span></div>
+			                    <div class="sideWidget">
+			                        <div class="formRow">
+			                            <label>时间段查询:</label>
+			                            <input type="text" name="s_time" id="comment_movie_search_s_time" placeholder="开始时间"  onClick="WdatePicker()" value="{$Think.get.s_time}"/>
+			                            <input id="d12" name="e_time" type="text" onClick="WdatePicker()" placeholder="结束时间" value="{$Think.get.e_time}"/>
+									</div>
+			                        <div class="formRow">
+			                            <input type="submit" class="buttonS bLightBlue" value="Just 搜索" />
+			                        </div>
+			                    </div>
+			            </div>
+		            </form>
+                </div>
+            </div>
+            
+            <div class="divider"><span></span></div>
+            
+            
+       </div> 
+       <div class="clear"></div>
+   </div>
+   
+<script>
+(function(){
+	setTimeout(function(){
+		searchInitValue ({
+			'comment_adv_search_s_time' : "{:toDate(strtotime('-1 day'), 'Y-m-d')}",
+			'comment_movie_search_s_time' : "{:toDate(strtotime('-1 day'), 'Y-m-d')}"
+		});
+	},150);
+})();
+</script>
+<eq name="ACTION_NAME" value="movieList">
+<script>
+(function(){
+	setTimeout(function(){
+		$('#comment_search_movie_alt_a').click();
+	},200);
+})();
+</script>
+</eq>

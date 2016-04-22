@@ -1,0 +1,202 @@
+<include file="Public:header" />
+
+<script language="javascript" type="text/javascript" src="__JS__/My97DatePicker/WdatePicker.js"></script>
+<script src="__JS__/dialog/artDialog.js?skin=default"></script>
+<script src="__JS__/zxxFile.js"></script>
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<!-- Secondary nav -->
+    <div class="secNav">
+        <div class="secWrapper">
+            <include file="HomeOnline:opt" />
+       </div> 
+       <div class="clear"></div>
+   </div>
+</div>
+<!-- Sidebar ends -->
+<!-- Content begins -->
+<div id="content">
+    <include file="Public:bav" />
+    <!-- Main content -->
+    
+    <div class="wrapper">
+        <!-- Media table sample -->
+        <div class="widget check">
+            <div class="whead">
+            	<h6>首页【配置】上线配置列表</h6>
+            	<a href="javascript:void(0);" id="add_tuijian" class="buttonH bBlue">添加</a>
+            	<div class="clear"></div>
+            </div>
+            <table cellpadding="0" cellspacing="0" width="100%" class="tDefault checkAll tMedia" id="checkAll">
+                <thead>
+                    <tr>
+                        <td width="10">ID</td>
+                        <td>信息</td>
+                        <td width="50">类型</td>
+                        <td width="250">（小米渠道）上线时间</td>
+                        <td width="200">添加时间</td>
+                        <td width="80">操作</td>
+                        
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td colspan="7">
+                        	<empty name="list">
+                        		木油满足您强烈需求的配置，您可以添加一部咩？
+                        	<else />
+                            <div class="tPages">
+                                <ul class="pages">
+                                    {$page}
+                                </ul>
+                            </div>
+                            </empty>
+                        </td>
+                    </tr>
+                </tfoot>
+                <tbody>
+                	<volist name="list" id="vo">
+		            <tr>
+		                <td>{$vo.id}</td>
+		                <td>
+		                	{$vo.data.name}   (ID:{$vo.t_id})
+		                </td>
+		                <td>{$type[$vo['t_type']]}</td>
+		                <td><empty name="vo.online_time"><span class="redBack">未上线</span><else /><span class="greenBack">{$vo.online_time}</span></empty></td>
+		                <td>{$vo.add_time}</td>
+		                <td>
+		                	<a href="{:U('HomeOnline/onlineTuijian', array('id'=>$vo['id'],'mname'=>$vo['t_id'],'type'=>$vo['t_type']))}">上/下线</a>
+		                </td>
+		            </tr>
+		            </volist>
+                </tbody>
+            </table>
+            <div id="xxsdf" style="display:none;min-width:600px;" class="fluid">sdfsdf</div>
+        </div>
+    </div>
+    <!-- Main content ends -->
+</div>
+<!-- Content ends -->
+
+<div id="dialog_tuijian_content" style="display:none; width:700px;" class="fluid">
+	<div class="widget nopadding nomargin">
+		<form method='post' id="post_form" name="form1" action="{:U('HomeOnline/doAddTuijian')}"  enctype="multipart/form-data">
+		<div class="formRow">
+			<div class="grid3"><label>类型：<span class="req">*</span> </label></div>
+			<div class="grid6">
+				<label style="float:left;width:80px;"><input type="radio" checked="checked" value="movie" class="js-radio-tuijian-type" name="tuijian_type" />图解</label>
+				<label style="float:left;width:80px;"><input type="radio" name="tuijian_type" value="paper" class="js-radio-tuijian-type" />画报</label>
+				<label><input type="radio" name="tuijian_type" class="js-radio-tuijian-type" value="wei"/>微图解</label>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="formRow">
+			<div class="grid3"><label>ID：<span class="req">*</span> </label></div>
+			<div class="grid3"><input type="text" name="t_id" id="t_id" placeholder="ID"/></div>
+			<div class="grid3"><label><a id="js_get_tuijian_info">获取</a></label></div>
+			<div class="clear"></div>
+		</div>
+		<div class="formRow">
+			<div class="grid3"><label>封面图片</label></div>
+			<div class="grid9">
+				<img id="tuijian_image_url" src='' width="320" height="230"/>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="formRow">
+			<div class="grid3"><label>标题</label></div>
+			<div class="grid9"><input type="text" id="tuijian_title" readonly="readonly" placeholder="影片标题"/></div>
+			<div class="clear"></div>
+		</div>
+		<div class="formRow">
+			<div class="grid3"><label>副标题</label></div>
+			<div class="grid9"><input type="text" id="tuijian_sub_title" readonly="readonly" placeholder="影片副标题"/></div>
+			<div class="clear"></div>
+		</div>
+		<input type="hidden" id="isset_id" value=""/>
+		</form>
+	</div>
+</div>
+
+<script type="text/javascript">
+(function(){
+	$('#add_tuijian').click(function(){
+		$('#isset_id').val('0');
+		art.dialog({
+			title:'添加推荐',
+			content:$('#dialog_tuijian_content')[0],
+			padding:0,
+			ok : function(){
+				if ($('#isset_id').val() == '0') {
+					alert("请输入ID后，点击“获取”后，再提交。");return false;
+				}
+				$('#post_form').submit();
+			},cancel:true
+		});
+	});
+	$('.js-radio-tuijian-type').click(function(){
+		$('#isset_id').val('0');
+	});
+	/*	
+	*  获取图解信息 
+	*/
+	$('#js_get_tuijian_info').click(function(){
+		var type = '';
+		$('.js-radio-tuijian-type').each(function(){
+			if ($(this).attr('checked') == 'checked') {
+				type = $(this).val();
+			}
+		});
+		if (type == '') {alert('请选择类型');return;}
+		var did = $.trim($('#t_id').val());
+		if (did == '') {alert('要输入ID哟');return;}
+		try {
+			did = parseInt(did);
+		}catch (ex) {
+			alert('要输入数字啊啊啊啊啊啊，半角的数字啊啊啊啊啊啊啊啊啊');return;
+		}
+		var data = {id:did,type:type}
+		$.ajax({
+			url : '{:U("HomeOnline/getOneInfo")}',
+			type : 'POST',
+			data : data,
+			success: function(data){
+				try {
+					if (data.rst == 1) {
+						$('#isset_id').val('1');
+						var rst = data.data;
+						if (type == 'movie') {
+							$('#tuijian_image_url').attr('src',rst.bpic);
+							$('#tuijian_sub_title').val(rst.sub_title);
+							$('#tuijian_title').val(rst.name);
+						} else if (type == 'paper') {
+							$('#tuijian_image_url').attr('src',rst.bpic);
+							$('#tuijian_sub_title').val(rst.sub_title);
+							$('#tuijian_title').val(rst.name);
+						} else if (type == 'wei') {
+							$('#tuijian_image_url').attr('src',rst.pic);
+							$('#tuijian_sub_title').val(rst.intro);
+							$('#tuijian_title').val(rst.title);
+						}
+					} else {
+						alert(data.msg);
+					}
+				}catch (ex) {
+					alert(data);
+				}
+			},
+			error : function(ex){
+				alert('ajax 错误');
+			}
+		});
+	});
+})();
+</script>
+
+
+<include file="Public:footer" />
+
+
+			
+			

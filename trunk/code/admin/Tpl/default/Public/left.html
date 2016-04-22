@@ -1,0 +1,29 @@
+
+    <div class="mainNav">
+        <div class="user">
+            <a title="" class="leftUserDrop"><img width="70" height="70" src="__UPLOAD__/{$Think.session.headerImg}" alt="" /><span><strong>×</strong></span></a>
+            	<span>{$Think.session.loginUserName}</span>
+            <ul class="leftUser">
+                <!--<li><a href="#" title="" class="sProfile">我的账户</a></li>-->
+                <li><a href="{:U('Index/index')}" title="" class="sMessages">首页君</a></li>
+                <li><a href="{:U('Me/setInfo')}" title="" class="sSettings">个人设置</a></li>
+                <li><a href="{:U('Public/logout')}" title="" class="sLogout">登出</a></li>
+            </ul>
+        </div>
+        
+        <!-- Main nav -->
+        <ul class="nav">
+            <volist name="menu" id="menu_item">
+            <li>
+            	<if condition="($menu_item['module'] eq MODULE_NAME)"> 
+            		<a href="{$menu_item.url}" title="" class="active">
+            	<else />
+            		<a href="{$menu_item.url}" title="" >
+            	</if>
+                	<img src="__PUBLIC__{$menu_item.icon}" alt="" />
+                	<span>{$menu_item.title}</span>
+                </a>
+            </li>
+            </volist>
+        </ul>
+    </div>

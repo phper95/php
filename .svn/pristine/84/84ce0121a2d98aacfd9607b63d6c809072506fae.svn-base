@@ -1,0 +1,25 @@
+<!-- Secondary nav -->
+    <div class="secNav">
+        <div class="secWrapper">
+            <!-- Tabs container -->
+            <div id="tab-container" class="tab-container">
+                
+                <div class="divider"><span></span></div>
+				<ul class="iconsLine ic1 etabs">
+                    <li><a href="#alt2" title="">数据统计:</a></li>
+                </ul>                
+                <div class="divider"><span></span></div>
+                <div id="alt2">
+                <div id="general">
+                    <ul class="subNav">
+                        <li><a href="{:U('Statistic/movie')}" title="统计影片信息" <eq name="ACTION_NAME" value="movie">class="this"</eq> ><span class="icos-frames"></span>影片统计</a></li>
+                        <li><a href="{:U('Statistic/totalStat')}" title="接口访问统计" <eq name="ACTION_NAME" value="totalStat">class="this"</eq> ><span class="icos-frames"></span>接口访问统计</a></li>
+                        <li><a href="{:U('Statistic/activeMember')}" title="活跃用户统计" <eq name="ACTION_NAME" value="activeMember">class="this"</eq> ><span class="icos-frames"></span>活跃用户统计</a></li>
+                        <li><a href="{:U('Statistic/movieList')}" title="电影列表习惯统计" <eq name="ACTION_NAME" value="movieList">class="this"</eq> ><span class="icos-frames"></span>电影列表习惯统计</a></li>
+                    </ul>
+                </div>
+                </div>
+            </div>
+       </div> 
+       <div class="clear"></div>
+   </div>

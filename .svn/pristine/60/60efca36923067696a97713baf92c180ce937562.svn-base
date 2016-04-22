@@ -1,0 +1,183 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<include file="Statistic:opt" />
+</div>
+<!-- Sidebar ends -->
+    
+<!-- Content begins -->
+<div id="content">
+	<div class="contentTop">
+        <span class="pageTitle">影片播放情况统计</span>
+        <div class="clear"></div>
+    </div>
+    <!-- Breadcrumbs line -->
+    <include file="Public:bav" />
+    
+    <!-- Main content -->
+    <div class="wrapper">
+    	<div class="widget">
+    		<div class="whead fluid">
+    			<h6>查询</h6>
+				<div class="clear"></div>
+    		</div>
+    		<script language="javascript" type="text/javascript" src="__JS__/My97DatePicker/WdatePicker.js"></script>
+    		<form method='post' id="form1" name="form1" action="{:U('Statistic/pvcMoviePlayed')}"  enctype="multipart/form-data">
+    		<div class="formRow">
+            	<div style="float:left;"><label>日期：</label></div>
+                <div style="float:left;width:120px;">
+                     <span class="grid12"><input type="text" onClick="WdatePicker()" name="day" value="{$Think.post.day|default=''}"></span>
+                </div>
+                <div style="float:left;"><label>&nbsp;&nbsp;平台：</label></div>
+                <div style="float:left;width:120px;">
+                     <span class="grid12">
+                     	<select name="platform">
+                     		<option value="" selected="selected"">-全部-</option>
+                     		<volist name="p_list" id="p">
+                     			<if condition="isset($_POST['platform']) and $_POST['platform'] == $p">
+                     				<option value="{$p}" selected="selected">{$p}</option>
+                     			<else />
+                     				<option value="{$p}">{$p}</option>
+                     			</if>
+                     		</volist>
+                     	</select>
+                     </span>
+                </div>
+                <div style="float:left;"><label>&nbsp;&nbsp;渠道：</label></div>
+                <div style="float:left;width:120px;">
+                     <span class="grid12">
+                     	<select name="channel">
+                     		<option value="" selected="selected"">-全部-</option>
+                     		<volist name="c_list" id="c">
+                     			<if condition="isset($_POST['channel']) and $_POST['channel'] == $c">
+                     				<option value="{$c}" selected="selected">{$c}</option>
+                     			<else />
+                     				<option value="{$c}">{$c}</option>
+                     			</if>
+                     		</volist>
+                     	</select>
+                     </span>
+                </div>
+                <div style="float:left;"><label>&nbsp;&nbsp;版本：</label></div>
+                <div style="float:left;width:120px;">
+                     <span class="grid12">
+                     	<select name="ver">
+                     		<option value="" selected="selected"">-全部-</option>
+                     		<volist name="v_list" id="v">
+                     			<if condition="isset($_POST['ver']) and $_POST['ver'] == $v">
+                     				<option value="{$v}" selected="selected">{$v}</option>
+                     			<else />
+                     				<option value="{$v}">{$v}</option>
+                     			</if>
+                     		</volist>
+                     	</select>
+                     </span>
+                </div>
+                <!--<div style="float:left;padding:0px 5px;"><label>&nbsp;到</label></div>
+                <div style="float:left;width:120px;">
+                     <span class="grid12"><input type="text" onClick="WdatePicker()" name="e_day" value="{$Think.post.e_day|default=''}"></span>
+                </div>
+                --><input type="submit" value="提 交" class="buttonM bBlack formSubmit" /><div class="clear"></div>
+                <div class="clear"></div>
+            </div>
+            </form>
+    	</div>
+    	<empty name="error_info">
+    	<div class="widget fluid">
+    		<div class="whead fluid">
+    			<h6 id="statistic_movie_play_table_head">结果 </h6>
+				<div class="clear"></div>
+    		</div>
+    		<table cellpadding="0" cellspacing="0" width="100%" class="tDefault" id="resize" style="max-height:100px;">
+                <thead>
+                    <tr>
+                    	<td width="40" class="sortCol">ID<span></span></td>
+		                <td >影片</td>
+		                <td width="40" class="sortCol">共计<span></span></td>
+		                <for start="0" end="24">
+							<td width="40" class="sortCol">{$i}<span></span></td>
+						</for>
+                    </tr>
+                </thead>
+                <tfoot>
+                	<tr>
+                		<td colspan="27"><a id="statistic_movie_play_more">加载更多？</a></td>
+                	</tr>
+                </tfoot>
+                <tbody id="statistic_movie_play_list">
+                </tbody>
+            </table>
+    	</div> 
+    	<else />
+	    	<div class="widget">
+	    	<div class="body">{$error_info}</div>
+	    	</div> 
+    	</empty>
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<empty name="error_info">
+<script>
+(function(){
+	var rst = {:json_encode($rst)};
+	var movies = {:json_encode($movies)};
+	var $obj = $('#statistic_movie_play_list');
+	var total_count =  count = {:count($rst)};
+	var max_p = {$max_p};
+	var max_t_p = {$max_t_p};
+	var url = "{:U('Statistic/poptxt')}&day={$Think.post.day}";
+	
+	var keys = [];
+	for(var key in rst){
+	    keys.push(key);
+	}
+	keys = keys.sort(function(a,b){return parseInt(a)-parseInt(b);});
+	
+	var num = 100;
+	//var color = ['','#ff6666','#e55c5c','#cc5252','#b34747','#993d3d','#803333','#662929','#4d1f1f','#331414','#1a0a0a'];
+	var color = ['','#f7ffd5','#efffae','#d4ee68','#b9da31','#d3e014','#ffd200','#ffb400','#ff9000','#ff6000','#ff0000'];
+	
+	function show(){
+		var mimica = num; // 每次的条数
+		var html = '';
+		var len = color.length-1;
+		var k_len = keys.length;
+		var id = keys.pop();
+		
+		while(typeof id != 'undefined') {
+			mimica --;
+			if (mimica<0) {
+				//setTimeout(show,500);
+				break;
+			}
+			var c_t = Math.ceil(parseInt(rst[id].t_p) * 10 / max_t_p);
+			html = html + '<tr>'
+					 + '<td><a target="_blank" href="' + url + '&id=' + id + '&name=' + movies[id] + '">' + id + '</a></td>'
+					 + '<td><a target="_blank" href="' + url + '&id=' + id + '&name=' + movies[id] + '">' + movies[id] + '</a></td>'
+					 + '<td style="' + (color[c_t]==''?'':('background-color:'+color[c_t])) + '">' + rst[id].t_p + '</td>';
+			for (var i=0; i<24; i++) {
+				var td_num = (typeof rst[id][i] != 'undefined' ? rst[id][i].play : 0);
+				var back_color = td_num == 0 ? 0 : Math.ceil(parseInt(td_num) * 10 / max_p);
+				back_color  = back_color > len  ? len : back_color;
+				var style = 'style="'+(color[back_color] == ''? '': ('background-color:'+color[back_color]))+'"';
+				html = html + '<td '+style+'>' + td_num + '</td>';
+			}
+				html += '</tr>'
+			delete(rst[id]);
+			id = keys.pop();
+		}
+		$obj.append(html);
+		count -= (num-mimica);
+		$('#statistic_movie_play_table_head').html('结果，共（'+total_count+'）--(还有'+count+'条未展示)');
+		$('#statistic_movie_play_more').html('再加载'+Math.min(count,num)+'条？');
+	}
+	$('#statistic_movie_play_more').click(function(){
+		show();
+	});
+	show();
+})();
+</script>
+</empty>
+<include file="Public:footer" />

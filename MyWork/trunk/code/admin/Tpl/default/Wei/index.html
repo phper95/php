@@ -1,0 +1,313 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<script src="__JS__/dialog/artDialog.js?skin=default"></script>
+
+<script language="javascript" type="text/javascript" src="__JS__/My97DatePicker/WdatePicker.js"></script>
+
+<div id="sidebar">
+	<include file="Public:left" />
+	<!-- Secondary nav -->
+    <div class="secNav">
+        <div class="secWrapper">
+            <!-- Tabs container -->
+            <form method="get" action="{:U('Wei/index')}">
+            <input type="hidden" value="{$Think.MODULE_NAME}" name="m"/>
+            <input type="hidden" value="{$Think.ACTION_NAME}" name="a"/>
+            <div id="tab-container" class="tab-container">
+				<ul class="iconsLine ic1 etabs">
+                    <li><a href="#alt2" title="">微图解搜索:</a></li>
+                </ul>
+                <div class="divider"><span></span></div>
+                <div id="alt2">
+                	<!-- Sidebar forms -->
+                    <div class="sideWidget">
+                        <div class="formRow">
+                            <label>微图解ID:</label>
+                            <input type="text" name="id" value="{$Think.get.id}" placeholder="微图解ID" />
+                        </div>
+                        <div class="formRow">
+                           <label>微图解标题:</label>
+                            <input type="text" name="title" value="{$Think.get.title}" placeholder="微图解标题" /> 
+                        </div>
+                        <div class="formRow">
+                           <label>微图解频道:</label>
+                            <select name="channel_id">
+                           		<option value="" selected="selected">-全部-</option>
+                           		<volist name="channel" id="c">
+                           		<option value="{$c.id}" <if condition="$Think.get.channel_id eq $c['id']">selected="selected"</if> > {$c.title}</option>
+                           		</volist>
+                           </select> 
+                        </div>
+                        <div class="formRow">
+                           <label>微图解用户ID:</label>
+                            <input type="text" name="user_id" value="{$Think.get.user_id}" placeholder="微图解用户ID" /> 
+                        </div>
+                        <div class="formRow">
+                           <label>上线状态:</label>
+                           <select name="open">
+                           		<option value="" selected="selected">-全部-</option>
+                           		<option value="1" <eq name="Think.get.open" value="1">selected="selected"</eq>>上线</option>
+                           		<option value="0" <eq name="Think.get.open" value="0">selected="selected"</eq>>下线</option>
+                           </select> 
+                        </div>
+                        <div class="formRow">
+                            <input type="submit" class="buttonS bLightBlue" value="搜索微图解" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"><span></span></div>
+            </form>
+            <include file="Wei:opt" />
+       </div> 
+       <div class="clear"></div>
+   </div>
+</div>
+<!-- Sidebar ends -->
+    
+<!-- Content begins -->
+<div id="content">
+    <div class="contentTop">
+        <span class="pageTitle">微图解管理</span>
+       	<div class="clear"></div>
+    </div>
+    
+    <include file="Public:bav" />
+    
+    <!-- Main content -->
+    <div class="wrapper">
+        <!-- Media table sample -->
+        <div class="widget check">
+            <div class="whead">
+            	<h6>微图解列表</h6>
+            		<a href="{:U('Wei/tuijianList')}" target="_blank" class="buttonH bBlue mb10 mt5">查看推荐列表</a>
+            		<a href="{:U('Wei/addByAdmin')}" class="buttonH bBlue mb10 mt5">添加</a>
+            		<notempty name="Think.get.backurl">
+                   		<a href="{$Think.get.backurl}" class="buttonH bBlue mb10 mt5">返回</a>
+                 	</notempty >
+            	<div class="clear"></div>
+            </div>
+            <table cellpadding="0" cellspacing="0" width="100%" class="tDefault checkAll tMedia" id="checkAll">
+                <thead>
+                    <tr>
+                        <td width="10">ID</td>
+                        <td width="100">作者</td>
+                        <td width="50">图片</td>
+                        <td>微图解</td>
+                        <td width="80">频道</td>
+                        <td width="30">状态</td>
+                        <td width="80">操作</td>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td colspan="7">
+                        	<empty name="list">
+                        		木油满足您强烈需求的微图解了。。
+                        	<else />
+                            <div class="tPages">
+                                <ul class="pages">
+                                    {$page}
+                                </ul>
+                            </div>
+                            </empty>
+                        </td>
+                    </tr>
+                </tfoot>
+                <tbody>
+                	<volist name="list" id="vo">
+		            <tr>
+		                <td>{$vo.id}</td>
+		                <td>
+		                	<a href="{:U('Member/index',array('id'=>$vo['user_id'],'backurl'=>urlencode(__SELF__)))}"><img src="{$vo.avatar}" width="50px" style="border-radius:70px;border:2px solid #fefefe;" /></a><br />{$vo.user_name}
+		                </td>
+		                <td>
+		                	<a href="{:U('Active/uploadImg',array('id'=>$vo['id']))}">
+		                		<empty name="vo.pic" >
+		                			<img src="__PUBLIC__/images/quetu.jpg" height="70px;" />
+		                		<else />
+		                			<img src="{:getImageUrl($vo['pic'])}" height="70px;" />
+		                		</empty>
+		                	</a>
+		                </td>
+		                <td style="vertical-align: top;">
+		                	<div style="text-align:left;">
+		                		<div style="font-weight:700;font-size:20px;float:left;padding-right:30px;">
+		                			<empty name="vo.tuijian_time"><else /><span style="font-size:0.6em;" class="redBack" title="last Time：{$vo.tuijian_time}">荐</span>&nbsp;</empty>
+		                			{$vo.title}
+		                		</div>
+		                		<a class="save_image" href="http://ser3.graphmovie.com/gmspanel/controlboard/sharebigerimg/wei_creat.php?weiid={$vo.id}" target="_blank"><span class="icos-download"></span></a>
+		                		<div class="clear"></div>
+		                		<br />
+								<div>添加时间：{$vo.add_time}</div>
+								<div>{$vo.tags}</div>  
+								<div>
+									[ <a target="_blank" href="http://ser3.graphmovie.com/gmspanel/controlboard/server/px7_see_wei.php?weiid={$vo.id}">{$vo.played} ]</a> 
+									<a href="{:U('Wei/index',array('_order'=>'played'))}" class="tipS" original-title="点击按播放数排序">播</a> 
+									- [ {$vo.ding} ] <a href="{:U('Wei/index',array('_order'=>'ding'))}" class="tipS" original-title="点击按顶数排序">顶 </a>
+									- [ {$vo.share} ] <a href="{:U('Wei/index',array('_order'=>'share'))}" class="tipS" original-title="点击按分享数排序">分享</a> 
+								</div>
+								<div>
+									[ {$vo.comment_count} ] 
+									<a href="{:U('Wei/index',array('_order'=>'comment_count'))}" class="tipS" original-title="点击按评论数排序">评 -</a> 
+									[ {$vo.poptxt_count} ] 
+									<a href="{:U('Wei/index',array('_order'=>'poptxt_count'))}" class="tipS" original-title="点击按弹幕数排序">弹</a>
+								</div>
+		                	</div>
+		                </td>
+		                <td><empty name="vo.channel"><a data-id="{$vo.id}" class="bind-channel redBack">未绑定</a><else/><a data-id="{$vo.id}" class="bind-channel">{$vo.channel}</a></empty></td>
+		                <td>
+		                	<eq name="vo.open" value="1"><span class="greenBack">OK</span> <else /><span class="redBack">NO</span></eq>
+		                </td>
+		                <td>
+		                	<!-- Simple buttons with caret -->
+	                        <div class="btn-group" style="float: left;">
+	                            <a href="#" class="buttonM bDefault opt" data-toggle="dropdown">点我 <span class="caret"></span></a>
+	                            <ul class="dropdown-menu pull-right">
+	                            	<li><a data-href="{:U('Wei/doTuijian',array('id'=>$vo['id']))}" href="javascript:void(0);" class="js_tuijian"><i class="fa fa-thumbs-up"></i>&nbsp;推荐进列表</a></li>
+	                            	<li><a href="{:U('Wei/editByAdmin',array('id'=>$vo['id']))}"><i class="fa fa-edit"></i>&nbsp;修改</a></li>
+	                                <li><a href="{:U('Wei/volListAdmin',array('id'=>$vo['id'],'backurl'=>urlencode(__SELF__)))}"><i class="fa fa-video-camera"></i>&nbsp;编辑解说</a></li>
+	                                <eq name="vo.open" value="1">
+	                                	<li><a href="{:U('Wei/closeWei',array('id'=>$vo['id']))}" onclick="return confirm('确认关闭么？');"><i class="fa fa-close"></i>&nbsp;关闭</a></li>
+	                                	<li><a href="javascript:void(0);" data-id="{$vo.id}" data-time="{$vo.add_time}" class="js-add-tuijian"><i class="fa fa-bullhorn"></i> &nbsp;推荐至首页</a></li>
+	                                <else />
+	                                	<li><a href="{:U('Wei/openWei',array('id'=>$vo['id']))}" onclick="return confirm('确认开启么？');"><span class="fa fa-check"></span>&nbsp;开启</a></li>
+	                                </eq>
+	                            </ul>
+	                        </div>
+		                </td>
+		            </tr>
+		            </volist>
+                </tbody>
+            </table>
+           <div id="bind_channel_panel" style="display:none;width:300px;line-height:24px;" class="fluid">
+            		<div class="fluid">
+            			<div class="widget nomargin">
+	                        <div class="formRow">
+	                            <div class="grid4"><label>频道: </label></div>
+	                            <div class="grid6">
+	                            	<select name="channel" id="wei_channel">
+	                            		<option value="">-请选择-</option>
+	                            		<volist name="channel" id="c">
+	                            		<option value="{$c.id}">{$c.title}</option>
+	                            		</volist>
+	                            	</select>
+	                            </div>
+	                            <div class="clear"></div>
+	                        </div>
+            			</div>
+            		</div>
+            </div>
+            
+            <div id="jian_choose_time" style="display:none;width:300px;line-height:24px;" class="fluid">
+            		<div class="fluid">
+            			<div class="widget nomargin">
+	                        <div class="formRow">
+	                            <div class="grid4"><label>选择推荐时间: </label></div>
+	                            <div class="grid6">
+	                            	<input onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" type="text" id="tuijian_time" readonly="readonly"/>
+	                            </div>
+	                            <div class="clear"></div>
+	                        </div>
+            			</div>
+            		</div>
+            </div>
+            
+            <div id="add_to_tuijian_panel" style="display:none;width:300px;line-height:24px;" class="fluid">
+       			<form method='post' id="tuijian_wei_form" name="form1" action="{:U('HomeOnline/doTuijian')}"  enctype="multipart/form-data">
+       				<input type="hidden" id="wei_tuijian_id" name="id"/>
+       				<input type="hidden" id="wei_tuijian_type" name="type" value="3"/>
+            		<div class="fluid">
+            			<div class="widget nomargin">
+	                        <div class="formRow">
+	                            <div class="grid4"><label>推荐时间: </label></div>
+	                            <div class="grid6">
+	                            	<input type="text" name="online_time" id="wei_tuijian_time"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly"/>
+	                            </div>
+	                            <div class="clear"></div>
+	                        </div>
+            			</div>
+            		</div>
+            	</form>
+            </div>
+        </div>
+     
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+<script>
+(function(){
+	$(".js_tuijian").click(function(){
+		var href = $(this).attr('data-href');
+		art.dialog({
+			padding : 0,
+			title : '推荐该微图解',
+			content:$('#jian_choose_time')[0],
+			ok : function(){
+				var time = $.trim($('#tuijian_time').val());
+				if (time == '') {alert('请输入时间'); return false;}
+				location.href = href+'&online_time='+time;
+			}, cancel: true
+		});
+	});
+	
+	$('.bind-channel').click(function(){
+		var id = $(this).attr('data-id');
+		var obj = $(this);
+		art.dialog({
+			padding:0,
+			title : '绑定频道',
+			content : $('#bind_channel_panel')[0],
+			ok : function(){
+				var channel = $('#wei_channel').val();
+				if (channel == '') {
+					alert('请选择频道');return;
+				}
+				$.ajax({
+					url : '{:U("Wei/bindChannel")}',
+					type : 'POST',
+					data : {wei_id:id,channel_id:channel},
+					success : function(ret){
+						if (typeof ret == 'object') {
+							if (ret.rst == 1) {
+								$.jGrowl('ID：'+id +' 绑定成功!');
+								obj.html($('#wei_channel').find("option:selected").text()).removeClass('redBack');
+							} else {
+								alert(rst.msg);
+							}
+						} else {
+							alert('快截图，并且快联系Bobo,'+ret);
+						}
+					},
+					error : function(){
+						$.jGrowl('Ajax 错误');
+					}
+				});
+			},
+			cancel : true
+		});
+	});
+	
+	$('.js-add-tuijian').click(function(){
+		var id = ($(this).attr('data-id'));
+		var online_time = ($(this).attr('data-time'));
+		$('#wei_tuijian_time').val(online_time);
+		$('#wei_tuijian_id').val(id);
+		art.dialog({
+			id: 'add_to_tuijian_dialog',
+			padding:0,
+			content:$('#add_to_tuijian_panel')[0],
+			title:'添加至推荐',
+			ok : function(){
+				$('#tuijian_wei_form').submit();
+			},
+			cancel:true
+		});
+		
+	});
+})();
+</script>
+<include file="Public:footer" />

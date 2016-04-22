@@ -1,0 +1,104 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<!-- Secondary nav -->
+</div>
+<!-- Sidebar ends -->
+
+<!-- Content begins -->
+<div id="content">
+    <include file="Public:bav" />
+    <!-- Main content -->
+    <div class="wrapper">
+        	<div class="fluid">
+        		<form method='post' id="form1" name="form1" action="{:U('HomeOnline/doAddMovieConf')}"  enctype="multipart/form-data">
+                    <div class="widget ">
+                        <div class="whead">
+                        <h6>添加首页【电影】配置</h6>
+                        <a href="{:getCurrentUrl()}" class="buttonH bBlue mb10 mt5">返回</a>
+                        <div class="clear"></div></div>
+                        <for start="1" end="5">
+                        <div class="divider"><span></span></div>
+                        <div class="formRow">
+                            <div class="grid3"><label>电影 {$i} 的ID：<span class="req">*</span> </label></div>
+                            <div class="grid3"><input type="text" id="js_movie_id_{$i}" name="id[{$i}]" placeholder="电影ID"/></div>
+                            <div class="grid3"><a class="js_get_Movie_info" data-id="{$i}">获取</a></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>电影 {$i} 封面：<span class="req">*</span></label></div>
+                            <div class="grid7">
+                            	<div class="red">电影名称：【 <span id="js_movie_name_{$i}" class="blueBack"></span>】</div>
+                            	<img id="img_up_img_{$i}" src="" height="110px" style="margin:4px 0px;"><br />
+                            	<input type="file" data-id="{$i}" id="up_img_{$i}" name="up_img_{$i}" size="24" style="opacity: 0;">
+                            	<br /><br />
+                            	<input type="text" name="up_img_v[{$i}]" id="js_img_url_{$i}" />
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>电影 {$i} 副标题：<span class="req">*</span></label></div>
+                            <div class="grid7"><input type="text" name="sub_title[{$i}]" id="sub_title_{$i}" placeholder="副标题"/></div>
+                            <div class="clear"></div>
+                        </div>
+                        </for>
+                        <div class="formRow"><input type="submit" value="提 交" class="buttonM bBlack formSubmit" /><div class="clear"></div></div>
+                        <div class="clear"></div>
+                    </div>
+                    </form>
+            </div>
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+<script>
+for (var i=1; i<5; i++) {
+	$("#up_img_"+i).change(function(){
+		var objUrl = booGetObjectURL(this.files[0]) ;
+		var id = $(this).attr('data-id');
+		if (objUrl) {
+			$("#img_up_img_"+id).attr("src", objUrl) ;
+		}
+	}) ;
+}
+
+$('.js_get_Movie_info').click(function(){
+	var id = $(this).attr('data-id');
+	var did = $.trim($('#js_movie_id_'+id).val());
+	if (did == '') {alert('要输入ID哟');return;}
+	try {
+		did = parseInt(did);
+	}catch (ex) {
+		alert('要输入数字啊啊啊啊啊啊，半角的数字啊啊啊啊啊啊啊啊啊');return;
+	}
+	var data = {id:did,type:'movie'}
+	$.ajax({
+		url : '{:U("HomeOnline/getOneInfo")}',
+		type : 'POST',
+		data : data,
+		success: function(data){
+			try {
+				if (data.rst == 1) {
+					var rst = data.data;
+					$('#js_movie_name_'+id).html(rst.name);
+					$('#img_up_img_'+id).attr('src',rst.bpic);
+					$('#js_img_url_'+id).val(rst.bpic);
+					$('#sub_title_'+id).val(rst.sub_title);
+				} else {
+					alert(data.msg);
+				}
+			}catch (ex) {
+				alert(data);
+			}
+		},
+		error : function(ex){
+			alert('ajax 错误');
+		}
+	});
+});
+</script>
+<include file="Public:footer" />

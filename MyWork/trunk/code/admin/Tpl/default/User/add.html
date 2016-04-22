@@ -1,0 +1,88 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<!-- Secondary nav -->
+</div>
+<!-- Sidebar ends -->
+
+<!-- Content begins -->
+<div id="content">
+    <include file="Public:bav" />
+    <!-- Main content -->
+    <div class="wrapper">
+        	<div class="fluid">
+        		<form method='post' id="form1" name="form1" action="{:U('User/insert')}"  enctype="multipart/form-data">
+                    <div class="widget ">
+                        <div class="whead"><h6>添加管理员</h6><div class="clear"></div></div>
+                        <div class="formRow">
+                            <div class="grid3"><label>用户名:</label></div>
+                            <div class="grid3"><input type="text" name="account" id="account"/></div>
+                            <label id="accounterror"></label>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>密码:</label></div>
+                            <div class="grid3"><input type="text" name="password" value="ooxx"/></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>真实姓名:</label></div>
+                            <div class="grid3"><input type="text" name="nickname" value=""/></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>角色:</label></div>
+                            <div class="grid1">
+                            	<select name="role_id"> 
+		                            <volist name="list" id="l">
+		                                <option value="{$l['id']}">
+		                                {$l['name']}
+		                                </option>
+		                            </volist>    
+		                        </select>
+                        	</div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>伊妹儿:</label></div>
+                            <div class="grid3"><input type="text" name="email"/></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>状态:</label></div>
+                            <div class="grid1">
+                            	<select name="status">
+		                            <option value="1">启用</option>
+		                            <option value="0">禁用</option>
+	                        	</select>
+                        	</div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>描述:</label></div>
+                            <div class="grid9"><textarea rows="8" cols="" name="remark"></textarea></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow"><input type="submit" value="提 交" class="buttonM bBlack formSubmit" /><div class="clear"></div></div>
+                        <div class="clear"></div>
+                    
+                    </div>
+                    </form>
+            </div>
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+
+<include file="Public:footer" />
+

@@ -1,0 +1,116 @@
+<include file="Public:header" />
+
+<script language="javascript" type="text/javascript" src="__JS__/My97DatePicker/WdatePicker.js"></script>
+
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<!-- Secondary nav -->
+</div>
+<!-- Sidebar ends -->
+
+<!-- Content begins -->
+<div id="content">
+    <include file="Public:bav" />
+    <!-- Main content -->
+    <div class="wrapper">
+        	<div class="fluid">
+        		<form method='post' id="form1" name="form1" action="{:U('Shop/doAddGoods')}"  enctype="multipart/form-data">
+                    <div class="widget ">
+                        <div class="whead">
+                        <h6>添加商品</h6>
+                        <a href="{:U('Shop/goodsList')}" class="buttonH bBlue mb10 mt5">返回</a>
+                        <div class="clear"></div></div>
+                        <div class="formRow">
+                            <div class="grid3"><label>商品名称:</label></div>
+                            <div class="grid3"><input type="text" name="name" /></div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="formRow">
+                            <div class="grid3"><label>商品描述:</label></div>
+                            <div class="grid9"><textarea rows="3" cols="" name="desc"></textarea></div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="formRow">
+                            <div class="grid3"><label>商品上架时间段:</label></div>
+                            <div class="grid3" style="width:120px;">
+                            	<input type="text" name="on_sale_time" onFocus="WdatePicker({minDate:'%y-%M-%d {%H+1}:00',dateFmt:'yyyy-MM-dd HH:mm'})"/>
+                            </div>
+                            <div class="grid3" style="width:120px;">
+                            	<span style="position:absolute;left:-24px;top:3px;">To</span>
+                            	<input type="text" name="off_sale_time" onFocus="WdatePicker({minDate:'%y-%M-%d {%H+1}:00',dateFmt:'yyyy-MM-dd HH:mm'})"/>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="formRow">
+                            <div class="grid3"><label>价格:</label></div>
+                            <div class="grid3"><input type="text" name="price" /></div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="formRow">
+                            <div class="grid3"><label>库存总量:</label></div>
+                            <div class="grid3"><input type="text" name="total_num" /></div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="formRow">
+                            <div class="grid3"><label>剩余库存量:</label></div>
+                            <div class="grid3"><input type="text" name="ku_cun" /></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>分类:</label></div>
+                            <div class="grid3">
+                            	<select name="cat_id">
+                            		<!-- <option value="0">-请选择-</option> -->
+                            	<volist name="category" id="cat">
+                            		<option value="{$cat.id}">{$cat.name}</option>
+                            	</volist>
+                            	</select>
+							</div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>每个ID可抽奖次数:</label></div>
+                            <div class="grid3"><input type="text" name="times" /></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>中奖概率:</label></div>
+                            <div class="grid3" style="width:120px;">
+                            	<input type="text" name="min_num"/>
+                            </div>
+                            <div class="grid3" style="width:120px;">
+                            	<span style="position:absolute;left:-24px;top:3px;">/</span>
+                            	<input type="text" name="max_num" value="1000"/>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>开始抽奖时间段：</label></div>
+                            <div class="grid3" style="width:120px;">
+                            	<input type="text" name="start_time" onFocus="WdatePicker({minDate:'%y-%M-%d {%H+1}:00',dateFmt:'yyyy-MM-dd HH:mm'})"/>
+                            </div>
+                            <div class="grid3" style="width:120px;">
+                            	<span style="position:absolute;left:-24px;top:3px;">To</span>
+                            	<input type="text" name="end_time" onFocus="WdatePicker({minDate:'%y-%M-%d {%H+1}:00',dateFmt:'yyyy-MM-dd HH:mm'})"/>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow"><input type="submit" value="提 交" class="buttonM bBlack formSubmit" /><div class="clear"></div></div>
+                        <div class="clear"></div>
+                    
+                    </div>
+                    </form>
+            </div>
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+
+<include file="Public:footer" />

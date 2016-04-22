@@ -1,0 +1,98 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<include file="Shop:opt" />
+	<!-- Secondary nav -->
+</div>
+<!-- Sidebar ends -->
+
+<!-- Content begins -->
+<div id="content">
+
+  <include file="Public:bav" />
+  
+    <!-- Main content -->
+    <div class="wrapper">
+        <!-- Media table sample -->
+        <div class="widget check">
+        	<div class="fluid">
+	        	<form method="get" action="{:U('Movie/index')}">
+	            <input type="hidden" value="{$Think.MODULE_NAME}" name="m"/>
+	            <input type="hidden" value="{$Think.ACTION_NAME}" name="a"/>
+        				<div class="formRow">
+        					<div class="grid2" style="width:100px;">
+        						<label>订单编号：</label>
+        					</div>
+        					<div class="grid6" style="width:200px;">
+                            	<input type="text" placeholder="订单编号" value="{$Think.get.order_id|default=''}" name="order_id">
+                            </div>
+                            <div class="grid2">
+                            	<input type="submit" value="提 交" class="buttonM bBlack formSubmit" />
+                            </div> 
+                            <div class="clear"></div>
+                        </div>
+                 </form>
+             </div>
+		</div>
+        <div class="widget check">
+            <div class="whead">
+            <h6>中奖列表</h6>
+				<div class="clear"></div></div>
+            <table cellpadding="0" cellspacing="0" width="100%" class="tDefault checkAll tMedia" id="checkAll">
+                <thead>
+                    <tr>
+                        <td width="40">ID</td>
+                        <td width="120">订单编号</td>
+                        <td width="80">图片</td>
+                        <td>商品名称</td>
+                        <td width="130">中奖用户</td>
+                        <td width="100">状态</td>
+                        <td width="80">操作</td>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td colspan="8">
+                            <div class="tPages">
+                                <ul class="pages">
+                                	{$page}
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    <volist name="list" id="vo">
+		            <tr>
+		                <td>{$vo.id}</td>
+		                <td>{$vo.order_id}</td>
+		                <td>
+		                	<img src="{$vo.goods.image}" alt="点我编辑" width="100px" height="70px;" />	
+		                </td>
+		                <td>
+	                		{$vo.goods.name}
+		                </td>
+		                <td>
+		                	<img src="{$vo.member.avatar}" width="50px" style="border-radius:50px;" /><br />
+		                	{$vo.member.name}<br /> ({$vo.user_id})
+		                </td>
+		                <td>
+		                	{$state[$vo['state']]}
+						</td>
+						<td>
+							<a href="{:U('Shop/lotterySuccDetail', array('id'=>$vo['id']))}">处理</a>
+						</td>
+		            </tr>
+		            </volist>
+                </tbody>
+            </table>
+        </div>
+     
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+
+<include file="Public:footer" />

@@ -1,0 +1,119 @@
+<include file="Public/header" />
+	<div id="content">
+		<div class="body">
+			<dl class="movieList">
+				<dt>
+					<empty name="doing.pit_img">
+						<img src="__IMG__/fail_image.png" class="face"/>
+					<else />
+						<img src="__PITIMG__/{$one.pit_img}" class="face"/>
+					</empty>
+					<div class="info">
+						<h6>{$one.pit_name}</h6><div class="clear"></div>
+						<span>{$one.info_str|default=''}</span>
+						<div class="right">{$one.right_str|default=''}</div>
+						<div class="rightTime">{$one.right_b_str|default=''}</div>
+					</div>
+					<div class="clear"></div>
+				</dt>
+			</dl>
+		</div>
+		<present name="undo">
+		<eq name="one.jiaogao" value="0">
+		<span style="color:red;padding-bottom:20px;">{$one.remark}</span>
+		<div class="search_form width100">
+			<form action="{:U('UpWorks/up')}" method="POST" id="upworks_pit_form" style="float:left;width:48%;">
+				<input type="hidden" name="id" value="{$one.id}"/>
+				<input type="submit" onclick="return false;" id="do_submit_upworks_pit" style="background-color:#00aaff;" value="我已交稿">
+			</form>
+			<form action="{:U('Pit/undo')}" method="POST" id="undo_pit_form" style="float:right;width:48%;">
+				<input type="hidden" name="id" value="{$one.id}"/>
+				<input type="submit" onclick="return false;" id="do_submit_undo_pit" style="background-color:#ff0000;" value="申请弃坑">
+			</form>
+		</div>
+		<else />
+			<span style="color:red;padding-bottom:20px;">O(∩_∩)O~ 等待投稿确认。</span>
+		</eq>
+		</present>
+		<div class="clear"></div>
+		<br/>
+		<div class="Tab"><h6>你还占了</h6><div class="clear"></div></div>
+		<div class="body">
+			<dl class="movieList">
+			<volist name="his_list" id="his">
+				<a href="{:U('Pit/pitInfo', array('id'=>$his['id']))}">
+				<dt>
+					<empty name="his.pit_img">
+						<img src="__IMG__/fail_image.png" class="face"/>
+					<else />
+						<img src="__PITIMG__/{$his.pit_img}" class="face"/>
+					</empty>
+					<div class="info">
+						<h6>{$his.pit_name}</h6><div class="clear"></div>
+						<span>{$his.info_str|default=''}</span>
+						<div class="right">{$his.right_str|default=''}</div>
+						<div class="rightTime">{$his.right_b_str|default=''}</div>
+					</div>
+					<div class="clear"></div>
+				</dt>
+				</a>
+			</volist>
+			</dl>
+		</div>
+	</div>
+<present name="undo">
+<script>
+$(document).ready(function(){
+	$('#do_submit_undo_pit').click(function(){
+		var list = art.dialog.list;
+		for (var i in list) {
+		    list[i].close();
+		};
+		var html = '<textarea id="undo_pit_reason" style="color:#999;border:1px solid #ccc;"></textarea>';
+		art.dialog({
+			id : 'show_input',
+			drag: false,
+		    resize: false,
+		    fixed:true,
+			title : '纳尼？为什么弃坑捏？',
+		    content: '<span id="undo_pit_info" style="color:#555;">填入你的原因吧<span><br />'+html,
+		    ok : function(){
+		    	var reason = $.trim($('#undo_pit_reason').val());
+		    	if (reason == '') {
+		    		$('#undo_pit_info').html('<span id="undo_pit_info" style="color:#ff0000;">原因不能不填啊。。<span><br />'+html);
+		    		return false;
+		    	} else {
+		    		$('#undo_pit_info').html('<span id="undo_pit_info" style="color:#555;">正在提交。。。<span>');
+		    		var obj = $('#undo_pit_form');
+		    		obj.append('<textarea name="remark" style="display:none;">'+reason+'</textarea>');
+		    		obj.submit();
+		    	}
+		    },
+		    cancel:true
+		});
+	});
+	
+	$('#do_submit_upworks_pit').click(function(){
+		var list = art.dialog.list;
+		for (var i in list) {
+		    list[i].close();
+		};
+		art.dialog({
+			id : 'show_input',
+			drag: false,
+		    resize: false,
+		    fixed:true,
+			title : '温馨提示你哦 O(∩_∩)O~',
+		    content: '确定交稿了？',
+		    ok : function(){
+		    	$('#undo_pit_info').html('<span id="undo_pit_info" style="color:#555;">正在提交。。。<span>');
+		    	var obj = $('#upworks_pit_form');
+		    	obj.submit();
+		    },
+		    cancel:true
+		});
+	});
+});
+</script>
+</present>
+<include file="Public/footer" />

@@ -1,0 +1,79 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<include file="CreateTeam:opt" />
+</div>
+<!-- Sidebar ends -->
+    
+<!-- Content begins -->
+<div id="content">
+    <div class="contentTop">
+        <span class="pageTitle">创作团管理</span>
+        <div class="clear"></div>
+    </div>
+    <include file="Public:bav" />
+    <!-- Main content -->
+    <div class="wrapper">
+        <!-- Media table sample -->
+        <div class="widget check">
+            <div class="whead">
+            <h6>创作团成员列表</h6>
+				<div class="clear"></div></div>
+            <table cellpadding="0" cellspacing="0" width="100%" class="tDefault checkAll tMedia" id="checkAll">
+                <thead>
+                    <tr>
+		                <td width="50">编号</td>
+		                <td width="50">用户ID</td>
+		                <td>用户名称</td>
+		                <td width="60">作品数</td>
+		                <td width="60">被阅读数</td>
+		                <td width="60">被赞数</td>
+		                <td width="180"><a href="{:U('CreateTeam/teamList',array('_order'=>'jinji_score'))}">进基值</a></td>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td colspan="11">
+                        <empty name="list">
+                        	额。。。木有咧……
+                        <else/>
+                        	<div class="footnote">*红色的名字代表已经是编辑部成员了。</div>
+                            <div class="tPages">
+                                <ul class="pages">
+                                	{$page}
+                                </ul>
+                            </div>
+                        </empty>
+                        </td>
+                        
+                    </tr>
+                </tfoot>
+                <tbody>
+                    <volist name="list" id="vo">
+		            <tr>
+		                <td>{$vo.id}</td>
+		                <td><a href="{:U('Member/index',array('id'=>$vo['user_id'],'backurl'=>urlencode(__SELF__)))}" title="点我管理该用户">{$vo.user_id}</a></td>
+		                <td>
+		                	<if condition="isset($bianji[$vo['user_id']])">
+		                		<strong class="tipW red" original-title="最近发表作品：{$vo.update_time}<br />第一次发表：{$vo.add_time}<br />第一次使用：{$vo.reg_time}">{$vo.name}</strong>
+		                	<else />
+		                		<span class="tipW" original-title="最近发表作品：{$vo.update_time}<br />第一次发表：{$vo.add_time}<br />第一次使用：{$vo.reg_time}">{$vo.name}</span>
+		                	</if>
+		                </td>
+		                <td><a href="{:U('Movie/index',array('grapher_id'=>$vo['user_id'],'backurl'=>urlencode(__SELF__)))}">{$vo.online_work_count}</a></td>
+		                <td>{$vo.stat_beplayed}</td>
+		                <td>{$vo.stat_belike}</td>
+		                <td>{$vo.jinji_score}</td>
+		            </tr>
+		            </volist>
+                </tbody>
+            </table>
+        </div>
+     
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+<include file="Public:footer" />

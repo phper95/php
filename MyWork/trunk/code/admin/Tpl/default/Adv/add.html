@@ -1,0 +1,238 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<!-- Secondary nav -->
+</div>
+<!-- Sidebar ends -->
+
+<!-- Content begins -->
+<div id="content">
+    <include file="Public:bav" />
+    <!-- Main content -->
+    <div class="wrapper">
+        	<div class="fluid">
+        		<form method='post' id="form1" name="form1" action="{:U('Adv/insert')}"  enctype="multipart/form-data">
+                    <div class="widget ">
+                        <div class="whead">
+                        <h6>添加广告</h6>
+                        <a href="{:getCurrentUrl()}" class="buttonH bBlue mb10 mt5">返回</a>
+                        <div class="clear"></div></div>
+                        <div class="formRow">
+                            <div class="grid3"><label>广告名称：<span class="req">*</span> </label></div>
+                            <div class="grid3"><input type="text" id="adv_name" name="name" placeholder="广告名称"/></div>
+                            <div class="grid3"><a id="full_adv_info" href="javascript:void(0);">全屏广告点我填满！</a></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>广告副标题：<span class="req">*</span></label></div>
+                            <div class="grid7"><input type="text" id="adv_sub_title" name="sub_title" placeholder="广告副标题"/></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>广告编者按：<span class="req">*</span></label></div>
+                            <div class="grid7"><textarea rows="3" cols="" id="adv_editor_note" name="editor_note" placeholder="编者按">编者按：</textarea></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>发行公司：<span class="req">*</span></label></div>
+                            <div class="grid7"><input type="text" id="adv_company" name="company" placeholder="发行公司"/></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>网站地址：<span class="req">*</span></label></div>
+                            <div class="grid7"><input type="text" id="adv_website" name="website" placeholder="网站地址"/></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>广告简介：<span class="req">*</span></label></div>
+                            <div class="grid7"><textarea rows="4" cols="" id="adv_intro" name="intro" placeholder="广告简介"></textarea></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>广告评分：<span class="req">*</span></label></div>
+                            <div class="grid3"><input type="text" id="adv_score" name="score" placeholder="广告评分"/></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>广告尺寸：<span class="req">*</span></label></div>
+                            <div class="grid3"><input type="text" name="total_size" id="adv_total_size" placeholder="广告尺寸（Mb）" /></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>广告类型：<span class="req">*</span></label></div>
+                            <div class="grid3"><input type="text" name="tags" id="adv_tags" placeholder="广告类型" /></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>广告被标记签字串：</label></div>
+                            <div class="grid9"><input type="text" name="tags_text" value="" placeholder="多个请用半角逗号隔开"/></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>广告关键字字串：</label></div>
+                            <div class="grid9"><input type="text" name="keyword" value="" placeholder="多个请用半角逗号隔开"/></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>按钮标题：<span class="req">*</span></label></div>
+                            <div class="grid3"><input type="text" name="open_btn_title" value="查看详情" placeholder="按钮标题"/></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>点击标题打开的网站：<span class="req">*</span></label></div>
+                            <div class="grid3"><input type="text" name="open_btn_url" value="" placeholder="点击标题打开的网站"/></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>广告作者ID：<span class="req">*</span></label></div>
+                            <div class="grid3"><input type="text" name="grapher" id="adv_grapher" value="" placeholder="广告作者ID, 多个以英文半角逗号隔开"/></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>顶次数：</label></div>
+                            <div class="grid3"><input type="text" name="ding" value="0" placeholder="顶次数" disabled="disabled"/></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>踩次数：</label></div>
+                            <div class="grid3"><input type="text" name="cai" value="0" placeholder="踩次数" disabled="disabled"/></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>播放次数：</label></div>
+                            <div class="grid3"><input type="text" name="played" value="0" placeholder="播放次数" disabled="disabled"/></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>分享次数：</label></div>
+                            <div class="grid3"><input type="text" name="share" value="0" placeholder="分享次数" disabled="disabled"/></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>收藏次数：</label></div>
+                            <div class="grid3"><input type="text" name="keep" value="0" placeholder="收藏次数" disabled="disabled"/></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>官网是否在线阅读：</label></div>
+                            <div class="grid9">
+                            	<label class="nopadding grid1" ><input type="radio" value="1" name="wp_post_open"/>是</label>
+                            	<label class="nopadding grid1"><input type="radio" value="0" checked="checked" name="wp_post_open"/>否</label>
+							</div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>官网文章ID：</label></div>
+                            <div class="grid3"><input type="text" name="wp_post_id" placeholder="官网文章ID" /></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>广告是否生效：<span class="req">*</span></label></div>
+                            <div class="grid9">
+                            	<label class="nopadding grid1" ><input type="radio" value="1" checked="checked" name="open"/>是</label>
+                            	<label class="nopadding grid1"><input type="radio" value="0" name="open"/>否</label>
+							</div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>广告使用图片服务器编号：</label></div>
+                            <div class="grid9">
+                            	<label class="nopadding grid1" ><input type="radio" value="0" name="imgserver_use"/>第三方</label>
+                            	<label class="nopadding" style="width:210px;"><input type="radio" value="1" name="imgserver_use"/> 【2.0版本】图片服务器-(230) </label>
+                            	<label class="nopadding" style="width:230px;" ><input type="radio" value="2" name="imgserver_use"/>【3.0版本】图片服务器imgs3-(248)</label>
+                            	<label class="nopadding" style="width:245px;"><input type="radio" checked="checked" value="6" name="imgserver_use"/>【3.0版本】图片服务器imgs2-adv-(109)</label>
+                            	<label class="nopadding grid3" ><input type="radio" value="3" name="imgserver_use"/>自身服务器3(31)</label>
+							</div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                        	<div class="grid3"><label>显示支持: <span class="req">*</span></label></div>
+                        	<div class="grid9">
+                        		<label style="width:120px;"><input type="checkbox" value="1" name="show_list" class="check" />支持-列表</label>
+	                            <label style="width:120px;"><input type="checkbox" value="1" name="show_window" class="check" />支持-窗口</label>
+	                            <label style="width:120px;"><input type="checkbox" value="1" name="show_search" class="check" />支持-搜索</label>
+	                            <label style="width:120px;"><input type="checkbox" value="1" name="show_tag" class="check" />支持-Tag</label>
+	                            <label style="width:120px;"><input type="checkbox" value="1" name="show_qrcode" class="check" />支持-二维码</label>
+	                            <label style="width:120px;"><input type="checkbox" value="1" name="show_same" class="check" />支持-相关推荐</label>
+	                            <label style="width:120px;"><input type="checkbox" value="1" name="show_grapher" class="check" />支持-作品列表</label>
+	                            <label style="width:120px;"><input type="checkbox" value="1" name="show_read" class="check" />支持-阅读时</label>
+	                            <label style="width:120px;"><input type="checkbox" value="1" id="adv_show_fullscreen" name="show_fullscreen" class="check" />支持-全屏</label>
+                        	</div>
+                        	<div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                        	<div class="grid3"><label>相对操作: <span class="req">*</span></label></div>
+                        	<div class="grid9">
+                        		<label style="width:200px;"><input type="checkbox" value="1" checked="checked" name="show_detail_fullscreen" class="check" />全屏广告点击时进入详情</label>
+	                            <label style="width:200px;"><input type="checkbox" value="1" checked="checked" name="show_detail_window" class="check" />窗口广告点击时进入详情</label>
+	                            <label style="width:200px;"><input type="checkbox" value="1" checked="checked" name="show_detail_list" class="check" />列表广告点击时进入详情</label>
+	                            <label style="width:200px;"><input type="checkbox" value="1" checked="checked" name="show_detail_read" class="check" />阅读广告点击时进入详情</label>
+	                            <label style="width:200px;"><input type="checkbox" value="1" checked="checked" name="show_detail_same" class="check" />相关推荐点击时进入详情</label>
+                        	</div>
+                        	<div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>全屏广告展示时间：</label></div>
+                            <div class="grid3"><input type="text" name="fullscrenn_show_second" value="0" placeholder="秒数" /></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow"><input type="submit" value="提 交" class="buttonM bBlack formSubmit" /><div class="clear"></div></div>
+                        <div class="clear"></div>
+                    </div>
+                    </form>
+            </div>
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+<script>
+(function(){
+	$('#full_adv_info').click(function(){
+		var name = $('#adv_name').val();
+		if (name == '') {alert('先填入名称');return;}
+		$('#adv_sub_title').val(name);
+		$('#adv_editor_note').val('编者按：' + name);
+		$('#adv_company').val('WZM Design');
+		$('#adv_website').val('http://www.graphmovie.com');
+		$('#adv_intro').val(name);
+		$('#adv_score').val('10.0');
+		$('#adv_total_size').val('1.0');
+		$('#adv_tags').val('每日一图');
+		$('#adv_grapher').val('2');
+		$('.check').attr('checked',false);
+		$('#adv_show_fullscreen').attr('checked','checked');
+		$.uniform.update();
+		
+	});
+})();
+</script>
+<include file="Public:footer" />

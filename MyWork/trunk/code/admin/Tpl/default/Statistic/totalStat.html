@@ -1,0 +1,477 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<include file="Statistic:opt" />
+</div>
+<!-- Sidebar ends -->
+
+<script language="javascript" type="text/javascript" src="__JS__/My97DatePicker/WdatePicker.js"></script>
+<script language="javascript" type="text/javascript" src="__JS__/dialog/artDialog.js?skin=default"></script>
+    
+<!-- Content begins -->
+<div id="content">
+    <div class="contentTop">
+        <span class="pageTitle">接口访问统计</span>
+        <div class="clear"></div>
+    </div>
+    
+    <!-- Breadcrumbs line -->
+    <include file="Public:bav" />
+    
+    <!-- Main content -->
+    <div class="wrapper">
+    	<div class="widget">
+    		<div class="whead fluid">
+    			<h6>查询</h6>
+				<div class="clear"></div>
+    		</div>
+    		<form method='post' id="form1" name="form1" action="{:U('Statistic/totalStat')}"  enctype="multipart/form-data">
+    		<div class="formRow">
+            	<div style="float:left;"><label>日期：</label></div>
+                <div style="float:left;width:120px;">
+                     <span class="grid12"><input type="text" onClick="WdatePicker()" name="day" value="{$Think.post.day|default=''}"></span>
+                </div>
+                <input type="submit" value="提 交" class="buttonM bBlack formSubmit" /><div class="clear"></div>
+                <div class="clear"></div>
+            </div>
+            </form>
+    	</div>
+    <empty name="error_info">
+    	 <div class="widget">
+            <div class="whead">
+            	<h6>{$Think.post.day|default=''} 接口总统计</h6>
+				<div class="clear"></div>
+			</div>
+            <table cellpadding="0" cellspacing="0" width="100%" class="tDefault" id="resize">
+                <thead>
+                    <tr>
+		                <td width="100">接口名称</td>
+		                <td width="100" class="sortCol">Post<span></span></td>
+		                <td width="100" class="sortCol">缓存<span></span></td>
+		                <td width="80" class="sortCol">请求用户数<span></span></td>
+		                <td width="140" class="sortCol">单用户最大请求<span></span></td>
+		                <td width="140" class="sortCol">错误次数<span></span></td>
+		                <td width="140" class="sortCol">Json总计字符长<span></span></td>
+		                <td width="100" class="sortCol">Json最大长度<span></span></td>
+		                <td width="100" class="sortCol">Json最小长度<span></span></td>
+		                <td width="80" class="sortCol">总耗时<span></span></td>
+		                <td width="80" class="sortCol">最大耗时<span></span></td>
+		                <td width="80" class="sortCol">最小耗时<span></span></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <volist name="api_total" id="vo">
+		            <tr>
+		                <td><eq name="key" value="总计">{$key}<else/>{:C('API_LAN_NAME.'.$key)} <br /><span style="font-size:10px">{$key}</span></eq></td>
+		                <td>{$vo.post}</td>
+		                <td>{$vo.memc}</td>
+		                <td>{$vo.user}</td>
+		                <td>{$vo.u_max}</td>
+		                <td>{$vo.err}</td>
+		                <td>{:getFomartFileSize($vo['json'])}</td>
+		                <td>{$vo.j_max}</td>
+		                <td>{$vo.j_min}</td>
+		                <td>{$vo.time}</td>
+		                <td>{$vo.t_max}</td>
+		                <td>{$vo.t_min}</td>
+		            </tr>
+		            </volist>
+                </tbody>
+            </table>
+        </div>
+
+    	<div class="widget fluid">
+    		<div class="formRow">
+            	<!--<div style="float:left;"><label>日期：</label></div>
+                <div style="float:left;width:120px;">
+                     <span class="grid12"><input type="text" onClick="WdatePicker()" value=""></span>
+                </div>
+                --><div style="float:left;padding-right:30px;">{$Think.post.day|default=''}</div>
+                <div style="float:left;">
+                	<label>平台：</label>
+                    <select id="statistic_total_stat_to_platform" >
+                    <option value="all">全部</option>
+                 	{:getPlatformList($_GET['platform'],'val')}
+                 	</select>
+                </div>
+                <div style="float:left;width:30px;">&nbsp;</div>
+                <div style="float:left;">
+                	<label>渠道：</label>
+                    <select id="statistic_total_stat_to_channel" >
+                    <option value="all">全部</option>
+                	{:getChannelList(0,'val')}
+            		</select>
+                </div>
+                
+                <div style="float:left;width:30px;">&nbsp;</div>
+                <div style="float:left;">
+                	<label>版本：</label>
+                    <select id="statistic_total_stat_to_verson" >
+                    <option value="all">全部</option>
+                	{:getChannelList(0,'val')}
+            		</select>
+                </div>
+                
+                <div style="float:left;width:30px;">&nbsp;</div>
+                <div style="float:left;">
+                	<label>数据：</label>
+                    <select id="statistic_total_stat_to_data" >
+                    <option value="post">请求次数</option>
+                    <option value="user">请求用户数</option>
+                    <option value="u_max">单个用户最大请求数</option>
+                    <option value="err">错误次数</option>
+                    <option value="t_max">最大耗时</option>
+            		</select>
+                </div>
+                
+                <div style="float:left;width:30px;">&nbsp;</div>
+                <div style="float:left;">
+                	<label>统计方式：</label>
+                    <select id="statistic_total_stat_to_type" >
+                    <option value="time">时间</option>
+                    <option value="0">平台</option>
+                    <option value="1">渠道</option>
+                    <option value="2">版本</option>
+            		</select>
+                </div>
+                <div style="float:left;width:30px;">&nbsp;</div>
+                <div style="float:left;">
+                	<a class="greenBack" href="javascript:void(0);" id="statistic_total_stat_check_line">接口选择</a>
+                </div>
+                <a href="javascript:void(0);" id="statistic_total_stat_to_search" class="buttonH bBlue mb10">查询</a>
+                <div class="clear"></div>
+            </div>
+    		<div id="boo" style="min-height:600px;"></div>
+    	</div>
+    	
+    <else />
+    	<div class="widget">
+    	<div class="body">{$error_info}</div>
+    	</div>
+    </empty>
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+
+<empty name="error_info">
+	<script src="http://echarts.baidu.com/build/echarts-plain.js"></script>
+    <script type="text/javascript">
+    (function(){
+    	var need_key = {:json_encode($need_key)};
+    	var data = {:json_encode($rst)};
+    	var api_name = {:json_encode(C('API_LAN_NAME'))};
+    	var checkbox_list = [];
+    	var show_lines = {'UM_CkUser':true};
+    	for (api in data) {
+    		if (typeof api_name[api] == 'undefined') {
+    			api_name[api] = '未知---'+api;
+			}
+    		checkbox_list.push('<label style="width:200px;float:left;padding:3px 6px;"><input class="js-api-line" type="checkbox" '+(api=='UM_CkUser' ? 'checked="checked"':'')+' value="' + api + '"/> '+api_name[api]+'</label>');
+    	}
+    	
+    	var dialog = art.dialog({
+    	    content:checkbox_list.join('') + '<div class="clear divider"></div><label style="float:left;padding:3px 6px;"><input type="checkbox" id="js-api-line-checkall"/> 全选</label>',
+    	    id: Date.parse(new Date()),
+    	    ok:function(){
+    	    	show_lines = {};
+    	    	$('.js-api-line').each(function(){
+    	    		if ($(this).attr('checked') == 'checked'){
+    	    			show_lines[$(this).val()] = true;
+    	    		}
+    	    	});
+    	    	if ($.isEmptyObject(show_lines)) {alert('选择接口啊'); return false;}
+    	    	$('#statistic_total_stat_to_search').click();
+    	    },
+    	    close: function () {
+    	        this.hide();
+    	        return false;
+    	    }
+    	});
+    	dialog.hide();
+    	$('#js-api-line-checkall').change(function(){
+    		if ($(this).attr('checked')){
+    			$('.js-api-line').attr('checked',$(this).attr('checked'));
+    		} else {
+    			$('.js-api-line').attr('checked',false);
+    		}
+    	});
+    	
+    	$('#statistic_total_stat_check_line').click(function(){
+    		dialog.show();
+    	});
+    	
+    	
+    	
+    	var initSelect = function(){
+    		var init_value = '<option value="all">全部</option>';
+    		var plat = $('#statistic_total_stat_to_platform');
+    		var chan = $('#statistic_total_stat_to_channel');
+    		var ver = $('#statistic_total_stat_to_verson'); 
+    		plat.html(init_value);
+    		chan.html(init_value);
+    		ver.html(init_value);
+    		var xp = {}, xc={}, xv={};
+    		for (var api in data) {
+        		for (var pvc in data[api]) {
+        			var tmp = pvc.split(' | ');
+        			if (tmp.length != 3) {alert('数据错误，请重新获取'); return;}
+        			var p = tmp[0];
+        			var c = tmp[1];
+        			var v = tmp[2];
+        			if (typeof xp[p] == 'undefined') {
+        				xp[p] = true;
+        				$('<option value="'+p+'">'+p+'</option>').appendTo(plat);
+        			}
+        			if (typeof xc[c] == 'undefined') {
+        				xc[c] = true;
+        				$('<option value="'+c+'">'+c+'</option>').appendTo(chan);
+        			}
+        			if (typeof xv[v] == 'undefined') {
+        				xv[v] = true;
+        				$('<option value="'+v+'">'+v+'</option>').appendTo(ver);
+        			}
+        		}
+        	}
+    	};
+    	
+    	initSelect();
+    	
+    	var display = function(option, type, p, c, v){
+    		for (var i =0; i<24; i++) { // 全天 0~23 小时 , x 轴
+        		option.xAxis[0].data.push(i);
+        	}
+        	for (var api in data) { 
+        		if (typeof show_lines[api] === 'undefined') continue;
+        		option.legend.data.push(api_name[api]); // 有多少条线条
+        		var opt = {markPoint : {
+                    data : [
+                            {type : 'max', name: '最大值'},
+                            {type : 'min', name: '最小值'}
+                        ]
+                    },markLine : {
+                        data : [
+                                {type : 'average', name: '平均值'}
+                            ]
+                        }
+        		};
+        		opt.name = api_name[api];
+        		opt.type = 'line';
+        		opt.data = [];
+        		for (var i =0; i<24; i++) { // 数据填充0
+        			opt.data.push(0);
+        		}
+        		var lev1 = data[api];
+        		for (var pvc in lev1) {
+        			var tmp = pvc.split(' | ');
+        			if (tmp.length != 3) {alert('数据错误，请重新获取'); return;}
+        			var lev2 = lev1[pvc];
+        			for (var t in lev2) {
+        				if (p == 'all' || p == tmp[0]){
+        					if (c == 'all' || c==tmp[1]) {
+        						if (v == 'all' || v==tmp[2]) {
+        							var x = parseInt(t.substring(t.length-2));
+        							var num = parseInt(lev2[t][type]);
+        							if (type=='u_max' || type=='t_max') { // 这里求最大值
+        								opt.data[x] = opt.data[x]==0 ? num : Math.max(opt.data[x],num);  
+        							} else {
+                    					opt.data[x] += num;
+        							}
+        						}
+        					}
+        				}
+        			}
+        		}
+        		option.series.push(opt);
+        	}
+        	
+        	if (option.legend.data.length > 27) {
+        		option.grid.x2 = 300;
+        		option.tooltip.formatter = function(params,ticket,callback) {
+        			var st = {};
+        			var key = [];
+                    var res = params[0][1] + '小时';
+                    for (var i = 0, l = params.length; i < l; i++) {
+                    	if (params[i][2] > 0) {
+                    		key.push(params[i][2]);
+                    		var k = params[i][2];
+                    		st[k] = typeof(st[k]) == 'undefined' ? [] : st[k];
+                        	st[k].push(params[i][0] + ' : ' + params[i][2]);
+                    	}
+                    }
+                    key = key.sort(function(a,b){return b-a;});
+                    //console.log(key);
+                    for (var a in key) {
+                    	res += '<br/>' + st[key[a]].pop() ;
+                    	//res += '<br/>' + eval('st.opt'+key[a] +'.pop()') ;
+                    }
+                    return res;
+                }
+        	}
+        	
+        	$('#boo').height('700px');
+        	// 基于准备好的dom，初始化echarts图表
+            var myChart = echarts.init(document.getElementById('boo')); 
+         	// 为echarts对象加载数据 
+            myChart.setOption(option);
+    	}
+    	
+    	
+    	var displayByPvc = function(option, type, p, c, v, boo_t){ // 基于平台渠道版本的统计
+    		var x_zhou = [];
+    		var tmp_arr_data = [];
+        	for (var api in data) {  
+        		option.legend.data.push(api_name[api]); // 有多少条线条
+        		var lev1 = data[api];
+        		var tmp_data = {'boo_x':api};
+        		for (var pvc in lev1) {
+        			var tmp = pvc.split(' | ');
+        			if (tmp.length != 3) {alert('数据错误，请重新获取'); return;}
+        			if ($.inArray(tmp[boo_t], x_zhou) < 0) {
+        				x_zhou.push(tmp[boo_t]);
+        			}
+        			tmp_data[tmp[boo_t]] = typeof tmp_data[tmp[boo_t]] == 'undefined' ? 0 : tmp_data[tmp[boo_t]];
+        			var lev2 = lev1[pvc];
+        			for (var t in lev2) {
+        				if (p == 'all' || p == tmp[0]){
+        					if (c == 'all' || c==tmp[1]) {
+        						if (v == 'all' || v==tmp[2]) {
+        							var num = parseInt(lev2[t][type]);
+        							if (type=='u_max' || type=='t_max') { // 这里求最大值
+        								tmp_data[tmp[boo_t]] = tmp_data[tmp[boo_t]]==0 ? num : Math.max(tmp_data[tmp[boo_t]],num);  
+        							} else {
+        								tmp_data[tmp[boo_t]] += num;
+        							}
+        						}
+        					}
+        				}
+        			}
+        		}
+        		tmp_arr_data.push(tmp_data);
+        	}
+        	
+        	for (var a in x_zhou) {
+        		option.xAxis[0].data.push(x_zhou[a]);
+        	}
+        	
+        	for (var b in tmp_arr_data) { // 补全数据
+        		var opt = {
+        			markPoint : {
+	                    data : [
+                            {type : 'max', name: '最大值'},
+                            {type : 'min', name: '最小值'}
+                        ]
+                    },markLine : {
+                        data : [
+                                {type : 'average', name: '平均值'}
+                            ]
+                        }
+                };
+	    		opt.name = api_name[tmp_arr_data[b].boo_x];
+	    		opt.type = 'line';
+	    		opt.data = [];
+    			for (var a in x_zhou) {
+    				var num = typeof tmp_arr_data[b][x_zhou[a]] == 'undefined' ? 0 : tmp_arr_data[b][x_zhou[a]];
+    				opt.data.push(num);
+    			}
+    			option.series.push(opt);
+    		}
+        	
+        	if (option.legend.data.length > 27) {
+        		option.grid.x2 = 300;
+        		option.tooltip.formatter = function(params,ticket,callback) {
+        			var st = {};
+        			var key = [];
+                    var res = params[0][1] + '';
+                    for (var i = 0, l = params.length; i < l; i++) {
+                    	if (params[i][2] > 0) {
+                    		key.push(params[i][2]);
+                    		var k = params[i][2];
+                    		st[k] = typeof(st[k]) == 'undefined' ? [] : st[k];
+                        	st[k].push(params[i][0] + ' : ' + params[i][2]);
+                    	}
+                    }
+                    key = key.sort(function(a,b){return b-a;});
+                    //console.log(key);
+                    for (var a in key) {
+                    	res += '<br/>' + st[key[a]].pop() ;
+                    	//res += '<br/>' + eval('st.opt'+key[a] +'.pop()') ;
+                    }
+                    return res;
+                }
+        	}
+        	
+        	$('#boo').height('700px');
+        	// 基于准备好的dom，初始化echarts图表
+            var myChart = echarts.init(document.getElementById('boo')); 
+         	// 为echarts对象加载数据 
+            myChart.setOption(option);
+    	}
+    	
+    	$('#statistic_total_stat_to_search').click(function(){
+    		if ($.isEmptyObject(show_lines)) {alert('选择接口啊'); return false;}
+    		var p = $('#statistic_total_stat_to_platform').val();
+    		var c = $('#statistic_total_stat_to_channel').val();
+    		var d = $('#statistic_total_stat_to_data').val();
+    		var v = $('#statistic_total_stat_to_verson').val();
+    		var t = $('#statistic_total_stat_to_type').val();
+    		
+    		var d_txt = $('#statistic_total_stat_to_data option:selected').text();
+    		var t_txt = $('#statistic_total_stat_to_type option:selected').text();
+    		var option = {
+        		title : {
+            	    text: '{$Think.post.day|default=''} 接口-'+d_txt+'-调用情况分析',
+            	    subtext: p + ' 平台  ' + c + ' 渠道   统计方式：' + t_txt + ''
+            	},
+            	tooltip : {
+            	    trigger: 'axis',
+            	    axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+            	        type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+            	    }
+            	},
+            	animation:false,
+            	grid :{
+            	  	x2 : 150
+            	},
+                toolbox: {
+                    show : true,
+                    feature : {
+                        mark : {show: true},
+                        dataView : {show: true, readOnly: false},
+                        magicType : {show: true, type: ['line', 'bar']},
+                        restore : {show: true},
+                        saveAsImage : {show: true}
+                    }
+                },
+                legend: {
+                	 orient: 'vertical', // 'vertical'
+                     x: 'right', // 'center' | 'left' | {number},
+                     y: '40', // 'center' | 'bottom' | {number}
+                    data:[]
+                },
+                xAxis : [{
+                        type : 'category',
+                        data : []
+                    }
+                ],
+                yAxis : [{
+                        type : 'value'
+                    }
+                ],
+                series : [
+                ]
+            };
+    		if (t == 'time') {
+    			display(option,d,p,c,v);
+    		} else {
+    			t = parseInt(t);
+    			displayByPvc(option, d,p,c,v,t);
+    		}
+    	});
+    	 
+    })();
+    </script>
+</empty>
+<include file="Public:footer" />

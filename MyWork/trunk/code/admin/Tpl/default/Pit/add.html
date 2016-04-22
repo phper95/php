@@ -1,0 +1,62 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<!-- Secondary nav -->
+</div>
+<!-- Sidebar ends -->
+
+<!-- Content begins -->
+<div id="content">
+    <include file="Public:bav" />
+    <!-- Main content -->
+    <div class="wrapper">
+        	<div class="fluid">
+        	<script language="javascript" type="text/javascript" src="__JS__/My97DatePicker/WdatePicker.js"></script>
+        		<form method='post' id="form1" name="form1" action="{:U('Pit/insert')}"  enctype="multipart/form-data">
+                    <div class="widget ">
+                        <div class="whead">
+                        	<h6>坑详情</h6>
+                        	<empty name="Think.get.backurl">
+	                        	<a href="{:getCurrentUrl()}" class="buttonH bBlue mb10 mt5">返回</a>
+	                        <else />
+	                        	<a href="{$Think.get.backurl}" class="buttonH bBlue mb10 mt5">返回</a>
+	                        </empty>
+                        	<div class="clear"></div>
+                        </div>
+                        <div class="formRow">
+                            <div class="grid3"><label>填坑用户 :</label></div>
+                            <div class="grid9 searchDrop">
+                            	<select name="user" class="select">
+                            	<option value="">-请选择-</option>
+                            	<volist name="PitMember" id="p">
+                            	<option value="{$key},{$p.user_name},{$p.avatar}">{$p.user_name}  ( {$key} )</option>
+                            	</volist>
+                            	</select>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>坑名:</label></div>
+                            <div class="grid9"><input type="text" name="pit_name" value="{$vo.pit_name}"></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                        	<notempty name="Think.get.backurl">
+                        	<input type="hidden" name="backurl" value="{$Think.get.backurl}">
+                        	</notempty>
+                        	<input type="submit" value="提 交" class="buttonM bBlack formSubmit" /><div class="clear"></div>
+                        </div>
+                        <div class="clear"></div>
+                    
+                    </div>
+                    </form>
+            </div>
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+<include file="Public:footer" />

@@ -1,0 +1,387 @@
+<include file="Public:header" />
+
+<script language="javascript" type="text/javascript" src="__JS__/My97DatePicker/WdatePicker.js"></script>
+<script src="__JS__/dialog/artDialog.js?skin=default"></script>
+<script src="__JS__/zxxFile.js"></script>
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<!-- Secondary nav -->
+    <div class="secNav">
+        <div class="secWrapper">
+            <include file="HomeOnline:opt" />
+       </div> 
+       <div class="clear"></div>
+   </div>
+</div>
+<!-- Sidebar ends -->
+<style>
+	.boo-box {float:left;width:602px;border:1px solid #ccc;}
+	.boo-box , .boo-box * {box-sizing: border-box;}
+	.boo-box .menubar{
+		height:50px;
+	}
+	.boo-box .menubar dt{float:left;width:200px;background-color:#fff;height:auto;padding:10px 0;text-align:center;}
+	.boo-box .line {float:left;width:100%;height:10px; background-color:#eee;}
+	.boo-box .item {
+		padding:10px;background-color:#fff;
+	}
+	.boo-box .item .head {
+		background:url('http://ser3.graphmovie.com/boo/ICON/APP/index_icon_type_top@3x.png') no-repeat left 3px;
+		background-size:auto 48%;padding:0 0 10px 22px;font-weight:900;
+	}
+	.boo-box .item .hot {
+		background-image:url('http://ser3.graphmovie.com/boo/ICON/APP/index_icon_type_top@3x.png');
+	}
+	.boo-box .item .topic {
+		background-image:url('http://ser3.graphmovie.com/boo/ICON/APP/index_icon_type_albums@3x.png');
+	}
+	.boo-box .item .pianchang {
+		background-image:url('http://ser3.graphmovie.com/boo/ICON/APP/index_icon_type_studio@3x.png');
+	}
+	.boo-box .item .juqing {
+		background-image:url('http://ser3.graphmovie.com/boo/ICON/APP/index_icon_type_drama@3x.png');
+	}
+	.boo-box .item .kongbu {
+		background-image:url('http://ser3.graphmovie.com/boo/ICON/APP/index_icon_type_terror@3x.png');
+	}
+	.boo-box .item .love {
+		background-image:url('http://ser3.graphmovie.com/boo/ICON/APP/index_icon_type_love@3x.png');
+	}
+	.boo-box .item .xiju {
+		background-image:url('http://ser3.graphmovie.com/boo/ICON/APP/index_icon_type_comedy@3x.png');
+	}
+	.boo-box .item .xuanyi {
+		background-image:url('http://ser3.graphmovie.com/boo/ICON/APP/index_icon_type_mystery@3x.png');
+	}
+	.boo-box .item .fanzui {
+		background-image:url('http://ser3.graphmovie.com/boo/ICON/APP/index_icon_type_crime@3x.png');
+	}
+	.boo-box .item .donghua {
+		background-image:url('http://ser3.graphmovie.com/boo/ICON/APP/index_icon_type_animation@3x.png');
+	}
+	.boo-box .item .dongzuo {
+		background-image:url('http://ser3.graphmovie.com/boo/ICON/APP/index_icon_type_action@3x.png');
+	}
+	.boo-box .item .kehuan {
+		background-image:url('http://ser3.graphmovie.com/boo/ICON/APP/index_icon_type_science@3x.png');
+	}
+	.boo-box .item .duanpian {
+		background-image:url('http://ser3.graphmovie.com/boo/ICON/APP/index_icon_type_short@3x.png');
+	}
+	.boo-box .item .qihuan {
+		background-image:url('http://ser3.graphmovie.com/boo/ICON/APP/index_icon_type_fantasy@3x.png');
+	}
+	.boo-box .item .lunli {
+		background-image:url('http://ser3.graphmovie.com/boo/ICON/APP/index_icon_type_ethics@3x.png');
+	}
+	
+	
+	.boo-box .item .movie {
+		float:left;width:290px;margin-bottom:15px;padding:5px;position:relative;
+	}
+	.movie .img {
+		float:left;width:100%;height:200px;
+		background:url('http://avatar.graphmovie.com/boo/movies/7482/7482_20151221205214_b.jpg');
+		background-size:100% 100%;position:relative;
+	}
+	.movie .grapher, .movie .play, .movie .ding {
+		background:url('__PUBLIC__/images/apphome/hc_botbar_eye.png') no-repeat left center;
+		background-size:auto 60%;float:right;padding:0 16px;
+		color:#fff; text-shadow:0 0 2px #000;
+	}
+	.movie .grapher {
+		background-image:url('__PUBLIC__/images/apphome/hc_3btn_rank.png');
+		float:left;
+	}
+	.movie .ding {
+		background-image:url('__PUBLIC__/images/apphome/hc_botbar_liked.png');
+	}
+	.movie .img-info {
+		position:absolute;bottom:0;left:0;padding:2px 8px;width:100%;
+	}
+	.movie .score {
+		float:right;width:36%;
+	}
+	.movie .ctrl {
+		position:absolute;width:100%;height:100%;background-color:rgba(0,0,0,0.4);
+		top:0;left:0;text-align:center;padding-top:70px;
+	}
+	.movie .ctrl .time {
+		position:absolute;top:2px;right:2px;color:#fff;
+	}
+	
+	
+	.boo-box .item .more {text-align:center;}
+	.more .refresh, .more .goto {
+		background:url('http://ser3.graphmovie.com/boo/ICON/APP/change.png') no-repeat right center;
+		background-size:auto 90%;padding-right:20px;font-size:1.2em;
+	}
+	.more .goto {
+		background-image:url('http://ser3.graphmovie.com/boo/ICON/APP/more.png');
+	}
+	
+	.boo-box .pianch {
+		float:left;width:100%;margin-bottom:15px;
+	}
+	.pianch .img {
+		float:left;width:30%;height:120px;
+		background:url('http://avatar.graphmovie.com/boo/movies/7482/7482_20151221205214_b.jpg');
+		background-size:100% 100%;position:relative;
+	}
+	.pianch .img .ctrl {
+		position:absolute;width:100%;height:100%;background-color:rgba(0,0,0,0.4);
+		top:0;left:0;text-align:center;padding-top:50px;
+	}
+	.pianch .ctrl .time {
+		position:absolute;top:2px;right:2px;color:#fff;
+	}
+	.pianch .info {
+		float:right;width:68%;position:relative; height:120px;
+	}
+</style>
+<!-- Content begins -->
+<div id="content">
+    <include file="Public:bav" />
+    <!-- Main content -->
+    
+    <div class="wrapper">
+        <div class="fluid">
+        		<form method='post' id="post_form" name="form1" action="{:U('HomeOnline/doAddHomeConfig')}" onsubmit="return false;"  enctype="multipart/form-data">
+                    <div class="widget ">
+                        <div class="whead">
+                        <h6>V4.8 首页配置项目</h6>
+                        <a href="{:getCurrentUrl()}" class="buttonH bBlue mb10 mt5">返回</a>
+                        <div class="clear"></div></div>
+                        <div class="formRow">
+                            <div class="grid2"><label>配置名称：<span class="req">*</span> </label></div>
+                            <div class="grid3"><input type="text" name="name" placeholder="配置名称"/></div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="formRow">
+                            <div class="grid2"><label>配置脚本：<span class="req">*</span> </label></div>
+                            <div class="grid10">
+                            	<label>效果：</label>
+                            	<div class="clear" ></div>
+                            	<div class="boo-xiaoguo" id="boo_xiaoguo">
+                            		<div class="boo-box">
+					            		<div class="menubar">
+					            			<dl>
+					            				<dt><img style="height:32px;" src="http://ser3.graphmovie.com/boo/ICON/APP/index_icon_guess@3x.png"/><br />排行榜</dt>
+					            				<dt><img style="height:32px;" src="http://ser3.graphmovie.com/boo/ICON/APP/index_icon_rank@3x.png"/><br />猜你喜欢</dt>
+					            				<dt><img style="height:32px;" src="http://ser3.graphmovie.com/boo/ICON/APP/index_icon_today@3x.png"/><br />今日茶点</dt>
+					            			</dl>
+					            		</div>
+					            		<div class="line"></div>
+					            		<div class="clear"></div>
+						            	<div class="item">
+						            		<div class="head hot">热门图解</div>
+						            		<div style="text-align:center;">
+						            			<a class="greenBack" id="add_movie">+ 添加一部图解 +</a>
+											</div>
+						            		<div class="clear"></div>
+						            		<div id="movie_list">
+						            		<!-- <div class="movie">
+						            			<div class="img">
+						            				<div class="ctrl">
+							            				<a class="greenBack" id="move_up_">上</a>
+							            				<a class="blueBack" id="move_up_">下</a>
+							            				<a class="redBack" id="move_up_">删</a>
+							            			</div>
+						            				<div class="img-info">
+							            				<div class="grapher">sdfsdf</div>
+							            				<div class="ding">sd</div>
+							            				<div class="play">sd</div>
+							            				<div class="clear"></div>
+						            				</div>
+						            			</div>
+						            			<div>
+						            				<h6>asdfasdf</h6>
+						            				<div>asdfasdf<span class="score">sdf</span></div>
+						            			</div>
+						            		</div> -->
+						            		</div>
+						            		<div class="clear"></div>
+						            		<div class="more"><span class="refresh">换一大波推荐</span></div>
+						            	</div>
+						            	<div class="line"></div>
+						            	<div class="clear"></div>
+						            	<div class="item">
+						            		<div class="head topic">专辑</div>
+						            		<div>balabala~</div>
+						            		<div class="clear"></div>
+						            		<div class="more"><span class="goto">更多精彩内容</span></div>
+						            	</div>
+						            	<div class="line"></div>
+						            	<div class="clear"></div>
+						            	<div class="item">
+						            		<div class="head pianchang">片场</div>
+						            		<div>
+						            			<a class="redBack" id="add_paper">+ 添加画报</a>  
+						            			<a class="blueBack" id="add_wei">+ 添加微图解</a>
+						            			<br /><br />
+											</div>
+											<div class="clear"></div>
+						            		<div id="pianch_list">
+						            		<!-- <div class="pianch">
+						            			<div class="img">
+						            				<div class="ctrl">
+							            				<a class="greenBack" id="move_up_">上</a>
+							            				<a class="blueBack" id="move_up_">下</a>
+							            				<a class="redBack" id="move_up_">删</a>
+							            			</div>
+						            			</div>
+						            			<div class="info">
+						            				<div style="color:#999;">from <span style="color:#666;">片场</span></div>
+						            				<div style="font-size:1.2em;color:#333;">车票难买</div>
+						            				<div style="position:absolute;bottom:0;left:0;width:100%;">By 洒毛心情</div>
+						            			</div>
+						            		</div> -->
+						            		</div>
+						            		<div class="clear"></div>
+						            		<div class="more"><span class="goto">更多精彩内容</span></div>
+						            	</div>
+						            	<div class="line"></div>
+						            	<div class="clear"></div>
+						            	<div class="item">
+						            		<div class="head juqing">剧情</div>
+						            		<div>balabala~</div>
+						            		<div class="clear"></div>
+						            		<div class="more"><span class="goto">更多精彩内容</span></div>
+						            	</div>
+						            	<div class="line"></div>
+						            	<div class="clear"></div>
+						            	<div class="item">
+						            		<div class="head kongbu">恐怖</div>
+						            		<div>balabala~</div>
+						            		<div class="clear"></div>
+						            		<div class="more"><span class="goto">更多精彩内容</span></div>
+						            	</div>
+						            	<div class="line"></div>
+						            	<div class="clear"></div>
+						            	<div class="item">
+						            		<div class="head love">爱情</div>
+						            		<div>balabala~</div>
+						            		<div class="clear"></div>
+						            		<div class="more"><span class="goto">更多精彩内容</span></div>
+						            	</div>
+						            	<div class="line"></div>
+						            	<div class="clear"></div>
+						            	<div class="item">
+						            		<div class="head xiju">喜剧</div>
+						            		<div>balabala~</div>
+						            		<div class="clear"></div>
+						            		<div class="more"><span class="goto">更多精彩内容</span></div>
+						            	</div>
+						            	<div class="line"></div>
+						            	<div class="clear"></div>
+						            	<div class="item">
+						            		<div class="head xuanyi">悬疑</div>
+						            		<div>balabala~</div>
+						            		<div class="clear"></div>
+						            		<div class="more"><span class="goto">更多精彩内容</span></div>
+						            	</div>
+						            	<div class="line"></div>
+						            	<div class="clear"></div>
+						            	<div class="item">
+						            		<div class="head fanzui">犯罪</div>
+						            		<div>balabala~</div>
+						            		<div class="clear"></div>
+						            		<div class="more"><span class="goto">更多精彩内容</span></div>
+						            	</div>
+						            	<div class="line"></div>
+						            	<div class="clear"></div>
+						            	<div class="item">
+						            		<div class="head donghua">动画</div>
+						            		<div>balabala~</div>
+						            		<div class="clear"></div>
+						            		<div class="more"><span class="goto">更多精彩内容</span></div>
+						            	</div>
+						            	<div class="line"></div>
+						            	<div class="clear"></div>
+						            	<div class="item">
+						            		<div class="head dongzuo">动作</div>
+						            		<div>balabala~</div>
+						            		<div class="clear"></div>
+						            		<div class="more"><span class="goto">更多精彩内容</span></div>
+						            	</div>
+						            	<div class="line"></div>
+						            	<div class="clear"></div>
+						            	<div class="item">
+						            		<div class="head kehuan">科幻</div>
+						            		<div>balabala~</div>
+						            		<div class="clear"></div>
+						            		<div class="more"><span class="goto">更多精彩内容</span></div>
+						            	</div>
+						            	<div class="line"></div>
+						            	<div class="clear"></div>
+						            	<div class="item">
+						            		<div class="head duanpian">短片</div>
+						            		<div>balabala~</div>
+						            		<div class="clear"></div>
+						            		<div class="more"><span class="goto">更多精彩内容</span></div>
+						            	</div>
+						            	<div class="line"></div>
+						            	<div class="clear"></div>
+						            	<div class="item">
+						            		<div class="head qihuan">奇幻</div>
+						            		<div>balabala~</div>
+						            		<div class="clear"></div>
+						            		<div class="more"><span class="goto">更多精彩内容</span></div>
+						            	</div>
+						            	<div class="line"></div>
+						            	<div class="clear"></div>
+						            	<div class="item">
+						            		<div class="head lunli">伦理</div>
+						            		<div>balabala~</div>
+						            		<div class="clear"></div>
+						            		<div class="more"><span class="goto">更多精彩内容</span></div>
+						            	</div>
+					            	</div>
+                            	</div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="formRow">
+                            <div class="grid2"><label>预计上线时间：<span class="req">*</span> </label></div>
+                            <div class="grid3"><input type="text" name="plan_time" id="play_time" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:00'})" placeholder="预计上线时间"/></div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="formRow">
+                            <div class="grid2"><label>备注：<span class="req">*</span> </label></div>
+                            <div class="grid10"><textarea name="remark" rows="5"></textarea></div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="formRow">
+                        	<input type="submit" value="提 交" id="submit_form" class="buttonM bBlack formSubmit" /><div class="clear"></div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    </form>
+            </div>
+    </div>
+    <!-- Main content ends -->
+</div>
+<include file="HomeOnline:homePage3" />
+<!-- Content ends -->
+
+<script type="text/javascript">
+(function(){
+	$('#add_movie').click(function(){
+		$('#add_movie_model').click();
+	});
+	$('#add_paper').click(function(){
+		$('#add_paper_model').click();
+	});
+	$('#add_wei').click(function(){
+		$('#add_wei_model').click();
+	});
+})();
+</script>
+
+
+<include file="Public:footer" />
+
+
+			
+			

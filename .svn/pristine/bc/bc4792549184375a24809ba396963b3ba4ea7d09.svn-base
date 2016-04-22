@@ -1,0 +1,83 @@
+body:after *{font-family:'xsphone,phone,xlphone,tablet,xltablet,desktop'}
+*, *:before, *:after {box-sizing: border-box;}
+@media only screen and (min-width:75em){body:after{font-family:desktop}}@media only screen and (max-width:85.375em){body:after{font-family:xltablet}}@media only screen and (max-width:64em){body:after{font-family:tablet}}@media only screen and (max-width:60em){body:after{font-family:xlphone}}@media only screen and (max-width:40em){body:after{font-family:phone}}@media only screen and (max-width:31.25em){body:after{font-family:xsphone}}
+html{height:100%}
+html,body,div,span,input,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,code,del,dfn,em,img,q,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,textarea,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;font-weight:inherit;font-style:inherit;font-size:100%;font-family:inherit;vertical-align:baseline;line-height:1.5em}
+#main_box {}
+#main {background-color: inherit; margin:0px auto; max-width: 720px; min-width: 320px; overflow: hidden; position: relative;}
+.header {height: 80px; border-bottom:1px solid #808080;}
+.nowrap {white-space: nowrap;}
+.header a, a:visited { color: #2C9AB7;text-decoration: none;}
+.header a .nolink,.header a:visited .nolink {color: #595959;}
+.header a:hover {color: #237A91;}
+#account {float:left; margin:5px 0px 0px 5px;}
+#account .avatar { width:60px; height:60px; float:left; margin-right:6px; border-radius:30px;}
+#account .info , #account .info h6, #account .info span{float:left; width:auto; color:#555;}
+#account .info h6 {font-weight:bold; font-size:18px; margin-top:10px;}
+#account .info span {clear:left; font-size:12px;line-height:20px;}
+.tip {float:right; margin-top:5px; margin-right:5px; font-weight:bold; color:#2C9AB7;}
+#menu_bar {height:40px;padding-left:10px; background-color:#e6e6e6;box-sizing: border-box;}
+#menu_bar a, a:visited { color: #2C9AB7;text-decoration: none;}
+#menu_bar a .nolink,#menu_bar a:visited .nolink {color: #595959;}
+#menu_bar a:hover {color: #237A91;}
+#menu_bar ul {padding-top:5px;}
+#menu_bar li {list-style:none; float:left;padding:3px 20px 3px 10px; background:url('../img/menu_bar.png') no-repeat right; background-size:auto 100%;background-color:#fff;}
+#menu_bar li.last{background-image:url('../img/menu_bar_2.png')}
+.search_form {width:98%; margin:0px auto;margin-top:12px; }
+.search_form .search_movie {width: 100%; padding:2px 2%; border:2px solid #00aaff; background-color:#fff;height:45px; line-height:35px; color:#999; border-radius:2px; *width:99%; *padding:2px 0px;}
+.search_form input[type="submit"]{width:100%; background-color:#00aaff;color:#fff;font-weight:bold; font-size:14px; height:40px;margin-top:10px;}
+.width100 {width:100%;}
+
+.search_result {width:98%; margin:0px auto;margin-top:12px;}
+.search_result .title {color:#555; font-weight:bold; font-size:20px; border-bottom:2px solid #e6e6e6;}
+@media only screen and (max-width:40em){
+	
+}
+.search_result .info {color:#555; font-size:14px; padding:10px 2px; line-height:2.4em;}
+.search_result a, a:visited { color: #00aaff;text-decoration: none; font-weight:bold; border:2px solid #00aaff; padding:4px 8px; border-radius:5px;}
+
+.clear {clear:both;}
+#content {width:98%; margin:0px auto; margin-top:10px;}
+#content .Tab {border-bottom:1px solid #00aaff;}
+#content .Tab h6 {font-weight:bold;color:#fff;background-color:#00aaff;padding:3px 10px;float:left;}
+
+#content .body{color:#555;}
+.movieList{padding-top:5px;}
+.movieList dl {}
+.movieList dt {position:relative;border-bottom:2px solid #e6e6e6;}
+@media only screen and (max-width:40em){.movieList dt{border-bottom:1px solid #e6e6e6;}}
+.movieList .face {width:20%;float:left;margin-right:3px;max-width:30%;border:1px solid #cccccc;}
+.movieList .info {float:left;}
+.movieList .info h6 {font-weight:bold; color:#00aaff;font-size:20px; float:left;}
+.movieList .info span {float:left;color:#555;}
+@media only screen and (max-width:40em){.movieList .info span {font-size:12px;}}
+.movieList .right{position:absolute;right:5px;top:2px;color:#ff4c4c;}
+@media only screen and (max-width:40em){.movieList .right {font-size:12px;}}
+.movieList .rightTime {position:absolute;right:5px;bottom:2px;color:#999999; font-zize:10px;}
+@media only screen and (max-width:40em){.movieList .rightTime {font-size:10px;}}
+
+#content .more{width:100%;text-align:center;color:#00aaff;border:2px solid #00aaff;margin:10px 0px;padding:5px 8px;}
+
+#content .readInfo { margin: 20px 0 24px; color: #7F7E7E;background-color:#F8F6F7; line-height: 24px;padding: 16px;font-size: 12px;}
+
+.short_text , .long_text {padding:3px 8px; color:#999; background-color:#fff;}
+.short_text {width:50%;}
+.long_text {width:99%;}
+.txtBlue {border:1px solid #bbb;}
+.cont_form {position:relative;padding:5px 0px; color:#666; font-size:12px;}
+.form_left {float:left;}
+.m_name { width:100px; padding-left:12px;}
+.m_name span{color:#ff0000; position:absolute; top:0px; left:0px;line-height:26px;}
+.form_right {float:left;width:80%;}
+@media only screen and (max-width:40em){.form_right {float:left;width:98%;}}
+.clearfix {clear:both;}
+.set_btn {float:left;clear:both; color:#ff0000;width:100%; margin-top:10px; font-size:12px;}
+.set_btn_cont {float:right;}
+
+.btn {font-weight:bold; height:32px; padding:0px 10px;border-radius:5px; font-size:14px;}
+.btnBlue{background-color:#00aaff; color:#fff; }
+
+@media only screen and (max-width:40em){
+	.movieList .info h6 {font-size:14px;}
+	
+}

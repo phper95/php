@@ -1,0 +1,123 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<!-- Secondary nav -->
+</div>
+<!-- Sidebar ends -->
+
+<!-- Content begins -->
+<div id="content">
+    <include file="Public:bav" />
+    <!-- Main content -->
+    <div class="wrapper">
+        	<div class="fluid">
+        		<form method='post' id="form1" name="form1" action="{:U('SiteConfig/doAddMemberBg')}"  enctype="multipart/form-data">
+                    <div class="widget ">
+                        <div class="whead">
+                        <h6>添加用户个人中心背景图</h6>
+                        <empty name="Think.get.backurl">
+                        	<a href="{:getCurrentUrl()}" class="buttonH bBlue mb10 mt5">返回</a>
+                        <else />
+                        	<a href="{$Think.get.backurl}" class="buttonH bBlue mb10 mt5">返回</a>
+                        </empty>
+                        
+                        <div class="clear"></div></div>
+                        <div class="formRow">
+                            <div class="grid3"><label>名称：</label></div>
+                            <div class="grid3">
+                            	<input type="text" name="name"/>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="formRow">
+                            <div class="grid3"><label>说明：</label></div>
+                            <div class="grid9">
+                            	<input type="text" name="subtitle"/>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>URL:</label></div>
+                            <div class="grid9">
+                            	<input type="text" name="img_url" id="member_avatar_bg_img_url"/>
+                            	<div class="red" id="add_member_avatar_bg_img_error"></div>
+                            	<br />
+                            	<div style="position:relative;">
+                            		<img id="member_avatar_bg" src="" width="640" height="460"/>
+                            		<img src="__PUBLIC__/images/member_avatar_bg.png" width="640" height="460" style="position:absolute;top:0px;left:0px;"/>
+                            	</div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>创作人:</label></div>
+                            <div class="grid3"><input type="text" value="dwz" name="designer"/></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>排序值：</label></div>
+                            <div class="grid3"><input type="text" value="0" name="weight"/></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>状态：</label></div>
+                            <div class="grid3">
+                            	<select name="open">
+                            		<option value="1">启用</option>
+                            		<option value="0">禁用</option>
+                            	</select>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                        	<notempty name="Think.get.backurl">
+                        	<input type="hidden" name="backurl" value="{$Think.get.backurl}">
+                        	</notempty>
+                        	<input type="submit" value="提 交" id="add_member_bg_submit" class="buttonM bBlack formSubmit" />
+                        	<div class="clear"></div>
+                        </div>
+                        <div class="clear"></div>
+                    
+                    </div>
+                    </form>
+            </div>
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+<script>
+(function(){
+	var ok_img = false;
+	$('#member_avatar_bg_img_url').blur(function(){
+		var url = this.value;
+		if (url == $('#member_avatar_bg').attr('src') && ok_img == true) {return;}
+		ok_img = false;
+		//$('#member_avatar_bg').attr('src',$(this).val());
+		$("#member_avatar_bg").animate({opacity:'toggle'},"slow",null,function(){
+			$("#member_avatar_bg").attr("src",url);
+			$("#member_avatar_bg").animate({opacity:'toggle'},"slow");
+		});
+	});
+	
+	$('#member_avatar_bg').load(function(){
+		$('#add_member_avatar_bg_img_error').html('');
+		ok_img = true;
+	}).error(function(){
+		$('#add_member_avatar_bg_img_error').html('图片地址错误哦');
+	});
+	
+	$('#add_member_bg_submit').click(function(){
+		if (!ok_img){
+			alert('图片地址错误哦'); return false;
+		}
+	});
+})();
+</script>
+<include file="Public:footer" />

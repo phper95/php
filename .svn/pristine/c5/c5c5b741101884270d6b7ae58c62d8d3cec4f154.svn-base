@@ -1,0 +1,154 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<include file="Shop:opt" />
+	<!-- Secondary nav -->
+</div>
+<!-- Sidebar ends -->
+
+<script src="__JS__/dialog/artDialog.js?skin=default"></script>
+<script src="__JS__/jquery.qrcode.min.js"></script>
+
+<!-- Content begins -->
+<div id="content">
+
+  <include file="Public:bav" />
+  
+    <!-- Main content -->
+    <div class="wrapper">
+        <!-- Media table sample -->
+        <div class="widget check">
+            <div class="whead">
+            <h6>商品列表</h6>
+            <a href="{:U('Shop/addGoods')}" class="buttonH bBlue">添加</a>
+				<div class="clear"></div></div>
+            <table cellpadding="0" cellspacing="0" width="100%" class="tDefault checkAll tMedia" id="checkAll">
+                <thead>
+                    <tr>
+                        <td width="40">ID</td>
+                        <td width="80">ID</td>
+                        <td>商品信息</td>
+                        <td width="150">上架时间段</td>
+                        <td width="100">库存</td>
+                        <td width="80">操作</td>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td colspan="6">
+                            <div class="tPages">
+                                <ul class="pages">
+                                	{$page}
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    <volist name="list" id="vo">
+		            <tr>
+		                <td>{$vo.id}</td>
+		                <td>
+		                	<a href="{:U('Shop/uploadGoodsImg', array('id'=>$vo['id']))}" title="点我编辑封面">
+		                		<empty name="vo.image">
+		                			<img src="__PUBLIC__/images/quetu.jpg" alt="点我编辑" width="100px" height="70px;" />
+		                		<else />
+		                			<img src="{$vo.image}" alt="点我编辑" width="100px" height="70px;" />	
+		                		</empty>
+		                	</a>
+		                </td>
+		                <td>
+		                	<div style="text-align:left;">
+		                		<a class="js-show-phone" data-id="{$vo.goods_id}" href="javascript:void(0);" title="点我查看二维码"><span style="font-size:20px;font-weight:bold;">{$vo.name}</span></a><br />
+		                		{$vo.desc}
+		                	</div>
+		                </td>
+		                <td>
+		                	{$vo.on_sale_time} <br />
+		                	{$vo.off_sale_time}
+						</td>
+						<td>
+							{$vo.ku_cun} / {$vo.total_num}
+						</td>
+		                <td>
+		                	
+		                	<div class="btn-group" style="float: left;">
+	                            <a href="#" class="buttonM bDefault opt" data-toggle="dropdown">点我 <span class="caret"></span></a>
+	                            <ul class="dropdown-menu pull-right">
+	                            	<li><a href="{:U('Shop/editGoods', array('id'=>$vo['id']))}"><span class="icos-pencil"></span>编辑</a></li>
+	                            	<li><a href="{:U('Shop/editGoodsInfo', array('id'=>$vo['id']))}"><span class="icos-pencil"></span>编辑内容</a></li>
+	                            	<li><a href="javascript:void(0);" class="js-edit-num" data-id="{$vo.id}" data-txt='余量' data-field='ku_cun'><span class="icos-pencil"></span>修改余量</a></li>
+	                            	<li><a href="javascript:void(0);" class="js-edit-num" data-id="{$vo.id}" data-txt='总量' data-field='total_num'><span class="icos-pencil"></span>修改总量</a></li>
+	                            </ul>
+	                        </div>
+		                </td>
+		            </tr>
+		            </volist>
+                </tbody>
+            </table>
+        </div>
+        
+        	<div id="xxsdf" style="display:none;min-width:600px;" class="fluid">
+            			<div class="fluid">
+                    		<div class="widget nopadding nomargin">
+                    		<form method='post' id="form1" name="form1" action="{:U('Shop/doEditKucun')}"  enctype="multipart/form-data">
+                    		<div class="formRow">
+                        		<div class="grid5">
+                    				<label style="float:left;width:100px;"><input type="radio" value="1" name="p_type"/> 增加</label>
+                    				<label><input type="radio" value="0" name="p_type"/> 减少</label>
+                    			</div>
+                    			<div class="grid5">
+                    				<input type="text" name="num" placeholder="请输入数字"/>
+                    				<input type="hidden" name="field" id="field_num"/>
+                    				<input type="hidden" name="id" id="field_id"/>
+                    			</div>
+                    			<div class="clear"></div>
+                    		</div>
+                    		</form>
+                    		<div class="clear"></div>
+                    		</div>
+                    	</div>
+			</div>
+     
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+
+<script>
+(function(){
+	$('.js-show-phone').click(function(){
+		art.dialog({id:'show-qrcode',content:'<div id="output" style=""></div>'});
+		var id = $(this).attr('data-id');
+		$('#output').html('');
+		$('#output').qrcode({
+			//render: 'table', //table方式
+			width: 200, //宽度
+			height:200, //高度
+			text: 'http://ser3.graphmovie.com/appweb/shop/index.php?m=Public&a=look&k='+id //任意内容
+		});
+		
+		//art.dialog.open('http://ser3.graphmovie.com/appweb/news/read_{$vo.id}.html',{title: '手机模拟页面 ',resize:false,width: 340, height: 800});
+	});
+	
+	$('.js-edit-num').click(function(){
+		var title = $(this).attr('data-txt');
+		$('#field_num').val($(this).attr('data-field'));
+		$('#field_id').val($(this).attr('data-id'));
+		art.dialog({
+			title :'修改'+title,
+			id : 'edit-num-dialog',
+			padding:0,
+			content:$('#xxsdf')[0],
+			ok : function(){
+				$('#form1').submit();
+			},
+			cancel:function(){}
+		});
+	});
+})();
+</script>
+
+<include file="Public:footer" />

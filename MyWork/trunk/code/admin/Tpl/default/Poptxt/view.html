@@ -1,0 +1,93 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<!-- Secondary nav -->
+</div>
+<!-- Sidebar ends -->
+
+<!-- Content begins -->
+<div id="content">
+    <include file="Public:bav" />
+    <!-- Main content -->
+    <div class="wrapper">
+        	<!-- Messages #1 -->
+        <div class="widget">
+            <div class="whead">
+                <h6>【{$vo.movie_name}】弹幕详情</h6>
+                <a href="{:getCurrentUrl()}" class="buttonH bBlue mb10 mt5">返回</a>
+                <div class="clear"></div>
+            </div>
+            <br />
+            <ul class="messagesOne">
+            	<div align="left">
+            	<span style="font-size:30px;float:left;width:80px;" align="center">{++$vo['page_sort_id']}</span>
+            	<div style="padding-bottom:10px;">
+            			<img id="poptxt_show_info_img_{$key}" width="400px;" alt="" src="{$vo.img}">
+            		{$vo['intro']}
+            	</div>
+            	</div>
+            	<li class="by_user">
+                    <div class="btn-group" style="position:absolute;top:0px;left:1px;">
+	                     <a href="#" class="buttonM bDefault opt nopadding" data-toggle="dropdown"><img src="{$vo.avatar}" width='45px' height="45px" alt="" /></a>
+	                     <div class="dropdown-menu pull-left">
+	                         <span><a href="{:U('Member/addNews',array('id'=>$vo['user_id'],'type'=>'notice','typedata'=>1, 'backurl'=>urlencode(__SELF__)))}"><span class="icos-pencil"></span>下发动态</a></span>
+	                     </div>
+	                </div>
+                    <div class="messageArea">
+                        <span class="aro"></span>
+                        <div class="infoRow">
+                            <span class="name"><strong>{$vo['name']} ({$vo.user_id})</strong> 说:</span>
+                            <span class="time">{$vo.add_time}</span>
+                            <div class="clear"></div>
+                        </div>
+                        {:htmlspecialchars($vo['comment_content'])}
+                    </div>
+                    <div class="clear"></div>
+                </li>
+                <li class="divider"><span></span></li>
+            </ul>
+         </div>
+        <!-- 
+         <div class="fluid">
+         	<div class="widget">
+         		<div class="whead">
+	                <h6>屏蔽该条弹幕</h6>
+	                <div class="clear"></div>
+	            </div>
+		    	<div class="formRow">
+                	<div class="grid1"><label>原因：</label></div>
+                    <div class="grid3">
+                    	<select onchange="$('#poptxt_view_reason').val($(this).val());">
+                    		<option value="">-请选择-</option>
+                    		<option value="该用户因发广告，已被封印">广告</option>
+                    		<option value="该用户因剧透，已被封印">剧透</option>
+                    		<option value="该用户因辱骂，已被封印">辱骂</option>
+                    		<option value="该记录因违规，已被封印">其他</option>
+                    	</select>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="formRow">
+                	<div class="grid1"><label>原因：</label></div>
+                    <div class="grid3">
+                    	<input type="text" name="reason" readonly="readonly" id="poptxt_view_reason"/>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="formRow">
+                	<input type="hidden" name="id" value="{$vo.id}"/>
+                	<input type="submit" value="提 交" class="buttonM bBlack formSubmit" />
+                	<div class="clear"></div>
+                </div>
+                <div class="clear"></div>
+            </div>
+         </div>
+          -->
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+
+<include file="Public:footer" />

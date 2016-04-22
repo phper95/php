@@ -1,0 +1,39 @@
+<!-- Secondary nav -->
+    <div class="secNav">
+        <div class="secWrapper">
+            <!-- Tabs container -->
+            <div id="tab-container" class="tab-container">
+                
+                <div class="divider"><span></span></div>
+				<ul class="iconsLine ic1 etabs">
+                    <li><a href="#alt2" title="">资讯管理:</a></li>
+                </ul>                
+                <div class="divider"><span></span></div>
+                <div id="alt2">
+                <eq name="ACTION_NAME" value="newsList">
+                	<form method="get" action="{:U('News/newsList')}">
+		            <input type="hidden" value="{$Think.MODULE_NAME}" name="m"/>
+		            <input type="hidden" value="{$Think.ACTION_NAME}" name="a"/>
+                	<div class="sideWidget">
+                        <div class="formRow">
+                            <label>资讯名称：</label>
+                            <input type="text" name="name" value="{$Think.get.name}" placeholder="资讯名称" />
+                        </div>
+                        <div class="formRow">
+                            <input type="submit" class="buttonS bLightBlue" value="搜索资讯" />
+                        </div>
+                    </div>
+                    <div class="divider"><span></span></div>
+                    </form>
+                </eq>
+                <div id="general">
+                    <ul class="subNav">
+                        <li><a href="{:U('News/dayPic')}" title="每日一图管理" <eq name="ACTION_NAME" value="dayPic">class="this"</eq> ><span class="icos-frames"></span>每日一图</a></li>
+                        <li><a href="{:U('News/newsList')}" title="每日资讯管理" <eq name="ACTION_NAME" value="newsList">class="this"</eq> ><span class="icos-frames"></span>每日资讯</a></li>
+                    </ul>
+                </div>
+                </div>
+            </div>
+       </div> 
+       <div class="clear"></div>
+   </div>

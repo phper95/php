@@ -1,0 +1,79 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<!-- Secondary nav -->
+</div>
+<!-- Sidebar ends -->
+
+<!-- Content begins -->
+<div id="content">
+
+  <include file="Public:bav" />
+  
+    <!-- Main content -->
+    <div class="wrapper">
+        <!-- Media table sample -->
+        <div class="widget check">
+            <div class="whead">
+            <h6>权限组成员列表</h6>
+            <a href="{:getCurrentUrl()}" class="buttonH bBlue mb10 mt5">返回</a>
+				<div class="clear"></div></div>
+            <table cellpadding="0" cellspacing="0" width="100%" class="tDefault checkAll tMedia" id="checkAll">
+                <thead>
+                    <tr>
+		                <td></td>
+		                <td>编号</td>
+		                <td>用户名</td>
+		                <td>最后登录ip</td>
+		                <td>最后登录时间</td>
+		                <td>E-mail</td>
+		                <td>真实姓名</td>
+		                <td>状态</td>
+		            </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td colspan="8">
+                            <div class="tPages">
+                                <ul class="pages">
+                                	{$page}
+                                    <!--<li class="prev"><a href="#" title="">&lt;</a></li>
+                                    <li><a href="#" title="" class="active">1</a></li>
+                                    <li><a href="#" title="">2</a></li>
+                                    <li><a href="#" title="">3</a></li>
+                                    <li><a href="#" title="">4</a></li>
+                                    <li><a href="#" title="">5</a></li>
+                                    <li><a href="#" title="">6</a></li>
+                                    <li>...</li>
+                                    <li><a href="#" title="">20</a></li>
+                                    <li class="next"><a href="#" title="">&gt;</a></li>
+                                --></ul>
+                            </div>
+                        </td>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    <volist name="list2" id="vo">
+		            <tr>
+		                <td><input type="checkbox" name="key" value="{$vo.id}"></td>
+		                <td>{$vo.id}</td>
+		                <td>{$vo.account}</td>
+		                <td>{$vo.last_login_ip} </td>
+		                <td>{$vo.last_login_time|toDate='Y-m-d H:i:s'}</td>
+		                <td>{$vo.email}</td>
+		                <td>{$vo.nickname}</td>
+		                <td>{$vo.status|getStatus}</td>
+		            </tr>
+		            </volist>
+                </tbody>
+            </table>
+        </div>
+     
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+
+<include file="Public:footer" />

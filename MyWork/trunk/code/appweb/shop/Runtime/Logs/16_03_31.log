@@ -1,0 +1,6 @@
+[ 2016-03-31T10:13:23+08:00 ] 192.168.0.19 /php/mywork/trunk/code/appweb/shop/index.php?m=index&a=index&userid=99g3hpa2
+ERR: 无法加载模块:index
+
+[ 2016-03-31T10:15:37+08:00 ] 192.168.0.19 /php/mywork/trunk/code/appweb/shop/index.php?m=index&a=index&userid=99g3hpa2%e3%80%81
+ERR: 无法加载模块:index
+

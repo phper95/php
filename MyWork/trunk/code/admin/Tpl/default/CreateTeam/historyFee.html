@@ -1,0 +1,111 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<include file="CreateTeam:opt" />
+</div>
+<!-- Sidebar ends -->
+
+<!-- Content begins -->
+<div id="content">
+	 <include file="Public:bav" />
+    <!-- Main content -->
+    <div class="wrapper">
+        <!-- Media table sample -->
+        <div class="widget check">
+            <div class="whead">
+            <h6>结算历史记录</h6>
+				<div class="clear"></div></div>
+            <table cellpadding="0" cellspacing="0" width="100%" class="tDefault checkAll tMedia" id="checkAll">
+                <thead>
+                    <tr>
+                    	<td></td>
+		                <td>电影</td>
+		                <td>作者</td>
+		                <td width="50">稿费</td>
+		                <td width="130">结算时间</td>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td colspan="5">
+                        <empty name="list">
+                        	额。。。木有咧……
+                        <else/>
+                        </empty>
+                        </td>
+                        
+                    </tr>
+                </tfoot>
+                <tbody>
+                    <volist name="list" id="vo">
+		            <tr>
+		            	<td></td>
+		                <td>{$vo.movie_name} - ({$vo.movie_id}) {:getMovieCellcover($vo['cellcover'])}</td>
+		                <td>{$vo.user_name} - ({$vo.user_id})</td>
+		                <td>{$vo.cost|round=###,2}</td>
+		                <td>{$vo.fee_time}</td>
+		            </tr>
+		            </volist>
+                </tbody>
+            </table>
+        </div>
+     
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+
+<script>
+(function(){
+	$('.comment_show_box').click(function(){
+		var name = $(this).attr('data_name');
+		var id = $(this).attr('data_id');
+		var url = $(this).attr('data_url');
+		var html = '<strong>' + name + '</strong> ' + (id == '' ? ' 该用户的所有弹幕' : (' 说: ' + $('#vo_'+id).html()));
+		html += '<div style="padding:15px 0px;"><select id="showInfo_dialog_reason"><option value="">-选择原因-</option><option value="1">广告</option><option value="2">剧透</option><option value="3">辱骂</option><option value="4">其他</option></select></div>';
+		art.dialog({
+			id : 'dialog_xxx_mmm_nnn',
+			title : id==''?'屏蔽所有弹幕' : '屏蔽该条弹幕',
+			content : html,
+			ok : function(){
+				var reason = $('#showInfo_dialog_reason').val();
+				if (reason == '') {
+					alert('请选择原因'); return false;
+				}
+				$.ajax({
+					type:'POST',
+					url : url,
+					data : {reason:reason},
+					success : function(data){
+						if (typeof data == 'object') {
+							if (data.rst == 1) {
+								var ids = data.data.ids;
+								for (var a in ids) {
+									$('#vo_'+ids[a].id).html(ids[a].content);
+								}
+								if (id=='') {
+									alert('一共屏蔽该用户 ' + ids.length + ' 条记录。');
+								}
+							} else {
+								alert(data.msg);
+							}
+						} else {
+							alert(data);
+						}
+					},
+					error : function(ex){
+						alert('ajax 失败');
+					}
+				});
+			},
+			padding:10,
+			cancel:true
+		});
+		return false;
+	});
+})();
+</script>
+
+<include file="Public:footer" />

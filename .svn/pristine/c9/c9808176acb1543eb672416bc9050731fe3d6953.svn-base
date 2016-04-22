@@ -1,0 +1,173 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<!-- Secondary nav -->
+</div>
+<!-- Sidebar ends -->
+
+<script src="__JS__/dialog/artDialog.js?skin=default"></script>
+
+<!-- Content begins -->
+<div id="content">
+    <include file="Public:bav" />
+    <!-- Main content -->
+    <div class="wrapper">
+        	<div class="fluid">
+        		<form method='post' id="form1" name="form1" action="{:U('Wei/doEditByAdmin')}"  enctype="multipart/form-data">
+                    <div class="widget ">
+                        <div class="whead">
+                        <h6>编辑微图解</h6>
+                        <a href="{:getCurrentUrl()}" class="buttonH bBlue mb10 mt5">返回</a>
+                        <div class="clear"></div></div>
+                        <div class="formRow">
+                            <div class="grid3"><label>微图解标题：<span class="req">*</span> </label></div>
+                            <div class="grid3"><input type="text" name="title" value="{$vo.title}" placeholder="微图解标题"/></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>微图解说明：<span class="req">*</span> </label></div>
+                            <div class="grid3"><textarea name="intro" placeholder="微图解说明">{$vo.intro}</textarea></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>封面：<span class="req">*</span> </label></div>
+                            <div class="grid3">
+                            	<img src="{:getImageUrl($vo['pic'])}" id="wei_img_pic" height="150">
+                            	<input type="file" name="pic" id="file_pic"/>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>作者：<span class="req">*</span> </label></div>
+                            <div class="grid3"><input type="text" name="user_id" value="{$vo.user_id}" placeholder="默认编辑部" value=""/></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>标签：<span class="req">*</span> </label></div>
+                            <div class="grid3"><input type="text" name="tags" value="{$vo.tags}" placeholder="多个标签用半角逗号隔开"/></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>关联电影：<span class="req">*</span> </label></div>
+                            <div class="grid9">
+                            	<div id="film_id">
+                            	<volist name="film_list" id="film">
+                            		<span class="blueBack" style="margin:0px 20px 10px 0px;float:left;">
+                            			{$key}: {$film}
+                            			<input type="hidden" name="filmArr[]" value="{$key}" />
+                            			<span onclick="$(this).parent().remove();" style="cursor:pointer;margin-left:10px;">×</span>
+                            		</span>
+                            	</volist>
+                            	</div>
+                            	<a href="javascript:void(0);" id="search_film">查询</a>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>备注：<span class="req">*</span></label></div>
+                            <div class="grid7"><textarea rows="4" name="remark">{$vo.remark}</textarea></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                        	<input type="hidden" value="{$vo.id}" name="id"/>
+                        	<input type="submit" value="提 交" id="wei_edit_by_admin_submit" class="buttonM bBlack formSubmit" /><div class="clear"></div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    </form>
+            </div>
+            <div id="xxsdf" style="display:none;width:600px;" class="fluid">
+            			<div class="fluid">
+                    		<div class="widget nopadding nomargin">
+                    		<div class="formRow">
+                        		<div class="grid9">
+                    				<input type="text" id="search_film_name" placeholder="输入剧集名称查询"/>
+                    			</div>
+                    			<div class="grid3"><a class="buttonM bBlue" id="do_search_film">查询</a></div>
+                    			<div class="clear"></div>
+                    		</div>
+                    		<div class="body" id="choose_film">
+                    			
+                    		</div>
+                    		<div class="clear"></div>
+                    		<div style="overflow:auto; max-height:400px;">
+                    		<table cellpadding="0" cellspacing="0" width="100%" class="tDefault" id="search_rst_table">
+                    		</table>
+                    		</div>
+                    		<div class="clear"></div>
+                    		</div>
+                    	</div>
+			</div>
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+<script>
+(function(){
+	$("#file_pic").change(function(){
+		var objUrl = booGetObjectURL(this.files[0]) ;
+		if (objUrl) {
+			$("#wei_img_pic").attr("src", objUrl) ;
+		}
+	}) ;
+	$('#search_film').click(function(){
+		art.dialog({
+			id : 'search_img_dialog',
+			padding:0,
+			content:$('#xxsdf')[0],
+			ok : function(){
+				$('#film_id').html($('#choose_film').html());
+			},
+			cancel:function(){}
+		});
+	});
+	
+	$('#wei_edit_by_admin_submit').click(function(){
+		if ($('#wei_channel').val() == '') {
+			alert('请选择频道');
+			return false;
+		}
+	});
+	
+	var search_loading = false;
+	$('#do_search_film').click(function(){
+		var name = $('#search_film_name').val();
+		if (name == '') {alert("输入查询内容啊啊啊 啊");return;}
+		if (search_loading) {alert("正在查询啊，你就不能等一下么？");return;}
+		$.ajax({
+			url : '{:U("Film/getByName")}',
+			type:'POST',
+			data : {name:name},
+			success :function(data){
+				if (data == null || data.length==0) {
+					alert('没有查询记录');
+				} else {
+					var html = '';
+					for (var i=0,len=data.length; i<len; i++) {
+						html += '<tr>'
+								+'<td>'+data[i].id+'</td>'
+							 	+'<td>'+data[i].name+'</td>'
+							 	+'<td width="70"> <img src="'+data[i].face+'" width="60px" /></td>'
+							 	+'<td width="50" onclick="$(\'#choose_film\').append(\'<span style=\\\'margin:0px 20px 10px 0px;float:left;\\\' class=\\\'js-choose-film blueBack\\\'>'+data[i].id + ': '+data[i].name+'<input type=\\\'hidden\\\' name=\\\'filmArr[]\\\' value=\\\''+data[i].id+'\\\'><span onclick=\\\'$(this).parent().remove();\\\' style=\\\'cursor:pointer;margin-left:10px;\\\'>×</span></span>\');"><a href="javascript:void(0);">选择</a></td>'
+							 +'</tr>';
+					}
+					$('#search_rst_table').html(html);
+				}
+			},
+			error : function(ex){
+				alert('ajax 错误');
+			}
+		});
+	});
+})();
+</script>
+<include file="Public:footer" />

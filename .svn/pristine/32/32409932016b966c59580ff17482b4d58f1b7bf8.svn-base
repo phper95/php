@@ -1,0 +1,91 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<!-- Secondary nav -->
+</div>
+<!-- Sidebar ends -->
+
+<!-- Content begins -->
+<div id="content">
+
+  <include file="Public:bav" />
+  
+    <!-- Main content -->
+    <div class="wrapper">
+        <!-- Media table sample -->
+        <div class="widget check">
+            <div class="whead">
+            <h6>求片关键字列表</h6>
+            <eq name="Think.get.open" value="1">
+            	<a class="buttonH bBlue mb10 mt5" href="{:U('Wantsee/index')}">查看全部</a>
+            <else />
+            	<a class="buttonH bBlue mb10 mt5" href="{:U('Wantsee/index', array('open'=>1))}">只看显示</a>
+            </eq>
+            
+				<div class="clear"></div></div>
+            <table cellpadding="0" cellspacing="0" width="100%" class="tDefault checkAll tMedia" id="checkAll">
+                <thead>
+                    <tr>
+                    	<td width="10"><div>&nbsp;</div></td>
+                        <td width="40">ID</td>
+                        <td ><div>关键字</div></td>
+                        <td width="140"><div>添加时间</div></td>
+                        <td width="80"><div>求片次数</div></td>
+                        <td width="200">操作</td>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td colspan="6">
+                            <div class="tPages">
+                                <ul class="pages">
+                                	{$page}
+                                    <!--<li class="prev"><a href="#" title="">&lt;</a></li>
+                                    <li><a href="#" title="" class="active">1</a></li>
+                                    <li><a href="#" title="">2</a></li>
+                                    <li><a href="#" title="">3</a></li>
+                                    <li><a href="#" title="">4</a></li>
+                                    <li><a href="#" title="">5</a></li>
+                                    <li><a href="#" title="">6</a></li>
+                                    <li>...</li>
+                                    <li><a href="#" title="">20</a></li>
+                                    <li class="next"><a href="#" title="">&gt;</a></li>
+                                --></ul>
+                            </div>
+                        </td>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    <volist name="list" id="vo">
+		            <tr>
+		                <td><input type="checkbox" name="key" value="{$vo.id}"></td>
+		                <td>{$vo.id}</td>
+		                <td><div  align="left">{:htmlspecialchars($vo['keyword'])}</div></td>
+		                <td>{$vo.add_time}</td>
+		                <td>{$vo.want_times}</td>
+		                <td>
+		                <eq name="vo.open" value="1">
+		                	<a href="{:U('Wantsee/forbid',array('id'=>$vo['id']))}">禁止</a>&nbsp;&nbsp;
+		                	<span style="color:#ccc">显示</span>
+		                <else />
+		                	<span style="color:#ccc">禁止</span>&nbsp;&nbsp;
+		                	<a href="{:U('Wantsee/resume',array('id'=>$vo['id']))}">显示</a>
+		                </eq>
+		                &nbsp;&nbsp;
+		                <a href="{:U('Wantsee/members',array('id'=>$vo['id']))}">详情</a>
+		                </td>
+		                
+		            </tr>
+		            </volist>
+                </tbody>
+            </table>
+        </div>
+     
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+
+<include file="Public:footer" />

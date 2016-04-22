@@ -1,0 +1,214 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<!-- Secondary nav -->
+    <div class="secNav">
+        <div class="secWrapper">
+            <!-- Tabs container -->
+            <form method="get" action="{:U('Advht/index')}">
+            <input type="hidden" value="{$Think.MODULE_NAME}" name="m"/>
+            <input type="hidden" value="{$Think.ACTION_NAME}" name="a"/>
+            <div id="tab-container" class="tab-container">
+
+                <ul class="iconsLine ic1 etabs">
+                    <li><a href="#alt2" title="">片头片尾广告搜索:</a></li>
+                </ul>
+                
+                <div class="divider"><span></span></div>
+                
+                <div id="general"></div>
+                
+                <div id="alt1"></div>
+                <div id="alt2">
+                
+                	<!-- Sidebar forms -->
+                    <div class="sideWidget">
+                        <div class="formRow">
+                            <label>广告ID:</label>
+                            <input type="text" name="id" value="{$Think.get.id}" placeholder="广告ID" />
+                        </div>
+                        <div class="formRow">
+                           <label>广告名称:</label>
+                            <input type="text" name="name" value="{$Think.get.name}" placeholder="广告名称" /> 
+                        </div>
+                        <div class="formRow">
+                            <label>上线状态:</label>
+                            <select name="online" id="adv_search_online_select">
+                                <option value="" <eq name="Think.get.online" value="">selected="selected"</eq> >全部</option>
+                                <option value="1" <eq name="Think.get.online" value="1">selected="selected"</eq> >已上线</option>
+                                <option value="2" <eq name="Think.get.online" value="2">selected="selected"</eq> >未上线</option>
+                            </select>
+                        </div>
+                        <div class="formRow" id="adv_search_onlie_show">
+                        <div class="formRow">
+                            <label>平台:</label>
+                            <select name="platform" >
+                                <option value="all">全部</option>
+                                {:getPlatformList($_GET['platform'],'val')}
+                            </select>
+                        </div>
+                        <div class="formRow">
+                            <label>渠道:</label>
+                            <select name="channel" >
+                                <option value="all">全部</option>
+                                {:getChannelList($_GET['channel'],'val')}
+                            </select>
+                        </div>
+                        </div>
+                        
+                       	<div class="formRow searchDrop">
+                            <label>广告类型:</label>
+                            <input type="text" name="tags" value="{$Think.get.tags}" placeholder="广告类型" /> 
+                        </div>
+                        
+                        <div class="formRow">
+                            <label class="nopadding">
+                            	<input type="radio" name="orderby" <eq name="Think.get.orderby" value="id">checked="checked"</eq> value="id"/>排序-按广告ID
+                            </label>
+                            <div class="clear"></div>
+                            <div id="adv_search_orderby_onlietime_show">
+                            <label class="nopadding">
+                            	<input type="radio" name="orderby" <eq name="Think.get.orderby" value="online_time">checked="checked"</eq> value="online_time"/>排序-按上线时间
+                            </label>
+                            </div>
+                            <div class="clear"></div>
+                            <label class="nopadding"><input type="radio" name="orderby" <eq name="Think.get.orderby" value="add_time">checked="checked"</eq> value="add_time"/>排序-按添加时间</label>
+                            <div class="clear"></div>
+                            <label class="nopadding"><input type="radio" name="orderby" <eq name="Think.get.orderby" value="played">checked="checked"</eq> value="played"/>排序-按播放次数</label>
+                            <div class="clear"></div>
+                            <label class="nopadding"><input type="radio" name="orderby" <eq name="Think.get.orderby" value="ding">checked="checked"</eq> value="ding" />排序-按喜欢次数</label>
+                            <div class="clear"></div>
+                        </div>
+                        
+                         <div class="formRow">
+                            <label class="nopadding"><input type="radio" name="order" <eq name="Think.get.order" value="asc">checked="checked"</eq> value="asc"/>排序-升序</label>
+                            <div class="clear"></div>
+                            <label class="nopadding"><input type="radio" name="order" <eq name="Think.get.order" value="desc">checked="checked"</eq> value="desc"/>排序-降序</label>
+                            <div class="clear"></div>
+                        </div>
+                       
+                        <div class="formRow">
+                            <input type="submit" class="buttonS bLightBlue" value="搜索广告" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"><span></span></div>
+            </form>
+            
+       </div> 
+       <div class="clear"></div>
+   </div>
+</div>
+<!-- Sidebar ends -->
+    
+<!-- Content begins -->
+<div id="content">
+    <div class="contentTop">
+        <span class="pageTitle">片头片尾广告管理</span><div class="clear"></div>
+    </div>
+    
+    <include file="Public:bav" />
+    
+    <!-- Main content -->
+    <div class="wrapper">
+        <!-- Media table sample -->
+        <div class="widget check">
+            <div class="whead">
+            	<h6>片头片尾广告列表</h6>
+            	<a href="{:U('Advht/add')}" class="buttonH bBlue">添加</a>
+            	<div class="clear"></div>
+            </div>
+            <table cellpadding="0" cellspacing="0" width="100%" class="tDefault checkAll tMedia" id="checkAll">
+                <thead>
+                    <tr>
+                        <td width="10">ID</td>
+                        <td width="150">广告名称</td>
+                        <td width="50">图片</td>
+                        <td>说明</td>
+                        <td ><div>备注</div></td>
+                        <td width="80">操作</td>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td colspan="7">
+                        	<empty name="list">
+                        		木油满足您强烈需求的广告，您可以添加一部咩？
+                        	<else />
+                            <div class="tPages">
+                                <ul class="pages">
+                                    {$page}
+                                </ul>
+                            </div>
+                            </empty>
+                        </td>
+                    </tr>
+                </tfoot>
+                <tbody>
+                	<volist name="list" id="vo">
+		            <tr>
+		                <td>{$vo.id}</td>
+		                <td>
+		                	<div style="font-weight:700;font-size:20px;">{$vo.name}</div>
+		                </td>
+		                <td><img src="{$vo.img}" alt="" title="{$vo.img}" width="120px" /></td>
+		                <td>
+		                	<eq name="vo.head_show" value="1">
+		                		<span class="greenBack">片头：{$vo.head_fill_lv} / N</span>
+		                	</eq>
+		                	<eq name="vo.tail_show" value="1">
+		                		&nbsp;&nbsp;<span class="blueBack">片尾：{$vo.tail_fill_lv} / N</span>
+		                	</eq>
+		                	<if condition="(!empty($vo['match_movie']))"> 
+		                		&nbsp;&nbsp;<span class="redBack">制定影片ID：{$vo.match_movie}</span>
+		                	</if>
+		                </td>
+		                <td><div style="text-align:left;">{$vo.remark}</div></td>
+		                <td>
+		                	<!-- Simple buttons with caret -->
+	                        <div class="btn-group" style="float: left;">
+	                            <a href="#" class="buttonM bDefault opt" data-toggle="dropdown">点我 <span class="caret"></span></a>
+	                            <ul class="dropdown-menu pull-right">
+	                                <li><a href="{:U('Advht/edit',array('id'=>$vo['id']))}"><span class="icos-view"></span>查看</a></li>
+	                                <li><a href="{:U('Advht/online', array('id'=>$vo['id'],'mname'=>$vo['name']))}"><span class="icos-cross"></span>上/下 线</a></li>
+	                                <li><a href="#" class=""><span class="icos-trash"></span>删除</a></li>
+	                            </ul>
+	                        </div>
+		                </td>
+		            </tr>
+		            </volist>
+                </tbody>
+            </table>
+        </div>
+     
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+<script>
+(function(){
+	var show = function(b){
+		if (b>0){
+			$('#adv_search_onlie_show').show();
+		}
+		else { 
+			$('#adv_search_onlie_show').hide();
+		}
+		if (b==1) {
+			$('#adv_search_orderby_onlietime_show').show();
+		} else {
+			$('#adv_search_orderby_onlietime_show').hide();
+		}
+	};
+	$('#adv_search_online_select').change(function(){
+		show($(this).val());
+	});
+	
+	show($('#adv_search_online_select').val());
+})();
+</script>
+<include file="Public:footer" />

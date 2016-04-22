@@ -1,0 +1,46 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<!-- Secondary nav -->
+</div>
+<!-- Sidebar ends -->
+
+<!-- Content begins -->
+<div id="content">
+    <include file="Public:bav" />
+    <!-- Main content -->
+    <div class="wrapper">
+        <div class="fluid">
+        <form method=post id="form1" action="{:U('Role/setRole')}">
+        	<div class="widget ">
+        		<div class="whead">
+        			<h6>权限设置</h6>
+        			<a href="{:getCurrentUrl()}" class="buttonH bBlue mb10 mt5">返回</a>
+        			<div class="clear"></div>
+        		</div>
+		        <div class="formRow">
+		            <ul id="ckb_node_list">
+		                {$tree}
+		            </ul>
+		        </div>
+		        <div class="formRow">
+		        	<label><input type="checkbox" id="ckb_node_list_checkall" class="check" >全选/取消</label>   
+	            	<input type="submit" value="授 权" class="buttonM bBlack formSubmit">
+	            	<input type="hidden" name="roleId" value="{$Think.get.id}">
+                <div class="clear"></div>
+		    </div>
+        </form>
+        </div>
+    </div>  
+</div>
+<script>
+$('#ckb_node_list_checkall').click(function(){
+	if ( $(this).attr('checked') ) {
+		$('#ckb_node_list .checkx').attr("checked","checked");
+	} else {
+		$('#ckb_node_list .checkx').attr("checked",false);
+	}
+});
+</script>
+<include file="Public:footer" />

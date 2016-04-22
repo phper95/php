@@ -1,0 +1,49 @@
+<include file="Public/header" />
+	<div id="content">
+		<div class="Tab"><h6>当前坑</h6><div class="clear"></div></div>
+		<div class="body">
+			<dl class="movieList">
+			<volist name="doing_list" id="doing">
+				<dt>
+					<a href="{:U('Pit/pitInfo', array('id'=>$doing['id']))}">
+					<empty name="doing.pit_img">
+						<img src="__IMG__/fail_image.png" class="face"/>
+					<else />
+						<img src="__PITIMG__/{$doing.pit_img}" class="face"/>
+					</empty>
+					<div class="info">
+						<h6>{$doing.pit_name}</h6><div class="clear"></div>
+						<span>{$doing.info_str|default=''}</span>
+						<div class="right">{$doing.right_str|default=''}</div>
+						<div class="rightTime">{$doing.right_b_str|default=''}</div>
+					</div>
+					</a>
+					<div class="clear"></div>
+				</dt>
+			</volist>
+			</dl>
+		</div>
+		<br/>
+		<div class="Tab"><h6>占坑历史</h6><div class="clear"></div></div>
+		<div class="body">
+			<dl class="movieList">
+			<volist name="his_list" id="his">
+				<dt>
+					<empty name="his.pit_img">
+						<img src="__IMG__/fail_image.png" class="face"/>
+					<else />
+						<img src="__PITIMG__/{$his.pit_img}" class="face"/>
+					</empty>
+					<div class="info">
+						<h6>{$his.pit_name}</h6><div class="clear"></div>
+						<span>{$his.info_str|default=''}</span>
+						<div class="right">{$his.right_str|default=''}</div>
+						<div class="rightTime">{$his.right_b_str|default=''}</div>
+					</div>
+					<div class="clear"></div>
+				</dt>
+			</volist>
+			</dl>
+		</div>
+	</div>
+<include file="Public/footer" />

@@ -1,0 +1,17 @@
+<div class="widget togglesGroup">
+            	<div id="opened" class="whead hand opened inactive"><h6>微图解管理</h6><div class="clear"></div></div>
+                <div class="body nopadding">
+                	<ul class="subNav noBorderB">
+		                <li><a <eq name="ACTION_NAME" value="index">class="this"</eq> title="" style="border-top:0px;" href="{:U('Wei/index')}">&nbsp;&nbsp;&nbsp;&nbsp;| -- 列表</a></li>
+		                <li><a <eq name="ACTION_NAME" value="checkVol">class="this"</eq> title="" href="{:U('Wei/checkVol')}">&nbsp;&nbsp;&nbsp;&nbsp;| -- 审核</a></li>
+		            </ul>
+                </div>
+                
+                <div id="opened" class="whead hand opened inactive"><h6>微图解官方图册管理</h6><div class="clear"></div></div>
+                <div class="body nopadding">
+                	<ul class="subNav noBorderB">
+		                <li><a title="" style="border-top:0px;" <eq name="ACTION_NAME" value="material">class="this"</eq> href="{:U('Wei/material')}">&nbsp;&nbsp;&nbsp;&nbsp;| -- 图册列表</a></li>
+		                <li><a title="" <eq name="ACTION_NAME" value="materialImg">class="this"</eq>  href="{:U('Wei/materialImg')}">&nbsp;&nbsp;&nbsp;&nbsp;| -- 素材列表</a></li>
+		            </ul>
+                </div>
+            </div>

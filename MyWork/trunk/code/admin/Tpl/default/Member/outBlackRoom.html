@@ -1,0 +1,70 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<!-- Secondary nav -->
+</div>
+<!-- Sidebar ends -->
+
+<!-- Content begins -->
+<div id="content">
+    <include file="Public:bav" />
+    <!-- Main content -->
+    <div class="wrapper">
+        	<div class="fluid">
+        		<form method='post' id="form1" name="form1" action="{:U('Member/doOutBlackRoom')}"  enctype="multipart/form-data">
+                    <div class="widget ">
+                        <div class="whead">
+                        <h6>给【{$Think.get.name}】 {$Think.get.id} 拉出小黑屋</h6>
+                        <empty name="Think.get.backurl">
+                        	<a href="{:getCurrentUrl()}" class="buttonH bBlue mb10 mt5">返回</a>
+                        <else />
+                        	<a href="{$Think.get.backurl}" class="buttonH bBlue mb10 mt5">返回</a>
+                        </empty>
+                        
+                        <div class="clear"></div></div>
+                        <div class="body"><div class="redBack">注意：拉出小黑屋，代表该用户可以发言，但之前发过的所有言论，都不会显示的哦。</div></div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>用户君ID：</label></div>
+                            <div class="grid9">
+                            	<input type="text" name="to_user_id" value="{$Think.get.id}">
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>表情：</label></div>
+                            <div class="grid9"><input type="text" value="【╮(╯3╰)╭ 】：" name="pre_str"/></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>动态内容：</label></div>
+                            <div class="grid9">
+                            	<textarea rows="8" cols="" name="comment_content" id="put_blackroom_content"></textarea>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        
+                        <div class="formRow">
+                        	<input type="hidden" name="id" value="{$Think.get.id}">
+                        	<notempty name="Think.get.backurl">
+                        	<input type="hidden" name="backurl" value="{$Think.get.backurl}">
+                        	</notempty>
+                        	<input type="submit" value="提 交" onclick="return confirm('三思君说：提交后是不能修改的哦？确定么？');" class="buttonM bBlack formSubmit" />
+                        	<div class="clear"></div>
+                        </div>
+                        <div class="clear"></div>
+                    
+                    </div>
+                    </form>
+            </div>
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+
+<include file="Public:footer" />

@@ -1,0 +1,97 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<include file="Member:commentSearch" />
+</div>
+<!-- Sidebar ends -->
+
+<!-- Content begins -->
+<div id="content">
+
+  <include file="Public:bav" />
+  
+    <!-- Main content -->
+    <div class="wrapper">
+        <!-- Media table sample -->
+        <div class="widget check">
+            <div class="whead">
+            	<h6>编辑影片【{$Think.get.mname}】解说信息</h6>
+				<div class="clear"></div>
+			</div>
+            <table cellpadding="0" cellspacing="0" width="100%" class="tDefault checkAll tMedia" id="checkAll">
+                <thead>
+                    <tr>
+		                <td width="500px">图片</td>
+		                <td >说明</td>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td colspan="12">
+                        <empty name="list">
+                        	额。。。木有咧……
+                        <else/>
+                            <div class="tPages">
+                                <ul class="pages">
+                                	{$page}
+                                </ul>
+                            </div>
+                        </empty>
+                        </td>
+                        
+                    </tr>
+                </tfoot>
+                <tbody>
+                    <volist name="list" id="vo">
+		            <tr>
+		                <td>
+		                	<img title="{:otherURL2ServerUrl($vo['image'],$_GET['movie_id'], $_GET['serv'])}" src="{:otherURL2ServerUrl($vo['image'],$_GET['movie_id'], $_GET['serv'])}" alt="图片君" width="400px" height="230px"/>
+		                </td>
+		                <td>
+		                	<div style="font-size:48px;" align="left">{++$vo['pindex']}</div>
+		                	<div class="formRow nopadding"><input id="movie_comment_image_{$vo.id}" type="text" value="{$vo.image}"/></div>
+		                	<div class="formRow nopadding"><textarea id="movie_comment_intro_{$vo.id}" rows="4" cols="" style="font-size:14px;">{$vo.intro}</textarea></div>
+		                	<div class="formRow" align="right">
+		                		<a class="buttonS bBlue movie_comment_update" href="javascript:void(0);" data="{$vo.id}">更新</a>&nbsp;
+		                		<a class="buttonS bRed" onclick="return confirm('确定删除咩？');" href="{:U('Movie/foreverdelComment', array('id'=>$vo['id']))}">删除</a>
+		                	</div>
+		                </td>
+		            </tr>
+		            </volist>
+                </tbody>
+            </table>
+        </div>
+     
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+<include file="Public:footer" />
+<script>
+(function(){
+	$('.movie_comment_update').click(function(){
+		var id = $(this).attr('data');
+		var image = $.trim($('#movie_comment_image_' + id).val());
+		var intro = $.trim($('#movie_comment_intro_' + id).val());
+		if (image == '') {alert("图片地址不能为空哦！"); return false;}
+		if (intro == '') {alert("说明不能为空哦！"); return false;}
+		$.ajax({
+			type : 'POST',
+			url : '{:U("Movie/updateComment")}',
+			data : {image:image, intro:intro, id:id},
+			success : function(data){
+				if (typeof data.msg == 'undefined') {
+					alert('服务器错误');
+				} else {
+					alert(data.msg);
+				}
+			},
+			error : function (ex) {
+				alert('Ajax 错误');
+			}
+		});
+	});
+})();
+</script>

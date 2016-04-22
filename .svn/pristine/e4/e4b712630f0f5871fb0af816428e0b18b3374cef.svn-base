@@ -1,0 +1,91 @@
+<style>
+.form-row {border-top:1px solid #eee;padding:0.8em 1em;}
+.form-row label {float:left;color:#999;font-size:0.8em;}
+.form-row input, .form-row textarea {font-size:0.8em;color:#666;line-height:1.4em;float:right;text-align:right;border:0;min-width:70%;outline:none;}
+.addr-form {
+	position:relative;max-width:600px;min-width:300px;margin:0 auto; padding:10px;
+	background-color:#fff;
+}
+.addr-form form {
+	border:1px solid #eee; border-top:0;
+}
+.form-row-note {
+	color:#ccc;font-size:0.6em;float:right;
+}
+</style>
+<div class="addr-form" id="addr_form_panel">
+	<form action="{:U('Index/doSetAddr')}" method="post" id="addr_form">
+		<div class="form-row">
+			<label>收货人：</label>
+			<input type="text" name="name" id="p_name" value="{$vo.name|default=''}" placeholder="请输入收货人姓名"/>
+			<div class="clear"></div>
+		</div>
+		<div class="form-row">
+			<label>手机：</label>
+			<input type="text" name="phone" id="p_phone" value="{$vo.phone|default=''}" placeholder="请输入收货人联系方式"/>
+			<div class="clear"></div>
+		</div>
+		<div class="form-row">
+			<label>详细地址：</label>
+			<textarea rows="3" name="addr" id="p_addr" placeholder="请输入收货地址">{$vo.addr|default=''}</textarea>
+			<div class="clear"></div>
+			<div class="form-row-note">注意：请输入省市区详细地址 <br />如：广东省深圳市南山区学府路软件产业基地5B栋3楼</div>
+			<div class="clear"></div>
+		</div>
+		<input type="hidden" name="userid" value="{$Think.get.userid}"/>
+	</form>
+	<div style="text-align:center;padding:1em 0em;">
+		<a class="btn blue" id="sumit_user_addr">确 定</a>&nbsp;&nbsp;&nbsp;&nbsp;
+		<a class="btn grery" onclick="$('#addr_form_panel').parent().remove();">取 消</a>
+		<div class="clear"></div>
+	</div>
+	<div class="clear"></div>
+</div>
+<script>
+(function(){
+	submit_loading = false;
+	$('#sumit_user_addr').click(function(){
+		if (submit_loading) {return;}
+		var p_name = $.trim($('#p_name').val());
+		var p_phone = $.trim($('#p_phone').val());
+		var p_addr = $.trim($('#p_addr').val());
+		if (p_name == '') {booAlert('请输入收货人姓名'); return;}
+		if (p_phone == '') {booAlert('请输入电话'); return;}
+		if (p_addr == '') {booAlert('请输入邮寄地址'); return;}
+		submit_loading = true;
+		$(this).addClass('grery');
+		$.ajax({
+			url : "{:U('Index/doSetAddr')}",
+			type :'POST',
+			data : $('#addr_form').serialize(),
+			success : function(data) {
+				$('#sumit_user_addr').removeClass('grery');
+				try {
+					if (typeof data === 'string') {
+						data = parseJSON(data);
+					}
+					if (data.rst == 0) {
+						var rst = data.data;
+						if (typeof _setAddrOver === 'function') {
+							rst.name = p_name; rst.phone = p_phone; rst.addr = p_addr;
+							_setAddrOver(rst);
+						} else {
+							$('#have_rst_addr').attr('data-k', rst.k);
+							$('#have_rst_addr').html('<div id="have_rst_addr" class="rst-mid-addr"><div class="left">配送至：'+p_name+'&nbsp;&nbsp;'+p_phone+'</div><div class="right in-line"><span class="addr">'+p_addr+'</span></div></div>');
+						}
+						$('#addr_form_panel').parent().remove();
+					} else {
+						booAlert(data.msg);
+					}
+				} catch (ex) {
+					booAlert('网络出错误了哦');
+				}
+				submit_loading = false;
+			}, error : function(ex){
+				$('#sumit_user_addr').removeClass('grery');
+				booAlert('进入方式错误，重新再进来一次吧！');
+			}
+		});
+	});
+})();
+</script>

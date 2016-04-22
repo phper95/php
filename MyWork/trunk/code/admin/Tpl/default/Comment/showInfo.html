@@ -1,0 +1,116 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<!-- Secondary nav -->
+</div>
+<!-- Sidebar ends -->
+
+<script src="__JS__/dialog/artDialog.js?skin=default"></script>
+
+<!-- Content begins -->
+<div id="content">
+    <include file="Public:bav" />
+    <!-- Main content -->
+    <div class="wrapper">
+        <!-- Messages #2 -->
+        <div class="widget">
+            <div class="whead">
+                <h6>【{$obj.name}】评论详情</h6>
+                <a href="{:getCurrentUrl()}" class="buttonH bBlue mb10 mt5">返回</a>
+                <a href="{:U('Comment/add',array('id'=>$obj['id'],'name'=>$obj['name'],'type'=>$_GET['type'],'backurl'=>urlencode(__SELF__)))}" class="buttonH bGreen mb10 mt5">添加评论</a>
+                <div class="clear"></div>
+            </div>
+            
+            <ul class="messagesTwo">
+            	<volist name="list" id="vo">
+            	<li class="by_user">
+            		 <div class="btn-group" style="position:absolute;top:0px;left:1px;">
+	                        <a href="#" class="buttonM bDefault opt nopadding" style="border:0px;" data-toggle="dropdown"><img src="{$members[$vo['user_id']]['avatar']}" width='65px' height="68px" alt="" /></a>
+	                        <div class="dropdown-menu pull-left">
+	                        <span><a href="{:U('Member/addNews',array('id'=>$vo['user_id'],'type'=>'notice','typedata'=>1, 'backurl'=>urlencode(__SELF__)))}"><span class="icos-pencil"></span>下发动态</a></span>
+	                        <span><a href="{:U('Member/putBlackRoom',array('id'=>$vo['user_id'],'name'=>$members[$vo['user_id']]['name'], 'backurl'=>urlencode(__SELF__)))}"><span class="icos-pencil"></span>关小黑屋</a></span>
+	                        <span><a href="#" data_url="{:U('Comment/heXie',array('id'=>$vo['id'],'type'=>$_GET['type'],'hexie'=>'one'))}" class="comment_show_box" data_name="{$members[$vo['user_id']]['name']}" data_id="{$vo['id']}" ><span class="icos-pencil"></span>屏蔽此条评论</a></span>
+	                        <span><a href="#" data_url="{:U('Comment/heXie',array('id'=>$vo['id'],'type'=>$_GET['type'],'hexie'=>'all'))}" class="comment_show_box" data_name="{$members[$vo['user_id']]['name']}" data_id="" title="屏蔽该用户在此电影中所有的评论"><span class="icos-pencil"></span>*该人在此电影中所有..</a></span>
+	                		</div>
+	                </div>
+                    <div class="messageArea">
+                        <div class="infoRow">
+                            <span class="name" onclick="$(this).next().toggle();"><strong>{$members[$vo['user_id']]['name']} ({$vo.user_id})</strong> 说:</span>
+                            <span style="display:none;">&nbsp;&nbsp;&nbsp;&nbsp;秘钥: {$vo.id}</span>
+                            <span class="time">{$vo.add_time}</span>
+                            <div class="clear"></div>
+                        </div>
+                        <span id="vo_{$vo.id}">
+                        	{:htmlspecialchars($vo['comment_content'])}
+                        </span>
+                        <span style="float:right;"><a href="{:U('Comment/add',array('id'=>$obj['id'],'name'=>$obj['name'],'type'=>$_GET['type'],'reply_id'=>$vo['id'],'ry_userid'=>$vo['user_id'],'backurl'=>urlencode(__SELF__)))}">回复</a></span>
+                    </div>
+                    <div class="clear"></div>
+                </li>
+            	</volist>
+            </ul>
+        </div>
+        <div class="tPages">
+           	<ul class="pages">
+           		{$page}
+          	</ul>
+        </div>
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+
+<script>
+(function(){
+	$('.comment_show_box').click(function(){
+		var name = $(this).attr('data_name');
+		var id = $(this).attr('data_id');
+		var url = $(this).attr('data_url');
+		var html = '<strong>' + name + '</strong> ' + (id == '' ? ' 在该电影中所有弹幕' : (' 说: ' + $('#vo_'+id).html()));
+		html += '<div style="padding:15px 0px;"><select id="showInfo_dialog_reason"><option value="">-选择原因-</option><option value="1">广告</option><option value="2">剧透</option><option value="3">辱骂</option><option value="4">其他</option></select></div>';
+		art.dialog({
+			id : 'dialog_xxx_mmm_nnn',
+			title : id==''?'屏蔽所有弹幕' : '屏蔽该条弹幕',
+			content : html,
+			ok : function(){
+				var reason = $('#showInfo_dialog_reason').val();
+				if (reason == '') {
+					alert('请选择原因'); return false;
+				}
+				$.ajax({
+					type:'POST',
+					url : url,
+					data : {reason:reason},
+					success : function(data){
+						if (typeof data == 'object') {
+							if (data.rst == 1) {
+								var ids = data.data.ids;
+								for (var a in ids) {
+									$('#vo_'+ids[a].id).html(ids[a].content);
+								}
+								if (id=='') {
+									alert('一共屏蔽该用户 ' + ids.length + ' 条记录。');
+								}
+							} else {
+								alert(data.msg);
+							}
+						} else {
+							alert(data);
+						}
+					},
+					error : function(ex){
+						alert('ajax 失败');
+					}
+				});
+			},
+			padding:10,
+			cancel:true
+		});
+		return false;
+	});
+})();
+</script>
+
+<include file="Public:footer" />

@@ -1,0 +1,120 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<!-- Secondary nav -->
+</div>
+<!-- Sidebar ends -->
+
+<!-- Content begins -->
+<div id="content">
+    
+    <!-- Breadcrumbs line -->
+    <div class="breadLine">
+        <div class="bc">
+            <ul id="breadcrumbs" class="breadcrumbs">
+                <li><a href="#">主页</a></li>
+                <li><a href="#">{}</a>
+                    
+                </li>
+                
+            </ul>
+        </div>
+        
+        
+    </div>
+    <!-- Main content -->
+    <div class="wrapper">
+        	<div class="fluid">
+        		<form method='post' id="form1" name="form1" action="{:U('Movie/updateGrapher')}"  enctype="multipart/form-data">
+                    <div class="widget ">
+                        <div class="whead">
+                        	<h6>添加节点</h6>
+                        	<a href="{:getCurrentUrl()}" class="buttonH bBlue mb10 mt5">取消</a>
+                        	<div class="clear"></div>
+                        </div>
+                    
+                        <div class="formRow">
+                            <div class="grid3"><label>作者:</label></div>
+                            <div class="grid9"><input type="text" name="grapher" value="{$Think.get.grapher|default=''}" id="movie_choose_grapher_txt"/></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                        	<input type="hidden" type="hidden" value="{$Think.get.id}" name="id" />
+                        	<input type="submit" value="提 交" class="buttonM bBlack formSubmit" /><div class="clear"></div>
+                        </div>
+                        <div class="clear"></div>
+                    <div style="min-height:300px; overflow:hidden; overflow-y:auto;" id="movie_grapher_view_area">
+                    <table cellpadding="0" cellspacing="0" width="100%" class="tDefault checkAll tMedia" id="checkAll">
+	                <thead>
+	                    <tr>
+	                        <td width="40">ID</td>
+	                        <td ><div>名称</div></td>
+	                        <td ><div>作品数目</div></td>
+	                        <td ><div>Email</div></td>
+	                        <td width="200">操作</td>
+	                    </tr>
+	                </thead>
+	                <tbody>
+	                    <volist name="list" id="vo">
+	                    <tr>
+	                    	<td>{$vo.id}</td>
+	                    	<td>{$vo.name}</td>
+	                    	<td>{$vo.works}</td>
+	                    	<td>{$vo.email}</td>
+	                    	<td><a class="movie_choose_grapher" data="{$vo.id}" href="javascript:void(0);">选择</a></td>
+	                    </tr>
+	                    </volist>
+	                </tbody>
+           			</table>
+           			</div>
+                    </div>
+                    </form>
+                    
+            </div>
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+<script>
+(function(){
+	$('#movie_choose_grapher_txt').val('{$Think.get.grapher|default=''}');
+	$('#movie_grapher_view_area').height($(window).height() - 320);
+	
+	$('.movie_choose_grapher').click(function(){
+		var html = $(this).html();
+		var obj = $('#movie_choose_grapher_txt');
+		var xx = $.trim(obj.val());
+		var arr = xx == '' ? [] : xx.split(',');
+		var value = $(this).attr('data');
+		if (html=='选择') {
+			var flag = true;
+			for (a in arr) {
+				if (arr[a] == value){flag = false; break;}
+			}
+			if (flag) {
+				arr.push(value);
+			}
+			obj.val(arr.join(','));
+			$(this).html('取消');
+			$(this).parent().parent().children('td').addClass('redBack');
+		} else {
+			var val = '';
+			var ge = '';
+			for (a in arr) {
+				if (arr[a] == value) {
+					continue;
+				}
+				val = val + ge + arr[a]; 
+				ge = ',';
+			}
+			$('#movie_choose_grapher_txt').val(val)
+			$(this).html('选择');
+			$(this).parent().parent().children('td').removeClass('redBack');
+		}
+	});
+})();
+</script>
+<include file="Public:footer" />

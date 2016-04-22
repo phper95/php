@@ -1,0 +1,73 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<include file="News:opt" />
+</div>
+<!-- Sidebar ends -->
+    
+<!-- Content begins -->
+<div id="content">
+    <div class="contentTop">
+        <span class="pageTitle">资讯管理</span>
+        <div class="clear"></div>
+    </div>
+    <include file="Public:bav" />
+    <!-- Main content -->
+    <div class="wrapper">
+       	<div class="widget check">
+            <div class="whead">
+            <h6>每日一图列表</h6>
+            <a href="{:U('News/addDayPic')}" class="buttonH bGreen mb10 mt5">添加</a>
+				<div class="clear"></div></div>
+            <table cellpadding="0" cellspacing="0" width="100%" class="tDefault checkAll tMedia" id="checkAll">
+                <thead>
+                    <tr>
+		                <td width="50">编号</td>
+		                <td><div style="text-align:left;">名称</div></td>
+		                <td width="200">图片</td>
+		                <td width="180">上线日期</td>
+		                <td width="180">添加日期</td>
+	                	<td width="80">是否启用</td>
+	                	<td width="80">操作</td>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td colspan="9">
+                        <empty name="list">
+                        	额。。。木有咧……
+                        <else/>
+                            <div class="tPages">
+                                <ul class="pages">
+                                	{$page}
+                                </ul>
+                            </div>
+                        </empty>
+                        </td>
+                        
+                    </tr>
+                </tfoot>
+                <tbody>
+                    <volist name="list" id="vo">
+		            <tr>
+		            	<td>{$vo.id}</td>
+		            	<td style="text-align:left;">{$vo.name}</td>
+		            	<td><img src="{$vo.image_url}" width="80" /></td>
+		            	<td>{$vo.online_time}</td>
+		            	<td>{$vo.add_time}</td>
+		            	<td><eq name="vo.open" value='1'><span class="greenBack">启用</span><else/><span class="redBack">停用</span></eq></td>
+		            	<td><a href="{:U('News/editDayPic',array('id'=>$vo['id']))}">编辑</a></td>
+		            </tr>
+		            </volist>
+                </tbody>
+            </table>
+        </div>
+     
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+
+<include file="Public:footer" />

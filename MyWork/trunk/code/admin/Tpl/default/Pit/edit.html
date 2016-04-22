@@ -1,0 +1,133 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<!-- Secondary nav -->
+</div>
+<!-- Sidebar ends -->
+
+<!-- Content begins -->
+<div id="content">
+    <include file="Public:bav" />
+    <!-- Main content -->
+    <div class="wrapper">
+        	<div class="fluid">
+        	<script language="javascript" type="text/javascript" src="__JS__/My97DatePicker/WdatePicker.js"></script>
+        		<form method='post' id="form1" name="form1" action="{:U('Pit/update')}"  enctype="multipart/form-data">
+                    <div class="widget ">
+                        <div class="whead">
+                        	<h6>坑详情</h6>
+                        	<empty name="Think.get.backurl">
+	                        	<a href="{:getCurrentUrl()}" class="buttonH bBlue mb10 mt5">返回</a>
+	                        <else />
+	                        	<a href="{$Think.get.backurl}" class="buttonH bBlue mb10 mt5">返回</a>
+	                        </empty>
+                        	<div class="clear"></div>
+                        </div>
+                        <div class="formRow">
+                            <div class="grid3"><label>填坑用户 :</label></div>
+                            <div class="grid9 noSearch">
+                            	<input type="text" readonly="readonly" value="{$vo.user_name} （{$vo.user_id}）">
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>坑名:</label></div>
+                            <div class="grid9"><input type="text" readonly="readonly" value="{$vo.pit_name}"></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>坑图片:</label></div>
+                            <div class="grid9">
+                            	<img src="__UPLOAD__/{$vo.pit_img}" alt="{$vo.pit_img}" id="pit_img" width="200" height="200">
+                            	<input type="file" name="pit_img" id="upload_pit_img" />
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>状态:</label></div>
+                            <div class="grid9"><input type="text" readonly="readonly" value="{$pitName[$vo['state']]}"></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <if condition="$vo.state LT 10">
+	                        <div class="formRow">
+	                            <div class="grid3"><label>过期时间:</label></div>
+	                            <div class="grid9"><input type="text" readonly="readonly" name="deadline" onClick="WdatePicker()"  value="{$vo.deadline}"></div>
+	                            <div class="clear"></div>
+	                        </div>
+                        </if>
+                        
+                        <present name="state">
+                        <div class="formRow">
+                            <div class="grid3"><label>操作:</label></div>
+                            <div class="grid9">
+                            	<select name="state">
+                            		<volist name="state" id="s">
+                            			<option value="{$key}">{$s}</option>
+                            		</volist>
+                            	</select>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>交稿状态:</label></div>
+                            <div class="grid9">
+                            	<select name="jiaogao">
+	                            	<if condition="$vo['jiaogao'] === '1'" >
+	                            		<option value="1" selected="selected">已交稿</option>
+	                            		<option value="0">未交稿</option>
+	                            	<else />
+	                            		<option value="0" selected="selected">未交稿</option>
+	                            		<option value="1">已交稿</option>
+	                            	</if>
+                            	</select>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>理由:</label></div>
+                            <div class="grid9">
+                            	<textarea rows="3" cols="8" name="remark" placeholder="选填">{$vo.remark}</textarea>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        </present>
+                        
+                        <div class="formRow">
+                        	<notempty name="Think.get.backurl">
+                        	<input type="hidden" name="backurl" value="{$Think.get.backurl}">
+                        	</notempty>
+                        	<input type="hidden" value="{$Think.get.id}" name="id">
+                        	<input type="submit" value="提 交" class="buttonM bBlack formSubmit" /><div class="clear"></div>
+                        </div>
+                        <div class="clear"></div>
+                    
+                    </div>
+                    </form>
+            </div>
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+<script>
+(function(){
+	/**
+	 * 使用HTML5 File API, 來即時預覽image
+	 */
+	$("#upload_pit_img").change(function(){
+		var objUrl = booGetObjectURL(this.files[0]) ;
+		if (objUrl) {
+			$("#pit_img").attr("src", objUrl) ;
+		}
+	}) ;
+})();
+</script>
+
+<include file="Public:footer" />

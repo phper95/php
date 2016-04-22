@@ -1,0 +1,24 @@
+<!-- Secondary nav -->
+    <div class="secNav">
+        <div class="secWrapper">
+            <!-- Tabs container -->
+            <div id="tab-container" class="tab-container">
+                
+                <div class="divider"><span></span></div>
+				<ul class="iconsLine ic1 etabs">
+                    <li><a href="#alt2" title="">影片评级:</a></li>
+                </ul>                
+                <div class="divider"><span></span></div>
+                <div id="alt2">
+                <div id="general">
+                    <ul class="subNav">
+                        <li><a href="{:U('MovieRank/history')}" title="历史发布评级" <if condition="strstr(ACTION_NAME,'history') != false" >class="this"</if> ><span class="icos-frames"></span>历史发布评级</a></li>
+                        <li><a href="{:U('MovieRank/preRankView')}" title="预评级结果查看" <if condition="(ACTION_NAME eq 'preRankView') or (ACTION_NAME eq 'preRankInfo')" >class="this"</if> ><span class="icos-frames"></span>预评级结果查看</a></li>
+                        <li><a href="{:U('MovieRank/preRank')}" title="预评级" <eq name="ACTION_NAME" value="preRank">class="this"</eq> ><span class="icos-frames"></span>预评级</a></li>
+                    </ul>
+                </div>
+                </div>
+            </div>
+       </div> 
+       <div class="clear"></div>
+   </div>

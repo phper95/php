@@ -1,0 +1,26 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<include file="CreateTeam:opt" />
+</div>
+<!-- Sidebar ends -->
+    
+<!-- Content begins -->
+<div id="content">
+    <div class="contentTop">
+        <span class="pageTitle">创作团管理</span>
+        <div class="clear"></div>
+    </div>
+    <include file="Public:bav" />
+    <!-- Main content -->
+    <div class="wrapper">
+        点击右边先。
+     
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+
+<include file="Public:footer" />

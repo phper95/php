@@ -1,0 +1,126 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<!-- Secondary nav -->
+</div>
+<!-- Sidebar ends -->
+
+<script language="javascript" type="text/javascript" src="__JS__/My97DatePicker/WdatePicker.js"></script>
+<script src="__JS__/gw2c.js"></script>
+<script src="__JS__/dialog/artDialog.js?skin=default"></script>
+
+<!-- Content begins -->
+<div id="content">
+    <include file="Public:bav" />
+    <!-- Main content -->
+    <div class="wrapper">
+        	<div class="fluid">
+        		<form method='post' id="form1" name="form1" action="{:U('Active/update')}"  enctype="multipart/form-data">
+                    <div class="widget ">
+                        <div class="whead">
+                        <h6>添加活动</h6>
+                        <a href="{:getCurrentUrl()}" class="buttonH bBlue mb10 mt5">返回</a>
+                        <div class="clear"></div></div>
+                        <div class="formRow">
+                            <div class="grid3"><label>活动名称：<span class="req">*</span> </label></div>
+                            <div class="grid3"><input type="text" name="name" value="{$vo.name}" placeholder="活动名称"/></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>活动链接：<span class="req">*</span></label></div>
+                            <div class="grid7">
+                            	<input type="text" name="url" id="active-url" value='{$vo.url}' placeholder="活动URL"/>
+                            	<a id="js-exec-gw2c" href="javascript:void(0);">生成</a>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>活动分类：<span class="req">*</span></label></div>
+                            <div class="grid3">
+                            	<select name="cat_id">
+                            		<option value="">-- 请选择活动分类 --</option>
+                            		<volist name="catList" id="cat">
+                            		<if condition="$key eq $vo['cat_id']" >
+                            			<option value="{$key}" selected="selected">{$key} : {$cat}</option>
+                            		<else />
+                            			<option value="{$key}">{$key} : {$cat}</option> 
+                            		</if>
+                            		</volist>
+                            	</select>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>活动条件：<span class="req">*</span></label></div>
+                            <div class="grid7">
+                            	<label><input type="checkbox" value="1" class="check"
+                            	<if condition="$vo['state']%2 eq 1" > checked="checked" </if>
+                            	 name="state[]"/>不可重复</label>
+                            	<label style="width:20px;"></label>
+                            	<label><input type="checkbox" value="2" class="check"
+                            	<if condition="$vo['state']%4 GT 1" > checked="checked" </if>
+                            	 name="state[]"/>限制注册</label>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>参与人数：<span class="req">*</span></label></div>
+                            <div class="grid2"><input type="text" name="min_users" value="{$vo.min_users}" placeholder="最小参与人数，不限制请填0"/></div>
+                            <label style="width:20px;text-align:center;">-</label>
+                            <div class="grid2 nopadding nomargin"><input type="text" name="max_users" value="{$vo.max_users}" placeholder="最大参与人数，不限制请填0"/></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>起止时间：<span class="req">*</span></label></div>
+                            <div class="grid2"><input type="text" name="start_time" value="{$vo.start_time}" placeholder="开始时间" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly" /></div>
+                            <label style="width:20px;text-align:center;">-</label>
+                            <div class="grid2 nopadding nomargin"><input name="end_time" value="{$vo.end_time}" type="text" placeholder="结束时间" onFocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly"/></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>备注：<span class="req">*</span></label></div>
+                            <div class="grid7"><textarea rows="4" name="remark">{$vo.remark}</textarea></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                        	<input type="hidden" value="{$vo.id}" name="id" />
+                        	<input type="submit" value="提 交" class="buttonM bBlack formSubmit" /><div class="clear"></div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    </form>
+            </div>
+             <div id="xxsdf" style="display:none;min-width:600px;" class="fluid">sdfsdf</div>
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+
+<script>
+(function(){
+	gw2c.getpanel();
+	$('#js-exec-gw2c').click(function(){
+		art.dialog({
+			id : 'dialog_adv2_gw2c_script',
+			content : $('#xxsdf')[0],
+			padding:0,
+			ok : function(){
+				var script = gw2c.getScript();
+				if (script == null) return false;
+				$('#active-url').val('gw2c://'+script);
+			}
+		});
+	});
+})();
+</script>
+
+<include file="Public:footer" />

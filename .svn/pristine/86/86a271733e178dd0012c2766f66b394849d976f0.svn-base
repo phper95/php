@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            {$title|default='占坑——图解电影'}
+        </title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="copyright" content="Copyright (c) 2013 GraphMovies. All Rights Reserved.">
+        <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="apple-itunes-app" content="app-id=684762974">
+        <!--[if IE 8]>
+            <link rel="stylesheet" type="text/css" href="__CSS__/ie8.css" />
+        <![endif]-->
+        <link rel="stylesheet" type="text/css" href="__CSS__/style.css?{:rand(0,1000)}">
+        <script src="__JS__/jquery.min.js"></script>
+        <script src="__JS__/common.js"></script>
+        <script src="__JS__/artDialog.js?skin=default"></script>
+        <script>
+        </script>
+    </head>
+    <body>
+    	<div id="main_box">
+    		<div id="main">
+	    		<div class="header">
+	    			<div id="account">
+	    				<present name='user'>
+		    				<img class="avatar" src="{$user.avatar}"/>
+		    				<div class="info">
+	    						<h6>{$user.name}</h6>
+			    				<span>
+			    					<a href="{:U('Pit/mypit')}">已占({$user['doing_pit']})</a> , <a href="#">可占({$user['allow_pit']-$user['doing_pit']})</a>
+			    					, <a href="{:U('Author/index')}">蜀黍的钱柜</a>
+			    					<empty name="user.gms"><else />, <a href="{:U('Pcmaker/index')}">GMS投稿作品（{$user.gms}）</a></empty>
+			    				</span>
+			    			</div>
+			    		<else />
+			    			<img class="avatar" src="http://imgs5.graphmovie.com/appimage/app_default_avatar.jpg"/>
+			    			<div class="info">
+			    				<h6 style="margin-top:23px;"> 娇羞の匿名君  </h6>
+	    					</div>
+	    				</present>
+	    			</div>
+	    			<notpresent  name='Think.get.look'>
+	    			<present name='user'>
+	    				<div class="tip"><a href="{:U('Login/logout')}">退出</a></div>
+	    			<else />
+	    				<div class="tip"><a href="{:U('Public/regist')}">注册</a> | <a href="{:U('Login/index')}">登录</a></div>
+	    			</present>
+	    			</notpresent>
+	    		</div>
+	    		<div id="menu_bar">
+	    			<ul>
+	    				<volist name="menu" id="me">
+	    					<li><a href="{$me[1]}">{$me[0]}</a></li>	
+	    				</volist>
+	    			</ul>
+	    		</div>
+	    		<script>
+	    			$('#menu_bar li:last').addClass('last');
+	    		</script>

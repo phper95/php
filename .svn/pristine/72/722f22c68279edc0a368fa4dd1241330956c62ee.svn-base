@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" >
+<meta name="format-detection" content="telephone=no"/>
+<meta name="format-detection" content="telephone=no" /><!--禁用iphone自动将数字串转化为电话-->
+<title>电影集市</title>
+<link href="__CSS__/style.css?2" rel="stylesheet" type="text/css" media="screen"/>
+<link href="__CSS__/swiper.min.css" rel="stylesheet" type="text/css" media="screen"/>
+<script src="../js/jquery-1.10.1.min.js"></script>
+<script src="__JS__/swiper.jquery.min.js"></script>
+<script src="http://ser3.graphmovie.com/boo/js/gw2c.js"></script>
+<style type="text/css">
+*{outline:none;-webkit-touch-callout: none;-webkit-user-select: none;}
+*:before{content:'';} *:after{content:'';}
+body,html {font-size:0.8em;}
+.border {
+	border:1px solid red;
+}
+.head{
+	width:100%;
+}
+.head .item {
+	height:100%;background:url('__PUBLIC__/image/head.jpg') no-repeat center;background-size:100% auto;
+}
+.head .top_head {
+	line-height:50px;padding-left:10px;font-size:1.4em;
+	background:url('__PUBLIC__/image/line.png') no-repeat center;background-size:auto 40%;
+}
+.top_head .half {
+	float:left;width:50%;text-align:center;
+}
+.top_head .gold {
+	background:url('__PUBLIC__/image/shop_icon_goldcoin.png') no-repeat left center;background-size:auto 100%;
+	padding-left:1.5em;
+}
+.head .prize {
+	background:url('__PUBLIC__/image/shop_icont.png.png') no-repeat left center;background-size:auto 100%;
+	padding-left:1.5em;
+}
+.content {overflow:hidden;}
+.content .swip-img{
+	line-height:0;
+}
+.content .swip-img img {
+	width:100%;height:100%;
+}
+.content .info { 
+	color:#999;padding:0 10px;line-height:1.8em;
+}
+.content .info h4 {
+	font-size:1.4em;
+	font-weight:300;color:#333;
+	margin:0px; line-height:2.1em;
+}
+.content .bar {
+	padding:5px 10px;
+}
+.bar .timer {
+	font-size:0.9em;
+	background:url('__PUBLIC__/image/shop_icon_time.png') no-repeat left center;background-size: auto 90%;
+	padding:0.6em 0 0.6em 2.4em;float:left;color:#999;
+}
+.bar .timer span{
+	color:#00b9ff;
+}
+.bar .btn {
+	padding:0.6em 1em;float:right;border-radius:50px;
+}
+.bar .blue {
+	background-color:#00b9ff;color:#fff;
+}
+.bar .grery {
+	background-color:#ccc;color:#fff;
+}
+.in-line {
+	display:block;                     /*内联对象需加*/
+word-break:keep-all;           /* 不换行 */
+white-space:nowrap;          /* 不换行 */
+overflow:hidden;               /* 内容超出宽度时隐藏超出部分的内容 */
+text-overflow:ellipsis;         /* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
+}
+.clear {
+	clear:both;
+}
+.content .line {
+	height:10px; background-color:#eee;
+}
+.narror {
+	position:relative;
+}
+.narror:after {
+	transform:rotate(-45deg);
+	-webkit-transform:rotate(-45deg);
+	position:absolute;right:10;top:24px;
+	border:2px solid #ccc;border-left:0;border-top:0;width:10px;height:10px;
+}
+</style>
+</head>
+<body>
+<div id="box">
+	<div id="main">
+		<div class="head swiper-container">
+			<div class="top_head">
+				<div class="half"><span id="my_gold" class="gold" data-t="我的金币" data-url='http://ser3.graphmovie.com/appweb/uc/goldList-x.php'>{$gold}</span></div>
+				<div class="half"><span id="my_order_list" class="prize" data-t="我的奖品" data-url='{:U("Index/orderList","",false,false,true)}'>我的奖品</span></div>
+				<div class="clear"></div>
+			</div>
+			<div class="swiper-wrapper" id="nav_head">
+				<if condition="NOW_TIME elt 1456696800 and $_GET['pub_platform'] eq 'android'">
+					<!-- <div data-t="给梦想一个机会" data-url="http://caipiao.163.com/nfop/tgwdownload/index.htm?from=tgwweidong4" class="item swiper-slide" data-upvc="0" style="background-image:url(news/4/b.jpg);"> </div> -->
+				</if>
+				<div data-t="集市规则" data-url="http://ser3.graphmovie.com/appweb/shop/news/1/" class="item swiper-slide" style="background-image:url(news/1/b.jpg);"> </div>
+			</div>
+		</div>
+		<div class="content">
+			<empty name="list">
+				<h1>还没上架任何商品哦，请稍后再进来吧。</h1>
+			</empty>
+			<volist name="list" id="vo">
+			<div class="line"></div>
+			<div class="item" data-t="{$vo.name}" data-url='{:U("Index/detail",array("k"=>$vo["goods_id"]),false,false,true)}'>
+				<div class="swiper-container">
+					<div class="swiper-wrapper">
+						<volist name="vo.img_list" id="img">
+						<div class="swip-img swiper-slide">
+							<img data-src="{:str_replace('ser3.graphmovie.com','avatar.graphmovie.com',$img['url'])}" class="swiper-lazy">
+			                <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+						</div>
+						</volist>
+					</div>
+				</div>
+				<div class="info">
+					<h4 class="in-line">{$vo.name}</h4>
+					<div>{$vo.desc}</div>
+					<div>{:formartDate($vo['lottery']['start_time'],'Y-m-d H:i')} 总共{$vo.total_num}件，等你来抽</div>
+				</div>
+				<div class="bar">
+						<if condition="strtotime($vo['lottery']['start_time']) gt NOW_TIME" >
+							<div class="timer"><span class="js-timer" data-t="{:strtotime($vo['lottery']['start_time'])}"></span>  后开始</div>
+							<span class="btn blue">{:Intval($vo['price'])} 金币</span>
+						<elseif condition="strtotime($vo['lottery']['end_time']) gt NOW_TIME"  />
+							<div class="timer"><span class="js-timer" style="color:#999;" data-t="{:strtotime($vo['lottery']['end_time'])}"></span>  后结束</div>
+							<if condition="$vo['ku_cun'] gt 0">
+								<span class="btn blue">{:Intval($vo['price'])} 金币</span>
+							<else />
+								<span class="btn grery">已抽完</span>
+							</if>
+						<else />
+							<div class="timer">已结束</div>
+							<span class="btn grery">{:Intval($vo['price'])} 金币</span>
+						</if>
+					<div class="clear"></div>
+				</div>
+			</div>
+			</volist>
+		</div>
+	</div>
+</div>
+<script>
+$('document').ready(function(){
+	var w = 0, h = 0 ;
+	var t = <?php echo NOW_TIME;?>;
+	function initP(){
+		w = $('#main').width();
+		h = $('window').height();
+		$('#nav_head').height(w*230/640);
+		$('.swip-img').height(w*460/640);
+	};
+	$(window).resize(initP);
+	initP();
+	var mySwiper = new Swiper ('.swiper-container', {
+	    direction: 'horizontal',
+	    loop: false,
+        preloadImages: false,
+        lazyLoading: true
+	});
+
+	function refreshTimer() {
+		$('.js-timer').each(function(){
+			var timer = $(this).attr('data-t');
+			if (timer) {
+				var cha_time = parseInt(timer) - t;
+				if (cha_time > 0) {
+					$(this).html(sec2txt(cha_time));
+				}
+			}
+		});
+		t ++;
+	};
+	var timmer = setInterval(refreshTimer, 1000);
+	var sec2txt = function(sec){
+		var s = sec % 60;
+		var i = Math.floor (sec / 60) % 60;
+		var h = Math.floor (sec / 3600) % 24;
+		var d = Math.floor (sec / 86400);
+		return (d>0?(d+'天'):'') + (d+h>0?(h+'小时'):'') + (d+h+i>0?(i+'分'):'') + (d+h+i+s>0?(s+'秒'):'');
+	};
+
+	$('.item').click(function(){
+		//location.href = $(this).attr("data-url");
+		var url = $(this).attr("data-url");
+		var t = $(this).attr("data-t");
+		if (t.length>18) {
+			t = t.substr(0,17) + '...';
+		}
+		var upvc = $(this).attr('data-upvc');
+		if (typeof upvc == 'undefined') {upvc=1;}
+		GMBase.openUrl ({url:url,upvc:upvc,t:t, s:1});
+	});
+	
+	$('#my_gold').click(function(){
+		var url = $(this).attr("data-url");
+		var t = $(this).attr("data-t");
+		if (t.length>8) {
+			t = t.substr(0,7) + '...';
+		}
+		GMBase.openUrl ({url:url,upvc:1,t:t, s:1});
+	});
+	$('#my_order_list').click(function(){
+		var url = $(this).attr("data-url");
+		var t = $(this).attr("data-t");
+		if (t.length>8) {
+			t = t.substr(0,7) + '...';
+		}
+		GMBase.openUrl ({url:url,upvc:1,t:t, s:1});
+	});
+});
+</script>
+<include file="Public:bdtj" />
+</body>
+</html>

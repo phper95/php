@@ -1,0 +1,78 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+</div>
+<!-- Sidebar ends -->
+
+<!-- Content begins -->
+<div id="content">
+
+  <include file="Public:bav" />
+  
+    <!-- Main content -->
+    <div class="wrapper">
+        <!-- Media table sample -->
+        <div class="widget check">
+            <div class="whead">
+            	<h6>肥皂页面配置列表</h6>
+            	<a href="{:U('SiteConfig/index')}" class="buttonH bGreen">返回</a>
+            	<a href="{:U('SiteConfig/addSoapVolPic')}" class="buttonH bBlue">添加</a>
+				<div class="clear"></div>
+			</div>
+            <table cellpadding="0" cellspacing="0" width="100%" class="tDefault checkAll tMedia" id="checkAll">
+                <thead>
+                    <tr>
+		                <td width="50">编号</td>
+		                <td width="160">图解ID</td>
+		                <td width="160">图片</td>
+		                <td width="160">说明</td>
+		                <td width="">关键字</td>
+		                <td width="50">最大量</td>
+		                <td width="50">用户数</td>
+		                <td width="150">添加时间</td>
+		                <td width="150">过期时间</td>
+		                <td width="150">操作</td>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td colspan="10">
+                        <empty name="list">
+                        	额。。。木有咧……
+                        <else/>
+                            <div class="tPages">
+                                <ul class="pages">
+                                	{$page}
+                                </ul>
+                            </div>
+                        </empty>
+                        </td>
+                        
+                    </tr>
+                </tfoot>
+                <tbody>
+                    <volist name="list" id="vo">
+		            <tr>
+		                <td>{$vo.id}</td>
+		                <td>{$vo.vol_id}</td>
+		                <td><img src="{$vol_pic[$vo['vol_id']]['image']}" width="130px" height="73"/></td>
+		                <td>{$vol_pic[$vo['vol_id']]['movie_name']} <br />Page {$vol_pic[$vo['vol_id']]['pindex']} </td>
+		                <td>{$vo.key}</td>
+		                <td>{$vo.allow_count}</td>
+		                <td>{$vo.dis_count}</td>
+		                <td>{$vo.add_time}</td>
+		                <td><present name="vo.is_deadline"><span class="redBack">{$vo.deadline}</span><else/>{$vo.deadline}</present></td>
+		                <td><a href="{:U('SiteConfig/editSoapVolPic', array('id'=>$vo['id'], 'img_url'=>$vol_pic[$vo['vol_id']]['image'], 'movie_id'=>$vol_pic[$vo['vol_id']]['movie_id'],'pindex'=>$vol_pic[$vo['vol_id']]['pindex'],'movie_name'=>$vol_pic[$vo['vol_id']]['movie_name']))}">编辑</a></td>
+		            </tr>
+		            </volist>
+                </tbody>
+            </table>
+        </div>
+     
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+<include file="Public:footer" />

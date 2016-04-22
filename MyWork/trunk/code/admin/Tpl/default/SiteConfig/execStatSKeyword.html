@@ -1,0 +1,235 @@
+<include file="Public:header" />
+<script src="__JS__/dialog/artDialog.js?skin=default"></script>
+
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+</div>
+<!-- Sidebar ends -->
+
+<!-- Content begins -->
+<div id="content">
+
+  <include file="Public:bav" />
+  
+    <!-- Main content -->
+    <div class="wrapper">
+        <!-- Media table sample -->
+        <div class="widget check">
+            <div class="whead">
+            	<h6>用户个人中心背景图列表</h6>
+            	<a href="{:U('SiteConfig/searchKeyword')}" class="buttonH bGreen">返回</a>
+            	<a href="javascript:void(0);" id="insert_keyword"  class="buttonH bBlue">插入新词</a>
+				<div class="clear"></div>
+			</div>
+			<form method='post' id="form1" name="form1" action="{:U('SiteConfig/doAddStateSKeyword')}"  enctype="multipart/form-data">
+            <table cellpadding="0" cellspacing="0" width="100%" class="tDefault checkAll tMedia" id="checkAll">
+                <thead>
+                    <tr>
+		                <td width="50">名次</td>
+		                <td>搜索词</td>
+		                <td width="160">排名情况</td>
+		                <td width="100">操作</td>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td colspan="10">
+                        <empty name="list">
+                        	额。。。木有咧……
+                        <else />
+                        	<input type="submit" value="发 布" class="buttonM bBlack formSubmit" />
+                        </empty>
+                        </td>
+                        
+                    </tr>
+                </tfoot>
+                <tbody>
+                    <volist name="list" id="vo">
+		            <tr>
+		                <td class="keyword_index" data-id="{$vo.id}" data-keyword="{$vo.keyword}">
+		                	{$i}
+		                	<input name="sk_id[]" value="{$vo.id}" type="hidden"/>
+		                	<input name="keyword[]" value="{$vo.keyword}" type="hidden"/>
+		                	<if condition="isset($old_keywords[$vo['keyword']])">
+		                			<input name="top_num[]" id="data-keyword-top-num-{$vo.id}" type="hidden" value="{$old_keywords[$vo['keyword']] - $i}" />
+		                	<else />
+		                			<input name="top_num[]" value="51" id="data-keyword-top-num-{$vo.id}" type="hidden"/>
+		                	</if>
+		                </td>
+		                <td>
+		                	<if condition="$i lt 16">
+		                		<span class="blueBack">{$vo.keyword}</span>
+		                	<else />
+		                		<span>{$vo.keyword}</span>
+		                	</if>
+		                </td>
+		                <td>
+		                	<if condition="isset($old_keywords[$vo['keyword']])">
+		                		<if condition="$old_keywords[$vo['keyword']] lt $i" >
+		                			<span class="green">↓</span>
+		                		<elseif condition="$old_keywords[$vo['keyword']] eq $i" />
+		                			-
+		                		<else />
+		                			<span class="red">↑</span>
+		                		</if >
+		                	<else />
+		                		<span class="red">↑</span>
+		                	</if>
+		                </td>
+		                <td>
+		                	<a class="deltet_keyword" data-index="{$i}" href="javascript:void(0);">删除</a>
+		                </td>
+		            </tr>
+		            </volist>
+                </tbody>
+            </table>
+            </form>
+        </div>
+        
+       	 	<div id="insert_keyword_dialog" style="display:none;width:300px;line-height:24px;" class="fluid">
+            		<div class="fluid">
+            			<div class="widget nomargin">
+	                        <div class="formRow">
+	                            <div class="grid4"><label>关键词: </label></div>
+	                            <div class="grid6">
+	                            	<input type="text" id="insert_keyword_input"/>
+	                            </div>
+	                            <div class="clear"></div>
+	                        </div>
+	                        
+	                        <div class="formRow">
+	                            <div class="grid4"><label>名次 </label></div>
+	                            <div class="grid6">
+	                            	<input type="text" id="insert_keyword_index_input"/>
+	                            </div>
+	                            <div class="clear"></div>
+	                        </div>
+	                        
+	                        <div class="formRow">
+	                            <div class="grid4"><label>升降: </label></div>
+	                            <div class="grid6">
+	                            	<select id="keyword_top_num">
+	                            		<option value="">-选择-</option>
+	                            		<option value="51">上升</option>
+	                            		<option value="-51">下降</option>
+	                            		<option value="0">平</option>
+	                            	</select>
+	                            </div>
+	                            <div class="clear"></div>
+	                        </div>
+            			</div>
+            		</div>
+            </div>
+     
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+
+<script>
+(function(){
+	var old = {:json_encode($old_keywords);};
+	var ref = function(){
+		$('.keyword_index').each(function(i){
+			var key = i+1;
+			var keyword = $(this).attr('data-keyword');
+			var id = $(this).attr('data-id');
+			if (key<16) {
+				$(this).next().html('<span class="blueBack">'+keyword+'</span>');
+			} else {
+				$(this).next().html('<span>'+keyword+'</span>');
+			}
+			if (old[keyword]) {
+				
+			}
+			$(this).html(
+					key
+					+'<input type="hidden" name="sk_id[]" value="'+id+'"/>'
+					+'<input type="hidden" name="keyword[]" value="'+keyword+'"/>'
+					+'<input type="hidden" name="top_num[]" value="'+$('#data-keyword-top-num-'+id).val()+'" id="data-keyword-top-num-'+id+'">'
+			);
+		});
+	};
+	$('.deltet_keyword').click(function(){
+		$(this).parent().parent().remove();
+		ref();
+	});
+	
+	var addtr = function(data, index) {
+		var id = 'delete_keyword_'+(new Date()).valueOf(); ;
+		var html = '<tr>'
+						+ '<td class="keyword_index" data-id="'+data.id+'" data-keyword="'+data.keyword+'">'
+							+ '<input type="hidden" name="sk_id[]" value="'+data.id+'"/>'
+		                	+ '<input type="hidden" name="keyword[]" value="'+data.keyword+'"/>'
+		                	+ '<input type="hidden" name="top_num[]" id="data-keyword-top-num-'+data.id+'" value="'+data.top_num+'" />'
+						+ '</td>'
+						+'<td><span>'+data.keyword+'</span></td>'
+						+'<td>'+(data.top_num>0 ? '<span class="red">↑</span>':(data.top_num<0 ? '<span class="green">↓</span>':'-'))+'</td>'
+						+ '<td><a class="deltet_keyword" id="'+id+'" data-index="{$i}" href="javascript:void(0);">删除</a></td>'
+				 + '</tr>';
+		$('.keyword_index').each(function(i){
+			if (i==index-1) {
+				$(this).parent().before(html);
+				$('#'+id).click(function(){
+					$(this).parent().parent().remove();
+					ref();
+				});
+				return false;
+			}
+		});
+		ref();
+	};
+	
+	var loading = false;
+	$('#insert_keyword').click(function(){
+		art.dialog({
+			id : '_insert_keyword_dialog',
+			content : $('#insert_keyword_dialog')[0],
+			ok : function(){
+				try {
+					var keyword = $.trim($('#insert_keyword_input').val());
+					var index = parseInt($('#insert_keyword_index_input').val());
+					var top_num = $('#keyword_top_num').val();
+					if (keyword == '') {alert('请填入搜索词');return false;}
+					if (!index || index < 1 || index>50) {alert('名次在1~50之间');return false;}
+					if (top_num == '') {alert('选择排序啊!');return false;}
+					if (loading) {alert('正在查询，请稍后哟'); return;}
+					loading = true;
+					$.ajax({
+						url : '{:U("SiteConfig/getSearchKeyword")}',
+						type:'POST',
+						data : {keyword:keyword},
+						success : function(data) {
+							loading= false;
+							if (typeof data == 'object') {
+								if (data.rst == 1) {
+									var one = data.data;
+									one.top_num = top_num;
+									addtr(one, index);
+								} else {
+									alert(data.msg);
+								}
+							} else {
+								alert('截图发Bobo吧'+data);
+							}
+						},
+						error : function(ex){
+							loading= false;
+							alert('Ajax 网络错误');
+						}
+					});
+					
+					
+				} catch(ex) {
+					alert('名次只能天数数据');
+				}
+			},
+			cancel : true,
+			padding: 0
+		});
+	});
+})();
+</script>
+<!-- Content ends -->
+<include file="Public:footer" />

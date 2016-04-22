@@ -1,0 +1,1417 @@
+									<!-- 
+                            		<div class="boo-kuai">
+                            			<div class="boo-title">
+                            				<div style="float:right;">
+                            					<a class="greenBack">上</a>
+                            					<a class="greenBack">下</a>
+                            					<a class="redBack" href="javascript:void(0);" onclick="$(this).parent().parent().parent().remove();">删</a>
+                            				</div>
+                            				<h6>当时我就蒙蔽了</h6>
+                            			</div>
+                            			<div class="boo-ctrl-add"><a href="javascript:void(0);" class="blueBack"> + </a></div>
+                            		</div>
+                            		<div class="boo-kuai">
+                            			<div class="boo-title">
+                            				<h6>当时我就蒙蔽了</h6>
+                            			</div>
+                            			<div class="boo-item">
+                            				<div class="boo-tag">
+                            					<div class="boo-color"></div>
+                            					<div class="boo-tag-text">战争</div>
+                            				</div>
+                            				<img style="width:600px;height:215px;" src="http://imgs5.graphmovie.com/graphmovie/movies/4780/4780_20150319161915_s.jpg" />
+                            				<div class="clear" ></div>
+                            				<div class="boo-movie-info">
+                            					<span class="boo-movie-mark">曝光</span>
+                            					<h6>饥饿游戏2：星火燎原</h6>
+                            					<div class="clear"></div>
+                            					<div>-- 凯特尼斯成为嘲笑鸟之路</div>
+                            					<div class="boo-movie-tags"><span class="level1">表情</span><span class="level1">表情</span><span>二次元</span></div>
+                            				</div>
+                            				<div class="clear" ></div>
+                            				<div class="boo-movie-grapher">
+                            					<img src="http://ser3.graphmovie.com/gmspanel/appimages/avatars/2347549/20150216093333.jpg" class="boo-movie-avatar" />
+                            					<div class="boo-movie-grapher-name">Yeli青萧</div>
+                            					<div class="boo-movie-comment">300</div>
+                            					<div class="boo-movie-like">21</div>
+                            					<div class="boo-movie-play">25</div>
+                            				</div>
+                            			</div>
+                            		</div>
+                            		<!-- 
+                            		<div class="boo-kuai">
+                            			<div class="boo-title">
+                            				<h6>这个剧Diao</h6>
+                            			</div>
+                            			<div class="boo-item">
+                            				<div class="boo-tag">
+                            					<div class="boo-color"></div>
+                            					<div class="boo-tag-text">战争</div>
+                            				</div>
+                            				<img style="width:600px;height:215px;" src="http://imgs5.graphmovie.com/graphmovie/movies/4780/4780_20150319161915_s.jpg" />
+                            				<div class="clear" ></div>
+                            				<div class="boo-movie-info">
+                            					<span class="boo-movie-mark">美剧</span>
+                            					<h6>饥饿游戏2：星火燎原</h6>
+                            					<div class="clear"></div>
+                            					<div>-- 凯特尼斯成为嘲笑鸟之路</div>
+                            				</div>
+                            				<div class="clear" ></div>
+                            				<div class="boo-movie-grapher">
+                            					<img src="http://ser3.graphmovie.com/gmspanel/appimages/avatars/2347549/20150216093333.jpg" class="boo-movie-avatar" />
+                            					<div class="boo-movie-grapher-name">Yeli青萧</div>
+                            					<div class="boo-movie-comment">300</div>
+                            					<div class="boo-movie-like">21</div>
+                            					<div class="boo-movie-play">25</div>
+                            				</div>
+                            			</div>
+                            		</div>
+                            		
+                            		<div class="boo-kuai">
+                            			<div class="boo-title">
+                            				<h6>Paper</h6>
+                            			</div>
+                            			<div class="boo-item">
+                            				<div class="boo-paper-1">
+                            					<div class="boo-paper-info">
+                            						<div class="boo-paper-title"> 3月即将上线电影，有几部是你会去看呢？</div>
+                            						<div class="boo-paper-subt">—— 3月观影指南</div>
+                            					</div>
+                            				</div>
+                            			</div>
+                            			
+                            			<div class="boo-item">
+                            				<div class="boo-paper-2">
+                            					<div class="boo-paper-image">
+                            					</div>
+                            					<div class="boo-paper-info">
+                            						<div class="boo-paper-title boo-nowrap"> 3月即将上线电影，有几部是你会去看呢？</div>
+                            						<div class="boo-paper-by boo-nowrap"><span style="color:aaaaae;">By</span> 洒毛心情</div>
+                            						<div class="boo-paper-subt boo-nowrap">—— 3月观影指南</div>
+                            						<div class="boo-paper-play">3232</div>
+                            						<div class="boo-paper-like">221</div>
+                            						<div class="boo-paper-tag">盘点</div>
+                            					</div>
+                            				</div>
+                            				<div class="clear"></div>
+                            			</div>
+                            		</div>
+                            		
+                            		<div class="boo-kuai">
+                            			<div class="boo-title">
+                            				<h6>推广</h6>
+                            			</div>
+                            			<div class="boo-item">
+                            				<img src="http://imgs2.graphmovie.com:8099/graphmovie/adv2/7/7_20141210153740_.jpg" class="boo-tui" />
+                            			</div>
+                            		</div>
+                            		
+                            		<div class="boo-kuai">
+                            			<div class="boo-title">
+                            				<h6>那些年的宫崎骏</h6>
+                            			</div>
+                            			<div class="boo-item">
+                            				<img style="width:600px;height:215px;" src="http://ser3.graphmovie.com/boo/topics/63/63_20140826174159_s.jpg" />
+                            				<div class="boo-topic-info">
+                            					<span class="boo-movie-mark">新收录</span>
+                            					<h6>动画大师宫崎骏合集</h6>
+                            					<div class="clear"></div>
+                            					<div class="boo-topic-subt">-- 凯特尼斯成为嘲笑鸟之路</div>
+                            					<div class="boo-topic-editernote">编者按：宫崎骏可以说是日本动画界的一个传奇，他是第一位将动画上升到人文高度的思想者。宫崎骏导演和编剧的动画作品数不胜数，经典作品也是不胜枚举。</div>
+                            				</div>
+                            			</div>
+                            		</div>
+                            		
+                            		<div class="boo-kuai">
+                            			<div class="boo-title">
+                            				<h6>高能预警</h6>
+                            			</div>
+                            			<div class="boo-item">
+                            				<div class="boo-wei">
+                            					<div class="boo-wei-image">
+                            					</div>
+                            					<div class="boo-wei-info">
+                            						<div class="boo-wei-title boo-nowrap">是吃货的学渣在期末的梦</div>
+                            						<div class="boo-wei-subt boo-nowrap">—你说最后几分钟再背点，然后，就在你的一系列行为之后，一点也没看的你走进了考场…</div>
+                            						<div class="boo-wei-other boo-nowrap">4小时前 / from 电影空间</div>
+                            						<div class="clear"></div>
+                            						<div class="boo-wei-grapher">
+	                            						<img src="http://q.qlogo.cn/qqapp/1101115824/2467503BFAB5EABA7FEFEC80EB0DDDF3/100" class="boo-wei-avatar" />
+	                            						<div class="boo-wei-grapher-name">灵台无计</div>
+	                            						<div class="boo-wei-play">11.2万</div>
+                            						</div>
+                            					</div>
+                            					<div class="clear"></div>
+                            				</div>
+                            			</div>
+                            		</div>
+                            		<div class="boo-kuai">
+                            			<div class="boo-item">
+                            				<div class="boo-image">
+                            					<div class="boo-image-info">
+                            						<div class="boo-image-title">2015.04.16</div>
+                            						<div class="boo-image-subt">土地是以它的肥沃和收获而被估价的；才能也是土地，不过它生产的不是粮食，而是真理。如果只能滋生瞑想和幻想的话，即使再大的才能也只是砂地或盐池，那上面连小草也长不出来的。</div>
+                            						<div class="boo-image-grapher">—— 别林斯基</div>
+                            					</div>
+                            					<div class="clear"></div>
+                            				</div>
+                            			</div>
+                            		</div>
+                            		 -->
+
+<style>
+.moxie-shim {display:none;}
+
+.boo-xiaoguo,.boo-xiaoguo * {box-sizing: border-box;}
+.boo-xiaoguo {
+	float:left;width:640px;border:1px solid #ccc;background-color:#e6e6e4;height:auto;
+	padding:0px 20px;
+	min-height:400px;
+}
+.boo-item {background-color:#fff; margin-bottom:20px;position:relative;}
+.boo-tag {position:absolute; top:0px; left:20px; text-align:center;}
+.boo-color {width:60px; height:10px; background-color:#f00;}
+.boo-tag-text {color:#fff;text-shadow:0px 0px 1px #bbb; font-size:1.2em;}
+.boo-title {padding:20px; padding-right:0px; background:url(__PUBLIC__/images/apphome/hc_title_icon.png) no-repeat left center;}
+.boo-title h6 ,.boo-movie-info  h6, .boo-topic-info h6{color:#282832;font-size:1.5em;font-weight:600;}
+
+.boo-movie-tags {background:url(__PUBLIC__/images/apphome/hcwei_tagicon.png) no-repeat left 6px; line-height:1.2em; padding-left:30px;background-size:auto 70%;margin-top:15px;}
+.boo-movie-tags span {font-size:0.7em;font-weight:400;margin-right:10px;}
+.boo-movie-tags .level1 {background-color:#e9e9e9;padding:3px 5px;border-radius:5px;}
+.boo-movie-mark {float:left;background-color:#00b9ff;padding:0px 6px;border-radius:5px;margin-right:10px;color:#fff;}
+.boo-movie-info {padding:20px;border-bottom:1px solid #f0f0ee;line-height:2.0em;}
+.boo-movie-info  div {color:#aaaaae;font-size:1.5em;font-weight:600;padding-top:5px;}
+.boo-movie-grapher {padding:15px 20px;height:70px;}
+.boo-movie-avatar {width:40px;height:40px;border-radius:40px;float:left;}
+.boo-movie-grapher-name {float:left;line-height:40px;margin-left:10px;font-size:1.3em;color:#6e6e78;}
+.boo-movie-like,.boo-movie-play,.boo-movie-comment {
+	background:url(__PUBLIC__/images/apphome/hc_botbar_play.png) no-repeat left center; float:right;
+	padding-left:30px;line-height:40px;margin-right:25px;
+}
+.boo-movie-like {background-image:url(__PUBLIC__/images/apphome/hc_botbar_like.png);}
+.boo-movie-comment {background-image:url(__PUBLIC__/images/apphome/hc_botbar_comment.png);}
+
+.boo-paper-1 {
+	position:relative;height:430px;width:100%;
+	background:url(http://imgs5.graphmovie.com:8099/graphmovie/news/273/273_20150307182155_b.jpg) no-repeat center;
+}
+.boo-paper-1 .boo-paper-info {
+	position:absolute; left:20px;bottom:20px;
+}
+.boo-paper-1 .boo-paper-title {
+	color:#fff;font-size:3.0em;font-weight:900; line-height:1.2em;
+}
+.boo-paper-1 .boo-paper-subt {
+	color:#fff;font-size:2.0em;padding-top:10px;
+}
+
+.boo-nowrap {
+	white-space:nowrap;text-overflow:ellipsis;overflow:hidden;
+}
+
+.boo-paper-2 {}
+.boo-paper-image {
+	float:left; height:184px;width:256px;background:url(http://imgs5.graphmovie.com:8099/graphmovie/news/273/273_20150307182155_b.jpg) no-repeat center;
+	background-size:100% auto;
+} 
+.boo-paper-2 .boo-paper-info {
+	float:left;padding:20px 15px 0px 15px; width:342px;height:auto;overflow:hidden;
+}
+.boo-paper-2 .boo-paper-title {
+	font-size:1.6em;font-weight:600;color:#282832;
+}
+.boo-paper-2 .boo-paper-subt {
+	font-size:1.3em;color:#bfbfc2;border:1px solid #f0f0ee;border-left:0px;border-right:0px;padding:10px 0px;
+}
+.boo-paper-2 .boo-paper-by {
+	font-size:1.3em;color:#5a5a64;padding:10px 0px 25px 0px;font-weight:400;
+}
+
+.boo-paper-play,.boo-paper-like {
+	background:url(__PUBLIC__/images/apphome/hc_botbar_play.png) no-repeat left center; float:left;
+	padding-left:30px;line-height:40px;margin-right:25px;
+}
+
+
+.boo-paper-play{
+	background-image:url(__PUBLIC__/images/apphome/hc_botbar_eye.png);
+}
+.boo-paper-like{background-image:url(__PUBLIC__/images/apphome/hc_botbar_like.png);}
+.boo-paper-tag{float:right;padding:3px 10px; background-color:#ebf0f2;color:#aaaaae;margin-top:6px;border-radius:5px;}
+
+.boo-tui {width:600px; height:215px;}
+
+.boo-topic-info {padding:20px;}
+.boo-topic-subt {color:#aaaaae;font-size:1.5em;font-weight:600;padding-top:12px;}
+.boo-topic-editernote {color:#aaaaae;font-size:1.2em;padding-top:20px;line-height:2.0em;}
+
+.boo-wei-image {
+	float:left; height:184px;width:256px;background:url(http://imgs5.graphmovie.com:8099/graphmovie/news/273/273_20150307182155_b.jpg) no-repeat center;
+	background-size:100% auto;
+}
+.boo-wei-info {
+	float:left;padding:20px 15px 0px 15px; width:342px;height:184px;overflow:hidden;
+}
+.boo-wei-title {font-size:1.6em;font-weight:600;color:#282832;}
+.boo-wei-subt {font-size:1.3em;color:#bfbfc2; padding-top:6px;}
+.boo-wei-other {font-size:1.3em;color:#bfbfc2; padding:16px 0px; border-bottom:1px solid #f0f0ee;}
+.boo-wei-grapher {padding:10px 0px;}
+.boo-wei-avatar {width:40px;height:40px;border-radius:40px;float:left;margin-right:10px;}
+.boo-wei-grapher-name {float:left; line-height:40px;font-size:1.3em;color:#6e6e78;}
+.boo-wei-play{background:url(__PUBLIC__/images/apphome/hc_botbar_eye.png) no-repeat left center; float:right;
+	padding-left:30px;line-height:40px;margin-right:25px;}
+
+.boo-image {
+	position:relative; height:460px;width:100%;
+	background:url(http://imgs5.graphmovie.com/graphmovie/dayPic/d0330161322.jpg) no-repeat center center;
+	background-size:100% auto;
+}
+.boo-image-info {
+	position:absolute;bottom:0px;left:0px; height:80%;width:100%;
+	background-image: linear-gradient(to top, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.3) 40%, rgba(0, 0, 0, 0.2) 60%, rgba(0, 0, 0, 0.1) 80%, rgba(0, 0, 0, 0) 100%);
+	padding:40px; 
+}
+.boo-image-title {text-align:center; color:#fff;font-size:2.5em;font-weight:600; line-height:2.5em;}
+.boo-image-subt {color:#fff;font-size:1.5em;line-height:1.8em;}
+.boo-image-grapher {color:#fff;font-size:1.5em;text-align:right;line-height:2.5em;}
+
+.boo-bar-control {border:0px solid #f00; position:fixed;top:326px; left:140px;height:auto;width:200px;z-index:999;}
+
+.boo-ctrl-add {text-align:center;background-color:#ccc;padding:5px;margin-bottom:30px;}
+.boo-item-ctrl {position:absolute;top:0px;left:0px;width:600px;height:215px;text-align:center;padding-top:100px;background-color:rgba(0,0,0,0.5);}
+.boo-item-ctrl a {margin-right:10px;}
+.boo-ctrl-wei {width:256px; height:184px; padding-top:80px;}
+.boo-ctrl-paper {width:600px; height:430px;padding-top:200px;}
+.boo-ctrl-adv {width:600px;height:215px;}
+.boo-online-time {position:absolute;bottom:5px;right:5px;color:#fff;}
+</style>
+
+
+<div id="dialog_title_content" class="fluid" style="display:none; width:500px;">
+	<div class="widget nopadding nomargin">
+		<div class="formRow">
+			<div class="grid3"><label>标题名称：<span class="req">*</span> </label></div>
+			<div class="grid9"><input type="text" id="title_name" name="name" placeholder="模块标题"/></div>
+			<div class="clear"></div>
+		</div>
+		<div class="formRow">
+			<div class="grid3"><label>标题图片</label></div>
+			<div class="grid9"><img src="__PUBLIC__/images/apphome/hc_title_icon.png" /></div>
+			<div class="clear"></div>
+		</div>
+		<div class="formRow">
+			<div class="grid3"><label>上线时间</label></div>
+			<div class="grid9"><input type="text" class="js_online_time" onClick="WdatePicker({onpicked:function(dp){$('.js_online_time').val(dp.cal.getDateStr());},dateFmt:'yyyy-MM-dd HH:mm:00'})" id="title_online_time" name="online_time" placeholder="上线时间"/></div>
+			<div class="clear"></div>
+		</div>
+		<input type="hidden" id="title_image" value="__PUBLIC__/images/apphome/hc_title_icon.png" />
+	</div>
+</div>
+                     		 
+<div id="dialog_movie_content" style="display:none; width:700px;" class="fluid">
+	<div class="widget nopadding nomargin">
+		<div class="formRow">
+			<div class="grid3"><label>图解ID：<span class="req">*</span> </label></div>
+			<div class="grid3"><input type="text" id="movie_id" placeholder="图解ID"/></div>
+			<div class="grid3"><label><a id="js_get_Movie_info">获取</a></label></div>
+			<div class="clear"></div>
+		</div>
+		<div class="formRow">
+			<div class="grid3"><label>封面图片</label></div>
+			<div class="grid9">
+				<img id="movie_image_url" src='' width="320" height="115"/>
+				<input type="hidden" id="movie_image"/>
+				<a class="js-get-imgurl" data-id="movie_image">获取</a>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="formRow">
+			<div class="grid3"><label>图解标题</label></div>
+			<div class="grid9"><input type="text" id="movie_title" placeholder="影片标题"/></div>
+			<div class="clear"></div>
+		</div>
+		<div class="formRow">
+			<div class="grid3"><label>图解副标题</label></div>
+			<div class="grid9"><input type="text" id="movie_sub_title" placeholder="影片副标题"/></div>
+			<div class="clear"></div>
+		</div>
+		
+		<div class="formRow">
+			<div class="grid3"><label>上线时间</label></div>
+			<div class="grid9"><input type="text" class="js_online_time" onClick="WdatePicker({onpicked:function(dp){$('.js_online_time').val(dp.cal.getDateStr());},dateFmt:'yyyy-MM-dd HH:mm:00'})" id="movie_online_time" name="online_time" placeholder="上线时间"/></div>
+			<div class="clear"></div>
+		</div>
+		
+		<input type="hidden" id="movie_avatar" />
+		<input type="hidden" id="movie_grapher" />
+		<input type="hidden" id="movie_played" />
+		<input type="hidden" id="movie_ding" />
+		<input type="hidden" id="movie_comment_count" />
+		<input type="hidden" id="movie_tag"/>
+		<input type="hidden" id="movie_name_tag" />
+		<input type="hidden" id="movie_xiaomi_online_time" />
+	</div>
+</div>
+
+<div id="dialog_wei_content" style="display:none; width:700px;" class="fluid">
+	<div class="widget nopadding nomargin">
+		<div class="formRow">
+			<div class="grid3"><label>微图解ID：<span class="req">*</span> </label></div>
+			<div class="grid3"><input type="text" id="wei_id" placeholder="微图解ID"/></div>
+			<div class="grid3"><label><a id="js_get_Wei_info">获取</a></label></div>
+			<div class="clear"></div>
+		</div>
+		<div class="formRow">
+			<div class="grid3"><label>封面图片</label></div>
+			<div class="grid9">
+				<img id="wei_image_url" src='' width="320" height="230"/>
+				<input type="hidden" id="wei_image"/>
+				<a class="js-get-imgurl" data-id="wei_image">获取</a>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="formRow">
+			<div class="grid3"><label>微图解标题</label></div>
+			<div class="grid9"><input type="text" id="wei_title" placeholder="微图解标题"/></div>
+			<div class="clear"></div>
+		</div>
+		<div class="formRow">
+			<div class="grid3"><label>微图解副标题</label></div>
+			<div class="grid9"><input type="text" id="wei_sub_title" placeholder="微图解副标题"/></div>
+			<div class="clear"></div>
+		</div>
+		<div class="formRow">
+			<div class="grid3"><label>上线时间</label></div>
+			<div class="grid9"><input type="text" class="js_online_time" onClick="WdatePicker({onpicked:function(dp){$('.js_online_time').val(dp.cal.getDateStr());},dateFmt:'yyyy-MM-dd HH:mm:00'})" id="wei_online_time" name="online_time" placeholder="上线时间"/></div>
+			<div class="clear"></div>
+		</div>
+		<input type="hidden" id="wei_avatar" />
+		<input type="hidden" id="wei_grapher" />
+		<input type="hidden" id="wei_played" />
+	</div>
+</div>
+
+
+<div id="dialog_paper_content" style="display:none; width:700px;" class="fluid">
+	<div class="widget nopadding nomargin">
+		<div class="formRow">
+			<div class="grid3"><label>画报ID：<span class="req">*</span> </label></div>
+			<div class="grid3"><input type="text" id="paper_id" placeholder="画报ID"/></div>
+			<div class="grid3"><label><a id="js_get_Paper_info">获取</a></label></div>
+			<div class="clear"></div>
+		</div>
+		<div class="formRow">
+			<div class="grid3"><label>展现方式</label></div>
+			<div class="grid9">
+				<select id="paper_show_type">
+					<option value="1">大图模式</option>
+					<option value="2">小图模式</option>
+				</select>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="formRow">
+			<div class="grid3"><label>封面图片</label></div>
+			<div class="grid9">
+				<img id="paper_image_url" src='' width="320" height="230"/>
+				<input type="hidden" id="paper_image"/>
+				<a class="js-get-imgurl" data-id="paper_image">获取</a>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="formRow">
+			<div class="grid3"><label>画报标题</label></div>
+			<div class="grid9"><input type="text" id="paper_title" placeholder="画报标题"/></div>
+			<div class="clear"></div>
+		</div>
+		<div class="formRow">
+			<div class="grid3"><label>画报副标题</label></div>
+			<div class="grid9"><input type="text" id="paper_sub_title" placeholder="画报副标题"/></div>
+			<div class="clear"></div>
+		</div>
+		<div class="formRow">
+			<div class="grid3"><label>上线时间</label></div>
+			<div class="grid9"><input type="text" class="js_online_time" onClick="WdatePicker({onpicked:function(dp){$('.js_online_time').val(dp.cal.getDateStr());},dateFmt:'yyyy-MM-dd HH:mm:00'})" id="paper_online_time" name="online_time" placeholder="上线时间"/></div>
+			<div class="clear"></div>
+		</div>
+		<input type="hidden" id="paper_avatar" />
+		<input type="hidden" id="paper_grapher" />
+		<input type="hidden" id="paper_played" />
+		<input type="hidden" id="paper_ding" />
+	</div>
+</div>
+
+
+<div id="dialog_adv_content" style="display:none; width:700px;" class="fluid">
+	<div class="widget nopadding nomargin">
+		<div class="formRow">
+			<div class="grid3"><label>广告ID：<span class="req">*</span> </label></div>
+			<div class="grid3"><input type="text" id="adv_id" placeholder="广告ID"/></div>
+			<div class="grid3"><label><a id="js_get_Adv_info">获取</a></label></div>
+			<div class="clear"></div>
+		</div>
+		<div class="formRow">
+			<div class="grid3"><label>广告图片</label></div>
+			<div class="grid9">
+				<img id="adv_image_url" src='' width="320" height="115"/>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="formRow">
+			<div class="grid3"><label>上线时间</label></div>
+			<div class="grid9"><input type="text" class="js_online_time" onClick="WdatePicker({onpicked:function(dp){$('.js_online_time').val(dp.cal.getDateStr());},dateFmt:'yyyy-MM-dd HH:mm:00'})" id="adv_online_time" name="online_time" placeholder="上线时间"/></div>
+			<div class="clear"></div>
+		</div>
+	</div>
+</div>
+
+<div id="dialog_topic_content" style="display:none; width:700px;" class="fluid">
+	<div class="widget nopadding nomargin">
+		<div class="formRow">
+			<div class="grid3"><label>专辑ID：<span class="req">*</span> </label></div>
+			<div class="grid3"><input type="text" id="topic_id" placeholder="专辑ID"/></div>
+			<div class="grid3"><label><a id="js_get_Topic_info">获取</a></label></div>
+			<div class="clear"></div>
+		</div>
+		<div class="formRow">
+			<div class="grid3"><label>封面图片</label></div>
+			<div class="grid9">
+				<img id="topic_image_url" src='' width="320" height="115"/>
+				<input type="hidden" id="topic_image"/>
+				<a class="js-get-imgurl" data-id="topic_image">获取</a>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="formRow">
+			<div class="grid3"><label>专辑标题</label></div>
+			<div class="grid9"><input type="text" id="topic_title" placeholder="专辑标题"/></div>
+			<div class="clear"></div>
+		</div>
+		<div class="formRow">
+			<div class="grid3"><label>专辑副标题</label></div>
+			<div class="grid9"><input type="text" id="topic_sub_title" placeholder="专辑副标题"/></div>
+			<div class="clear"></div>
+		</div>
+		<div class="formRow">
+			<div class="grid3"><label>专辑编者按</label></div>
+			<div class="grid9"><input type="text" id="topic_editor_note" placeholder="专辑编者按"/></div>
+			<div class="clear"></div>
+		</div>
+		<div class="formRow">
+			<div class="grid3"><label>上线时间</label></div>
+			<div class="grid9"><input type="text" class="js_online_time" onClick="WdatePicker({onpicked:function(dp){$('.js_online_time').val(dp.cal.getDateStr());},dateFmt:'yyyy-MM-dd HH:mm:00'})" id="topic_online_time" name="online_time" placeholder="上线时间"/></div>
+			<div class="clear"></div>
+		</div>
+		<input type="hidden" id="topic_name_tag" />
+	</div>
+</div>
+
+
+<div id="dialog_image_content" style="display:none; width:700px;" class="fluid">
+	<div class="widget nopadding nomargin">
+		<div class="formRow">
+			<div class="grid3"><label>每日一图ID：<span class="req">*</span> </label></div>
+			<div class="grid3"><input type="text" id="image_id" placeholder="每日一图ID"/></div>
+			<div class="grid3"><label><a id="js_get_Image_info">获取</a></label></div>
+			<div class="clear"></div>
+		</div>
+		<div class="formRow">
+			<div class="grid3"><label>标题</label></div>
+			<div class="grid9"><input type="text" id="image_title" value="{:toDate(NOW_TIME,'Y-m-d')}" placeholder="标题"/></div>
+			<div class="clear"></div>
+		</div>
+		<div class="formRow">
+			<div class="grid3"><label>说明</label></div>
+			<div class="grid9"><input type="text" id="image_content" placeholder="说明"/></div>
+			<div class="clear"></div>
+		</div>
+		<div class="formRow">
+			<div class="grid3"><label>By</label></div>
+			<div class="grid9"><input type="text" id="image_grapher" placeholder="By"/></div>
+			<div class="clear"></div>
+		</div>
+		<div class="formRow">
+			<div class="grid3"><label>图片</label></div>
+			<div class="grid9">
+				<img id="image_image_url" src='' width="150" height="200"/>
+				<input type="hidden" id="image_image"/>
+				<a class="js-get-imgurl" data-id="image_image">获取</a>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="formRow">
+			<div class="grid3"><label>上线时间</label></div>
+			<div class="grid9"><input type="text" class="js_online_time" onClick="WdatePicker({onpicked:function(dp){$('.js_online_time').val(dp.cal.getDateStr());},dateFmt:'yyyy-MM-dd HH:mm:00'})" id="image_online_time" name="online_time" placeholder="上线时间"/></div>
+			<div class="clear"></div>
+		</div>
+	</div>
+</div>
+
+<style>
+.upload_append_list{
+	border:1px solid #ccc; float:left; width:90px;margin:5px;padding:5px;padding-top:0px;
+}
+.upload_append_list .upload_image{
+	width:100%;
+}
+.upload_drap_info {
+	line-height:150px;z-index:0;top:0px;left:0px;height:100%;width:100%;text-align:center;color:#999;position:absolute;
+}
+
+.homePage_img_list {
+	
+}
+.homePage_img_list .item{
+	float:left; width:90px; margin:5px;cursor:pointer;
+}
+.homePage_img_list .choose_ok {
+	border:5px solid #00b9ff;padding:10px; width:60px;
+}
+.homePage_img_list .item img {
+	width:100%;
+}
+</style>
+<div id="dialog_upload_image" style="display:none; width:500px;">
+	选择图片：<input id="fileImage" type="file" size="30" name="fileselect[]" multiple />（可多选）
+	<a class="buttonH bGreen mb10 mt5" id="do_upload_files" href="javascript:void(0);">上传</a>
+    <div style="border:2px dashed #ddd;min-height:150px;margin-top:30px;position:relative;" id="fileDragArea">
+    	<div class="upload_drap_info">或者将图片拖到此处</div>
+    </div>
+    <div class="clear"></div><br />
+   	 点击选择图片：
+    <div class="homePage_img_list" id="homePage_img_list">
+    	
+    </div>
+    <input id="choose_img_url" type="hidden" value=""/>
+</div>
+
+
+<div class="boo-bar-control" id="boo_bar_control">
+	<a class="buttonS bDefault mb10 mt5 js-add-model" js-data="title" id="add_title_model" href="javascript:void(0);">【+Tit】 标题</a><br />
+	<a class="buttonS bDefault mb10 mt5 js-add-model" js-data="movie" id="add_movie_model" href="javascript:void(0);">【+Gra】图解</a><br />
+	<a class="buttonS bDefault  mb10 mt5 js-add-model" js-data="wei" id="add_wei_model" href="javascript:void(0);">【+Wei】微图解</a><br />
+	<a class="buttonS bDefault  mb10 mt5 js-add-model" js-data="paper" id="add_paper_model" href="javascript:void(0);">【+Pap】画报</a><br />
+	<a class="buttonS bDefault  mb10 mt5 js-add-model" js-data="adv" id="add_adv_model" href="javascript:void(0);">【+Adv】推广广告</a><br />
+	<a class="buttonS bDefault mb10 mt5 js-add-model" js-data="topic" id="add_topic_model" href="javascript:void(0);">【+Top】专辑</a><br />
+	<a class="buttonS bDefault  mb10 mt5 js-add-model" js-data="image" id="add_image_model" href="javascript:void(0);">【+Img】每日一图</a><br />
+	<br /><br />
+	<a class="buttonS bSea  mb10 mt5" onclick="$('.js-ctrl').fadeOut();art.dialog({lock: true,opacity: 1.0,content:$('#boo_xiaoguo')[0],button:[{name:'确定'}],close:function(){$('.js-ctrl').fadeIn();}});" href="javascript:void(0);">预览</a>
+</div>
+
+<script>
+(function(){
+	$('.js_ctrl_add').click(function(){
+		var timestamp = ( new Date()).valueOf();
+		var timestamp = $(this).attr('data-timestamp');
+		var type = $(this).attr('data-type');
+		var obj = $(this);
+		art.dialog({
+			id : '__Dialog_'+type+'_list_',
+			padding:0,
+			title : '添加图解',
+			content : $('#dialog_'+type+'_content')[0],
+			ok : function(){
+				var html = getHtmlByType(type,timestamp,timestamp);
+				if (html == '') {return false;}
+				obj.parent().before(html);
+				$('#move_up_'+timestamp).click(function(){
+					var $item = $(this).parent().parent();
+					if ($item.prev('.boo-item').length > 0) {
+						$(this).parent().hide();
+						$item.insertBefore($item.prev('.boo-item'));
+					} else {
+						alert('已经在最上面啦');
+					}
+				});
+				$('#move_down_'+timestamp).click(function(){
+					var $item = $(this).parent().parent();
+					if ($item.next('.boo-item').length > 0) {
+						$(this).parent().hide();
+						$item.insertAfter($item.next('.boo-item'));
+					} else {
+						alert('已经在最下面啦');
+					}
+				});
+			}
+		});
+	});
+	
+	$('.js_list_move_up').click(function(){
+		var $item = $(this).parent().parent();
+		if ($item.prev('.boo-item').length > 0) {
+			//$(this).parent().hide();
+			$item.insertBefore($item.prev('.boo-item'));
+		} else {
+			alert('已经在最上面啦');
+		}
+	});
+	
+	$('.js_list_move_down').click(function(){
+		var $item = $(this).parent().parent();
+		if ($item.next('.boo-item').length > 0) {
+			//$(this).parent().hide();
+			$item.insertAfter($item.next('.boo-item'));
+		} else {
+			alert('已经在最下面啦');
+		}
+	});
+	
+	$('.boo-title > h6').dblclick(function(){
+		if ($(this).html().indexOf('type="text"')>0) return;
+		var input_id = 'input_'+( new Date()).valueOf();
+		var update_id = $(this).attr('data-id');
+		$(this).html('<input type="text" style="width:400px;" id="'+input_id+'" value="'+$(this).html()+'"/>');
+		$('#'+input_id).focus().blur(function(){
+			var val = $.trim($(this).val());
+			$(this).before(val).remove();
+			var obj = $.parseJSON($('#'+update_id).val());
+			obj.title = val;
+			$('#'+update_id).val(JSON.stringify(obj));
+		});
+	});
+	
+	
+	var xx = function(){
+		$('#boo_bar_control').css('left',$('#boo_xiaoguo').offset().left +650+ 'px');
+	}
+	$(window).resize(function(){
+		xx();
+	});
+	
+	
+	var kuai_index = 0;
+	$('.js-add-model').click(function(){
+		var type = $(this).attr('js-data');
+		var timestamp = ( new Date()).valueOf();
+		var type_str = {'title':'标题','movie':'图解','adv':'广告','topic':'专辑','paper':'画报','image':'图片','wei':'微图解'};
+		art.dialog({
+			id : '__Dialog_'+type+'_model_',
+			padding:0,
+			title : '添加【' + type_str[type]+'】',
+			content : $('#dialog_'+type+'_content')[0],
+			ok : function(){
+				kuai_index ++;
+				var timestamp = ( new Date()).valueOf();
+				var html = getHtmlByType(type,timestamp);
+				if (html == '') {return false;}
+				$('#boo_xiaoguo').append(html);
+				if (type=="title") {
+					$('#h6_title_'+timestamp).dblclick(function(){
+						if ($(this).html().indexOf('type="text"')>0) return;
+						var input_id = 'input_'+( new Date()).valueOf();
+						var update_id = $(this).attr('data-id');
+						$(this).html('<input type="text" style="width:400px;" id="'+input_id+'" value="'+$(this).html()+'"/>');
+						$('#'+input_id).focus().blur(function(){
+							var val = $.trim($(this).val());
+							$(this).before(val).remove();
+							var obj = $.parseJSON($('#'+update_id).val());
+							obj.title = val;
+							$('#'+update_id).val(JSON.stringify(obj));
+						});
+					});
+				}
+				
+				$('#move_up_'+timestamp).click(function(){
+					var $item = $(this).parent().parent();
+					if ($item.prev('.boo-item').length > 0) {
+						//$(this).parent().hide();
+						$item.insertBefore($item.prev('.boo-item'));
+					} else {
+						alert('已经在最上面啦');
+					}
+				});
+				$('#move_down_'+timestamp).click(function(){
+					var $item = $(this).parent().parent();
+					if ($item.next('.boo-item').length > 0) {
+						//$(this).parent().hide();
+						$item.insertAfter($item.next('.boo-item'));
+					} else {
+						alert('已经在最下面啦');
+					}
+				});
+				
+			}
+		});
+		return;
+		art.dialog({
+			id : '__Dialog_model_',
+			padding:0,
+			content : $('#dialog_add_model')[0],
+			ok : function(){
+				
+			},
+		});
+	});
+	
+	
+	var getHtmlByType = function(type,timestamp){
+		var html = '';
+		if (type == 'title') {
+			var title_online_time = $('#title_online_time').val();
+			var post_value = '{'
+				+ '"type":"'+type+'",'
+				+ '"title":"' + $('#title_name').val() +'",'
+				+ '"icon":"' + '' +'",'
+				+ '"online_time":"'+ title_online_time +'"'
+			+'}';
+			var a_id = 'add_kuai_index'+kuai_index;
+			html = '<div class="boo-title boo-item" style="margin-bottom: 0px;" >'
+						+ '<div style="float:right;" class="js-ctrl">'
+            				+ '<a class="greenBack" id="move_up_'+timestamp+'">上</a> '
+            				+ '<a class="greenBack" id="move_down_'+timestamp+'">下</a> '
+            				+ '<a class="redBack" href="javascript:void(0);" onclick="$(this).parent().parent().remove();">删</a>'
+            			+ '</div>'
+            			+ '<h6 id="h6_title_'+timestamp+'" title="'+title_online_time+'" data-id="item_input_'+timestamp+'">'+$('#title_name').val()+'</h6>'
+            			+ '<input id="item_input_'+timestamp+'" type="hidden" value=\''+post_value+'\' name="item[]"/>'
+				 + '</div>';
+					
+		} else if (type=='movie') {
+			var movie_id = $('#movie_id').val();
+			var movie_tag = $('#movie_tag').val();
+			var movie_image = $('#movie_image').val();
+			var movie_title = $('#movie_title').val();
+			var movie_sub_title = $('#movie_sub_title').val();
+			var movie_avatar = $('#movie_avatar').val();
+			var movie_grapher = $('#movie_grapher').val();
+			var movie_played = $('#movie_played').val();
+			var movie_ding = $('#movie_ding').val();
+			var movie_comment_count = $('#movie_comment_count').val();
+			var movie_name_tag = $('#movie_name_tag').val();
+			var movie_online_time = $('#movie_online_time').val(); 
+			var movie_xiaomi_online_time = $('#movie_xiaomi_online_time').val();
+			var post_value = '{'
+				+ '"type":"'+type+'",'
+				+ '"movie_id":"'+movie_id +'",'
+				+ '"title":"' + movie_title +'",'
+				+ '"sub_title":"' + movie_sub_title +'",'
+				+ '"image":"' + movie_image +'",'
+				+ '"online_time":"'+ movie_online_time +'"'
+			+'}';
+			
+			if (movie_xiaomi_online_time > movie_online_time) {
+				alert('你添加的这部图解的上线时间小于你推荐的时间啊啊啊 啊啊啊啊啊啊啊啊 啊啊啊啊啊啊啊啊啊啊啊啊啊 啊啊啊啊啊啊啊啊啊啊');
+				return '';
+			}
+			
+			html = '<div class="boo-item">'
+							+'<div class="boo-item-ctrl js-ctrl" >'
+								+'<a class="blueBack" id="move_up_'+timestamp+'">上移</a> '
+								+'<a class="blueBack" id="move_down_'+timestamp+'">下移</a> '
+								+'<a class="redBack" onclick="$(this).parent().parent().remove();">删除</a> '
+								+'<div class="boo-online-time">'+movie_online_time+'</div>'
+							+'</div>'
+							+'<div ><img style="width:600px;height:215px;" src="'+movie_image+'"/></div>'
+							+'<div class="clear" ></div>'
+							+'<div class="boo-movie-info">'
+								+ (movie_name_tag == '' ? '':('<span class="boo-movie-mark">'+movie_name_tag+'</span>'))
+								+'<h6>'+movie_title+'</h6>'
+								+'<div class="clear"></div>'
+								+'<div>'+movie_sub_title+'</div>'
+								+'<div class="boo-movie-tags">'+movie_tag+'</div>' 
+							+'</div>'
+							+'<div class="clear" ></div>'
+							+'<div class="boo-movie-grapher">'
+								+'<img src="'+movie_avatar+'" class="boo-movie-avatar" />'
+								+'<div class="boo-movie-grapher-name">'+movie_grapher+'</div>'
+								+'<div class="boo-movie-comment">'+movie_comment_count+'</div>'
+								+'<div class="boo-movie-like">'+movie_ding+'</div>'
+								+'<div class="boo-movie-play">'+movie_played+'</div>'
+							+'</div>'
+							+'<input type="hidden" value=\''+post_value+'\' name="item[]"/>'
+						+'</div>';
+		}else if (type == 'wei') {
+			var wei_id = $('#wei_id').val();
+			var wei_title = $('#wei_title').val();
+			var wei_image = $('#wei_image').val();
+			var wei_sub_title = $('#wei_sub_title').val();
+			var wei_avatar = $('#wei_avatar').val();
+			var wei_grapher = $('#wei_grapher').val();
+			var wei_played = $('#wei_played').val();
+			var wei_online_time = $('#wei_online_time').val();
+			var post_value = '{'
+				+ '"type":"'+type+'",'
+				+ '"wei_id":"'+wei_id +'",'
+				+ '"title":"' + wei_title +'",'
+				+ '"sub_title":"' + wei_sub_title +'",'
+				+ '"image":"' + wei_image +'",'
+				+ '"online_time":"'+ wei_online_time +'"'
+			+'}';
+			html = '<div class="boo-item">'
+						+'<div class="boo-item-ctrl boo-ctrl-wei js-ctrl" ;>'
+							+'<a class="blueBack" id="move_up_'+timestamp+'">上移</a> '
+							+'<a class="blueBack" id="move_down_'+timestamp+'">下移</a> '
+							+'<a class="redBack" onclick="$(this).parent().parent().remove();">删除</a> '
+							+'<div class="boo-online-time">'+wei_online_time+'</div>'
+						+'</div>'
+						+'<div class="boo-wei">'
+							+'<div class="boo-wei-image" style="background-image:url(\''+wei_image+'\')"></div>'
+						+'</div>'
+						+'<div class="boo-wei-info">'
+							+'<div class="boo-wei-title boo-nowrap">'+wei_title+'</div>'
+							+'<div class="boo-wei-subt boo-nowrap">'+wei_sub_title+'</div>'
+							+'<div class="boo-wei-other boo-nowrap">4小时前 / from 电影空间</div>'
+							+'<div class="clear"></div>'
+							+'<div class="boo-wei-grapher">'
+								+'<img src="'+wei_avatar+'" class="boo-wei-avatar" />'
+								+'<div class="boo-wei-grapher-name">'+wei_grapher+'</div>'
+								+'<div class="boo-wei-play">'+wei_played+'</div>'
+							+'</div>'
+						+'</div>'
+						+'<div class="clear"></div>'
+						+'<input type="hidden" value=\''+post_value+'\' name="item[]"/>'
+					+'</div>'
+				+ '</div>';
+		} else if (type == 'paper') {
+			var paper_id = $('#paper_id').val();
+			var paper_title = $('#paper_title').val();
+			var paper_image = $('#paper_image').val();
+			var paper_sub_title = $('#paper_sub_title').val();
+			var paper_grapher = $('#paper_grapher').val();
+			var paper_played = $('#paper_played').val();
+			var paper_ding = $('#paper_ding').val();
+			var paper_show_type = $('#paper_show_type').val();
+			var paper_online_time = $('#paper_online_time').val();
+			var post_value = '{'
+				+ '"type":"'+type+'",'
+				+ '"paper_id":"'+paper_id +'",'
+				+ '"title":"' + paper_title +'",'
+				+ '"sub_title":"' + paper_sub_title +'",'
+				+ '"show_type":"'+paper_show_type+'",'
+				+ '"image":"' + paper_image +'",'
+				+ '"online_time":"'+ paper_online_time +'"'
+			+'}';
+			if (paper_show_type == '1') { // 大图模式
+				html = '<div class="boo-item">'
+							+'<div class="boo-item-ctrl boo-ctrl-paper js-ctrl"  style="z-index:20;">'
+								+'<a class="blueBack" id="move_up_'+timestamp+'">上移</a> '
+								+'<a class="blueBack" id="move_down_'+timestamp+'">下移</a> '
+								+'<a class="redBack" onclick="$(this).parent().parent().remove();">删除</a> '
+								+'<div class="boo-online-time">'+paper_online_time+'</div>'
+							+'</div>'
+							+'<div class="boo-paper-1" style="background-image:url(\''+paper_image+'\')" >'
+								+'<div class="boo-paper-info">'
+									+'<div class="boo-paper-title">'+paper_title+'</div>'
+									+'<div class="boo-paper-subt">'+paper_sub_title+'</div>'
+								+'</div>'
+							+'</div>'
+							+'<input type="hidden" value=\''+post_value+'\' name="item[]"/>'
+					 +'</div>' ;
+			} else if (paper_show_type=='2') { // 小图模式
+				html = '<div class="boo-item">'
+							+'<div class="boo-item-ctrl boo-ctrl-wei js-ctrl" ;>'
+								+'<a class="blueBack" id="move_up_'+timestamp+'">上移</a> '
+								+'<a class="blueBack" id="move_down_'+timestamp+'">下移</a> '
+								+'<a class="redBack" onclick="$(this).parent().parent().remove();">删除</a> '
+								+'<div class="boo-online-time">'+paper_online_time+'</div>'
+							+'</div>'
+							+'<div class="boo-paper-2">'
+								+'<div class="boo-paper-image" style="background-image:url(\''+paper_image+'\')"></div>'
+								+'<div class="boo-paper-info">'
+									+'<div class="boo-paper-title boo-nowrap">'+paper_title+'</div>'
+									+'<div class="boo-paper-by boo-nowrap"><span style="color:aaaaae;">By</span> '+paper_grapher+'</div>'
+									+'<div class="boo-paper-subt boo-nowrap">'+paper_sub_title+'</div>'
+									+'<div class="boo-paper-play">'+paper_played+'</div>'
+									+'<div class="boo-paper-like">'+paper_ding+'</div>'
+									+'<div class="boo-paper-tag">'+'我的'+'</div>'
+								+'</div>'
+							+'</div>'
+							+'<div class="clear"></div>'
+							+'<input type="hidden" value=\''+post_value+'\' name="item[]"/>'
+					 + '</div>';
+			}
+		} else if (type=='adv') {
+			var adv_online_time = $('#adv_online_time').val();
+			var post_value = '{'
+				+ '"type":"'+type+'",'
+				+ '"adv2_id":"'+$('#adv_id').val() +'",'
+				+ '"online_time":"'+ adv_online_time +'"'
+			+'}';
+			html = '<div class="boo-item">'
+						+'<div class="boo-item-ctrl boo-ctrl-adv js-ctrl" ;>'
+							+'<a class="blueBack" id="move_up_'+timestamp+'">上移</a> '
+							+'<a class="blueBack" id="move_down_'+timestamp+'">下移</a> '
+							+'<a class="redBack" onclick="$(this).parent().parent().remove();">删除</a> '
+							+'<div class="boo-online-time">'+adv_online_time+'</div>'
+						+'</div>'
+						+'<div >'
+							+'<img src="'+$('#adv_image_url').attr('src')+'" class="boo-tui" />'
+						+'</div>'
+						+'<div class="clear"></div>'
+						+'<input type="hidden" value=\''+post_value+'\' name="item[]"/>'
+				+ '</div>';
+		} else if (type=='topic') {
+			var topic_id = $('#topic_id').val();
+			var topic_title = $('#topic_title').val();
+			var topic_image = $('#topic_image').val();
+			var topic_sub_title = $('#topic_sub_title').val();
+			var topic_editor_note = $('#topic_editor_note').val();
+			var topic_name_tag = $('#topic_name_tag').val();
+			var topic_online_time = $('#topic_online_time').val();
+			var post_value = '{'
+				+ '"type":"'+type+'",'
+				+ '"topic_id":"'+topic_id +'",'
+				+ '"title":"' + topic_title +'",'
+				+ '"sub_title":"' + topic_sub_title +'",'
+				+ '"editor_note":"'+topic_editor_note+'",'
+				+ '"image":"' + topic_image +'",'
+				+ '"online_time":"'+ topic_online_time +'"'
+			+'}';
+			html = '<div class="boo-item">'
+						+'<div class="boo-item-ctrl boo-ctrl-adv js-ctrl" ;>'
+							+'<a class="blueBack" id="move_up_'+timestamp+'">上移</a> '
+							+'<a class="blueBack" id="move_down_'+timestamp+'">下移</a> '
+							+'<a class="greenBack" id="edit_img_'+timestamp+'">修改图片</a> '
+							+'<a class="redBack" onclick="$(this).parent().parent().remove();">删除</a> '
+							+'<div class="boo-online-time">'+topic_online_time+'</div>'
+						+'</div>'
+						+'<div ><img style="width:600px;height:215px;" src="'+topic_image+'" /></div>'
+						+'<div class="boo-topic-info">'
+							+ (topic_name_tag == '' ? '':('<span class="boo-movie-mark">'+topic_name_tag+'</span>'))
+							+'<h6>'+topic_title+'</h6>'
+							+'<div class="clear"></div>'
+							+'<div class="boo-topic-subt">-- '+topic_sub_title+'</div>'
+							+'<div class="boo-topic-editernote">'+topic_editor_note+'</div>'
+						+'</div>'
+						+'<div class="clear"></div>'
+						+'<input type="hidden" value=\''+post_value+'\' name="item[]"/>'
+				+ '</div>';
+		} else if (type=='image') {
+			var image_id = $('#image_id').val();
+			var image_image = $('#image_image').val();
+			var image_title = $('#image_title').val();
+			var image_content = $('#image_content').val();
+			var image_grapher = $('#image_grapher').val();
+			var image_online_time = $('#image_online_time').val();
+			var post_value = '{'
+				+ '"type":"'+type+'",'
+				+ '"pic_id":"'+image_id+'",'
+				+ '"title":"'+image_title+'",'
+				+ '"content":"' + image_content +'",'
+				+ '"grapher":"' + image_grapher +'",'
+				+ '"image":"' + image_image +'",'
+				+ '"online_time":"'+ image_online_time +'"'
+			+'}';
+			var html = '<div class="boo-item">'
+    							+ '<div class="js-ctrl" style="position:absolute;right:20px;top:20px;z-index:120;">'
+            						+ '<a class="greenBack" id="move_up_'+timestamp+'">上</a> '
+            						+ '<a class="greenBack" id="move_down_'+timestamp+'">下</a> '
+            						+ '<a class="redBack" href="javascript:void(0);" onclick="$(this).parent().parent().remove();">删</a>'
+            						+'<div class="boo-online-time" style="bottom:-400px; left:-400px;">'+image_online_time+'</div>'
+            						+'<div class="clear"></div>'
+            					+ '</div>'
+								+'<div class="boo-image" style="background-image:url(\''+image_image+'\')">'
+									+'<div class="boo-image-info">'
+										+'<div class="boo-image-title">'+image_title+'</div>'
+										+'<div class="boo-image-subt">'+image_content+'</div>'
+										+'<div class="boo-image-grapher">'+image_grapher+'</div>'
+									+'</div>'
+									+'<div class="clear"></div>'
+								+'</div>'
+								+'<div class="clear"></div>'
+								+'<input type="hidden" value=\''+post_value+'\' name="item[]"/>'
+						+'</div>';
+		}
+		return html;
+	}
+	
+	
+	var mi = function() {
+		var local_key = 'graphmovie.boo.admin.home.homeImg';
+		var ge = '<:>';
+		var params = {
+				fileInput: $("#fileImage").get(0),
+				dragDrop: $("#fileDragArea").get(0),
+				//upButton: $("#fileSubmit").get(0),
+				url: '{:U("HomeOnline/addUploadImage")}',
+				filter: function(files) {
+					var arrFiles = [];
+					for (var i = 0, file; file = files[i]; i++) {
+						if (file.type.indexOf("image") == 0) {
+							if (file.size >= 102400) {
+								alert('您这张"'+ file.name +'"图片大小过大，应小于100k');	
+							} else {
+								arrFiles.push(file);	
+							}			
+						} else {
+							alert('文件"' + file.name + '"不是图片。');	
+						}
+					}
+					return arrFiles;
+				},
+				onSelect: function(files) {
+					var html = '', i = 0;
+					$("#fileDragArea").html();
+					var funAppendImage = function() {
+						file = files[i];
+						if (file) {
+							var reader = new FileReader()
+							reader.onload = function(e) {
+								html = html + '<div id="uploadList_'+ i +'" class="upload_append_list"><p><strong>' + file.name + '</strong>'+ 
+									'<a href="javascript:" class="upload_delete" title="删除" data-index="'+ i +'">删除</a><br />' +
+									'<img id="uploadImage_' + i + '" src="' + e.target.result + '" class="upload_image" /></p>'+ 
+									'<span id="uploadProgress_' + i + '" class="upload_progress"></span>' +
+								'</div>';
+								
+								i++;
+								funAppendImage();
+							}
+							reader.readAsDataURL(file);
+						} else {
+							$("#fileDragArea").html(html+'<div class="clear"></div>');
+							if (html) {
+								//删除方法
+								$(".upload_delete").click(function() {
+									ZXXFILE.funDeleteFile(files[parseInt($(this).attr("data-index"))]);
+									return false;	
+								});
+								//提交按钮显示
+								$("#fileSubmit").show();	
+							} else {
+								//提交按钮隐藏
+								$("#fileSubmit").hide();	
+							}
+						}
+					};
+					funAppendImage();		
+				},
+				onDelete: function(file) {
+					$("#uploadList_" + file.index).fadeOut();
+				},
+				onDragOver: function() {
+					$(this).addClass("upload_drag_hover");
+				},
+				onDragLeave: function() {
+					$(this).removeClass("upload_drag_hover");
+				},
+				onProgress: function(file, loaded, total) {
+					var eleProgress = $("#uploadProgress_" + file.index), percent = (loaded / total * 100).toFixed(2) + '%';
+					eleProgress.show().html(percent);
+				},
+				onSuccess: function(file, response) {
+					try {
+						response = $.parseJSON(response);
+						//$("#homePage_img_list").append("<p>上传成功，图片地址是：" + typeof() + "</p>");
+						if (response.rst == 1) {
+							var local_data = localStorage.getItem(local_key); //获取本地缓存
+							var new_data = [];
+							new_data.push(response.data.url);
+							if (local_data != null) {
+								var tmp = local_data.split(ge);
+								for (var i=0,len=tmp.length; i<len; i++) {
+									if (i>=20) break;
+									new_data.push(tmp[i]);
+								}
+							}
+							localStorage.setItem(local_key,new_data.join(ge)); //写入本地缓存
+							
+							var id = 'list_item_'+( new Date()).valueOf();
+							$("#homePage_img_list").prepend("<div id='"+id+"' data-url='"+response.data.url+"' class='item'><img src='"+response.data.url+"' /></div>");
+							$('#'+id).click(function(){
+								$("#choose_img_url").val($(this).attr('data-url'));
+								$("#homePage_img_list > .item").removeClass('choose_ok');
+								$(this).addClass('choose_ok');
+							});
+						} else {
+							$("#homePage_img_list").prepend("<p class='red'>图片上传错误："+response.msg+"</p>");
+						}
+					}catch(ex) {
+						$("#homePage_img_list").prepend("<p class='red'>返回数据解析错误："+response+"</p>");
+					}
+					
+				},
+				onFailure: function(file) {
+					$("#fileDragArea").append("<p>图片" + file.name + "上传失败！</p>");	
+					$("#uploadImage_" + file.index).css("opacity", 0.2);
+				},
+				onComplete: function() {
+					//提交按钮隐藏
+					$("#fileSubmit").hide();
+					//file控件value置空
+					$("#fileImage").val("");
+					$("#fileDragArea").append('<div class="upload_drap_info">当前图片全部上传完毕，可继续添加上传。</div>');
+				}
+			};
+			ZXXFILE = $.extend(ZXXFILE, params);
+			ZXXFILE.init();
+			
+			var local_data = localStorage.getItem(local_key); //获取本地缓存
+			if (local_data != null) {
+				var tmp = local_data.split(ge);
+				for (var i=0,len=tmp.length; i<len; i++) {
+					var id = 'list_item_'+i;
+					$("#homePage_img_list").append("<div class='item' data-url='"+tmp[i]+"' id='"+id+"'><img src='"+tmp[i]+"' /></div>");
+					$('#'+id).click(function(){
+						$("#choose_img_url").val($(this).attr('data-url'));
+						$("#homePage_img_list > .item").removeClass('choose_ok');
+						$(this).addClass('choose_ok');
+					});
+				}
+			}
+	};
+	mi();
+	
+	$('#do_upload_files').click(function(){
+		ZXXFILE.funUploadFile();
+	});
+	
+	$('.js-get-imgurl').click(function(){
+		var id = $(this).attr('data-id');
+		$("#homePage_img_list > .item").removeClass('choose_ok');
+		$('#choose_img_url').val('');
+		art.dialog({
+			lock:true,
+			id : '__choose_img_dialog',
+			content:$('#dialog_upload_image')[0],
+			ok : function(){
+				var url = $.trim($('#choose_img_url').val());
+				if (url == '') {alert('请选择图片'); return false;}
+				$('#'+id).val(url);
+				$('#'+id+'_url').attr('src',url);
+			},
+			cancel:true
+		});
+	});
+	
+   	/*	
+	*  获取图解信息 
+	*/
+	$('#js_get_Movie_info').click(function(){
+		var did = $.trim($('#movie_id').val());
+		if (did == '') {alert('要输入ID哟');return;}
+		try {
+			did = parseInt(did);
+		}catch (ex) {
+			alert('要输入数字啊啊啊啊啊啊，半角的数字啊啊啊啊啊啊啊啊啊');return;
+		}
+		var data = {id:did,type:'movie'}
+		$.ajax({
+			url : '{:U("HomeOnline/getOneInfo")}',
+			type : 'POST',
+			data : data,
+			success: function(data){
+				try {
+					if (data.rst == 1) {
+						var rst = data.data;
+						//$('#movie_tag').val(rst.tags.split('|')[0]);
+						$('#movie_tag').val('<span class="level1">'+rst.tags.replace(/\|/g,'</span><span class="level1">') + '</span>' + '<span>'+rst.mark.replace(/\|/g,'</span><span>')+'</span>');
+						$('#movie_title').val(rst.name);
+						$('#movie_image_url').attr('src',rst.spic);
+						$('#movie_image').val(rst.spic);
+						$('#movie_sub_title').val(rst.sub_title);
+						$('#movie_avatar').val(rst.avatar);
+						$('#movie_grapher').val(rst.grapher_name);
+						$('#movie_played').val(rst.played);
+						$('#movie_ding').val(rst.ding);
+						$('#movie_comment_count').val(rst.comment_count);
+						$('#movie_name_tag').val(rst.name_tag);
+						$('#movie_xiaomi_online_time').val(rst.online_time);
+					} else {
+						alert(data.msg);
+					}
+				}catch (ex) {
+					alert(data);
+				}
+			},
+			error : function(ex){
+				alert('ajax 错误');
+			}
+		});
+	});
+	
+	/*	
+	*  获取微图解信息 
+	*/
+	$('#js_get_Wei_info').click(function(){
+		var did = $.trim($('#wei_id').val());
+		if (did == '') {alert('要输入ID哟');return;}
+		try {
+			did = parseInt(did);
+		}catch (ex) {
+			alert('要输入数字啊啊啊啊啊啊，半角的数字啊啊啊啊啊啊啊啊啊');return;
+		}
+		var data = {id:did,type:'wei'}
+		$.ajax({
+			url : '{:U("HomeOnline/getOneInfo")}',
+			type : 'POST',
+			data : data,
+			success: function(data){
+				try {
+					if (data.rst == 1) {
+						var rst = data.data;
+						$('#wei_title').val(rst.title);
+						$('#wei_image_url').attr('src',rst.pic);
+						$('#wei_image').val(rst.pic);
+						$('#wei_sub_title').val(rst.intro);
+						$('#wei_avatar').val(rst.avatar);
+						$('#wei_grapher').val(rst.grapher_name);
+						$('#wei_played').val(rst.played);
+					} else {
+						alert(data.msg);
+					}
+				}catch (ex) {
+					alert(data);
+				}
+			},
+			error : function(ex){
+				alert('ajax 错误');
+			}
+		});
+	});
+	
+	/*	
+	*  获取画报信息
+	*/
+	$('#js_get_Paper_info').click(function(){
+		var did = $.trim($('#paper_id').val());
+		if (did == '') {alert('要输入ID哟');return;}
+		try {
+			did = parseInt(did);
+		}catch (ex) {
+			alert('要输入数字啊啊啊啊啊啊，半角的数字啊啊啊啊啊啊啊啊啊');return;
+		}
+		var data = {id:did,type:'paper'}
+		$.ajax({
+			url : '{:U("HomeOnline/getOneInfo")}',
+			type : 'POST',
+			data : data,
+			success: function(data){
+				try {
+					if (data.rst == 1) {
+						var rst = data.data;
+						$('#paper_title').val(rst.name);
+						$('#paper_image_url').attr('src',rst.bpic);
+						$('#paper_image').val(rst.bpic);
+						$('#paper_sub_title').val(rst.sub_title);
+						$('#paper_grapher').val(rst.grapher_name);
+						$('#paper_played').val(rst.played);
+						$('#paper_ding').val(rst.ding);
+					} else {
+						alert(data.msg);
+					}
+				}catch (ex) {
+					alert(data);
+				}
+			},
+			error : function(ex){
+				alert('ajax 错误');
+			}
+		});
+	});
+	
+	
+	/**
+	* 获取广告信息
+	*/
+	$('#js_get_Adv_info').click(function(){
+		var did = $.trim($('#adv_id').val());
+		if (did == '') {alert('要输入ID哟');return;}
+		try {
+			did = parseInt(did);
+		}catch (ex) {
+			alert('要输入数字啊啊啊啊啊啊，半角的数字啊啊啊啊啊啊啊啊啊');return;
+		}
+		var data = {id:did,type:'adv'}
+		$.ajax({
+			url : '{:U("HomeOnline/getOneInfo")}',
+			type : 'POST',
+			data : data,
+			success: function(data){
+				try {
+					if (data.rst == 1) {
+						var rst = data.data;
+						$('#adv_image_url').attr('src',rst.pic);
+					} else {
+						alert(data.msg);
+					}
+				}catch (ex) {
+					alert(data);
+				}
+			},
+			error : function(ex){
+				alert('ajax 错误');
+			}
+		});
+	});
+	
+	/*	
+	*  获取专辑信息
+	*/
+	$('#js_get_Topic_info').click(function(){
+		var did = $.trim($('#topic_id').val());
+		if (did == '') {alert('要输入ID哟');return;}
+		try {
+			did = parseInt(did);
+		}catch (ex) {
+			alert('要输入数字啊啊啊啊啊啊，半角的数字啊啊啊啊啊啊啊啊啊');return;
+		}
+		var data = {id:did,type:'topic'}
+		$.ajax({
+			url : '{:U("HomeOnline/getOneInfo")}',
+			type : 'POST',
+			data : data,
+			success: function(data){
+				try {
+					if (data.rst == 1) {
+						var rst = data.data;
+						$('#topic_title').val(rst.name);
+						$('#topic_image_url').attr('src',rst.spic);
+						$('#topic_image').val(rst.spic);
+						$('#topic_sub_title').val(rst.sub_title);
+						$('#topic_editor_note').val(rst.editor_note);
+						$('#topic_name_tag').val(rst.name_tag);
+					} else {
+						alert(data.msg);
+					}
+				}catch (ex) {
+					alert(data);
+				}
+			},
+			error : function(ex){
+				alert('ajax 错误');
+			}
+		});
+	});
+	
+	/*	
+	*  获取每日一图信息
+	*/
+	$('#js_get_Image_info').click(function(){
+		var did = $.trim($('#image_id').val());
+		if (did == '') {alert('要输入ID哟');return;}
+		try {
+			did = parseInt(did);
+		}catch (ex) {
+			alert('要输入数字啊啊啊啊啊啊，半角的数字啊啊啊啊啊啊啊啊啊');return;
+		}
+		var data = {id:did,type:'image'}
+		$.ajax({
+			url : '{:U("HomeOnline/getOneInfo")}',
+			type : 'POST',
+			data : data,
+			success: function(data){
+				try {
+					if (data.rst == 1) {
+						var rst = data.data;
+						$('#image_content').val(rst.name);
+						$('#image_image_url').attr('src',rst.image_url);
+						$('#image_image').val(rst.image_url);
+					} else {
+						alert(data.msg);
+					}
+				}catch (ex) {
+					alert(data);
+				}
+			},
+			error : function(ex){
+				alert('ajax 错误');
+			}
+		});
+	});
+})();
+
+$(window).scroll(function() {
+	var scrollTop = 326-$(this).scrollTop();
+	$('#boo_bar_control').css('top',(scrollTop>10 ? scrollTop : 10) + 'px');
+});
+</script>
+

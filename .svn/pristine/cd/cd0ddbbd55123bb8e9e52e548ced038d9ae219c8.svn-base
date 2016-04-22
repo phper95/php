@@ -1,0 +1,143 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<script src="__JS__/dialog/artDialog.js?skin=default"></script>
+<div id="sidebar">
+	<include file="Public:left" />
+</div>
+<!-- Sidebar ends -->
+    
+<!-- Content begins -->
+<div id="content">
+    <div class="contentTop">
+        <span class="pageTitle">添加微图解解说</span>
+       	<div class="clear"></div>
+    </div>
+    
+    <include file="Public:bav" />
+    
+    <!-- Main content -->
+    <div class="wrapper">
+        <!-- Media table sample -->
+        <div class="widget check">
+            <div class="whead">
+            	<h6>微图解解说列表</h6>
+            		<notempty name="Think.get.backurl">
+                   		<a href="{$Think.get.backurl}" class="buttonH bBlue mb10 mt5">返回</a>
+                   	<else />
+                   		<a href="{:getCurrentUrl()}" class="buttonH bBlue mb10 mt5">返回</a>
+                 	</notempty >
+            	<div class="clear"></div>
+            </div>
+            <form method='post' id="form1" name="form1" action="{:U('Wei/doAddVol')}"  enctype="multipart/form-data">
+            <table cellpadding="0" cellspacing="0" width="100%" class="tDefault checkAll tMedia" id="checkAll">
+                <thead>
+                    <tr>
+                        <td width="120">页码</td>
+                        <td width="400">图片</td>
+                        <td>解说</td>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td colspan="7">
+                        	<input type="hidden" value="{$wei.id}" name="wei_id"/>
+                        	<input type="submit" value="提 交" class="buttonM bBlack formSubmit" /><div class="clear"></div>
+                        </td>
+                    </tr>
+                </tfoot>
+                <tbody>
+                	<volist name="list" id="vo">
+		            <tr>
+		                <td><span class="blueBack" style="font-size:20px;font-weight:900;">{$vo['pindex']+1}</span></td>
+		               	<td>
+		               		<img src="{$vo.image|default='__PUBLIC__/images/quetu.jpg'}" height="120px;" id="images-{$vo.pindex}" />
+		               		<br />
+		               		<input type="file" name="Fileimages-{$vo.pindex}" class="js-file-choose" data-id="images-{$vo.pindex}">
+		               	</td>
+		                <td><textarea name="intro[{$vo.pindex}]" rows="3"></textarea></td>
+		            </tr>
+		            </volist>
+                </tbody>
+            </table>
+            </form>
+        </div>
+     
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+<script>
+(function(){
+	
+	$(".js-file-choose").change(function(){
+		var objUrl = booGetObjectURL(this.files[0]) ;
+		if (objUrl) {
+			$("#"+$(this).attr('data-id')).attr("src", objUrl) ;
+		}
+	}) ;
+	
+	$('.js-shenhe').click(function(){
+		var id = $(this).attr('data-id');
+		var vol_id = $(this).attr('data-id');
+		art.dialog({
+			id : 'shenhevol-list',
+			title : '',
+			content: '审核结果',
+			ok : function(){
+				$.ajax({
+					url : "{:U('Wei/shenheVol',array(''))}",
+					data: {id:id,vol_id:vol_id,state:1},
+					success : function(data){
+						if (typeof data == 'object') {
+							if (data.rst == 1) {
+								art.dialog({id:'shenhevol-list'}).close();
+								alert('审核通过');
+							} else {
+								alert(data.msg);
+							}
+						} else {
+							alert(data);
+						}
+					},
+					error:function(ex){
+						alert('ajax错误');
+					}
+				});
+				return false;
+			},
+			button:[
+			   {
+				   name:'不通过',
+				   callback:function(){
+					   if (confirm('不通过会清空这条解说的图片和用户的绑定关系，是否确认')) {
+						   $.ajax({
+								url : "{:U('Wei/shenheVol',array(''))}",
+								data: {id:id,vol_id:vol_id,state:2},
+								success : function(data){
+									if (typeof data == 'object') {
+										if (data.rst == 1) {
+											art.dialog({id:'shenhevol-list'}).close();
+											alert('操作成功');
+											location.reload();
+										} else {
+											alert(data.msg);
+										}
+									} else {
+										alert(data);
+									}
+								},
+								error:function(ex){
+									alert('ajax错误');
+								}
+							});
+					   }
+				   }
+			   }
+			],
+			okVal:'通过',
+		});
+	});
+})();
+</script>
+<include file="Public:footer" />

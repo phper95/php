@@ -1,0 +1,84 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<include file="Poptxt:search" />
+</div>
+<!-- Sidebar ends -->
+
+<!-- Content begins -->
+<div id="content">
+
+  <include file="Public:bav" />
+  
+    <!-- Main content -->
+    <div class="wrapper">
+        <!-- Media table sample -->
+        <div class="widget check">
+            <div class="whead">
+            <h6>广告弹幕列表</h6>
+				<div class="clear"></div></div>
+            <table cellpadding="0" cellspacing="0" width="100%" class="tDefault checkAll tMedia" id="checkAll">
+                <thead>
+                    <tr>
+		                <td width="50">编号</td>
+		                <td width="50">用户ID</td>
+		                <td width="50">广告ID</td>
+		                <td width="50">章节ID</td>
+		                <td width="50">页面ID</td>
+		                <td>弹幕内容</td>
+		                <td width="80">弹幕回复ID</td>
+		                <td width="150">弹幕时间</td>
+		                <td width="50">页面序号</td>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td colspan="9">
+                        <empty name="list">
+                        	额。。。木有咧……
+                        <else/>
+                            <div class="tPages">
+                                <ul class="pages">
+                                	{$page}
+                                    <!--<li class="prev"><a href="#" title="">&lt;</a></li>
+                                    <li><a href="#" title="" class="active">1</a></li>
+                                    <li><a href="#" title="">2</a></li>
+                                    <li><a href="#" title="">3</a></li>
+                                    <li><a href="#" title="">4</a></li>
+                                    <li><a href="#" title="">5</a></li>
+                                    <li><a href="#" title="">6</a></li>
+                                    <li>...</li>
+                                    <li><a href="#" title="">20</a></li>
+                                    <li class="next"><a href="#" title="">&gt;</a></li>
+                                --></ul>
+                            </div>
+                        </empty>
+                        </td>
+                        
+                    </tr>
+                </tfoot>
+                <tbody>
+                    <volist name="list" id="vo">
+		            <tr>
+		                <td>{$vo.id}</td>
+		                <td>{$vo.user_id}</td>
+		                <td><a href="{:U('Poptxt/showInfo', array('id'=>$vo['adv_id'],'user_id'=>$vo['user_id'],'type'=>'adv'))}">{$vo.adv_id}</a></td>
+		                <td>{$vo.vol_id} </td>
+		                <td>{$vo.page_index}</td>
+		                <td>{:htmlspecialchars($vo['comment_content'])}</td>
+		                <td>{$vo.reply_comment_id}</td>
+		                <td>{$vo.add_time}</td>
+		                <td>{$vo.page_sort_id}</td>
+		            </tr>
+		            </volist>
+                </tbody>
+            </table>
+        </div>
+     
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+<include file="Public:footer" />

@@ -1,0 +1,91 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<!-- Secondary nav -->
+</div>
+<!-- Sidebar ends -->
+
+<!-- Content begins -->
+<div id="content">
+    
+    <!-- Breadcrumbs line -->
+    <div class="breadLine">
+        <div class="bc">
+            <ul id="breadcrumbs" class="breadcrumbs">
+                <li><a href="#">主页</a></li>
+                <li><a href="#">{}</a>
+                    
+                </li>
+                
+            </ul>
+        </div>
+        
+        
+    </div>
+    <!-- Main content -->
+    <div class="wrapper">
+        	<div class="fluid">
+        		<form method='post' id="form1" name="form1" action="{:U('Topic/insert')}"  enctype="multipart/form-data">
+                    <div class="widget ">
+                        <div class="whead">
+                        	<h6>添加专题</h6>
+                        	<a href="{:getCurrentUrl()}" class="buttonH bBlue mb10 mt5">取消</a>
+                        	<div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>专题类型:</label></div>
+                            <div class="grid2"><input type="text" name="tags" /></div>
+                            <div class="clear"></div>
+                        </div>
+                    
+                        <div class="formRow">
+                            <div class="grid3"><label>专题名称:</label></div>
+                            <div class="grid3"><input type="text" name="name" /></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>副标题:</label></div>
+                            <div class="grid6"><input type="text" name="sub_title" /></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>专辑编者按：</label></div>
+                            <div class="grid7"><textarea rows="3" cols="" name="editor_note" placeholder="编者按">编者按：</textarea></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>专辑简介：</label></div>
+                            <div class="grid7"><textarea rows="4" cols="" name="intro" placeholder="专辑简介"></textarea></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>作者:</label></div>
+                            <div class="grid6"><input type="text" name="grapher"  placeholder="作者ID"/></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>专辑名称前缀：</label></div>
+                            <div class="grid3"><input type="text" name="name_tag" placeholder="专辑名称前缀"/></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow"><input type="submit" value="提 交" class="buttonM bBlack formSubmit" /><div class="clear"></div></div>
+                        <div class="clear"></div>
+                    
+                    </div>
+                    </form>
+            </div>
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+
+<include file="Public:footer" />

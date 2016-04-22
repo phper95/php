@@ -1,0 +1,52 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<!-- Secondary nav -->
+    <div class="secNav">
+        <div class="secWrapper">
+            <div class="secTop">
+                <div class="balance">
+                    <div class="balInfo">上次登陆:<span>{$Think.session.lastLoginTime|toDate}</span></div>
+                </div>
+            </div>
+
+
+            <div class="divider"><span></span></div>
+            
+       </div> 
+       <div class="clear"></div>
+   </div>
+</div>
+<!-- Sidebar ends -->
+    
+<!-- Content begins -->
+<div id="content">
+    <div class="contentTop">
+        <span class="pageTitle">主页君</span>
+        <div class="clear"></div>
+    </div>
+    
+    <!-- Breadcrumbs line -->
+    <div class="breadLine">
+        <div class="bc">
+            <ul id="breadcrumbs" class="breadcrumbs">
+                <li><a href="#">主页君</a></li>
+                
+            </ul>
+        </div>
+        
+        
+    </div>
+    
+    <!-- Main content -->
+    <div class="wrapper">
+        不要问我为什么没有内容，我也不知道。
+     
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+
+<include file="Public:footer" />

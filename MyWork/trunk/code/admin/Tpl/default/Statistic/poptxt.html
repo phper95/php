@@ -1,0 +1,175 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+</div>
+<!-- Sidebar ends -->
+    
+<!-- Content begins -->
+<div id="content">
+    <div class="contentTop">
+        <span class="pageTitle">【{$Think.get.name}】  {$Think.get.day} 弹幕请求分析</span>
+        <div class="clear"></div>
+    </div>
+    
+    <!-- Breadcrumbs line -->
+    <include file="Public:bav" />
+    
+    <!-- Main content -->
+    <div class="wrapper">
+   	 	<div class="widget fluid">
+    		<div id="boo"></div>
+    	</div>
+    <empty name="error_info">
+    	<div class="widget fluid">
+    		<div class="whead fluid">
+    			<h6>{$Think.get.day} 【{$Think.get.name}】({$Think.get.id})</h6>
+				<div class="clear"></div>
+    		</div>
+    		<table cellpadding="0" cellspacing="0" width="100%" class="tDefault" id="resize" style="max-height:100px;">
+                <thead>
+                    <tr>
+                    	<td width="40" class="sortCol">屏<span></span></td>
+                    	<td width="40" class="sortCol">平台<span></span></td>
+                    	<td width="40" class="sortCol">渠道<span></span></td>
+                    	<td width="40" class="sortCol">版本<span></span></td>
+                    	<td width="40" class="sortCol">总计<span></span></td>
+		                <for start="0" end="24">
+							<td width="40" class="sortCol">{$i}<span></span></td>
+						</for>
+                    </tr>
+                </thead>
+                <tbody id="statistic_pvc_active_member_table">
+                </tbody>
+            </table>
+    	</div>
+    	
+    <else />
+    	<div class="widget">
+    	<div class="body">{$error_info}</div>
+    	</div>
+    </empty>
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<empty name="error_info">
+<script src="http://echarts.baidu.com/build/echarts-plain.js"></script>
+    <script type="text/javascript">
+    (function(){
+    	var data = {:json_encode($rst)};
+    	var pages = {$cha_nums};
+    	
+    	var html = '';
+    	for (var page in data) {
+    		var lev1 = data[page];
+    		for (var pvc in lev1) {
+    			var tmp = pvc.split(' | ');
+    			var t = 0;
+    			html += '<tr>';
+        		html += '<td>' + page + '</td>';
+        		html += '<td>' + tmp[0] + '</td>';
+        		html += '<td>' + tmp[1] + '</td>';
+        		html += '<td>' + tmp[2] + '</td>';
+        		html += '<td>{t}</td>';
+        		for (var i=0; i<24; i++) {
+        			var num = typeof lev1[pvc][i] == 'undefined' ? 0 : parseInt(lev1[pvc][i].p);
+        			html += '<td>' + num + '</td>';
+        			t += num;
+        		}
+        		html += '</tr>';
+        		html = html.replace(/{t}/,t);
+    		}
+    	}
+    	$('#statistic_pvc_active_member_table').html(html);
+    	
+    	var option = {
+        		title : {
+            	    text: '电影弹幕请求情况',
+            	    subtext : '{$total_str|default=""}'
+            	},
+            	tooltip : {
+            	    trigger: 'axis',
+            	    axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+            	        type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+            	    }
+            	},
+            	animation:false,
+                toolbox: {
+                    show : true,
+                    feature : {
+                        mark : {show: true},
+                        dataView : {show: true, readOnly: false},
+                        magicType : {show: true, type: ['line', 'bar']},
+                        restore : {show: true},
+                        saveAsImage : {show: true}
+                    }
+                },
+                xAxis : [{
+                        type : 'category',
+                        data : []
+                    }
+                ],
+                yAxis : [{
+                        type : 'value'
+                    }
+                ],
+                series : [
+                ]
+            };
+    	
+    	var display = function(option){
+    		var opt = {markPoint : {
+                data : [
+                        {type : 'max', name: '最大值'},
+                        {type : 'min', name: '最小值'}
+                    ]
+                },markLine : {
+                    data : [
+                            {type : 'average', name: '平均值'}
+                        ]
+                    }
+    		};
+    		opt.name = '访问量';
+    		opt.type = 'bar';
+    		opt.data = [];
+    		
+    		
+    		
+    		var show_data = {};
+    		for (var page in data) {
+        		var lev1 = data[page];
+        		var tmp = page.split('-');
+        		var area = Math.floor((parseInt(tmp[1]) + parseInt(tmp[0])) / 60);
+        		for (var pvc in lev1) {
+        			var t = show_data[area] || 0;
+        			for (var i=0; i<24; i++) {
+            			var num = typeof lev1[pvc][i] == 'undefined' ? 0 : parseInt(lev1[pvc][i].p);
+            			t += num;
+            		}
+        			show_data[area] = t;
+        		}
+    		}
+    		
+    		for (var i=0; i<pages; i+=30) {
+    			var next = Math.min(i+30,pages);
+    			option.xAxis[0].data.push(i + '-' + next);
+    			var index = parseInt(i/30);
+    			var num = show_data[index] || 0;
+    			opt.data.push(num);
+    		}
+    		
+    		option.series.push(opt);
+        	
+        	$('#boo').height('500px');
+        	// 基于准备好的dom，初始化echarts图表
+            var myChart = echarts.init(document.getElementById('boo')); 
+         	// 为echarts对象加载数据 
+            myChart.setOption(option);
+    	}
+    	display(option);
+    })();
+    </script>
+</empty>
+<!-- Content ends -->
+<include file="Public:footer" />

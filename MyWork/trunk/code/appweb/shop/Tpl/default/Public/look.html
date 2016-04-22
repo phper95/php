@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" >
+<meta name="format-detection" content="telephone=no"/>
+<title>{$vo.name}</title>
+<link href="__CSS__/style.css?2" rel="stylesheet" type="text/css" media="screen"/>
+<link href="__CSS__/swiper.min.css" rel="stylesheet" type="text/css" media="screen"/>
+<script src="../js/jquery-1.10.1.min.js"></script>
+<script src="__JS__/swiper.jquery.min.js"></script>
+<script src="__JS__/lib.js?1"></script>
+<script src="http://ser3.graphmovie.com/boo/js/gw2c.js"></script>
+<style type="text/css">
+#main {font-size:0.8em;}
+a{text-decoration:none;}
+.border {
+	border:1px solid red;
+}
+.content {overflow:hidden;}
+.content .item {font-size:0.8em;}
+.content .swip-img img {
+	width:100%;height:100%;
+}
+.content .info { 
+	color:#999;padding:0 10px;line-height:1.8em;
+}
+.content .info h4 {
+	font-size:1.2em;
+	font-weight:300;color:#333;
+	margin:0px; line-height:2.5em;
+}
+.content .bar {
+	padding:5px 10px;
+}
+.bar .timer {
+	font-size:0.9em;
+	background:url('__PUBLIC__/image/shop_icon_time.png') no-repeat left center;background-size: auto 90%;
+	padding:0.6em 0 0.6em 2.4em;float:left;color:#999;
+}
+.bar .timer span{
+	color:#00b9ff;
+}
+.bar .price{
+	float:right;
+	padding:0em 1em; color:#00b9ff;font-size:1.2em;
+}
+.btn {
+	padding:0.6em 1em;border-radius:50px;
+}
+.blue {
+	background-color:#00b9ff;color:#fff;
+}
+.grery {
+	background-color:#ccc;color:#fff;
+}
+.in-line {
+	display:block;                     /*内联对象需加*/
+word-break:keep-all;           /* 不换行 */
+white-space:nowrap;          /* 不换行 */
+overflow:hidden;               /* 内容超出宽度时隐藏超出部分的内容 */
+text-overflow:ellipsis;         /* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
+}
+.clear {
+	clear:both;
+}
+.content .line {
+	height:15px; background-color:#eee;
+}
+.narror {
+	position:relative;
+}
+.narror:after {
+	transform:rotate(-45deg);
+	position:absolute;right:10;top:10px;
+	border:2px solid #ccc;border-left:0;border-top:0;width:12px;height:12px;
+}
+
+.detail {
+	font-size:1.2em;line-height:1.2em;padding:10px;margin-bottom:50px;
+}
+.detail p{
+	margin:0.2em 0;
+}
+.foot-bar {
+	position:fixed;bottom:0;left:0;width:100%;height:60px;background-color:#fff; text-align:center;
+	line-height:60px;font-size:1.2em;
+}
+.rst-info {
+	position:fixed;top:0;left:0;z-index:20;width:100%;min-height:100%;background-color:rgba(0,0,0,0.8);
+	display:none;
+}
+.rst-panel {
+	max-width:600px;min-width:300px;margin:0 auto;position:relative;
+}
+.rst-main {
+	width:86%;position:relative;margin:0 auto;
+	margin-top:20%;
+	background-color:#e04441;border-radius:20px;
+	color:#fff;
+}
+.rst-head {
+	position:relative;
+	padding-bottom:40px;
+	overflow:hidden;
+	border-top-left-radius:20px;
+	border-top-right-radius:20px;
+}
+.rst-head h4 {
+	font-size:2.0em;text-align:center;margin:0;line-height:1.8em;
+}
+.rst-thing {
+	padding:20px 20px 0 20px;
+	min-height:50px;position:relative;
+}
+.rst-img {
+	float:left;width:26%;min-height:120px;
+	background:url('__PUBLIC__/image/giftbox.png') no-repeat center;
+	background-size:100% auto;
+}
+.rst-gift {
+	float:left;font-size:1.4em;height:120px;width:70%;
+	text-align:center;
+}
+.rst-background {
+	position:absolute;background-color:#fa4b49;bottom:15px;left:-50%;height:1000px;width:200%;
+	border-radius:1000px;
+	z-index:0;
+}
+
+.rst-mid-info {
+	padding:0 2em;
+	background:#f2f2f2;
+	text-align:center;color:#999;
+}
+.have_rst_no_addr {
+	line-height:60px;
+}
+.rst-mid-addr {
+	
+}
+.rst-mid-addr .left {
+	line-height:30px;text-align:left;
+}
+.rst-mid-addr .right {
+	line-height:30px;text-align:right;
+}
+.rst-mid-addr .right .addr {
+	background:url('__PUBLIC__/image/shop_icon_locktion.png') no-repeat left center;background-size:auto 100%;padding-left:20px;
+}
+
+.rst-mid {
+	color:#999;float:left;
+	padding:20px 10px;
+	line-height:1.6em;
+	font-size:1.2em;
+	min-height:190px;width:100%;
+	text-indent:2em;
+}
+
+.rst-close {
+	position:absolute;right:-16px;top:-16px;width:50px;height:50px;z-index:5;
+	background:url('__PUBLIC__/image/shop_btn_close.png') no-repeat center;
+	background-size:100% auto;
+}
+.rst-foot {
+	background:url('__PUBLIC__/image/shop_btn_sure_c.png') no-repeat center 8px;
+	height:60px;
+	background-size:auto 88%;
+}
+
+.midel-liu {
+	display: box;
+	display: -webkit-box;
+	display: -moz-box; 
+	-webkit-box-pack:center;
+	-moz-box-pack:center;
+	-webkit-box-align:center;
+	-moz-box-align:center; 
+}
+.content img {max-width:100%;}
+</style>
+</head>
+<body>
+<div id="box">
+	<div id="main">
+		<div class="content">
+			<div class="item">
+				<div class="swiper-container">
+					<div class="swiper-wrapper">
+						<volist name="vo.img_list" id="img">
+						<div class="swip-img swiper-slide">
+							<img data-src="{$img.url}" class="swiper-lazy">
+			                <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+						</div>
+						</volist>
+					</div>
+				</div>
+				<div class="info">
+					<h4 class="in-line">{$vo.name}</h4>
+					<div>{$vo.desc}</div>
+					<div>{:formartDate($vo['lottery']['start_time'],'Y-m-d H:i')} 总共{$vo.total_num}件，等你来抽</div>
+				</div>
+				<div class="bar">
+						<if condition="strtotime($vo['lottery']['start_time']) gt NOW_TIME" >
+							<div class="timer"><span class="js-timer" data-t="{:strtotime($vo['lottery']['start_time'])}"></span>  后开始</div>
+						<elseif condition="strtotime($vo['lottery']['end_time']) gt NOW_TIME"  />
+							<div class="timer"><span class="js-timer" style="color:#999;" data-s="1" data-t="{:strtotime($vo['lottery']['end_time'])}"></span>  后结束</div>
+						<else />
+							<div class="timer">已结束</div>
+						</if>
+						<span class="price">{:Intval($vo['price'])} 金币 / 次</span>
+					<div class="clear"></div>
+				</div>
+			</div>
+			<div class="detail">
+				{$vo.intro}
+			</div>
+			<div class="foot-bar">
+				<if condition="strtotime($vo['lottery']['start_time']) gt NOW_TIME" >
+					<a id="go_lottery" href="javascript:void(0);" class="btn blue" data-t="{$vo.lottery_times}">
+						抽奖（还未开始）
+			 		</a>
+				<elseif condition="strtotime($vo['lottery']['end_time']) gt NOW_TIME"  />
+					<if condition="$vo['ku_cun'] gt 0">
+						<a id="go_lottery" href="javascript:void(0);" class="btn blue" data-t="{$vo.lottery_times}">
+							抽奖（还有N次机会）
+					 	</a>
+					<else />
+						<a id="go_no_more" href="javascript:void(0);" class="btn grery" data-t="{$vo.lottery_times}">
+							抽奖（已抽完）
+					 	</a>
+					</if>
+				<else />
+					<a id="go_lottery_over" href="javascript:void(0);" class="btn grery" data-t="{$vo.lottery_times}">
+						抽奖（已经结束）
+				 	</a>
+				</if>
+				
+			</div>
+			<div class="line"></div>
+		</div>
+	</div>
+</div>
+<script>
+$('document').ready(function(){
+	var w = 0, h = 0 ;
+	var cha_time = <?php echo strtotime($vo['lottery']['start_time']) - NOW_TIME; ?>;
+	var t = <?php echo NOW_TIME;?>;
+	var k = GetQueryString('k');
+	function initP(){
+		w = $('#main').width();
+		h = $('window').height();
+		$('#nav_head').height(w*230/640);
+		$('.swip-img').height(w*460/640);
+	};
+	$(window).resize(initP);
+	initP();
+	var mySwiper = new Swiper ('.swiper-container', {
+	    direction: 'horizontal',
+	    loop: false,
+        preloadImages: false,
+        lazyLoading: true
+	});
+
+	function refreshTimer() {
+		$('.js-timer').each(function(){
+			var timer = $(this).attr('data-t');
+			if (timer) {
+				cha_time = parseInt(timer) - t;
+				if (cha_time > 0) {
+					$(this).html(sec2txt(cha_time));
+				} else {
+					clearInterval(timmer);
+				}
+				if ($(this).attr('data-s') != 'undefined') {
+					cha_time = -1;
+				}
+			}
+		});
+		t ++;
+	};
+	var timmer = setInterval(refreshTimer, 1000);
+	var sec2txt = function(sec){
+		var s = sec % 60;
+		var i = Math.floor (sec / 60) % 60;
+		var h = Math.floor (sec / 3600) % 24;
+		var d = Math.floor (sec / 86400);
+		return (d>0?(d+'天'):'') + (d+h>0?(h+'小时'):'') + (d+h+i>0?(i+'分'):'') + (d+h+i+s>0?(s+'秒'):'');
+	};
+});
+</script>
+</body>
+</html>

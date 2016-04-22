@@ -1,0 +1,231 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<!-- Secondary nav -->
+</div>
+<!-- Sidebar ends -->
+
+<script src="__JS__/dialog/artDialog.js?skin=default"></script>
+<script src="__JS__/echarts/dist/echarts.js"></script>
+
+<!-- Content begins -->
+<div id="content">
+    <include file="Public:bav" />
+    <!-- Main content -->
+    <div class="wrapper">
+        	<div class="fluid">
+                <div class="widget ">
+                    <div class="whead">
+                    <h6>影片阅读情况分析</h6>
+                    <a href="{:getCurrentUrl()}" class="buttonH bBlue mb10 mt5">返回</a>
+                    <div class="clear"></div></div>
+                    <div class="body">
+                    	<present name="err">
+                    		{$err}
+                    	<else />
+                    		<div id="movie_info" class="inFrom">
+                    		
+                        <h5>Your Company Name</h5>
+                        <span>Your Address Line</span>
+                        <span>Town</span>
+                        <span>Region/State</span>
+                        <span>Zip/Postal Code</span>
+                        <span class="number">Mobile Phone: <strong class="red">+4530422244</strong></span>
+                        <span class="black">Send To: <a href="#">me@company.com</a></span>
+                        <span>Payment due by <strong>10/06/2012</strong></span>
+                    
+                    		</div>
+                    		<div class="clear"></div>
+                    		<div id="boooo" style="height:500px;"></div>
+                    	</present>
+                    </div>
+                </div>
+            </div>
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+<present name="err">
+<else />
+<script>
+(function(){
+	require.config({
+        paths: {
+            echarts: '__JS__/echarts/dist'
+        }
+    });
+    require(
+        [
+            'echarts',
+            'echarts/chart/line',   // 按需加载所需图表，如需动态类型切换功能，别忘了同时加载相应图表
+            'echarts/chart/bar'
+        ],
+        function (ec) {
+        	var rst = {$rst};
+        	
+        	/*
+        	"total_user": 8076, //一共有多少人阅读了这部影片,来自于表user_action_record
+
+        "total_quit": 9199,  //一共有多少人退出了该部影片,total_quit/total_user可以大概得出影片的人均几次可以看完
+
+        "total_page": "348”, //影片一共多少页
+
+        "start_date": "2015-02-27 10:01:23”, //第一条阅读记录添加时间
+
+        "to_date": "2015-03-02 20:47:00”, //截至本次统计，最后一条阅读记录添加时间
+
+        "zone_pages": 17, //把影片划分后，每单位的页数
+
+
+        	*/
+        	var data = rst.data;
+        	var movie = rst.stat.movie;
+        	
+        	var html = '<h5>['+movie.name+'] 阅读情况分析</h5>'
+        			 + '<span>总阅读人数：'+rst.stat.total_user+'</span>'
+        			 + '<span>总退出人数：'+rst.stat.total_quit+'</span>'
+        			 + '<span>影片页数：'+rst.stat.total_page+'</span>'
+        			 + '<span>人均看完次数：'+(parseInt(rst.stat.total_quit) / parseInt(rst.stat.total_user)).toFixed(2)+'<i> （总退出人数 ÷ 总阅读人数）</i></span>'
+        			 + '<span>分析时间：<a href="javascript:void(0);">{$time}</a></span>';
+        	$('#movie_info').html(html);
+        	
+        	var option = {
+        			title : {
+              	        text: '',
+              	        subtext: ''
+              	    },
+        		    tooltip : {
+        		        trigger: 'axis'
+        		    },
+        		    legend: {
+        		        data:['退出人数','真正退出人数','退出次数','弹幕数']
+        		    },
+        		    toolbox: {
+        		        show : true,
+        		        feature : {
+        		            mark : {show: true},
+        		            dataView : {show: true, readOnly: false},
+        		            magicType : {show: true, type: ['line', 'bar']},
+        		            restore : {show: true},
+        		            saveAsImage : {show: true}
+        		        }
+        		    },
+        		    calculable : true,
+        		    xAxis : [
+        		        {
+        		            type : 'category',
+        		            boundaryGap : false,
+        		            data : []
+        		        }
+        		    ],
+        		    yAxis : [
+        		        {
+        		            type : 'value',
+        		            axisLabel : {
+        		                formatter: '{value}'
+        		            }
+        		        }
+        		    ],
+        		    series : [
+        		    ]
+        		};
+        		                    
+        	var data2 = [];
+        	var data3 = [];
+        	var data4 = [];
+        	var data5 = [];
+        	var check = ['from_page','to_page','total_readto','user_quit','user_real_quit','quit_times','poptxt_count'];
+        	for (var a in data) {
+        		var continue_flag = false;
+        		for (var i=0, len=check.length; i<len; i++) {
+        			if (typeof data[a][check[i]] == 'undefined') {
+        				continue_flag = true;
+        				break;
+        			} else if (data[a][check[i]] == null) {
+        				data[a][check[i]] = 0;
+        			}
+        		}
+        		console.log(data[a]);
+        		if (data[a].from_page<0) continue;
+        		if (continue_flag) continue;
+        		option.xAxis[0].data.push(data[a].from_page + '-' + data[a].to_page + ' 页');
+        		data2.push(parseInt(data[a].user_quit));
+        		data3.push(parseInt(data[a].user_real_quit));
+        		data4.push(parseInt(data[a].quit_times));
+        		data5.push(parseInt(data[a].poptxt_count));
+        	}
+        	option.series.push({
+        		name : '退出人数',
+        		type : 'line',
+        		data : data2,
+        		markPoint : {
+	                data : [
+	                    {type : 'max', name: '最大值'},
+	                    {type : 'min', name: '最小值'}
+	                ]
+	            },
+	            markLine : {
+	                data : [
+	                    {type : 'average', name: '平均值'}
+	                ]
+	            }
+        	});
+        	option.series.push({
+        		name : '真正退出人数',
+        		type : 'line',
+        		data : data3,
+        		markPoint : {
+	                data : [
+	                    {type : 'max', name: '最大值'},
+	                    {type : 'min', name: '最小值'}
+	                ]
+	            },
+	            markLine : {
+	                data : [
+	                    {type : 'average', name: '平均值'}
+	                ]
+	            }
+        	});
+        	option.series.push({
+        		name : '退出次数',
+        		type : 'line',
+        		data : data4,
+        		markPoint : {
+	                data : [
+	                    {type : 'max', name: '最大值'},
+	                    {type : 'min', name: '最小值'}
+	                ]
+	            },
+	            markLine : {
+	                data : [
+	                    {type : 'average', name: '平均值'}
+	                ]
+	            }
+        	});
+        	option.series.push({
+        		name : '弹幕数',
+        		type : 'line',
+        		data : data5,
+        		markPoint : {
+	                data : [
+	                    {type : 'max', name: '最大值'},
+	                    {type : 'min', name: '最小值'}
+	                ]
+	            },
+	            markLine : {
+	                data : [
+	                    {type : 'average', name: '平均值'}
+	                ]
+	            }
+        	});
+            var myChart = ec.init(document.getElementById('boooo'));
+            myChart.setOption(option);
+        }
+    );
+})();
+</script>
+</present>
+
+<include file="Public:footer" />

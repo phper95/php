@@ -1,0 +1,107 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<!-- Secondary nav -->
+</div>
+<!-- Sidebar ends -->
+<script language="javascript" type="text/javascript" src="__JS__/My97DatePicker/WdatePicker.js"></script>
+<!-- Content begins -->
+<div id="content">
+    <include file="Public:bav" />
+    <!-- Main content -->
+    <div class="wrapper">
+        	<div class="fluid">
+        		<form method='post' id="form1" name="form1" action="{:U('SiteConfig/updateSoapVolPic')}"  enctype="multipart/form-data">
+                    <div class="widget ">
+                        <div class="whead">
+                        <h6>编辑肥皂配置页面</h6>
+                        <empty name="Think.get.backurl">
+                        	<a href="{:getCurrentUrl()}" class="buttonH bBlue mb10 mt5">返回</a>
+                        <else />
+                        	<a href="{$Think.get.backurl}" class="buttonH bBlue mb10 mt5">返回</a>
+                        </empty>
+                        
+                        <div class="clear"></div></div>
+                        <div class="formRow nopadding">
+                            <div class="grid3"><label> </label></div>
+                            <div class="grid9">
+                            	<div class="grid1 textC">电影ID</div>
+                            	<div class="grid1 textC">页码</div>
+                            	<div class="grid3 textC">关键字</div>
+                            	<div class="grid1 textC">满足数量</div>
+                            	<div class="grid2 textC">过期时间</div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="formRow" style="padding-top:3px;">
+                            <div class="grid3"><label><img src="{$Think.get.img_url}" width="200" height="115" id="add_soap_movie_img_0"/><span class="greenBack" id="add_soap_movie_name_0">《{$Think.get.movie_name}》</span></label></div>
+                            <div class="grid9">
+                            	<div class="grid1 textC"><input type="text" id="add_soap_movie_id_0" name="movie_id" value="{$Think.get.movie_id}"></div>
+                            	<div class="grid1 textC"><input type="text" id="add_soap_pindex_0" value="{$Think.get.pindex}"><span style="position:absolute;right:-3px;top:6px; line-height:28px;"><span class="icos-view" id="add_soap_show_movie_info_0"></span></span></div>
+                            	<div class="grid3 textC"><input type="text" name="key" value="{$vo.key}" id="add_soap_key"></div>
+                            	<div class="grid1 textC"><input type="hidden" name="vol_id" value="{$vo.vol_id}" id="add_soap_vol_id_0"><input type="text" value="{$vo.allow_count}" name="allow_count" id="add_soap_count"></div>
+                            	<div class="grid2 textC"><input type="text" onClick="WdatePicker()" id="add_soap_deadline" value="{$vo.deadline}" name="deadline"></div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="formRow">
+                        	<notempty name="Think.get.backurl">
+                        		<input type="hidden" name="backurl" value="{$Think.get.backurl}">
+                        	</notempty>
+                        	<input type="hidden" name="id" value="{$vo.id}">
+                        	<input type="submit" value="提 交" id="add_member_bg_submit" class="buttonM bBlack formSubmit" />
+                        	<div class="clear"></div>
+                        </div>
+                        <div class="clear"></div>
+                    
+                    </div>
+                    </form>
+            </div>
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+<script>
+(function(){
+	var index = 0;
+	var showMovieInfo = function(i){
+		$('#add_soap_show_movie_info_'+i).click(function(){
+			var movie_id = $.trim($('#add_soap_movie_id_'+i).val());
+			var pindex = $.trim($('#add_soap_pindex_'+i).val());
+			if (movie_id == '' || pindex == '') {
+				alert('电影ID和页码需要填对哦');return;
+			}
+			$.ajax({
+				type : 'POST',
+				data : {movie_id:movie_id, pindex:pindex},
+				url : '{:U('SiteConfig/getVolPicInfo')}',
+				success : function(data) {
+					if (typeof data == 'object') {
+						if (data.rst == 1) {
+							if ($('#add_soap_movie_img_'+i).attr('src') != data.data.url) {
+								$('#add_soap_movie_img_'+i).animate({opacity:'toggle'},"fast",null,function(){
+									$('#add_soap_movie_img_'+i).attr("src",data.data.url);
+									$('#add_soap_movie_img_'+i).animate({opacity:'toggle'},"slow");
+								});
+								$('#add_soap_vol_id_'+i).val(data.data.vol_id);
+								$('#add_soap_movie_name_'+i).html('《' + data.data.movie_name + '》');
+							}
+						} else {
+							alert(data.msg);
+						}
+					} else {
+						alert(data);
+					}
+				},
+				error : function(ex){
+					alert('Ajax 错误');
+				}
+			});
+		});
+	};
+	showMovieInfo(index);
+})();
+</script>
+<include file="Public:footer" />

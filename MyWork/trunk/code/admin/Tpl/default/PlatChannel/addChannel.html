@@ -1,0 +1,65 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<!-- Secondary nav -->
+</div>
+<!-- Sidebar ends -->
+
+<!-- Content begins -->
+<div id="content">
+    <include file="Public:bav" />
+    <!-- Main content -->
+    <div class="wrapper">
+        	<div class="fluid">
+        		<form method='post' id="form1" name="form1" action="{:U('PlatChannel/doAddChannel')}"  enctype="multipart/form-data">
+                    <div class="widget ">
+                        <div class="whead">
+                        <h6>添加渠道</h6>
+                        <a href="{:getCurrentUrl()}" class="buttonH bBlue mb10 mt5">返回</a>
+                        <div class="clear"></div></div>
+                        <div class="formRow">
+                            <div class="grid3"><label>渠道名称:</label></div>
+                            <div class="grid3"><input type="text" name="name" /></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>所属平台:</label></div>
+                            <div class="grid1">
+                            	<select name="platform" >
+	                                <option value="">-请选择-</option>
+	                                <volist name="platform" id="p">
+	                                <option value="{$key}">{$p}</option>
+	                                </volist>
+	                            </select>
+                        	</div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow searchDrop">
+                            <div class="grid3"><label>copy的平台-渠道</label></div>
+                            <div class="grid9 ">
+                            	<select name="copy" class="select" >
+	                                <option value="">-请选择-</option>
+	                                <volist name="list" id="pc">
+	                                	<option value="{$pc.platform},{$pc.channel}">{$pc.platform} - {$pc.channel}</option>
+	                                </volist>
+	                            </select>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow"><input type="submit" value="提 交" class="buttonM bBlack formSubmit" /><div class="clear"></div></div>
+                        <div class="clear"></div>
+                    
+                    </div>
+                    </form>
+            </div>
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+
+<include file="Public:footer" />

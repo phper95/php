@@ -1,0 +1,72 @@
+<!-- Secondary nav -->
+<eq name="Think.session.authId" value="41">
+	<div class="secNav">
+        <div class="secWrapper">
+            <!-- Tabs container -->
+            <div id="tab-container" class="tab-container">
+                
+                <div class="divider"><span></span></div>
+				<ul class="iconsLine ic1 etabs">
+                    <li><a href="#alt2" title="">数据统计:</a></li>
+                </ul>                
+                <div class="divider"><span></span></div>
+                <div id="alt2">
+                <div id="general">
+                    <ul class="subNav">
+                        <li><a href="{:U('Statistic/movie')}" title="统计影片信息" <eq name="ACTION_NAME" value="movie">class="this"</eq> ><span class="icos-frames"></span>影片统计</a></li>
+                        <li><a href="{:U('Statistic/pvcMoviePlayed')}" title="影片观看完成统计" <eq name="ACTION_NAME" value="pvcMoviePlayed">class="this"</eq> ><span class="icos-frames"></span>影片观看完成统计</a></li>
+                        <li><a href="{:U('Statistic/movieDay')}" title="影片日常数据分析" <eq name="ACTION_NAME" value="movieDay">class="this"</eq> ><span class="icos-frames"></span>影片日常分析</a></li>
+                        <li><a href="{:U('Statistic/activeMAlive')}" title="活跃用户留存" <eq name="ACTION_NAME" value="activeMAlive">class="this"</eq> ><span class="icos-frames"></span>活跃用户留存</a></li>
+                        <li><a href="{:U('Statistic/imeiActive')}" title="活跃IMEI统计" <eq name="ACTION_NAME" value="imeiActive">class="this"</eq> ><span class="icos-frames"></span>活跃IMEI统计</a></li>
+                        <li><a href="{:U('Statistic/ipActive')}" title="活跃IP统计" <eq name="ACTION_NAME" value="ipActive">class="this"</eq> ><span class="icos-frames"></span>活跃IP-OPHP</a></li>
+                        <li><a href="{:U('Statistic/ipAddrActive')}" title="活跃IP地址统计" <eq name="ACTION_NAME" value="ipAddrActive">class="this"</eq> ><span class="icos-frames"></span>活跃IP地址-OPHP</a></li>
+                        <li><a href="{:U('Statistic/movieList')}" title="电影列表习惯统计" <eq name="ACTION_NAME" value="movieList">class="this"</eq> ><span class="icos-frames"></span>电影列表习惯统计</a></li>
+                        <li><a href="{:U('Statistic/apiError')}" title="各个接口错误统计" <eq name="ACTION_NAME" value="apiError">class="this"</eq> ><span class="icos-frames"></span>接口错误数统计</a></li>
+                    </ul>
+                </div>
+                </div>
+            </div>
+       </div> 
+       <div class="clear"></div>
+   </div>
+<else />
+    <div class="secNav">
+        <div class="secWrapper">
+            <!-- Tabs container -->
+            <div id="tab-container" class="tab-container">
+                
+                <div class="divider"><span></span></div>
+				<ul class="iconsLine ic1 etabs">
+                    <li><a href="#alt2" title="">数据统计:{$Think.session.loginUserName}</a></li>
+                </ul>                
+                <div class="divider"><span></span></div>
+                <div id="alt2">
+                <div id="general">
+                    <ul class="subNav">
+                        <li><a href="{:U('Statistic/movie')}" title="统计影片信息" <eq name="ACTION_NAME" value="movie">class="this"</eq> ><span class="icos-frames"></span>影片统计</a></li>
+                        <li><a href="{:U('Statistic/pvcMoviePlayed')}" title="影片播放统计" <eq name="ACTION_NAME" value="pvcMoviePlayed">class="this"</eq> ><span class="icos-frames"></span>影片播放统计</a></li>
+                        <li><a href="{:U('Statistic/movieDay')}" title="影片日常数据分析" <eq name="ACTION_NAME" value="movieDay">class="this"</eq> ><span class="icos-frames"></span>影片日常分析</a></li>
+                        <li><a href="{:U('Statistic/totalStat')}" title="接口访问统计" <eq name="ACTION_NAME" value="totalStat">class="this"</eq> ><span class="icos-frames"></span>接口访问统计</a></li>
+                        <li><a href="{:U('Statistic/activeMember')}" title="活跃用户统计" <eq name="ACTION_NAME" value="activeMember">class="this"</eq> ><span class="icos-frames"></span>活跃用户统计</a></li>
+                        <li><a href="{:U('Statistic/pvcActiveMember')}" title="活跃用户统计(By 渠道)" <eq name="ACTION_NAME" value="pvcActiveMember">class="this"</eq> ><span class="icos-frames"></span>活跃用户(By渠道)</a></li>
+                        <li><a href="{:U('Statistic/imeiActive')}" title="活跃IMEI统计" <eq name="ACTION_NAME" value="imeiActive">class="this"</eq> ><span class="icos-frames"></span>活跃IMEI统计</a></li>
+                        <li><a href="{:U('Statistic/activeAlive')}" title="活跃用户留存" <eq name="ACTION_NAME" value="activeAlive">class="this"</eq> ><span class="icos-frames"></span>活跃用户留存</a></li>
+                        
+                        
+                        <li><a href="{:U('Statistic/activeMAlive')}" title="活跃用户留存-2" <eq name="ACTION_NAME" value="activeMAlive">class="this"</eq> ><span class="icos-frames"></span>活跃用户留存-2</a></li>
+                        
+                        <li><a href="{:U('Statistic/ipActive')}" title="活跃IP统计" <eq name="ACTION_NAME" value="ipActive">class="this"</eq> ><span class="icos-frames"></span>活跃IP</a></li>
+                        <li><a href="{:U('Statistic/ipAddrActive')}" title="活跃IP地址统计" <eq name="ACTION_NAME" value="ipAddrActive">class="this"</eq> ><span class="icos-frames"></span>活跃IP地址</a></li>
+                        <li><a href="{:U('Statistic/movieList')}" title="电影列表习惯统计" <eq name="ACTION_NAME" value="movieList">class="this"</eq> ><span class="icos-frames"></span>电影列表习惯统计</a></li>
+                        <li><a href="{:U('Statistic/apiError')}" title="各个接口错误统计" <eq name="ACTION_NAME" value="apiError">class="this"</eq> ><span class="icos-frames"></span>接口错误数统计</a></li>
+                    </ul>
+                </div>
+                </div>
+            </div>
+       </div> 
+       <div class="clear"></div>
+   </div>
+</eq>  
+   
+   
+   

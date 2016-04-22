@@ -1,0 +1,151 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<include file="Topic:search" />
+</div>
+<!-- Sidebar ends -->
+    
+<!-- Content begins -->
+<div id="content">
+    <div class="contentTop">
+        <span class="pageTitle">专辑管理</span>
+        <div class="clear"></div>
+    </div>
+    
+    <!-- Breadcrumbs line -->
+    <div class="breadLine">
+        <div class="bc">
+            <ul id="breadcrumbs" class="breadcrumbs">
+                <li><a href="#">主页君</a></li>
+                <li><a href="#">专辑列表</a>
+                    
+                </li>
+                
+            </ul>
+        </div>
+        
+        
+    </div>
+    
+    <!-- Main content -->
+    <div class="wrapper">
+        <!-- Media table sample -->
+        <div class="widget check">
+            <div class="whead">
+            	<h6>专辑列表</h6>
+            	<a href="{:U('Topic/add')}" class="buttonH bBlue">添加</a>
+            	<div class="clear"></div>
+            </div>
+            <table cellpadding="0" cellspacing="0" width="100%" class="tDefault checkAll tMedia" id="checkAll">
+                <thead>
+                    <tr>
+                        <td width="10">ID</td>
+                        <td width="200">封面</td>
+                        <td>名称</td>
+                        <td width="80">影片数目</td>
+                        <td width="140">总播放量(查看全部)</td>
+                        <td width="80">操作</td>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td colspan="7">
+                        	<empty name="list">
+                        		木油满足您强烈需求的影片，您可以添加一部咩？
+                        	<else />
+                            <div class="tPages">
+                                <ul class="pages">
+                                    {$page}
+                                </ul>
+                            </div>
+                            </empty>
+                        </td>
+                    </tr>
+                </tfoot>
+                <tbody>
+                	<volist name="list" id="vo">
+		            <tr>
+		                <td>{$vo.id}</td>
+		                <td><a href="{:U('Topic/uploadImg', array('id'=>$vo['id']))}" title=""><img src="{$vo.spic}" alt="点我编辑" width="230px" /></a></td>
+		                <td style="vertical-align: top;">
+		                	<div style="text-align:left;">
+		                		<div style="font-weight:700;font-size:20px;">{$vo.name}</div>
+								<div>-- {$vo.sub_title}</div><br />
+								<div>{$vo.tags}</div> 
+								<div>{$vo.add_time}</div> 
+		                	</div>
+		                </td>
+		                <td>{$topicMovieNums[$vo['id']]|default=0}</td>
+		                <td><a href="javascript:void(0);" data-id="{$vo.id}" class="look_views">点击查看</a></td>
+		                <td>
+		                	<!-- Simple buttons with caret -->
+	                        <div class="btn-group" style="float: left;">
+	                            <a href="#" class="buttonM bDefault opt" data-toggle="dropdown">点我 <span class="caret"></span></a>
+	                            <ul class="dropdown-menu pull-right">
+	                                <li><a href="{:U('Topic/edit',array('id'=>$vo['id']))}"><span class="icos-pencil"></span>编辑</a></li>
+	                                <li><a href="{:U('Topic/uMovie',array('id'=>$vo['id'],'name'=>$vo['name']))}"><span class="icos-pencil"></span>配置影片</a></li>
+	                                <li><a href="{:U('Topic/online', array('id'=>$vo['id'],'mname'=>$vo['name']))}"><span class="icos-cross"></span>上/下 线</a></li>
+	                                <li><a href="{:U('Pushnotice/add', array('gm_id'=>$vo['id'],'gm_opt'=>3))}"><span class="icos-fax"></span>发送通知</a></li>
+	                                <li><a href="#" class=""><span class="icos-trash"></span>删除</a></li>
+	                            </ul>
+	                        </div>
+		                </td>
+		            </tr>
+		            </volist>
+                </tbody>
+            </table>
+        </div>
+     
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+<script>
+(function(){
+	var show = function(b){
+		if (b>0){
+			$('#movie_search_onlie_show').show();
+		}
+		else { 
+			$('#movie_search_onlie_show').hide();
+		}
+		if (b==1) {
+			$('#movie_search_orderby_onlietime_show').show();
+		} else {
+			$('#movie_search_orderby_onlietime_show').hide();
+		}
+	};
+	$('#movie_search_online_select').change(function(){
+		show($(this).val());
+	});
+	
+	show($('#movie_search_online_select').val());
+	
+	$('.look_views').click(function(){
+		var obj = $(this);
+		var ids = obj.attr('data-id');
+		$.ajax({
+			url : '{:U("Topic/getTotalViews")}',
+			type :'POST',
+			data : {ids:ids},
+			success : function(data){
+				if (typeof data == 'object') {
+					if (data.rst == 1) {
+						obj.parent().html(data.data[ids]);
+					} else {
+						alert(data.msg);
+					}
+				} else {
+					alert(data);
+				}
+			},
+			error : function(ex){
+				alert('ajax 错误');
+			}
+		});
+	});
+})();
+</script>
+<include file="Public:footer" />

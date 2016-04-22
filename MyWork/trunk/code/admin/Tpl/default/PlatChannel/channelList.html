@@ -1,0 +1,93 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<include file="PlatChannel:opt" />
+</div>
+<!-- Sidebar ends -->
+    
+<!-- Content begins -->
+<div id="content">
+    <div class="contentTop">
+        <span class="pageTitle">渠道管理</span>
+        <div class="clear"></div>
+    </div>
+    
+    <!-- Breadcrumbs line -->
+    <div class="breadLine">
+        <div class="bc">
+            <ul id="breadcrumbs" class="breadcrumbs">
+                <li><a href="#">Dashboard</a></li>
+                <li><a href="#">渠道列表</a>
+                    
+                </li>
+                
+            </ul>
+        </div>
+        
+        
+    </div>
+    
+    <!-- Main content -->
+    <div class="wrapper">
+       <div class="widget">
+    		<div class="whead fluid">
+    			<h6>渠道列表</h6>
+    			<a href="{:U('PlatChannel/addChannel')}" class="buttonH bBlue">添加</a>
+				<div class="clear"></div>
+    		</div>
+       		 <table cellpadding="0" cellspacing="0" width="100%" class="tDefault checkAll tMedia" id="checkAll">
+                <thead>
+                    <tr>
+		                <td width="100">ID</td>
+		                <td>平台</td>
+		                <td>渠道</td>
+		                <td width="200">操作</td>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td colspan="9">
+                        <empty name="list">
+                        	额。。。木有咧……
+                        <else/>
+                            <div class="tPages">
+                                <ul class="pages">
+                                	{$page}
+                                    <!--<li class="prev"><a href="#" title="">&lt;</a></li>
+                                    <li><a href="#" title="" class="active">1</a></li>
+                                    <li><a href="#" title="">2</a></li>
+                                    <li><a href="#" title="">3</a></li>
+                                    <li><a href="#" title="">4</a></li>
+                                    <li><a href="#" title="">5</a></li>
+                                    <li><a href="#" title="">6</a></li>
+                                    <li>...</li>
+                                    <li><a href="#" title="">20</a></li>
+                                    <li class="next"><a href="#" title="">&gt;</a></li>
+                                --></ul>
+                            </div>
+                        </empty>
+                        </td>
+                        
+                    </tr>
+                </tfoot>
+                <tbody>
+                <volist name="list" id="vo">
+                <tr>
+                	<td>{$vo.id}</td>
+                	<td>{$platform[$vo['platform_id']]['name']}</td>
+                	<td>{$channel[$vo['channel_id']]['name']}</td>
+                	<td><a href="{:U('PlatChannel/offlineMovie', array('platform'=>$platform[$vo['platform_id']]['name'],'channel'=>$channel[$vo['channel_id']]['name']))}">管理上线电影</a></td>
+                </tr>
+                </volist>
+                </tbody>
+       		</table>
+       </div>
+     
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+
+<include file="Public:footer" />

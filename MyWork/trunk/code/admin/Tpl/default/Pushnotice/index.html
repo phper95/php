@@ -1,0 +1,137 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+</div>
+<!-- Sidebar ends -->
+
+<script src="__JS__/dialog/artDialog.js?skin=default"></script>
+<script language="javascript" type="text/javascript" src="__JS__/My97DatePicker/WdatePicker.js"></script>
+
+<!-- Content begins -->
+<div id="content">
+
+  <include file="Public:bav" />
+  
+    <!-- Main content -->
+    <div class="wrapper">
+         <div class="widget fluid">
+        	<div class="whead">
+        		<h6>通知栏推送消息</h6>
+        		<a href="{:U('Pushnotice/add')}" class="buttonH bBlue">添加</a>
+        		<a href="{:U('Pushnotice/addBySelf')}" class="buttonH bBlue">自选用户</a>
+        		<div class="clear"></div>
+        	</div>
+            <table cellpadding="0" cellspacing="0" width="100%" class="tDefault checkAll tMedia" id="checkAll">
+                <thead>
+                    <tr>
+		                <td width="50">编号</td>
+		                <td >标题</td>
+		                <td>内容</td>
+		                <td width="140">推送时间</td>
+		                <td width="140">添加时间</td>
+		                <td width="80">是否发送</td>
+		                <td width="80">操作</td>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td colspan="12">
+                        <empty name="list">
+                        	额。。。木有咧……
+                        <else/>
+                            <div class="tPages">
+                                <ul class="pages">
+                                	{$page}
+                                </ul>
+                            </div>
+                        </empty>
+                        </td>
+                        
+                    </tr>
+                </tfoot>
+                <tbody>
+                    <volist name="list" id="vo">
+		            <tr>
+		                <td>{$vo.id}</td>
+		                <td>{$vo.title}</td>
+		                <td>{$vo.content}</td>
+		                <td>{$vo.send_time}</td>
+		                <td>{$vo.add_time}</td>
+		                <td>
+		                	<if condition="$vo['is_send'] eq 1">
+		                		<span class="greenBack">OK</span>
+		                	<elseif condition="$vo['is_send'] eq 2" />
+		                		<span class="redBack">取消发送</span>
+		                	<else />
+		                		<span class="blueBack">待发送</span>
+		                	</if>
+		                </td>
+		                <td>
+		                	<!-- Simple buttons with caret -->
+	                        <div class="btn-group" style="float: left;">
+	                            <a href="#" class="buttonM bDefault opt" data-toggle="dropdown">点我 <span class="caret"></span></a>
+	                            <ul class="dropdown-menu pull-right">
+	                                <if condition="$vo['is_send'] eq 0">
+	                                	<li><a href="javascript:void(0);" class="js-edit-send_time" js-data="{$vo.id}" js-data-time="{$vo.send_time}"><span class="icos-view"></span>修改发送时间</a></li>
+	                                	<li><a href="{:U('Pushnotice/cancelSend',array('id'=>$vo['id']))}"><span class="icos-view"></span>取消发送</a></li>
+	                                <elseif condition="$vo['is_send'] eq 2 and $vo['send_time'] gt toDate(NOW_TIME)" />
+	                                	<li><a href="{:U('Pushnotice/huifuSend',array('id'=>$vo['id']))}"><span class="icos-view"></span>恢复发送</a></li>
+	                                <else />
+	                                	<li><a href="javascript:void(0);"><span class="icos-view"></span>Do Nothing</a></li>
+	                                </if>
+	                            </ul>
+	                        </div>
+		                </td>
+		            </tr>
+		            </volist>
+                </tbody>
+            </table>
+        </div>
+        
+        	<div id="xxsdf" style="display:none;width:300px;line-height:24px;" class="fluid">
+            		<div class="fluid">
+            			<div class="widget nomargin">
+            				<form id="edit_send_time" action="{:U('Pushnotice/update')}" method="POST">
+            				<input type="hidden" value="" name="id" id="js_edit_send_time_id"/>
+            				<div class="formRow">
+	                            <div class="grid2"><label>修改为: </label></div>
+	                            <div class="grid10">
+	                            	<input type="text" name="send_time" id="js_edit_send_time" onfocus="WdatePicker({minDate:'%y-%M-%d {%H+1}:00:00',dateFmt:'yyyy-MM-dd HH:mm:00'});"/>
+	                            </div>
+	                            <div class="clear"></div>
+	                        </div>
+	                        </form>
+            			</div>
+            		</div>
+            </div>
+        
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<script>
+(function(){
+	$('.js-edit-send_time').click(function(){
+		var send_time = $(this).attr('jd-data-time');
+		$('#js_edit_send_time').val($(this).attr('js-data-time'));
+		$('#js_edit_send_time_id').val($(this).attr('js-data')); 
+		
+		art.dialog({
+			id : 'edit_send_time',
+			padding:0,
+			content:$('#xxsdf')[0],
+			title:'修改推送时间',
+			ok : function(){
+				if (send_time == $('#js_edit_send_time').val()) {
+					alert('要修改啊，否则点取消吧');return false;
+				}
+				$('#edit_send_time').submit();
+			},
+			cancel : function(){}
+		});
+	});
+})();
+</script>
+<!-- Content ends -->
+<include file="Public:footer" />

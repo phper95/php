@@ -1,0 +1,93 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<!-- Secondary nav -->
+</div>
+<!-- Sidebar ends -->
+
+<script language="javascript" type="text/javascript" src="__JS__/My97DatePicker/WdatePicker.js"></script>
+
+<!-- Content begins -->
+<div id="content">
+    <include file="Public:bav" />
+    <!-- Main content -->
+    <div class="wrapper">
+        	<div class="fluid">
+        		<form method='post' id="form1" name="form1" action="{:U('News/updateDayPic')}"  enctype="multipart/form-data">
+                    <div class="widget ">
+                        <div class="whead">
+                        		<h6>修改每日一图</h6>
+                        	<empty name="Think.get.backurl">
+	                        	<a href="{:getCurrentUrl()}" class="buttonH bBlue mb10 mt5">返回</a>
+	                        <else />
+	                        	<a href="{$Think.get.backurl}" class="buttonH bBlue mb10 mt5">返回</a>
+	                        </empty>
+                        	<div class="clear"></div>
+                        </div>
+                        <div>
+                        </div>
+                        <div class="formRow">
+                            <div class="grid3"><label>名称:</label></div>
+                            <div class="grid4">
+                            	<input type="text" name="name" value="{$vo.name}" placeholder="图片名称"/>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="formRow">
+                            <div class="grid3"><label>副标题:</label></div>
+                            <div class="grid4">
+                            	<input type="text" name="subtitle" value="{$vo.subtitle}" placeholder="图片副标题"/>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="formRow">
+                            <div class="grid3"><label>图片:</label></div>
+                            <div class="grid9">
+                            	<img src="{$vo.image_url}" title="{$vo.image_url}" id="day_pic_img" width="320" >
+                            	 <div class="clear"></div>
+                            	<input type="file" name="image_url" id="day_pic_file" />
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>上线时间:</label></div>
+                            <div class="grid4"><input type="text" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:00'})" name="online_time" value="{$vo.online_time}"></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+			        		<div class="grid3"><label>是否启用:</label></div>
+			                <div class="grid1">
+			                	<label><input type="radio" name="open" value="1" <eq name="vo.open" value="1">checked="checked"</eq> />是</label>
+			                </div>
+			                    <div class="grid4">
+			                	<label><input type="radio" name="open" value="0" <eq name="vo.open" value="0">checked="checked"</eq> />否</label>
+			                </div>
+			            	<div class="clear"></div>
+			            </div>
+                        
+                        <div class="formRow">
+                        	<input type="hidden" value="{$vo.id}" name="id"/>
+                        	<input type="submit" value="提 交" class="buttonM bBlack formSubmit" /><div class="clear"></div>
+                        </div>
+                        <div class="clear"></div>
+                    
+                    </div>
+                    </form>
+            </div>
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+<script>
+$("#day_pic_file").change(function(){
+	var objUrl = booGetObjectURL(this.files[0]) ;
+	if (objUrl) {
+		$("#day_pic_img").attr("src", objUrl) ;
+	}
+}) ;
+</script>
+<include file="Public:footer" />

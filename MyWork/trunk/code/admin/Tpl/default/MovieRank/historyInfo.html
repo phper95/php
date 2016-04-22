@@ -1,0 +1,209 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<include file="MovieRank:opt" />
+</div>
+<!-- Sidebar ends -->
+    
+<!-- Content begins -->
+<div id="content">
+    <div class="contentTop">
+        <span class="pageTitle">影片评级</span>
+        <div class="clear"></div>
+    </div>
+    
+    <!-- Breadcrumbs line -->
+	<include file="Public:bav" />
+	    
+    <!-- Main content -->
+    <div class="wrapper">
+       <div class="widget">
+          <div class="whead"><h6>【{$vo.add_time}】 评级详情</h6>
+          	<a href="{:getCurrentUrl()}" class="buttonH bBlue mb10 mt5">返回</a>
+          <div class="clear"></div></div>
+          <div class="body">
+          	<div>
+          		<h3>
+          			共计参评影片：<span class="green">{$vo.tm} 部</span>，
+          			其中 【神作】<span class="red"> {$vo.total_rank_a} 部</span>
+          			【震精】<span class="red">{$vo.total_rank_b} 部</span>
+          			【略屌】<span class="red">{$vo.total_rank_c} 部</span>
+          		</h3>
+          		<div class="pt10">
+                <span>单部影片成本期望：</span>
+                <strong style="font-size:22px;" class="red">￥{$vo.pay|round=###,2}</strong>
+                </div>
+                <div class="clear"></div>
+          	</div>
+          	<div class="divider "></div>
+          	<div class="fluid pt10">
+	          	<div class="grid2" style="border-right:2px solid #ccc;">
+	          		<h1 >神作率：</h1>
+	          		<h4 class="pt5">2.14285 ~ 4.2857%</h4>
+	          		<h1 class="red pt5">{:toPercent($vo['total_rank_a']/$vo['tm'])}</h1>
+	          		<!-- <h1 class="red pt5">{:toPercent($vo['total_rank_a']/$vo['tm'])}</h1> -->
+	          	</div>
+	          	<div class="grid2" style="border-right:2px solid #ccc;">
+	          		<h1 >震精率：</h1>
+	          		<h4 class="pt5">4.2857 ~ 8.5714%</h4>
+	          		<h1 class="green pt5">{:toPercent($vo['total_rank_b']/$vo['tm'])}</h1>
+	          	</div>
+	          	<div class="grid2">
+	          		<h1 >略屌率：</h1>
+	          		<h4 class="pt5">8.5714 ~ 17.1429%</h4>
+	          		<h1 class="red pt5">{:toPercent($vo['total_rank_c']/$vo['tm'])}</h1>
+	          	</div>
+	          	<div style="height:200px; width:320px;" id="bingtu" class="grid6"></div>
+          	</div>
+          	
+          	<div class="divider "></div>
+          	
+          	<div class="fluid">
+          	<div class="grid3">
+          	<table cellpadding="0" cellspacing="0" width="100%" style="border:1px solid #cfcfcf;" class="tDefault" id="resize">
+          		<thead>
+                    <tr>
+		                <td width="150">数据名称</td>
+		                <td >数据值</td>
+                    </tr>
+                </thead>
+                <tbody>
+                	<tr><td>参评影片</td><td>{$vo.tm}</td></tr>
+                	<tr><td>总计阅读数Tr</td><td>{$vo.tr}</td></tr>
+                	<tr><td>总计喜欢数Tl</td><td>{$vo.tl}</td></tr>
+                	<tr><td>平均阅读数Mr</td><td>{$vo.mr}</td></tr>
+                	<tr><td>平均点赞数Ml</td><td>{$vo.ml}</td></tr>
+                	<tr><td>平均点赞比Mlr</td><td>{$vo.mlr}</td></tr>
+                	<tr><td>【神作】阅读要求</td><td>{$vo['p1'] * $vo['mr']}</td></tr>
+                	<tr><td>【神作】点赞比要求</td><td>{$vo['q1'] * $vo['mlr']}</td></tr>
+                	<tr><td>【神作】破格阅读要求</td><td>{$vo['s1'] * $vo['mr']}</td></tr>
+                	<tr><td>【神作】破格点赞比要求</td><td>{$vo['t1'] * $vo['mlr']}</td></tr>
+                	<tr><td>【震精】阅读要求</td><td>{$vo['p2'] * $vo['mr']}</td></tr>
+                	<tr><td>【震精】点赞比要求</td><td>{$vo['q2'] * $vo['mlr']}</td></tr>
+                	<tr><td>【震精】破格阅读要求</td><td>{$vo['s2'] * $vo['mr']}</td></tr>
+                	<tr><td>【震精】破格点赞比要求</td><td>{$vo['t2'] * $vo['mlr']}</td></tr>
+                	<tr><td>【略屌】阅读要求</td><td>{$vo['p3'] * $vo['mr']}</td></tr>
+                	<tr><td>【略屌】点赞比要求</td><td>{$vo['q3'] * $vo['mlr']}</td></tr>
+                	<tr><td>【略屌】破格阅读要求</td><td>{$vo['s3'] * $vo['mr']}</td></tr>
+                	<tr><td>【略屌】破格点赞比要求</td><td>{$vo['t3'] * $vo['mlr']}</td></tr>
+                </tbody>
+          	</table>
+          	</div>
+          	<div class="grid9">
+          	<table cellpadding="0" cellspacing="0" width="100%" style="border:1px solid #cfcfcf;" class="tDefault" id="resize">
+          		<thead>
+                    <tr>
+		                <td width="150">ID</td>
+		                <td >影片名称</td>
+		                <td >影片作者</td>
+		                <td >阅读</td>
+		                <td >点赞</td>
+		                <td >点赞比</td>
+                    </tr>
+                </thead>
+                <tbody>
+                	<volist name="movie_a" id="a">
+                		<tr>
+                			<td>{$a.m}</td>
+                			<td>
+                				《{$movies[$a['m']]['name']}》&nbsp;&nbsp;<span class="redBack">神作</span>
+                				<empty name="a.po"><else/><span class="redBack">{$a.po}</span></empty>
+                			</td>
+                			<td>{$graphers[$movies[$a['m']]['grapher']]}</td>
+                			<td>{$a.p}</td>
+                			<td>{$a.l}</td>
+                			<td>{$a['l'] / $a['p']}</td>
+                		</tr>
+                	</volist>
+                	
+                	<volist name="movie_b" id="b">
+                		<tr>
+                			<td>{$b.m}</td>
+                			<td>
+                				《{$movies[$b['m']]['name']}》&nbsp;&nbsp;<span class="blueBack">震精</span>
+                				<empty name="b.po"><else/><span class="redBack">{$b.po}</span></empty>
+                			</td>
+                			<td>{$graphers[$movies[$b['m']]['grapher']]}</td>
+                			<td>{$b.p}</td>
+                			<td>{$b.l}</td>
+                			<td>{$b['l'] / $b['p']}</td>
+                		</tr>
+                	</volist>
+                	
+                	<volist name="movie_c" id="c">
+                		<tr>
+                			<td>{$c.m}</td>
+                			<td>
+                				《{$movies[$c['m']]['name']}》&nbsp;&nbsp;<span class="greenBack">略屌</span>
+                				<empty name="c.po"><else/><span class="redBack">{$c.po}</span></empty>
+                			</td>
+                			<td>{$graphers[$movies[$c['m']]['grapher']]}</td>
+                			<td>{$c.p}</td>
+                			<td>{$c.l}</td>
+                			<td>{$c['l'] / $c['p']}</td>
+                		</tr>
+                	</volist>
+                </tbody>
+          	</table>
+          	</div>
+          	</div>
+          </div>
+       </div>
+     
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+<script src="http://echarts.baidu.com/build/echarts-plain.js"></script>
+<script>
+var movie_rank_a ={$vo.total_rank_a};
+var movie_rank_b ={$vo.total_rank_b};
+var movie_rank_c ={$vo.total_rank_c};
+var movie_rank_mv = {$vo['tm']};
+var movie_rank_other = movie_rank_mv - movie_rank_a - movie_rank_b - movie_rank_c;
+option = {
+	    title : {
+	        text: '',
+	        subtext: '',
+	        x:'center'
+	    },
+	    tooltip : {
+	        trigger: 'item',
+	        formatter: "{a} <br/>{b} : {c} ({d}%)"
+	    },
+	    legend: {
+	        orient : 'vertical',
+	        x : 'left',
+	        data:['神作','震精','略屌','其他']
+	    },
+	    toolbox: {
+	        show : true,
+	        feature : {
+	            dataView : {show: true, readOnly: false},
+	            saveAsImage : {show: true}
+	        }
+	    },
+	    calculable : true,
+	    series : [
+	        {
+	            name:'电影部数',
+	            type:'pie',
+	            radius : '70%',
+	            center: ['50%', 110],
+	            data:[
+	                {value: movie_rank_a, name:'神作'},
+	                {value: movie_rank_b, name:'震精'},
+	                {value: movie_rank_c, name:'略屌'},
+	                {value: movie_rank_other, name:'其他'},
+	            ]
+	        }
+	    ]
+	};
+var myChart = echarts.init(document.getElementById('bingtu')); 
+	// 为echarts对象加载数据 
+myChart.setOption(option); 
+</script>
+
+<include file="Public:footer" />

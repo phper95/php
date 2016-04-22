@@ -1,0 +1,190 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<script src="__JS__/dialog/artDialog.js?skin=default"></script>
+<div id="sidebar">
+	<include file="Public:left" />
+	<!-- Secondary nav -->
+    <div class="secNav">
+        <div class="secWrapper">
+            <!-- Tabs container -->
+            <form method="get" action="{:U('Wei/material')}">
+            <input type="hidden" value="{$Think.MODULE_NAME}" name="m"/>
+            <input type="hidden" value="{$Think.ACTION_NAME}" name="a"/>
+            <div id="tab-container" class="tab-container">
+				<ul class="iconsLine ic1 etabs">
+                    <li><a href="#alt2" title="">素材搜索:</a></li>
+                </ul>
+                <div class="divider"><span></span></div>
+                <div id="alt2">
+                	<!-- Sidebar forms -->
+                    <div class="sideWidget">
+                        <div class="formRow">
+                            <label>素材ID:</label>
+                            <input type="text" name="id" value="{$Think.get.id}" placeholder="素材ID" />
+                        </div>
+                        <div class="formRow">
+                           <label>素材标题:</label>
+                            <input type="text" name="title" value="{$Think.get.title}" placeholder="素材标题" /> 
+                        </div>
+                        <div class="formRow">
+                            <input type="submit" class="buttonS bLightBlue" value="搜索素材" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"><span></span></div>
+            </form>
+            <include file="Wei:opt" />
+       </div> 
+       <div class="clear"></div>
+   </div>
+</div>
+<!-- Sidebar ends -->
+    
+<style>
+.boo-item {padding-top:110px;box-sizing: border-box;position:relative;float:left;width:210px;margin:3px;border:1px solid #ccc;border-radius:3px;height:auto;background-repeat:no-repeat;background-position:left top;background-size:100%;}
+.boo-name {box-sizing: border-box;position:absolute;bottom:62px;background-color:rgba(20,20,20,0.8);padding:3px;text-align:center;width:100%;height:auto;color:#fff;}
+.boo-input {padding:2px 0px;background-color:#fff;}
+.boo-input input[type='text'] {border:1px solid #ccc;line-height:24px;width:155px;}
+.boo-input label {float:left;width:50px;}
+</style>
+    
+<!-- Content begins -->
+<div id="content">
+    <div class="contentTop">
+        <span class="pageTitle">素材管理</span>
+       	<div class="clear"></div>
+    </div>
+    
+    <include file="Public:bav" />
+    
+    <!-- Main content -->
+    <div class="wrapper">
+        <!-- Media table sample -->
+        <div class="widget check">
+            <div class="whead">
+            	<h6>素材列表</h6>
+            		<a href="javascript:void(0);" id="add_mat_img" class="buttonH bBlue">添加</a>
+            		<notempty name="Think.get.backurl">
+                   		<a href="{$Think.get.backurl}" class="buttonH bBlue mb10 mt5">返回</a>
+                 	</notempty >
+            	<div class="clear"></div>
+            </div>
+            <table cellpadding="0" cellspacing="0" width="100%" class="tDefault checkAll tMedia" id="checkAll">
+                <thead>
+                    <tr>
+                        <td width="10">ID</td>
+                        <td width="100">名称</td>
+                        <td width="50">图片</td>
+                        <td>关键词</td>
+                        <td>标签</td>
+                        <td width="100">参数</td>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td colspan="9">
+                        	<empty name="list">
+                        		木油满足您强烈需求的素材了。。
+                        	<else />
+                            <div class="tPages">
+                                <ul class="pages">
+                                    {$page}
+                                </ul>
+                            </div>
+                            </empty>
+                        </td>
+                    </tr>
+                </tfoot>
+                <tbody>
+                	<volist name="list" id="vo">
+		            <tr>
+		                <td>{$vo.id}</td>
+		                <td>{$vo.name}</td>
+		                <td><img src="{$vo.url|default='__PUBLIC__/images/quetu.jpg'}" height="70px;" /></td>
+		                <td>{$vo.keywords}</td>
+		                <td>{$vo.tags}</td>
+		                <td>{:round($vo['size']/1024,2)}Kb<br />({$vo.width} * {$vo.height})</td>
+		            </tr>
+		            </volist>
+                </tbody>
+            </table>
+            <div id="xxsdf" style="display:none;width:888px;line-height:24px;" class="fluid">
+            		<div class="fluid">
+            			<div class="widget nomargin noBorderB">
+            				<div class="boo-input body">
+            					<label>关键字：</label><input id="js-all-keywords" style="float:left;" type="text" value="" placeholder="关键字" onfocus="$('.js-boo-input-k').val(this.value)" onblur="$('.js-boo-input-k').val(this.value)"/>
+            					<span style="float:left;width:30px;">&nbsp;</span>
+            					<label>标    签：</label><input id="js-all-tags" type="text" value="" placeholder="标签" onfocus="$('.js-boo-input-t').val(this.value)" onblur="$('.js-boo-input-t').val(this.value)"/>
+            				</div>
+            			</div>
+            			<div class="widget nomargin">
+	                        <div style="width:100%;height:400px;overflow-x:hidden;overflow-y:auto;" id="js-img-list">
+	                        </div>
+            			</div>
+            		</div>
+            </div>
+        </div>
+     
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+<script>
+(function(){
+	var post_url = "{:U('Wei/doAddMatImg')}";
+	$('#add_mat_img').click(function(){
+		window.__booCallback = function(data){
+			$("#js-img-list").html('');
+			if (data.files.length == 0) {
+				art.dialog({content:"<h1 style='padding:10px;'>你还没上传图片到服务器呢。</h1></br /><span style='float:right;'>3秒后关闭</span>",padding:10,time:3,title:false});return;
+			}
+			var html = '<form method=\'post\' id="form_add_mat_img" name="form1" action="'+post_url+'"  enctype="multipart/form-data">';
+			var i = 0;
+			var init_keywords = $('#js-all-keywords').val();
+			var init_tags = $('#js-all-tags').val();
+			for (var a in data.files) {
+				var tmp = a.split('.');
+				var item = data.files[a];
+				var len = tmp.length;
+				html += '<div class="boo-item" style="background-image:url(\'http://imgs5.graphmovie.com:8099/material/tmp/'+a+'\')">'
+						 + '<div class="boo-name">'+tmp[0]+'</div>'
+						 + '<div class="boo-input"><label>关键字：</label><input type="text" class="js-boo-input-k" name="'+i+'[keywords]" value="'+init_keywords+'" placeholder="关键字"/></div>'
+						 + '<div class="boo-input"><label>标     签：</label><input type="text" class="js-boo-input-t" name="'+i+'[tags]" value="'+init_tags+'" placeholder="标签"/></div>'
+						 + '<input type="hidden" name="'+i+'[name]" value="'+tmp[0]+'"/>'
+						 + '<input type="hidden" name="'+i+'[url]" value="http://imgs5.graphmovie.com:8099/material/'+item.md+'.'+tmp[len-1]+'"/>'
+						 + '<input type="hidden" name="'+i+'[size]" value="'+item.size+'"/>'
+						 + '<input type="hidden" name="'+i+'[img_type]" value="'+item.image.mime+'"/>'
+						 + '<input type="hidden" name="'+i+'[width]" value="'+item.image[0]+'"/>'
+						 + '<input type="hidden" name="'+i+'[height]" value="'+item.image[1]+'"/>'
+					  + '</div>';
+				i ++;
+			}
+			html += '</form>';
+			$("#js-img-list").html(html);
+			
+			art.dialog({
+				title : '添加图片',
+				padding:0,
+				content:$('#xxsdf')[0],
+				ok : function(){
+					$('#form_add_mat_img').submit();
+				}
+			});
+		};
+		
+		$.ajax({  
+            type: "get",  
+            async: false,  
+            url: "http://imgs5.graphmovie.com:8099/material/me/get.php",  
+            data: {getdn:true},
+            dataType: "jsonp",  
+            jsonp: "callback",
+            jsonpCallback:'__booCallback'   //这里为后台返回的动态函数
+        });
+	});
+})();
+</script>
+<include file="Public:footer" />

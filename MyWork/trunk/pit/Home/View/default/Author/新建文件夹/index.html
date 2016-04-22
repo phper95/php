@@ -1,0 +1,138 @@
+<include file="Public/header" />
+	<div id="content">
+		<include file="Author/info"/>
+		<form method='post' id="form1" name="form1" action="{:U('Author/add')}"  enctype="multipart/form-data">
+					<div class="e_cont a_cont">
+                        <div class="cont_form clearfix">
+                             <div class="form_left">
+                              <p class="m_name"><span>*</span>真实姓名：</p>
+                           </div>
+                           <div class="form_right">
+                            <p><input type="text" name="realname" info="姓名" class="short_text txtBlue require"></p>
+                           </div>
+                        </div>
+                        <div class="cont_form clearfix">
+                             <div class="form_left">
+                              <p class="m_name">QQ：</p>
+                           </div>
+                           <div class="form_right">
+                            <p><input type="text" name="qq" class="short_text txtBlue"></p>
+                           </div>
+                        </div>
+                        <div class="cont_form clearfix">
+                             <div class="form_left">
+                              <p class="m_name"><span>*</span>手机号：</p>
+                           </div>
+                           <div class="form_right">
+                            <p><input type="text" name="phone" info="手机号" class="short_text txtBlue require"></p>
+                           </div>
+                        </div>
+                        <div class="cont_form clearfix">
+                             <div class="form_left">
+                              <p class="m_name"><span>*</span>身份证号码：</p>
+                           </div>
+                           <div class="form_right">
+                            <p><input type="text" name="id_card" info="身份证" class="short_text txtBlue require"></p>
+                           </div>
+                        </div>
+                        <div class="cont_form clearfix">
+                             <div class="form_left">
+                              <p class="m_name"><span>*</span>Email：</p>
+                           </div>
+                           <div class="form_right">
+                            <p><input type="text" name="email" info="Email" value="{$user.email}" class="short_text txtBlue require"></p>
+                           </div>
+                        </div>
+                        <div class="cont_form clearfix">
+                             <div class="form_left">
+                              <p class="m_name"><span>*</span>通讯地址：</p>
+                           </div>
+                           <div class="form_right">
+                            <p><input type="text" info="通讯地址" placeholder="例如：深圳市福田区深南大道2008号中国凤凰大厦2号楼11B" value="" name="address" class="long_text txtBlue require"></p>
+                           </div>
+                        </div>
+                        <div class="cont_form clearfix">
+                             <div class="form_left">
+                              <p class="m_name"><span>*</span>银行卡信息：</p>
+                           </div>
+                           <div class="form_right">
+                            <p><input type="text" info="银行卡信息" placeholder="格式为：银行卡号，开户行，户主姓名  以逗号“，”隔开" value="" name="yh_card" class="long_text txtBlue require"></p>
+                           </div>
+                        </div>
+                        <div class="cont_form clearfix">
+                             <div class="form_left">
+                              <p class="m_name">其他：</p>
+                           </div>
+                           <div class="form_right">
+                            <p><input type="text" placeholder="如果还有什么想说的，请写在这里" value="" name="remark" class="long_text txtBlue"></p>
+                           </div>
+                        </div>
+
+                    </div>
+                    <div class="set_btn">
+                    	<p class="set_btn_cont">
+                             <input type="submit" class="btn btnBlue" id="submit" value="确 认" onclick="return false;"/>
+                        </p>
+                        <p class="error">* 标记为必填项</p>
+                         
+                     </div>
+                     <br /><br /><br /><br /><br />
+       </form>
+	</div>
+	<script type="text/javascript">
+<!--
+$(document).ready(function(){
+	$('#submit').click(function(){
+		var ok = true;
+		$('.require').each(function(){
+			var value = $.trim($(this).val());
+			var name = $(this).attr('name');
+			if (value == '') {
+				ok = false;
+				boo_common.showMsg($(this).attr('info')+' 不能为空'); return false;
+			} else if (name == 'yh_card') {
+				value = value.replace(/，/g,',');
+				var tmp = value.split(',');
+				if (tmp.length != 3) {
+					ok = false;
+					boo_common.showMsg($(this).attr('info')+' 格式有误<br /><span style="color:#f23;font-size:12px;">' + $(this).attr('placeholder')+'</span>'); return false;
+				}
+			} else if (name == 'email') {
+				if (false == boo_common.check_email(value)){
+					ok = false;
+					boo_common.showMsg($(this).attr('info')+' 格式错误'); return false;
+				}
+			}
+		});
+		if (ok) {
+			$.ajax({
+				url : '{:U("Author/add")}',
+				type : 'POST',
+				data : $('#form1').serialize(),
+				success : function(data){
+					loading = false;
+					if (typeof data == 'object') {
+						if (data.rst == 1) {
+							loading = true;
+							boo_common.showMsg(data.msg,'',function(){
+								location.href = '{:U("Index/index")}';
+							});
+							$('#submit').unbind();
+						} else {
+							boo_common.showMsg(data.msg);
+						}
+					}else {
+						boo_common.showMsg('额偶。请刷新页面。。。');
+					}
+				},
+				error : function(ex){
+					loading = false;
+					boo_common.showMsg('额偶。请刷新页面。。。');
+				}
+			});
+		}
+	});
+});
+//-->
+</script>
+<include file="Public/footer" />

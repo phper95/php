@@ -1,0 +1,173 @@
+<include file="Public:header" />
+<script language="javascript" type="text/javascript" src="__JS__/My97DatePicker/WdatePicker.js"></script>
+<script language="javascript" type="text/javascript" src="__JS__/dialog/artDialog.js?skin=default"></script>
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<!-- Secondary nav -->
+    <div class="secNav">
+        <div class="secWrapper">
+            <!-- Tabs container -->
+            <form method="get" action="{:U('Feedback/index')}">
+            	<input type="hidden" value="{$Think.MODULE_NAME}" name="m"/>
+            	<input type="hidden" value="{$Think.ACTION_NAME}" name="a"/>
+            <div id="tab-container" class="tab-container">
+
+                <ul class="iconsLine ic1 etabs">
+                    <li><a href="#alt2" title="">搜索条件</a></li>
+                </ul>
+                
+                <div class="divider"><span></span></div>
+                
+                <div id="general"></div>
+                
+                <div id="alt1"></div>
+                <div id="alt2">
+                
+                	<!-- Sidebar forms -->
+                    <div class="sideWidget">
+                        <div class="formRow">
+                            <label>时间段查询:</label>
+                            <input type="text" name="s_time" id="feedback_search_s_time" placeholder="开始时间"  onClick="WdatePicker()" value="{$Think.get.s_time}"/>
+                            <input id="d12" name="e_time" type="text" onClick="WdatePicker()" placeholder="结束时间" value="{$Think.get.e_time}"/>
+						</div>
+                        <div class="formRow">
+                            <input type="submit" class="buttonS bLightBlue" value="Just 搜索" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"><span></span></div>
+            </form>
+            
+       </div> 
+       <div class="clear"></div>
+   </div>
+</div>
+<!-- Sidebar ends -->
+
+<!-- Content begins -->
+<div id="content">
+
+  <include file="Public:bav" />
+  
+    <!-- Main content -->
+    <div class="wrapper">
+        <!-- Media table sample -->
+        <div class="widget check">
+            <div class="whead">
+            <h6>用户反馈列表</h6>
+				<div class="clear"></div></div>
+            <table cellpadding="0" cellspacing="0" width="100%" class="tDefault checkAll tMedia" id="checkAll">
+                <thead>
+                    <tr>
+		                <td width="50">编号</td>
+		                <td width="80">用户</td>
+		                <td>反馈内容</td>
+		                <td width="80">发布渠道</td>
+		                <td>用户IP</td>
+		                <td>IMEI</td>
+		                <td>用户机型</td>
+		                <td>类型</td>
+		                <td width="130">反馈时间</td>
+		                <td width="130">回复</td>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td colspan="13">
+                        <empty name="list">
+                        	额。。。木有咧……
+                        <else/>
+                            <div class="tPages">
+                                <ul class="pages">
+                                	{$page}
+                                </ul>
+                            </div>
+                        </empty>
+                        </td>
+                        
+                    </tr>
+                </tfoot>
+                <tbody>
+                    <volist name="list" id="vo">
+		            <tr>
+		                <td>{$vo.id}</td>
+		                <td>
+		                	<a href="{:U('Feedback/index',array('user_id'=>$vo['user_id']))}" title="点我查看该用户的所有反馈信息">{$Member[$vo['user_id']]['name']}</a><br />
+		                	（ID：<a href="{:U('Member/index',array('id'=>$vo['user_id'],'backurl'=>urlencode(__SELF__)))}" title="点我管理该用户">{$vo.user_id}</a>）<br />
+		                	{$vo.contact}
+		                </td>
+		                <td>{:addslashes($vo['feedback'])}</td>
+		                <td>
+		                	{$vo.pub_platform}<br />
+		                	{$vo.pub_channel} <br />
+		                	（Ver：<a href="{:U('Feedback/index',array('ver'=>$vo['ver']))}">{$vo.ver}</a>）
+		                </td>
+		                <td>{$vo.ip}</td>
+		                <td>{$vo.imei}</td>
+		                <td>{$vo.phone_type}</td>
+		                <td>{$type[$vo['fd_type']]}</td>
+		                <td>{$vo.add_time}</td>
+		                <td>
+		                	<empty name="vo.new_id">
+		                		<a href="{:U('Member/addNews',array('feedback_id'=>$vo['id'],'id'=>$vo['user_id'],'name'=>$Member[$vo['user_id']]['name'],'backurl'=>urlencode(__SELF__)))}">回复</a>
+		                	<else/>
+		                		<a href="javascript:void(0);" title="点击查看回复内容" data-id="{$vo.new_id}" class="greenBack look_conent">OK</a>
+		                	</empty>
+		                </td>
+		            </tr>
+		            </volist>
+                </tbody>
+            </table>
+        </div>
+     
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+<script>
+(function(){
+	searchInitValue ({
+		'feedback_search_s_time' : "{:toDate(strtotime('-1 day'), 'Y-m-d')}"
+	});
+	
+	var feedback_contents = [];
+	
+	$('.look_conent').click(function(){
+		var id = $(this).attr('data-id');
+		if (typeof feedback_contents[id] != 'undefined') {
+			art.dialog({
+				content:feedback_contents[id]
+			});
+			return;
+		}
+		$.ajax({
+			url : '{:U("Feedback/getFeedbackContent")}',
+			type : 'POST',
+			data : {id:id},
+			success :function(rst){
+				if (typeof rst === 'object') {
+					if (rst.rst==1) {
+						feedback_contents[id] = '回复时间：'+rst.data.add_time + '<br /><br />回复内容：' + rst.data.comment_content;
+						art.dialog({
+							content:feedback_contents[id]
+						});
+					} else {
+						alert(rst.msg);
+					}
+				} else {
+					alert(rst);
+				}
+			},
+			error : function(ex) {
+				alert('ajax 错误');
+			}
+		});
+	});
+	
+})();
+</script>
+<include file="Public:footer" />

@@ -1,0 +1,51 @@
+<include file="Public/header" />
+	<div class="search_result">
+		<div class="title">搜索：{$Think.get.search}</div>
+		<present name="list">
+			<present name="one">
+				<if condition="$one lt 10">
+					<div class="info">坑已被占&gt;&gt; <a href="{:U('Index/index')}">占其他坑？</a> </div>
+				<else/>
+					<div class="info">
+						该坑已被占过，不过你可以进行如下操作<br />
+						&gt;&gt; <a href="{:U('Pit/pitting',array('pit'=>$_GET['search']))}">强占此坑！</a> &nbsp;&nbsp;&nbsp;&nbsp;
+						&gt;&gt; <a href="{:U('Index/index')}">占其他坑</a> 
+					</div>
+				</if>
+			<else />
+				<div class="info">
+					与该坑相似的坑如下，你可以进行如下操作<br /> 
+					&gt;&gt; <a href="{:U('Pit/pitting',array('pit'=>$_GET['search']))}">占此坑！</a> &nbsp;&nbsp;&nbsp;&nbsp;
+					&gt;&gt; <a href="{:U('Index/index')}">占其他坑</a>  
+				</div>
+			</present>
+		<else />
+			<div class="info">没有找到此坑，还等什么 &gt;&gt; <a href="{:U('Pit/pitting',array('pit'=>$_GET['search']))}">占坑啊！</a> </div>
+		</present>
+	</div>
+	<present name="list">
+	<div id="content">
+		<div class="Tab"><h6>搜索结果</h6><div class="clear"></div></div>
+		<div class="body">
+			<dl class="movieList">
+				<volist name="list" id="one">
+				<dt>
+					<empty name="one.pit_img">
+						<img src="__IMG__/fail_image.png" class="face"/>
+					<else />
+						<img src="__PITIMG__/{$one.pit_img}" class="face"/>
+					</empty>
+					<div class="info">
+						<h6>{$one['pit_name']}</h6><div class="clear"></div>
+						<span>{$one.info_str|default=''}</span>
+						<div class="right">{$one.right_str|default=''}</div>
+						<div class="rightTime">{$one.right_b_str|default=''}</div>
+					</div>
+					<div class="clear"></div>
+				</dt>
+				</volist>
+			</dl>
+		</div>
+	</div>
+	</present>
+<include file="Public/footer" />

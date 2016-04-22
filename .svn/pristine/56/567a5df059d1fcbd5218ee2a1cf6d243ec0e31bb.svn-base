@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" >
+<meta name="format-detection" content="telephone=no"/>
+<title>任务详情</title>
+<link href="__CSS__/style.css?2" rel="stylesheet" type="text/css" media="screen"/>
+<script src="../js/jquery-1.10.1.min.js"></script>
+<script src="http://ser3.graphmovie.com/boo/js/gw2c.js"></script>
+<style type="text/css">
+*:before{content:'';} *:after{content:'';}
+body,html {}
+.border {
+	border:1px solid red;
+}
+.content .item {
+	padding:10px;color:#666;
+}
+.content .goods-img {
+	float:left; height:60px;width:84px;
+	background:url(__PUBLIC__/image/default.jpg) no-repeat center;
+	background-size:100% 100%;
+}
+.content .goods-state {
+	float:right; height:60px;
+	background:url(__PUBLIC__/image/shop_icontright.png.png) no-repeat right center;
+	background-size:20px auto;
+	line-height:60px;padding-right:20px;
+	font-size:0.8em;
+}
+.content .goods-gold {
+	background:url(__PUBLIC__/image/shop_icon_goldcoin.png) no-repeat left center;
+	background-size:16px auto;
+	line-height:30px;padding-left:18px;
+}
+.state-0{ color:#fa4b49;}
+.content .goods-info {
+	padding-left:90px;font-size:0.8em;
+}
+.content .goods-info h4{
+	margin:0; line-height:30px;
+}
+.clear {clear:both;}
+.in-line {
+	display:block;                     /*内联对象需加*/
+word-break:keep-all;           /* 不换行 */
+white-space:nowrap;          /* 不换行 */
+overflow:hidden;               /* 内容超出宽度时隐藏超出部分的内容 */
+text-overflow:ellipsis;         /* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
+}
+.content .line {
+	height:10px; background-color:#eee;
+}
+</style>
+</head>
+<body>
+<div id="box">
+	<div id="main">
+		<div class="content">
+			<empty name="list">
+				<div style="height:300px;float:left;width:100%;background:url('__PUBLIC__/image/nothing.png') no-repeat bottom center; background-size:60% auto;"></div>
+				<div class="clear"></div>
+				<div style="color:#666;text-align:center;line-height:5em;">什么都没有发现(´ﾟдﾟ`)</div>
+			</empty>
+			<volist name="list" id="vo">
+			<div class="item" data-t="订单详情" data-url='{:U("Index/orderDetail",array("k"=>$vo["id"],"gk"=>$vo["goods"]["goods_id"]),false,false,true)}'>
+				<div class="goods-state state-{$vo.state}">{$state_txt[$vo['state']]}</div>
+				<div class="goods-img" style="background-image:url({$vo.goods.image});"></div>
+				<div class="goods-info">
+					<h4 class="in-line">{$vo.goods.name}</h4>
+					<span class="goods-gold">{:Intval($vo['goods']['price'])}</span>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="line"></div>
+			</volist>
+		</div>
+	</div>
+</div>
+<script>
+$('document').ready(function(){
+	$('.item').click(function(){
+		//location.href = $(this).attr("data-url");
+		var url = $(this).attr("data-url");
+		var t = $(this).attr("data-t");
+		GMBase.openUrl ({url:url,upvc:1,t:t, s:1});
+	});
+});
+</script>
+<include file="Public:bdtj" />
+</body>
+</html>

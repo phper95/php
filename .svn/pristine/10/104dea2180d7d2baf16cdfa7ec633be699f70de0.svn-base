@@ -1,0 +1,177 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+</div>
+<!-- Sidebar ends -->
+
+<script src="__JS__/dialog/artDialog.js?skin=default"></script>
+
+<!-- Content begins -->
+<div id="content">
+
+  <include file="Public:bav" />
+  
+    <!-- Main content -->
+    <div class="wrapper">
+        <!-- Media table sample -->
+        <div class="widget check">
+            <div class="whead">
+            	<h6>剧集列表</h6>
+            	<a href="javascript:void(0);" id="add_movie_season" class="buttonH bBlue mb10 mt5">添加</a>
+				<div class="clear"></div>
+			</div>
+            <table cellpadding="0" cellspacing="0" width="100%" class="tDefault checkAll tMedia" id="checkAll">
+                <thead>
+                    <tr>
+		                <td width="50">编号</td>
+		                <td width="80">剧集名称前缀</td>
+		                <td>剧集名称</td>
+		                <td width="100">剧集集数</td>
+		                <td width="150">添加时间</td>
+		                <td width="100"> 操作</td>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td colspan="12">
+                        <empty name="list">
+                        	额。。。木有咧……
+                        <else/>
+                            <div class="tPages">
+                                <ul class="pages">
+                                	{$page}
+                                </ul>
+                            </div>
+                        </empty>
+                        </td>
+                        
+                    </tr>
+                </tfoot>
+                <tbody>
+                    <volist name="list" id="vo">
+		            <tr>
+		                <td>{$vo.id}</td>
+		                <td>{$vo.name_tag}</td>
+		                <td>
+		                	{$vo.name}
+		                </td>
+		                <td>
+		                	<a id="movie_count_{$vo.id}" href="{:U('Movie/index',array('season_id'=>$vo['id'],'backurl'=>urlencode(__SELF__)))}">{$vo.movie_count}</a>
+		                </td>
+		               <td>{$vo.add_time}</td>
+		               <td>
+		               		<a href="javascript:void(0);" data-id="{$vo.id}" class="refrsh_movie_count">校对</a>&nbsp;&nbsp;&nbsp;&nbsp;
+		               		<a href="javascript:void(0);" data-id="{$vo.id}" data-name="{$vo.name}" data-name-tag="{$vo.name_tag}" class="edit_movie_season">修改</a>
+		               </td>
+		            </tr>
+		            </volist>
+                </tbody>
+            </table>
+        </div>
+     
+    		 <div class="fluid" style="display:none; width:500px;" id="xxxxsd">
+        		<form method='post' id="form1" name="form1" action="{:U('MovieSeason/insert')}"  enctype="multipart/form-data">
+                    <div class="widget nopadding nomargin">
+                    	<div class="formRow">
+                            <div class="grid3"><label>剧集名称：<span class="req">*</span> </label></div>
+                            <div class="grid9"><input type="text" id="movie_season_name" name="name" placeholder="剧集名称"/></div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="formRow">
+                            <div class="grid3"><label>剧集名称前缀：</label></div>
+                            <div class="grid9">
+                            	<input type="text" name="name_tag" placeholder="剧集名称前缀"/>
+                            	<span class="note">如：日剧，韩剧，美剧等</span>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                   </form>
+            </div>
+            
+            <div class="fluid" style="display:none; width:500px;" id="edit_panel">
+        		<form method='post' id="form2" name="form2" action="{:U('MovieSeason/update')}"  enctype="multipart/form-data">
+                    <div class="widget nopadding nomargin">
+                    	<div class="formRow">
+                            <div class="grid3"><label>剧集名称：<span class="req">*</span> </label></div>
+                            <div class="grid9"><input type="text" id="movie_season_name_2" name="name" placeholder="剧集名称"/></div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="formRow">
+                            <div class="grid3"><label>剧集名称前缀：</label></div>
+                            <div class="grid9">
+                            	<input type="text" name="name_tag" id="movie_season_name_tag_2" placeholder="剧集名称前缀"/>
+                            	<input type="hidden" name="id" id="movie_season_id_2"/>
+                            	<span class="note">如：日剧，韩剧，美剧等</span>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                   </form>
+            </div>
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<script>
+(function(){
+	$('.refrsh_movie_count').click(function(){
+		var id = $(this).attr('data-id');
+		$('#movie_count_'+id).html('ing...');
+		$.ajax({
+			url : '{:U("MovieSeason/refreshMovieCount")}&id=' + id,
+			success : function(data){
+				if (typeof data == 'object') {
+					if (data.rst==1) {
+						$('#movie_count_'+id).html(data.data);
+					} else {
+						alert(data.msg);
+					}
+				} else {
+					alert(data);
+				}
+			}, 
+			error : function(ex){
+				alert('ajax 网络错误');
+			}
+		});
+	});
+	$('#add_movie_season').click(function(){
+		art.dialog({
+			padding : 0,
+			title : '添加剧集',
+			content : $('#xxxxsd')[0],
+			ok : function(){
+				var name = $.trim($('#movie_season_name').val());
+				$('#movie_season_name').val(name);
+				if (name == '') {alert('请填入名称好吗？');} else {
+					$('#form1').submit();
+				} 
+				return false;
+			}
+		});
+	});
+	
+	$('.edit_movie_season').click(function(){
+		$('#movie_season_id_2').val($(this).attr('data-id'));
+		$('#movie_season_name_2').val($(this).attr('data-name'));
+		$('#movie_season_name_tag_2').val($(this).attr('data-name-tag'));
+		art.dialog({
+			padding : 0,
+			title : '编辑剧集',
+			content : $('#edit_panel')[0],
+			ok : function(){
+				var name = $.trim($('#movie_season_name_2').val());
+				$('#movie_season_name_2').val(name);
+				if (name == '') {alert('请填入名称好吗？');} else {
+					$('#form2').submit();
+				} 
+				return false;
+			}
+		});
+	});
+})();
+</script>
+<!-- Content ends -->
+<include file="Public:footer" />

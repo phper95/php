@@ -1,0 +1,142 @@
+<include file="Public:header" />
+<script src="__JS__/dialog/artDialog.js?skin=default"></script>
+<script src="__JS__/gw2c.js"></script>
+
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<!-- Secondary nav -->
+    <div class="secNav">
+        <div class="secWrapper">
+            <include file="HomeOnline:opt" />
+       </div> 
+       <div class="clear"></div>
+   </div>
+</div>
+<!-- Sidebar ends -->
+<!-- Content begins -->
+<div id="content">
+    <include file="Public:bav" />
+    <!-- Main content -->
+    
+    <div class="wrapper">
+        <!-- Media table sample -->
+        <div class="widget check">
+            <div class="whead">
+            	<h6>首页【弹窗】上线配置列表</h6>
+            	<a href="{:U('HomeOnline/addHomeDialog')}" id="add_tuijian" class="buttonH bBlue">添加</a>
+            	<div class="clear"></div>
+            </div>
+            <table cellpadding="0" cellspacing="0" width="100%" class="tDefault checkAll tMedia" id="checkAll">
+                <thead>
+                    <tr>
+                        <td width="10">ID</td>
+                        <td width="50">名称</td>
+                        <td>信息</td>
+                        <td>按钮文字</td>
+                        <td width="250">（小米渠道）上线时间</td>
+                        <td width="200">添加时间</td>
+                        <td width="200">后续操作</td>
+                        <td width="80">操作</td>
+                        
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td colspan="8">
+                        	<empty name="list">
+                        		木油满足您强烈需求的配置，您可以添加一部咩？
+                        	<else />
+                            <div class="tPages">
+                                <ul class="pages">
+                                    {$page}
+                                </ul>
+                            </div>
+                            </empty>
+                        </td>
+                    </tr>
+                </tfoot>
+                <tbody>
+                	<volist name="list" id="vo">
+		            <tr>
+		                <td>{$vo.id}</td>
+		                <td>{$vo.name}</td>
+		                <td>
+		                	<img src="{$vo.image}" height="120px;"/>
+		                </td>
+		                <td>{$vo.btn_txt}</td>
+		                <td><empty name="vo.online"><span class="redBack">未上线</span><else /><span class="greenBack">{$vo.online.start_time}</span><br /><br /> <span>{$vo.online.end_time}</span></empty></td>
+		                <td>{$vo.add_time}</td>
+		                <td>{:getGW2CTxt($vo['script'])}</td>
+		                <td style="line-height:2.0em;">
+		                	<a href="{:U('HomeOnline/onlineHomeDialog', array('id'=>$vo['id'],'mname'=>$vo['name']))}">上/下线</a><br />
+		                	<a href="javascript:void(0);" data-id="{$vo.id}" class="gw2c_show">后续操作</a>
+		                </td>
+		            </tr>
+		            </volist>
+                </tbody>
+            </table>
+            <div id="xxsdf" style="display:none;min-width:600px;" class="fluid">sdfsdf</div>
+        </div>
+    </div>
+    <!-- Main content ends -->
+</div>
+<!-- Content ends -->
+<script>
+(function(){
+	gw2c.getpanel();
+	$('.gw2c_show').click(function(){
+		var id = $.trim($(this).attr('data-id'));
+		var loading = false;
+		art.dialog({
+			id : 'dialog_adv2_gw2c_script',
+			content : $('#xxsdf')[0],
+			padding:0,
+			ok : function(){
+				if (loading) {alert('啊啊啊啊啊啊啊，正在提交啊啊啊啊啊啊啊。。。');return false;}
+				if ($('#gw2c_script_a').val() == '') {alert('请选择操作哟');return false;}
+				var script = gw2c.getScript();
+				if (script == null) return false;
+				loading = true;
+				$('#gw2c_loading_info').fadeIn();
+				$.ajax({
+					url : "{:U('HomeOnline/updateHomeDialogScript')}",
+					data : {id:id,script:script},
+					type : 'POST',
+					success : function(data){
+						loading = false;
+						$('#gw2c_loading_info').hide();
+						if (typeof data != 'object') {
+							alert(data); return;
+						} else {
+							if (data.rst == 1) {
+								art.dialog({id: 'dialog_adv2_gw2c_script'}).close();
+								art.dialog({title:false,content:'<div style="font-size:20px;font-weight:900;padding:20px 20px;">修改成功</div> <span style="float:right;">3秒后关闭</span>'}).time(3);
+							} else {
+								alert(data.msg);
+							}
+						}
+					},
+					error : function(ex){
+						alert('ajax 错误');
+						loading = false;
+						$('#gw2c_loading_info').hide();
+					}
+				});
+				return false;
+			},
+			cancel : true,
+			close : function(){
+				if (loading) {alert('啊啊啊啊啊啊啊，正在提交啊啊啊啊啊啊啊。。。');return false;}
+				$('#gw2c_loading_info').hide();
+				$('#gw2c_script_a').val('').change();
+			}
+		});
+	});
+})();
+</script>
+<include file="Public:footer" />
+
+
+			
+			

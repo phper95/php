@@ -1,0 +1,83 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<!-- Secondary nav -->
+</div>
+<!-- Sidebar ends -->
+
+<!-- Content begins -->
+<div id="content">
+    <include file="Public:bav" />
+    <!-- Main content -->
+    <div class="wrapper">
+        	<div class="fluid">
+        	<script language="javascript" type="text/javascript" src="__JS__/My97DatePicker/WdatePicker.js"></script>
+        		<form method='post' id="form1" name="form1" action="{:U('Appwall/insert')}"  enctype="multipart/form-data">
+                    <div class="widget ">
+                        <div class="whead">
+                        	<h6>添加APP信息</h6>
+                        	<empty name="Think.get.backurl">
+	                        	<a href="{:getCurrentUrl()}" class="buttonH bBlue mb10 mt5">返回</a>
+	                        <else />
+	                        	<a href="{$Think.get.backurl}" class="buttonH bBlue mb10 mt5">返回</a>
+	                        </empty>
+                        	<div class="clear"></div>
+                        </div>
+                        <div class="formRow">
+                            <div class="grid3"><label>名称 :<span class="req">*</span> </label></div>
+                            <div class="grid9"><input type="text" name="name" value=""></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>说明 :<span class="req">*</span> </label></div>
+                            <div class="grid9"><input type="text" name="subtitle" value=""></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>图标地址 :<span class="req">*</span> </label></div>
+                            <div class="grid9">
+                            	<input type="text" name="icon" onblur="$('#app_icon').attr('src',this.value);" value="">
+                            	<img src="" id="app_icon" height="50"/>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>APP 下载地址:<span class="req">*</span> </label></div>
+                            <div class="grid9"><input type="text" name="url" value=""></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>下载按钮文字:<span class="req">*</span> </label></div>
+                            <div class="grid9"><input type="text" name="btn_title" value="下载"></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>排序值:</label></div>
+                            <div class="grid9"><input type="text" name="weight" value="0" placeholder="越大排名越前"></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                        	<notempty name="Think.get.backurl">
+                        	<input type="hidden" name="backurl" value="{$Think.get.backurl}">
+                        	</notempty>
+                        	<input type="hidden" name="open" value="0">
+                        	<input type="submit" value="提 交" class="buttonM bBlack formSubmit" /><div class="clear"></div>
+                        </div>
+                        <div class="clear"></div>
+                    
+                    </div>
+                    </form>
+            </div>
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+<include file="Public:footer" />

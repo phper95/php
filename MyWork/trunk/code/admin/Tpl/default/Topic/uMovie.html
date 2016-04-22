@@ -1,0 +1,155 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<!-- Secondary nav -->
+</div>
+<!-- Sidebar ends -->
+
+<!-- Content begins -->
+<div id="content">
+    
+    <!-- Breadcrumbs line -->
+    <div class="breadLine">
+        <div class="bc">
+            <ul id="breadcrumbs" class="breadcrumbs">
+                <li><a href="#">主页</a></li>
+                <li><a href="#">{}</a>
+                    
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+    <!-- Main content -->
+    <div class="wrapper">
+        	<div class="fluid">
+                <div class="widget">
+                    <div class="whead">
+                    	<h6>【{$Think.get.name}】配置影片</h6>
+                    	<a href="{:getCurrentUrl()}" class="buttonH bBlue mb10 mt5">取消</a>
+                    	<div class="clear"></div>
+                    </div>
+                    <div class="body">
+						<div class="formRow">
+						 	<div class="grid2"><label>搜索影片:</label></div>
+						 	 <div class="grid4"><input type="text" id="movie_txt" value=""/></div>
+						 	 <div class="grid1"><span id="search_movie" class="buttonH bBlue mb10 mt5">查询</span></div>
+						 	 <div class="clear"></div>
+						</div>
+						<div class="formRow">
+						<div class="grid6" style="background-color:#fff;" id="all_movie_ku">
+							图解库：{:count($allMovieList)} 部<div class="clear"></div>
+                            <volist name="allMovieList" id="all">
+                            	<span class="js-all-movie" style="float:left;margin:5px 8px;padding:3px;border:1px solid #ccc;cursor:pointer;display:none;" data-value="{$all.id}">{$all.name} ({$all.id})</span>
+                            </volist>
+                        </div>
+                        <div class="grid6" style="background-color:#fff;" id="own_movie_ku">
+                        	已选择：<span id="own_count">{:count($ownMovieList)}</span> 部<div class="clear"></div>
+                            <volist name="ownMovieList" id="own">
+                            	<span class="js-own-movie" style="float:left;margin:5px 8px;padding:3px;border:1px solid #ccc;cursor:pointer;" data-value="{$own.movie_id}">{$own.name} ({$own.movie_id})</span>
+                            </volist>
+                        </div>
+                        </div>
+                    </div>
+                    
+                    <div class="clear"></div>
+                    <div class="formRow">
+                    	<form method='post' id="topic_u_movie_form" name="form1" action="{:U('Topic/doUMovie')}"  enctype="multipart/form-data">
+                    	<input type="hidden" name="topic_id" value="{$Think.get.id|default=''}"/>
+                    	<input type="hidden" name="topic_name" value="{$Think.get.name|default=''}"/>
+                    	<input type="hidden" name="movie_ids" value="" id="topic_u_movie_mids"/>
+                    	<input type="submit" value="提 交" class="buttonM bBlack formSubmit" id="topic_u_movie_sumbit" />
+                    	</form>
+                    	<div class="clear"></div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+           	</div>
+            <div class="widget">
+            <table cellpadding="0" cellspacing="0" width="100%" class="tDefault checkAll tMedia" id="checkAll">
+                <thead>
+                    <tr>
+                    	<td width="10"></td>
+                        <td width="20">ID</td>
+                        <td width="200">名称</td>
+                        <td>影片关键字</td>
+                        <td width="130">添加时间</td>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td colspan="7">
+                        	<empty name="ownMovieList">
+                        		木油影片，您可以添加一部咩？
+                            </empty>
+                        </td>
+                    </tr>
+                </tfoot>
+                <tbody>
+                	<volist name="ownMovieList" id="vo">
+		            <tr>
+		            	<td>{$i}</td>
+		                <td>{$vo.movie_id}</td>
+		                <td>{$vo.name}</td>
+		                <td>{$vo.keyword}</td>
+		                <td>{$vo.add_time}</td>
+		            </tr>
+		            </volist>
+                </tbody>
+            </table>
+            </div>
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+<script>
+(function(){
+	function exchange($obj){
+		if ($obj.parent().attr('id') == 'own_movie_ku') {
+			$obj.appendTo($('#all_movie_ku'));
+			$obj.attr('class','js-all-movie');
+			$('#own_count').html(parseInt($('#own_count').html()) - 1);
+		} else {
+			$obj.appendTo($('#own_movie_ku'));
+			$obj.attr('class','js-own-movie');
+			$('#own_count').html(parseInt($('#own_count').html()) + 1);
+		}
+	}
+	$('#movie_txt').keydown(function (event){
+		if (event.keyCode == 13) {
+			$('#search_movie').click();
+		}
+	});
+	$('.js-own-movie').click(function(){exchange($(this));});
+	$('.js-all-movie').click(function(){exchange($(this));});
+	$('#search_movie').click(function(){
+		var movie_txt = $.trim($('#movie_txt').val());
+		$('.js-all-movie').hide();
+		var num = 0;
+		$('.js-all-movie').each(function(){
+			var tmp = $(this).html();
+			if (tmp.indexOf(movie_txt)>=0) {
+				$(this).show();
+				num++;
+				if (num>30) {alert('最多返回30部作品哟');return false;}
+			}
+		});
+	});
+	$('#topic_u_movie_sumbit').click(function(){
+		//$('#topic_u_movie_form').sumbit();
+		var value = [];
+		$('.js-own-movie').each(function(){
+			value.push($(this).attr('data-value'));
+		});
+		var xx = value.join(',');
+		$('#topic_u_movie_mids').val(xx);
+		if (xx == '') {
+			alert('请选择电影'); return false;
+		}
+		return true;
+	});
+})();
+</script>
+<include file="Public:footer" />

@@ -1,0 +1,222 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<!-- Secondary nav -->
+</div>
+<!-- Sidebar ends -->
+
+<!-- Content begins -->
+<div id="content">
+    <include file="Public:bav" />
+    <!-- Main content -->
+    <div class="wrapper">
+        	<div class="fluid">
+        		<form method='post' id="form1" name="form1" action="{:U('Movie/insert')}"  enctype="multipart/form-data">
+                    <div class="widget ">
+                        <div class="whead">
+                        <h6>添加影片</h6>
+                        <a href="{:getCurrentUrl()}" class="buttonH bBlue mb10 mt5">返回</a>
+                        <div class="clear"></div></div>
+                        <div class="formRow">
+                            <div class="grid3"><label>影片名称：</label></div>
+                            <div class="grid3"><input type="text" name="name" placeholder="电影名称"/></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>影片副标题：</label></div>
+                            <div class="grid7"><input type="text" name="sub_title" placeholder="电影副标题"/></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>影片编者按：</label></div>
+                            <div class="grid7"><textarea rows="3" cols="" name="editor_note" placeholder="编者按">编者按：</textarea></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>导演：</label></div>
+                            <div class="grid7"><input type="text" name="author" placeholder="导演"/></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>演员：</label></div>
+                            <div class="grid7"><input type="text" name="actor" placeholder="演员"/></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>影片简介：</label></div>
+                            <div class="grid7"><textarea rows="4" cols="" name="intro" placeholder="影片简介"></textarea></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>影片评分：</label></div>
+                            <div class="grid3"><input type="text" name="score" placeholder="影片评分"/></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>是否推荐：</label></div>
+                            <div class="grid9">
+                            	<label class="nopadding grid1" ><input type="radio" value="1" name="jian"/>是</label>
+                            	<label class="nopadding grid1"><input type="radio" value="0" checked="checked" name="jian"/>否</label>
+							</div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>是否热门：</label></div>
+                            <div class="grid9">
+                            	<label class="nopadding grid1" ><input type="radio" value="1" name="hot"/>是</label>
+                            	<label class="nopadding grid1"><input type="radio" value="0" checked="checked" name="hot"/>否</label>
+							</div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>影片尺寸：</label></div>
+                            <div class="grid3"><input type="text" name="total_size" placeholder="电影尺寸（Mb）" /></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>影片上映日期：</label></div>
+                            <div class="grid1">
+                            	<select name="showtime">
+		                            {:getMovieShowtimeList(0,'val')}
+	                        	</select>
+                        	</div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>影片上映地区：</label></div>
+                            <div class="grid1">
+                            	<select name="zone">
+		                            {:getMovieZoneList(0,'val')}
+	                        	</select>
+                        	</div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>影片类型：</label></div>
+                            <div class="grid9">
+		                        {:getMovieTypeCheckList(0,'|','tagsArr[]','val')}
+                        	</div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>影片被标记签字串：</label></div>
+                            <div class="grid9"><input type="text" name="tags_text" value="" placeholder="多个请用半角逗号隔开"/></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>影片关键字字串：</label></div>
+                            <div class="grid9"><input type="text" name="keyword" value="" placeholder="多个请用半角逗号隔开"/></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <!--<div class="formRow">
+                            <div class="grid3"><label>影片作者：</label></div>
+                            <div class="grid3"><input type="text" placeholder="need or No need" /></div>
+                            <div class="clear"></div>
+                        </div>
+                        -->
+                        <div class="formRow">
+                            <div class="grid3"><label>顶次数：</label></div>
+                            <div class="grid3"><input type="text" name="ding" value="0" placeholder="顶次数" disabled="disabled"/></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>踩次数：</label></div>
+                            <div class="grid3"><input type="text" name="cai" value="0" placeholder="踩次数" disabled="disabled"/></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>播放次数：</label></div>
+                            <div class="grid3"><input type="text" name="played" value="0" placeholder="播放次数" disabled="disabled"/></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>分享次数：</label></div>
+                            <div class="grid3"><input type="text" name="share" value="0" placeholder="分享次数" disabled="disabled"/></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>收藏次数：</label></div>
+                            <div class="grid3"><input type="text" name="keep" value="0" placeholder="收藏次数" disabled="disabled"/></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>官网是否在线阅读：</label></div>
+                            <div class="grid9">
+                            	<label class="nopadding grid1" ><input type="radio" value="1" name="wp_post_open"/>是</label>
+                            	<label class="nopadding grid1"><input type="radio" value="0" checked="checked" name="wp_post_open"/>否</label>
+							</div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>官网文章ID：</label></div>
+                            <div class="grid3"><input type="text" name="wp_post_id" placeholder="官网文章ID" /></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>影片是否生效：</label></div>
+                            <div class="grid9">
+                            	<label class="nopadding grid1" ><input type="radio" value="1" name="open"/>是</label>
+                            	<label class="nopadding grid1"><input type="radio" value="0" checked="checked" name="open"/>否</label>
+							</div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>影片使用图片服务器编号：</label></div>
+                            <div class="grid9">
+                            	<label class="nopadding grid1" ><input type="radio" value="0" name="imgserver_use"/>第三方</label>
+                            	<label class="nopadding" style="width:125px;"><input type="radio" value="1" checked="checked" name="imgserver_use"/> 自身服务器1(230)</label>
+                            	<label class="nopadding grid3" ><input type="radio" value="2" name="imgserver_use"/>自身服务器2(248)</label>
+							</div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                        	<div class="grid3">限制影片显示</div>
+                        	<div class="grid9">
+                        		<label style="width:120px;"><input type="checkbox" value="1" name="limit_listshow" class="check" />限制-列表</label>
+	                            <label style="width:120px;"><input type="checkbox" value="1" name="limit_search" class="check" />限制-搜索</label>
+	                            <label style="width:120px;"><input type="checkbox" value="1" name="limit_tag" class="check" />限制-Tag</label>
+	                            <label style="width:120px;"><input type="checkbox" value="1" name="limit_qrcode" class="check" />限制-二维码</label>
+	                            <label style="width:120px;"><input type="checkbox" value="1" name="limit_same" class="check" />限制-推荐</label>
+	                            <label style="width:120px;"><input type="checkbox" value="1" name="limit_grapher" class="check" />限制-用户作品</label>
+	                            <label style="width:120px;"><input type="checkbox" value="1" name="limit_topic" class="check" />限制-专题</label>
+                        	</div>
+                        	<div class="clear"></div>
+                        </div>
+                        <div class="formRow"><input type="submit" value="提 交" class="buttonM bBlack formSubmit" /><div class="clear"></div></div>
+                        <div class="clear"></div>
+                    </div>
+                    </form>
+            </div>
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+
+<include file="Public:footer" />

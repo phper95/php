@@ -1,0 +1,77 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+</div>
+<!-- Sidebar ends -->
+    
+<!-- Content begins -->
+<div id="content">
+    <include file="Public:bav" />
+    <!-- Main content -->
+    <div class="wrapper">
+    	<div class="fluid">
+    	<div class="widget grid3">
+    		<div class="whead"><h6>识别弹幕肥皂</h6><div class="clear"></div></div>
+	    	<div class="body">
+	    		<a class="blueBack" href="{:U('Soap/execPoptxt')}">点我自动识别</a>
+	    	</div>
+    	</div>
+    	<div class="widget grid3">
+    		<div class="whead"><h6>肥皂榜</h6><div class="clear"></div></div>
+	    	<div class="body">
+	    		<a class="greenBack" href="{:U('Soap/topten')}">点我生成肥皂榜</a>
+	    		&nbsp;&nbsp;
+	    		<a target="_blank" class="blueBack" href="http://ser3.graphmovie.com/appweb/soaptop.php">点我查看肥皂榜</a>
+	    	</div>
+    	</div>
+    	</div>
+    	
+    	<div class="widget">
+    		<div class="whead"><h6>肥皂捡起历史记录</h6><div class="clear"></div></div>
+	    	<table cellpadding="0" cellspacing="0" width="100%" class="tDefault checkAll tMedia" id="checkAll">
+                <thead>
+                    <tr>
+		                <td width="50">编号</td>
+		                <td >用户</td>
+		                <td width="150">解说ID</td>
+		                <td width="150">捡起时间</td>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td colspan="4">
+                        <empty name="list">
+                        	额。。。木有咧……
+                        <else/>
+                            <div class="tPages">
+                                <ul class="pages">
+                                	{$page}
+                                </ul>
+                            </div>
+                        </empty>
+                        </td>
+                        
+                    </tr>
+                </tfoot>
+                <tbody>
+                    <volist name="list" id="vo">
+		            <tr>
+		                <td>{$vo.id}</td>
+		                <td>{$vo.user_id}</td>
+		                <td>
+		                	{$vo.vol_id}
+		                </td>
+		                <td>{$vo.add_time}</td>
+		            </tr>
+		            </volist>
+                </tbody>
+            </table>
+    	</div>
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+
+<include file="Public:footer" />

@@ -1,0 +1,99 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+</div>
+<!-- Sidebar ends -->
+
+<!-- Content begins -->
+<div id="content">
+
+  <include file="Public:bav" />
+  
+    <!-- Main content -->
+    <div class="wrapper">
+        <!-- Media table sample -->
+        <div class="widget check">
+            <div class="whead">
+            	<h6>用户列表</h6>
+                <a href="{:U('Index/index')}" class="buttonH bBlue mb10 mt5">返回</a>
+				<div class="clear"></div>
+			</div>
+            <table cellpadding="0" cellspacing="0" width="100%" class="tDefault checkAll tMedia" id="checkAll">
+                <thead>
+                    <tr>
+		                <td width="50">编号</td>
+		                <td width="50">秘号</td>
+		                <td width="150">昵称</td>
+		                <td width="100"><a href="{:U('Member/index',array('email'=>array('neq','')))}">伊妹儿</a></td>
+		                <td width="80">性别/年龄</td>
+		                <td width="140">注册时间</td>
+		                <td width="140">最后登录时间</td>
+		                <td width="80">IMEI</td>
+		                <td >机型、渠道、应用平台</td>
+		                <td width="50">应用版本</td>
+		                <td width="50"><a href="{:U('Member/index', array('stat_work'=>array('GT',0)))}">作品数目</a></td>
+		                <td width="80">操作</td>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td colspan="12">
+                        <empty name="list">
+                        	额。。。木有咧……
+                        <else/>
+                            <div class="tPages">
+                                <ul class="pages">
+                                	{$page}
+                                </ul>
+                            </div>
+                        </empty>
+                        </td>
+                        
+                    </tr>
+                </tfoot>
+                <tbody>
+                    <volist name="list" id="vo">
+		            <tr>
+		                <td>{$vo.id}</td>
+		                <td>{:userIdKeyEncode($vo['id'])}</td>
+		                <td>
+		                	<a href="{:U('Member/Info', array('id'=>$vo['id']))}">{$vo.name}</a>
+		                </td>
+		                <td>{$vo.email}</td>
+		                <td>{$vo.sex|getSexTxt}-{$vo.age}</td>
+		                <td>{$vo.add_time}</td>
+		                <td>{$vo.update_time}</td>
+		                <td>{$vo.imei}</td>
+		                <td>{$vo.phone_type}
+		                	 【 <a href="{:U('Member/index', array('pub_channel'=>$vo['pub_channel']))}">{$vo.pub_channel}</a> 】 
+		                	 {$vo.pub_platform}
+		                </td>
+		                <td>{$vo.ver}</td>
+		                <td>{$vo.stat_work}</td>
+		                <td>
+		                	<!-- Simple buttons with caret -->
+	                        <div class="btn-group" style="float: left;">
+	                            <a href="#" class="buttonM bDefault opt" data-toggle="dropdown">点我 <span class="caret"></span></a>
+	                            <ul class="dropdown-menu pull-right">
+	                                <li><a href="{:U('Member/addNews', array('id'=>$vo['id'],'name'=>$vo['name']))}"><span class="icos-pencil"></span>发送动态</a></li>
+	                                <li><a href="{:U('Member/news', array('id'=>$vo['id'],'name'=>$vo['name'],'type'=>'acc'))}"><span class="icos-view"></span>查看动态</a></li>
+	                                <li><a href="{:U('Member/news', array('id'=>$vo['id'],'name'=>$vo['name'],'type'=>'to'))}"><span class="icos-view"></span>查看发布内容</a></li>
+	                                <li><a href="{:U('Pit/addPitUser', array('id'=>$vo['id'],'name'=>$vo['name'],'type'=>'to'))}"><span class="icos-signal"></span>添加为占坑用户</a></li>
+	                                <li><a href="{:U('Member/putBlackRoom', array('id'=>$vo['id'],'name'=>$vo['name'],'type'=>'to'))}"><span class="icos-pencil"></span>关小黑屋</a></li>
+	                                <li><a href="{:U('Member/outBlackRoom', array('id'=>$vo['id'],'name'=>$vo['name'],'type'=>'to'))}"><span class="icos-pencil"></span>拉出小黑屋</a></li>
+	                            </ul>
+	                        </div>
+		                </td>
+		            </tr>
+		            </volist>
+                </tbody>
+            </table>
+        </div>
+     
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+<include file="Public:footer" />

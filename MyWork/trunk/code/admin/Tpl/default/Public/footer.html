@@ -1,0 +1,37 @@
+<script>
+setTimeout(function(){
+	var content = $('#content');
+	var margin_left = parseInt(content.css("margin-left"));
+	var ctr = '<span style="display:none;cursor:pointer;position:absolute;top:50px;left:0px;width:8px;height:20px;border:1px solid #CDCDCD;border-left:0px;border-top-right-radius:10px;border-bottom-right-radius:10px;font-weight:900;font-size:20px;line-height:22px;text-align:center;"></span>';
+	if (margin_left > 200){
+		var $ctr = $(ctr);
+		$ctr.mouseenter(function(){
+			$(this).stop();
+			$(this).animate({width:'22px'},300);
+			$(this).html('+');
+		});
+		$ctr.mouseleave(function(){
+			$(this).stop();
+			$(this).animate({width:'8px'},1000);
+			$(this).html('');
+		});
+		$ctr.click(function(){
+			var margin_left = parseInt(content.css("margin-left"));
+			if (margin_left > 200) {
+				$('.secNav').fadeOut(100);
+				$('#sidebar').width('100px');
+				content.css("margin-left",'100px');
+			}else {
+				content.css("margin-left",'327px');
+				$('#sidebar').width('326px');
+				$('.secNav').fadeIn();
+			}
+		});
+		$ctr.appendTo(content);
+		$ctr.show(400);
+	}
+},900);
+</script>
+<div style="display:none"></div>
+</body>
+</html>

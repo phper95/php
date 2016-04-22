@@ -1,0 +1,97 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<!-- Secondary nav -->
+</div>
+<!-- Sidebar ends -->
+
+<!-- Content begins -->
+<div id="content">
+    <include file="Public:bav" />
+    <!-- Main content -->
+    <div class="wrapper">
+    <a href="{:getCurrentUrl()}" class="buttonH bBlue mb10 mt5">返回</a>
+    <div class="fluid">
+    	<form method="post" action="{:U('News/doUploadImg')}" enctype="multipart/form-data" id="upload_form">
+    	<div class="widget grid4">
+    		<div class="whead"><h6>{$vo.name} -- 大图</h6><div class="clear"></div></div>
+    		<div class="body" align="center">
+    			<div class="formRow">
+    				<img src="{$vo.bpic|default=''}" id="news_upload_bpic_img" width="320">
+    			</div>
+    			<div class="formRow nopadding">
+    				{$vo.bpic}<br />
+    				<input type="file" name="bpic" id="news_upload_bpic" />
+    			</div>
+    		</div>
+    	</div>
+    	<div class="widget grid4">
+    		<div class="whead"><h6>{$vo.name} -- 小图</h6><div class="clear"></div></div>
+    		<div class="body" align="center">
+    			<div class="formRow">
+    				<img src="{$vo.spic|default=''}" id="news_upload_spic_img" width="320">
+    			</div>
+    			<div class="formRow nopadding">
+    				{$vo.spic}<br />
+    				<input type="file" name="spic" id="news_upload_spic" />
+    			</div>
+    		</div>
+    	</div>
+    	
+    	<!-- <div class="widget grid4">
+    		<div class="whead"><h6>{$vo.name} -- 虚化图</h6><div class="clear"></div></div>
+    		<div class="body" align="center">
+    			<div class="formRow">
+    				<img src="{$vo.blur_pic|default=''}" id="news_upload_blur_img" width="320" height="40">
+    			</div>
+    			<div class="formRow nopadding">
+    				{$vo.spic}<br />
+    				<input type="file" name="blur_pic" id="news_upload_blur" />
+    			</div>
+    		</div>
+    	</div> -->
+    	
+    	<div class="clear"></div><br />
+    	<div>
+    		<input type="hidden" value="{$vo.id}" name="id"/>
+    		<input type="submit" value="提 交" class="buttonS bLightBlue">
+    	</div>
+    	</form>
+    </div>
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+<script>
+	/**
+	 * 使用HTML5 File API, 來即時預覽image
+	 */
+$("#news_upload_bpic").change(function(){
+	var objUrl = booGetObjectURL(this.files[0]) ;
+	if (objUrl) {
+		if (this.files[0]['size'] > 102400) {
+			if (!confirm('你选择的图片大于100Kb，是否确定上传.')) {
+				return false;
+			}
+		}
+		$("#news_upload_bpic_img").attr("src", objUrl) ;
+	}
+}) ;
+	
+$("#news_upload_spic").change(function(){
+	var objUrl = booGetObjectURL(this.files[0]) ;
+	if (objUrl) {
+		$("#news_upload_spic_img").attr("src", objUrl) ;
+	}
+}) ;
+
+$("#news_upload_blur").change(function(){
+	var objUrl = booGetObjectURL(this.files[0]) ;
+	if (objUrl) {
+		$("#news_upload_blur_img").attr("src", objUrl) ;
+	}
+}) ;
+</script>
+<include file="Public:footer" />

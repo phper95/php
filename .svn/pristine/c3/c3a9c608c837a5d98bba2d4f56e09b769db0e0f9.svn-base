@@ -1,0 +1,36 @@
+<!DOCTYPE>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<title>GraphMovie管理系统</title>
+<link href="__CSS__/styles.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+			<table cellpadding="0" cellspacing="0" width="100%" class="tDefault checkAll tMedia" id="checkAll">
+ 				<thead>
+                    <tr>
+                        <td width="100">电影</td>
+                        <volist name="table_time" id="t">
+                        <td>
+                        	<if condition="$i eq 3">
+                        	上线当天 <br /> {$online_time}
+                        	<else />
+                        	{$i-3} 天<br />{$t}
+                        	</if>
+                        </td>
+                        </volist>
+                    </tr>
+                </thead>
+                <tbody>
+                	<volist name="rst" id="vo">
+		            <tr>
+		            	<td>{$movie[$key]} : ({$key})</td>
+		            	<volist name="table_time" id="t">
+		            		<td>{$vo[$t]['played']|default='0'}</td>
+		            	</volist>
+		            </tr>
+		           	</volist>
+		        </tbody>
+</body>
+</html>

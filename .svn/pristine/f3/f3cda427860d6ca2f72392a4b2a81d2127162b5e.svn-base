@@ -1,0 +1,193 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<include file="CreateTeam:opt" />
+</div>
+<!-- Sidebar ends -->
+    <script language="javascript" type="text/javascript" src="__JS__/My97DatePicker/WdatePicker.js"></script>
+    <script src="__JS__/dialog/artDialog.js?skin=default"></script>
+    
+<!-- Content begins -->
+<div id="content">
+    <div class="contentTop">
+        <span class="pageTitle">创作团管理</span>
+        <div class="clear"></div>
+    </div>
+    <include file="Public:bav" />
+    <!-- Main content -->
+    <div class="wrapper">
+        <!-- Media table sample -->
+        <div class="fluid">
+        <div class="widget">
+        					<form method="post" action="{:U('CreateTeam/pingfenList')}">
+			               	<div class="formRow">
+	                            <div class="grid3" style="width:90px;"><label>评分月份：<span class="req">*</span></label></div>
+	                            <div class="grid2"><input type="text" name="p_month" value="{$p_month}" placeholder="评分月份" onClick="WdatePicker({dateFmt:'yyyy-MM'})" readonly="readonly" /></div>
+	                            <div class="grid3" style="width:90px;"><input type="submit" value="查询" class="buttonM bBlue formSubmit" /></div>
+	                            <div class="clear"></div>
+	                        </div>
+	                        </form>
+        </div>
+        </div>
+        <div class="widget check">
+            <div class="whead">
+            <h6>编辑部评分排名</h6>
+				<div class="clear"></div></div>
+            <table cellpadding="0" cellspacing="0" width="100%" class="tDefault checkAll tMedia" id="checkAll">
+                <thead>
+                    <tr>
+		                <td width="50">名次</td>
+		                <td width="50">用户ID</td>
+		                <td>用户名称</td>
+		                <td width="60">实际评分</td>
+		                <td width="80">人为+(-)分</td>
+		                <td width="90">总分</td>
+		                <td width="180">评分时间</td>
+		                <td width="100">明细</td>
+		                <td width="100">操作</td>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td colspan="11">
+                        <empty name="list">
+                        	额。。。木有咧……
+                        </empty>
+                        </td>
+                        
+                    </tr>
+                </tfoot>
+                <tbody>
+                    <volist name="list" id="vo">
+		            <tr>
+		                <td>{$i}</td>
+		                <td><a href="{:U('Member/index',array('id'=>$vo['user_id'],'backurl'=>urlencode(__SELF__)))}" title="点我管理该用户">{$vo.user_id}</a></td>
+		                <td>{$vo.name}</td>
+		                <td>{$vo.fen}</td>
+		                <td><span class="tipS" original-title="{$vo.remark}">{$vo.plus_fen}</span></td>
+		                <td>{$vo['plus_fen'] + $vo['fen']}</td>
+		                <td>{$vo.add_time}</td>
+		                <td><a href="javascript:void(0);" class="js-look-info" js-data-id="{$vo.user_id}" js-data-month="{$vo.p_month}" js-data-name="{$vo.name}">查看明细</a></td>
+		                <td>
+		                	<div class="btn-group" style="float: left;">
+	                            <a href="#" class="buttonM bDefault opt" data-toggle="dropdown">点我 <span class="caret"></span></a>
+	                            <ul class="dropdown-menu pull-right">
+	                                <li><a href="{:U('CreateTeam/deletePingfen', array('user_id'=>$vo['user_id'],'p_type'=>'1','p_month'=>$vo['p_month']))}" onclick="return confirm('确定删除 {$vo.name} 在 {$p_month} 的【电影】评分么，删除后不能恢复哟！');"><span class="icos-trash"></span>删除【电影】评分</a></li>
+	                                <li><a href="{:U('CreateTeam/deletePingfen', array('user_id'=>$vo['user_id'],'p_type'=>'2','p_month'=>$vo['p_month']))}" onclick="return confirm('确定删除 {$vo.name} 在 {$p_month} 的【剧集】评分么，删除后不能恢复哟！');"><span class="icos-trash"></span>删除【剧集】评分</a></li>
+	                                <li><a href="{:U('CreateTeam/deletePingfen', array('user_id'=>$vo['user_id'],'p_type'=>'3','p_month'=>$vo['p_month']))}" onclick="return confirm('确定删除 {$vo.name} 在 {$p_month} 的【资讯】评分么，删除后不能恢复哟！');"><span class="icos-trash"></span>删除【资讯】评分</a></li>
+	                                <li><a href="{:U('CreateTeam/deletePingfen', array('user_id'=>$vo['user_id'],'p_type'=>'4','p_month'=>$vo['p_month']))}" onclick="return confirm('确定删除 {$vo.name} 在 {$p_month} 的【微图解】评分么，删除后不能恢复哟！');"><span class="icos-trash"></span>删除【微图解】评分</a></li>
+	                            </ul>
+	                        </div>
+		                </td>
+		            </tr>
+		            </volist>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="widget check">
+            <div class="whead">
+            <h6>不参与排名的人员</h6>
+				<div class="clear"></div></div>
+            <table cellpadding="0" cellspacing="0" width="100%" class="tDefault checkAll tMedia" id="checkAll">
+                <thead>
+                    <tr>
+		                <td width="50">编号</td>
+		                <td width="50">用户ID</td>
+		                <td>用户名称</td>
+		                <td width="60">实际评分</td>
+		                <td width="80">人为+(-)分</td>
+		                <td width="90">总分</td>
+		                <td width="180">评分时间</td>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td colspan="11">
+                        <empty name="unlist">
+                        	额。。。木有咧……
+                        </empty>
+                        </td>
+                        
+                    </tr>
+                </tfoot>
+                <tbody>
+                    <volist name="unlist" id="vo">
+		            <tr>
+		                <td>{$vo.id}</td>
+		                <td><a href="{:U('Member/index',array('id'=>$vo['user_id'],'backurl'=>urlencode(__SELF__)))}" title="点我管理该用户">{$vo.user_id}</a></td>
+		                <td>{$vo.name}</td>
+		                <td>{$vo.fen}</td>
+		                <td>{$vo.plus_fen}</td>
+		                <td>{$vo['plus_fen'] + $vo['fen']}</td>
+		                <td>{$vo.add_time}</td>
+		            </tr>
+		            </volist>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+<script>
+(function(){
+	$('.js-look-info').click(function(){
+		var user_id = $(this).attr('js-data-id');
+		var month = $(this).attr('js-data-month');
+		var name = $(this).attr('js-data-name');
+		var dialog_id = '#dialog-user-'+user_id;
+		if (typeof art.dialog.list[dialog_id] !== 'undefined'){
+			art.dialog.list[dialog_id].show();
+		} else {
+			art.dialog({
+				id : dialog_id,
+				title:name+' 评分详情',
+				padding: 0,
+				close: function () {
+			        this.hide();
+			        return false;
+			    }
+			});
+			$.ajax({
+				url : '{:U("CreateTeam/pingfenInfo")}',
+				data : {user_id:user_id, p_month:month},
+				success : function(data) {
+					if(typeof data === 'object') {
+						if (data.rst == '1') {
+							var rst = data.data;
+							var html = ' <div class="widget check nopadding nomargin" style="width:650px;"><table cellpadding="0" cellspacing="0" width="100%" class="tDefault checkAll tMedia" id="checkAll">';
+							html += '<thead><tr><td width="220">名称</td><td width="50">类型</td><td width="50">交稿类型</td><td width="50">得分</td><td width="50">加分</td><td>评分时间</td></tr></thead>';
+							html += '<tbody>';
+							for (var a in rst) {
+								html += '<tr>'
+									 +  '<td>' + rst[a].name + '</td>'
+									 +  '<td>' + rst[a].type_str + '</td>'
+									 +  '<td>' + (rst[a].j_type == 0?'固定':'额外') + '</td>'
+									 +  '<td>' + rst[a].fen + '</td>'
+									 +  '<td>' + rst[a].plus_fen + '</td>'
+									 +  '<td>' + rst[a].add_time + '</td>'
+									 +  '</tr>';
+							}
+							html += '</tbody></table></div>';
+							art.dialog.list[dialog_id].content(html);
+						} else {
+							alert(data.msg);
+						}
+					} else {
+						alert(data);
+					}
+				},
+				error : function(ex) {
+					alert('ajax网络错误');
+				}
+			});
+		}
+	});
+})();
+</script>
+
+<include file="Public:footer" />

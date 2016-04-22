@@ -1,0 +1,75 @@
+<script language="javascript" type="text/javascript" src="__JS__/My97DatePicker/WdatePicker.js"></script>
+<!-- Secondary nav -->
+    <div class="secNav">
+        <div class="secWrapper">
+        
+        <!-- Tabs container -->
+            <form method="get" action="{:U('Member/index')}" id="member_adv_search_form">
+		        <input type="hidden" value="{$Think.MODULE_NAME}" name="m"/>
+		        <input type="hidden" value="{$Think.ACTION_NAME}" name="a"/>
+            <div id="tab-container" class="tab-container">
+                <ul class="iconsLine ic1 etabs">
+                    <li><a href="#alt2" title="">用户搜索:</a></li>
+                </ul>
+                
+                <div class="divider"><span></span></div>
+                
+                <div id="alt2">
+                
+                	<!-- Sidebar forms -->
+                    <div class="sideWidget">
+                    				<div class="formRow">
+			                            <label>ID:</label>
+			                            <input type="text" name="id" placeholder="用户ID" value="{$Think.get.id}"/>
+									</div>
+									<div class="formRow">
+			                            <label>秘号:</label>
+			                            <input type="text" name="mi_id" placeholder="秘号" value="{$Think.get.mi_id}"/>
+									</div>
+                        			<div class="formRow">
+			                            <label>昵称:</label>
+			                            <input type="text" id="nick_name" name="name" placeholder="昵称" value="{$Think.get.name}"/>
+									</div>
+			                        <div class="formRow">
+			                            <label>时间段查询:</label>
+			                            <input type="text" name="s_time" id="member_search_s_time" placeholder="开始时间"  onClick="WdatePicker()" value="{$Think.get.s_time}"/>
+			                            <input id="d12" name="e_time" type="text" onClick="WdatePicker()" placeholder="结束时间" value="{$Think.get.e_time}"/>
+									</div>
+									<div class="formRow">
+			                            <label>email:</label>
+			                            <if condition="is_array($_GET['email'])">
+			                            	<input name="email" type="text" placeholder="查询的email" value=""/>
+			                            <else/>
+			                            	<input name="email" type="text" placeholder="查询的email" value="{$Think.get.email}"/>
+			                            </if>
+									</div>
+									<div class="formRow">
+			                            <label>版本:</label>
+			                            <input type="text" name="ver" placeholder="版本" value="{$Think.get.ver}"/>
+									</div>
+			                        <div class="formRow">
+			                            <input type="submit" id="search_members" class="buttonS bLightBlue" value="Just 搜索" />
+			                        </div>
+                    </div>
+                </div>
+            </div>
+            </form>
+            
+            <div class="divider"><span></span></div>
+       </div> 
+       <div class="clear"></div>
+   </div>
+   <script>
+   (function(){
+	   var nick_name_flag = false;
+	   $('#search_members').click(function(){
+		   if (nick_name_flag) {alert('正在提交，请稍后');return false;}
+		   var nickname = $.trim($('#nick_name').val());
+		   if (nickname != '') {
+			   if(confirm('昵称查询会很卡，推荐使用其他方式查询，是否继续使用昵称查询？')){
+				   nick_name_flag = true;
+			   } else {return false;}
+		   }
+	   });
+   })();
+   </script>

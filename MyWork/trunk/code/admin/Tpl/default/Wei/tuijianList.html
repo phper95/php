@@ -1,0 +1,80 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<!-- Secondary nav -->
+</div>
+<!-- Sidebar ends -->
+
+<!-- Content begins -->
+<div id="content">
+
+  <include file="Public:bav" />
+  
+    <!-- Main content -->
+    <div class="wrapper">
+        <!-- Media table sample -->
+        <div class="widget check">
+            <div class="whead">
+            <h6>片场推荐列表</h6>
+				<div class="clear"></div></div>
+            <table cellpadding="0" cellspacing="0" width="100%" class="tDefault checkAll tMedia" id="checkAll">
+                <thead>
+                    <tr>
+                        <td width="40">ID</td>
+                        <td width="80">推荐内容</td>
+                        <td ><div>推荐内容</div></td>
+                        <td width="140"><div>上线时间</div></td>
+                        <td width="140"><div>推荐时间</div></td>
+                        <td width="200">操作</td>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td colspan="6">
+                            <div class="tPages">
+                                <ul class="pages">
+                                	{$page}
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    <volist name="list" id="vo">
+		            <tr>
+		                <td>{$vo.id}</td>
+		                <td>
+		                	<if condition="strpos($vo['pic'], 'img7n1.graphmovie.com') === false">
+		                		<img src="{$vo.pic}" height="70px"/>
+		                	<else />
+		                		<img src="{$vo.pic}-mw800.jpg" height="70px"/>
+		                	</if>
+		                </td>
+		                <td>
+		                	<div style="text-align:left;position:relative;">
+		                		{$vo.name}
+		                		<eq name="vo.online_type" value="4">
+			                		<span class="redBack" style="position:absolute;top:0;right:0;">画报</span>
+			                	</eq>
+		                	</div>
+		                </td>
+		                <td>{$vo.online_time}</td>
+		                <td>{$vo.add_time}</td>
+		                <td>
+		                	<a href="{:U('Wei/cancelTuijian',array('id'=>$vo['id']))}" onclick="return confirm('取消后不能恢复，是否确定？');">取消推荐</a>
+		                </td>
+		                
+		            </tr>
+		            </volist>
+                </tbody>
+            </table>
+        </div>
+     
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+
+<include file="Public:footer" />

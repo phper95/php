@@ -1,0 +1,44 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<!-- Secondary nav -->
+</div>
+<!-- Sidebar ends -->
+
+<!-- Content begins -->
+<div id="content">
+
+  <include file="Public:bav" />
+  
+    <!-- Main content -->
+    <div class="wrapper">
+    	<div class="widget">
+    		<div class="whead"><h6>关键字【{$keyword}】求片儿用户</h6><a href="{:getCurrentUrl()}" class="buttonH bBlue mb10 mt5">返回</a><div class="clear"></div></div>
+    		<div class="body">
+    		
+    		<dl>
+    		<volist name="list" id="vo">
+    		<dt style="float:left; padding:5px; border:1px solid #ccc; width:220px; margin:3px;border-radius:5px;">
+    		<img style="float:left;border:0px solid #ccc; margin-right:8px;" src="{$nameArr[$vo['user_id']]['avatar']}" width="80px" height="80px"/>
+    		<span style="float:left; width:130px;" align="left">
+    			<strong>{$nameArr[$vo['user_id']]['name']}</strong><br />
+		     	{$vo.add_time}
+		    </span>
+    		</dt>
+    		</volist>
+    		</dl>
+    		</div>
+    		<div class="clear"></div>
+    		<div class="tPages">
+    		{$page}
+    		</div>
+    		<div class="clear"></div>
+    	</div>
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+
+<include file="Public:footer" />

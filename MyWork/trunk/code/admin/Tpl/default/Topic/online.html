@@ -1,0 +1,121 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<!-- Secondary nav -->
+</div>
+<!-- Sidebar ends -->
+
+<!-- Content begins -->
+<div id="content">
+    
+    <!-- Breadcrumbs line -->
+    <div class="breadLine">
+        <div class="bc">
+            <ul id="breadcrumbs" class="breadcrumbs">
+                <li><a href="#">主页</a></li>
+                <li><a href="#">{}</a>
+                    
+                </li>
+                
+            </ul>
+        </div>
+        
+        
+    </div>
+    <!-- Main content -->
+    <div class="wrapper">
+        	<div class="fluid">
+        		
+                    <div class="widget grid6">
+                        <div class="whead">
+                        	<h6>【{$Think.get.mname}】已上线平台- 渠道</h6>
+                        	<a href="{:getCurrentUrl()}" class="buttonH bBlue mb10 mt5">取消</a>
+                        	<div class="clear"></div>
+                        </div>
+                        <form method='post' name="offline_form" action="{:U('Topic/doOffline')}"  enctype="multipart/form-data">
+                        
+                        <empty name="onlineList"><div class="formRow">纳尼？还木油上线！！</div></empty>
+                        <div id="topic_underline_ckb">
+                        <foreach name="onlineList" item="ol" key="olk">
+                        	<div class="formRow">
+                        		<div class="grid12">
+                        		<foreach name="ol" item="ch">
+                        			<label style="width:150px;"><input class="checkx" name="offline[]" type="checkBox" value="{$olk},{$ch.channel}"/> {$olk} - {$ch.channel} <br /><span style="color:#aaa;">({$ch.online_time})</span></label>
+                        		</foreach>
+                        		</div>
+                        		<div class="clear"></div>
+                        	</div> 
+						</foreach>
+						</div>
+						
+                        <div class="formRow">
+                        	<label><input type="checkbox" id="topic_underline_ckb_all" class="check" >全选/取消</label>
+                        	<input type="hidden" name="id" value="{$Think.get.id}">
+                        	<input type="submit" value="下 线" class="buttonM bBlack formSubmit" /><div class="clear"></div>
+                        </div>
+                        <div class="clear"></div>
+                        </form>
+                    
+                    </div>
+                    <div class="widget grid6">
+                        <div class="whead">
+                        	<h6>【{$Think.get.mname}】未上线平台- 渠道</h6>
+                        	<a href="{:getCurrentUrl()}" class="buttonH bBlue mb10 mt5">取消</a>
+                        	<div class="clear"></div>
+                        </div>
+                        <form method='post' name="online_form" action="{:U('Topic/doOnline')}"  enctype="multipart/form-data">
+                        
+                        <empty name="underlineList"><div class="formRow">纳尼？木油咧！！</div></empty>
+                        <div id="topic_online_ckb">
+                        <foreach name="underlineList" item="ol" key="olk">
+                        	<div class="formRow">
+                        		<div class="grid12">
+                        		<foreach name="ol" item="ch">
+                        			<div style="width:200px;float:left;line-height:28px;">
+                        			<div class="grid2" ><input type="text" size="1" name="{$olk},{$ch}" class="show_index"/></div>
+                        			<label class="grid9"><input class="checkx" name="online[]" type="checkBox" value="{$olk},{$ch}"/> {$olk} - {$ch}</label>
+                        			</div>
+                        		</foreach>
+                        		</div>
+                        		<div class="clear"></div>
+                        	</div> 
+						</foreach>
+						</div>
+						
+                        <div class="formRow">
+                        	<span class="grid1" style="width:50px;padding-right:10px;">
+                        		<input type="text" id="topic_online_all_index">
+                        		<a href="javascript:void(0);" style="float:left;" title="点我可以填满你的心" onclick="$('#topic_online_ckb .show_index').val($('#topic_online_all_index').val())">填满</a>
+                        	</span>
+                        	<label><input type="checkbox" id="topic_online_ckb_all" class="check" >全选/取消</label>
+                        	<input type="hidden" name="id" value="{$Think.get.id}">
+                        	<input type="submit" value="上 线" class="buttonM bGreen formSubmit" /><div class="clear"></div>
+                        </div>
+                        <div class="clear"></div>
+                        </form>
+                    </div>
+            </div>
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+<script>
+$('#topic_underline_ckb_all').click(function(){
+	if ( $(this).attr('checked') ) {
+		$('#topic_underline_ckb .checkx').attr("checked","checked");
+	} else {
+		$('#topic_underline_ckb .checkx').attr("checked",false);
+	}
+});
+
+$('#topic_online_ckb_all').click(function(){
+	if ( $(this).attr('checked') ) {
+		$('#topic_online_ckb .checkx').attr("checked","checked");
+	} else {
+		$('#topic_online_ckb .checkx').attr("checked",false);
+	}
+});
+</script>
+<include file="Public:footer" />

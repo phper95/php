@@ -1,0 +1,53 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<!-- Secondary nav -->
+</div>
+<!-- Sidebar ends -->
+
+<!-- Content begins -->
+<div id="content">
+    <include file="Public:bav" />
+    <!-- Main content -->
+    <div class="wrapper">
+    <a href="{:getCurrentUrl()}" class="buttonH bBlue mb10 mt5">返回</a>
+    <div class="fluid">
+    	<form method="post" action="{:U('Active/doUploadImg')}" enctype="multipart/form-data" id="upload_form">
+    	<div class="widget">
+    		<div class="whead"><h6>{$vo.name} -- 图片</h6><div class="clear"></div></div>
+    		<div class="body" align="center">
+    			<div class="formRow">
+    				<img src="{$vo.pic|default=''}" id="adv2_upload_pic_img" width="320">
+    			</div>
+    			<div class="formRow nopadding">
+    				{$vo.pic}<br />
+    				<input type="file" name="pic" id="adv2_upload_pic" />
+    			</div>
+    		</div>
+    	</div>
+    	
+    	<div class="clear"></div><br />
+    	<div>
+    		<input type="hidden" value="{$vo.id}" name="id"/>
+    		<input type="submit" value="提 交" class="buttonS bLightBlue">
+    	</div>
+    	</form>
+    </div>
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+<script>
+	/**
+	 * 使用HTML5 File API, 來即時預覽image
+	 */
+$("#adv2_upload_pic").change(function(){
+	var objUrl = booGetObjectURL(this.files[0]) ;
+	if (objUrl) {
+		$("#adv2_upload_pic_img").attr("src", objUrl) ;
+	}
+}) ;
+</script>
+<include file="Public:footer" />

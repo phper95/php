@@ -1,0 +1,131 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<!-- Secondary nav -->
+</div>
+<!-- Sidebar ends -->
+
+<!-- Content begins -->
+<div id="content">
+
+    <include file="Public:bav" />
+    
+    <!-- Main content -->
+    <div class="wrapper">
+        	<div class="fluid">
+                    <div class="widget ">
+                    	<a href="{:getCurrentUrl()}" class="buttonH bBlue mb10 mt5">返回</a>
+                        <div class="invoice">
+			                <div class="inHead">
+			                    <span class="inLogo"><h4>{$vo.name}</h5></span>
+			                    <div class="inInfo">
+			                        <span class="invoiceNum">{$vo.sex|getSexTxt}[{$vo.age}]</span><br />
+			                        <span>{$vo.update_time}</span>
+			                    </div>
+			                    <div class="clear"></div>
+			                </div>
+			                
+			                <div class="inContainer">
+			                    <div class="inFrom">
+			                        <h5><img src="{$vo.avatar}" width="45px" alt="logo" /></h5>
+			                        <span>介绍：{$vo.intro|default="……"}</span>
+			                        <span>Email：{$vo.email|default="……"}</span>
+			                        <span>电话：{$vo.phone_number|default="……"}</span>
+			                        <span>添加时间：{$vo.add_time|default="……"}</span>
+			                        <span>问题1：{$vo.secure_question_1|default="……"}</span>
+			                        <span>问题2：{$vo.secure_question_2|default="……"}</span>
+			                        <span>问题3：{$vo.secure_question_3|default="……"}</span>
+			                    </div>
+			                    <div class="inFrom">
+			                        <h5>&nbsp;</h5>
+			                        <span>IMEI：{$vo.imei|default="……"}</span>
+			                        <span>机型：{$vo.phone_type|default="……"}</span>
+			                        <span>渠道：{$vo.pub_channel|default="……"}</span>
+			                        <span>平台：{$vo.pub_platform|default="……"}</span>
+			                        <span>版本：{$vo.ver|default="……"}</span>
+			                        <span>IP: <a target="_blank" href="http://tool.chinaz.com/IP/?IP={$vo.ip}">{$vo.ip}</a></span>
+			                    </div>
+			                    <div class="clear"></div>
+			                </div>
+			                
+			                <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tLight">
+			                    <thead>
+			                        <tr>
+			                            <td width="33%">QQ</td>
+			                            <td width="33%">Weibo</td>
+			                            <td width="33%">Baidu</td>
+			                        </tr>
+			                    </thead>
+			                    <tbody>
+			                        <tr>
+			                            <td>ID： {$vo.sns_qq_id}</td>
+			                            <td>ID： {$vo.sns_sinawb_id}</td>
+			                            <td>云推送应用ID：{$vo.sns_bdyts_appid}</td>
+			                        </tr>
+			                        <tr>
+			                            <td>头像： <img alt="" width="40px" src="{$vo.sns_qq_avatar}"></td>
+			                            <td>头像： <img alt="" width="40px" src="{$vo.sns_sinawb_avatar}"></td>
+			                            <td>云推送用户ID：{$vo.sns_bdyts_userId}</td>
+			                        </tr>
+			                        <tr>
+			                            <td>返回数据：{$vo.sns_qq_data}</td>
+			                            <td>返回数据：{$vo.sns_sinawb_data}</td>
+			                            <td>返回数据：{$vo.sns_bdyts_data}</td>
+			                        </tr>
+			                        <tr>
+			                            <td>昵称：{$vo.sns_qq_name}</td>
+			                            <td>昵称：{$vo.sns_sinawb_name}</td>
+			                            <td>云推送请求ID：{$vo.sns_bdyts_requestId}</td>
+			                        </tr>
+			                        <tr>
+			                        	<td>性别：{$vo.sns_qq_sex|getSexTxt}</td>
+			                        	<td>性别：{$vo.sns_sinawb_sex|getSexTxt}</td>
+			                        	<td>云推送渠道ID：{$vo.sns_bdyts_channelId}</td>
+			                        </tr>
+			                    </tbody>
+			                </table>
+			                
+			                <div>
+			                    <div class="inFrom">
+			                        <h5>各个方面的: <i class="red">信息</i></h5>
+			                        <span>关注：{$vo.stat_follow}</span>
+			                        <span>被关注：{$vo.stat_befollow}</span>
+			                        <span>被喜欢：{$vo.stat_belike}</span>
+			                        <span>被踩：{$vo.stat_becai}</span>
+			                        <span>被分享：{$vo.stat_beshare}</span>
+			                        <span>被收藏：{$vo.stat_bekeep}</span>
+			                        <span>被播放：{$vo.stat_beplayed}</span>
+			                        <span>被留言：{$vo.stat_user_commnet}</span>
+			                    </div>
+			                    
+			                    <div class="inFrom">
+			                        <h5>&nbsp;</h5>
+			                        <span>猜电影过关：{$vo.stat_guess_pass}</span>
+			                        <span>未读动态：{$vo.stat_user_new_unread}</span>
+			                        <span>参与排行：{$vo.limit_grapherlist}</span>
+			                        <span>未读留言：{$vo.stat_new}</span>
+			                        <span>作品数：{$vo.stat_work}</span>
+			                    </div>
+			                
+			                    <div class="total">
+			                        <span>这个人值多少钱？</span>
+			                        <strong class="red" title="其实我也是乱估的，如果你相信，倒也无妨，无妨……">￥{:rand(0,100)}</strong>
+			                    </div>
+			                    <div class="clear"></div>
+			                </div>
+			                
+			                <div class="inFooter">
+			                    <div class="footnote" style="font-size:5px;">如果你看不清这一段字，那就算了吧。这一段字也是无意义的。</div>
+			                    <div class="clear"></div>
+			                </div>
+			            </div>
+                    </div>
+            </div>
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+
+<include file="Public:footer" />

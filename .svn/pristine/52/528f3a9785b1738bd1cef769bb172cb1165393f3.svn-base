@@ -1,0 +1,168 @@
+<include file="Public/header" />
+<style>
+.id-pic {
+	width:100%;line-height:0;position:relative;min-height:200px;border:1px solid #ccc;
+}
+.id-pic img {
+	width:100%;height:200px;margin:0;padding:0; display:none;
+}
+.img-info {
+	position:absolute;top:30%;left:0;width:100%;text-align:center;color:#666;z-index:-1;
+	font-size:2.0em;
+}
+.img-info span {
+	font-size:0.6em;
+}
+.shuiy {
+	display:none;
+	background:url(__IMG__/p.png) center;position:absolute;top:0;left:0;height:100%;width:100%;background-size:auto 100%;
+}
+#content{
+	font-size:0.8em;color:#333;line-height:1.8em;
+}
+@media only screen and (max-width:360px){
+	.short_text {
+	    width: 70%;
+	}
+	.id-pic {
+		min-height:150px;
+	}
+	.id-pic img {
+		height:150px;
+	}
+}
+</style>
+<script>
+/**
+ * 建立一個可存取到該file的url
+ * PS: 瀏覽器必須支援HTML5 File API
+ */
+function booGetObjectURL(file) {
+	var url = null ; 
+	if (window.createObjectURL!=undefined) { // basic
+		url = window.createObjectURL(file) ;
+	} else if (window.URL!=undefined) { // mozilla(firefox)
+		url = window.URL.createObjectURL(file) ;
+	} else if (window.webkitURL!=undefined) { // webkit or chrome
+		url = window.webkitURL.createObjectURL(file) ;
+	}
+	return url ;
+}
+</script>
+	<div id="content">
+		<div class="readInfo">
+			Tips：请上传与“蜀黍的钱柜”里保持一致的身份证件照片 
+		</div>
+		<div style="float:right; width:30%;border:0px solid #ccc;padding:10px;">
+			<br /> 
+			示例：
+			<img src="__IMG__/sfz03.png" style="width:100%;" />
+			<div style="text-align:center;">正面.jpg</div>
+		</div>
+		<div style="float:left;width:70%;line-height:2.5em;">
+			身份证正面照片:<br />
+			<div class="id-pic" onclick="$('#file_1').click();">
+				<img id='img_file_1' src="" />
+				<div id="shuiy_1" class="shuiy"></div>
+				<div class="img-info">点击上传<br /><span>（文件大小不能超过2M）</span></div>
+			</div>
+		</div>
+		<div class="clear"></div>
+		<div style="float:right; width:30%;border:0px solid #ccc;padding:10px;">
+			<br /> 
+			示例：
+			<img src="__IMG__/sfz04.png" style="width:100%;"/>
+			<div style="text-align:center;">背面.jpg</div>
+		</div>
+		<div style="float:left;width:70%;padding-top:15px;line-height:2.5em;">
+			身份证背面照片:
+			<div class="id-pic" onclick="$('#file_2').click();">
+				<img id='img_file_2' src="" />
+				<div id="shuiy_2" class="shuiy"></div>
+				<div class="img-info">点击上传<br /><span>（文件大小不能超过2M）</span></div>
+			</div>
+			
+		</div>
+		<div style="text-align:right;">
+			<div class="clear"></div>
+			<form style="padding:20px 0px;"  id="form" action="{:U('Bianji/uploadImg')}" method="post" enctype="multipart/form-data">
+				<label><input type="checkbox" value="1" name="agree" id="agree"/> 阅读并同意 </label><a href="javascript:void(0);" id="js-look-xy" data-url="{:U('Bianji/getYx')}">《蜀黍科技进基协议》</a>
+				<div class="clear"></div>
+				<br />
+				<input type="file" name="file1" id="file_1" style="display:none;"/>
+				<input type="file" name="file2" id="file_2" style="display:none;"/>
+				<input type="submit" class="btn btnBlue" id="submit" value="提 交" />
+			</form>
+			<br />
+			<br />
+		</div>
+	</div>
+	<script>
+		$('#js-look-xy').click(function(){
+			var url = $(this).attr('data-url');
+			$.ajax({
+				url:url,
+				success:function(data) {
+					var h = $(window).height();
+					var w = $(window).width();
+					data = '<div style="width:'+Math.floor(w*0.9)+'px;height:'+Math.floor(h*0.8)+'px;overflow:auto;">'+data+'</div>'
+					art.dialog({
+						title:'协议内容',
+						padding:0,
+						content:data,
+						ok:function(){
+							$('#agree').attr('checked','checked');
+						},
+						okVal:'同意协议，并继续',
+						lock:true,
+						fixed:true
+					});					
+				}
+			});
+			
+		});
+		var max_file_size = 2*1024*1024;
+		$("#file_1").change(function(){
+			var objUrl = booGetObjectURL(this.files[0]) ;
+			if (objUrl) {
+				if(this.files[0].size > max_file_size) {
+					alert('文件不能超过2M哦');
+					$('#shuiy_1').hide();
+					$("#img_file_1").attr("src", "").hide();
+					return;
+				}
+				$('#shuiy_1').show();
+				$("#img_file_1").attr("src", objUrl).show();
+			}
+		}) ;
+		$("#file_2").change(function(){
+			var objUrl = booGetObjectURL(this.files[0]) ;
+			if (objUrl) {
+				if(this.files[0].size > max_file_size) {
+					alert('文件不能超过2M哦');
+					$('#shuiy_2').hide();
+					$("#img_file_2").attr("src", "").hide();
+					return;
+				}
+				$('#shuiy_2').show();
+				$("#img_file_2").attr("src", objUrl).show();
+			}
+		}) ;
+		$('#submit').click(function(){
+			if ($("#img_file_1").attr("src")=='') {
+				alert('身份证正面照片不能为空！'); return false;
+			}
+			if ($("#img_file_2").attr("src")=='') {
+				alert('身份证反面照片不能为空！');return false;
+			}
+			if ($('#agree').attr('checked') !== 'checked') {
+				alert('请阅读并同意《蜀黍科技进基协议》');return false;
+			}
+		});
+		
+        if (window.applicationCache) {
+        } else {
+        	$('#content').html('请使用更高级的浏览器，如chrome，火狐，等！');
+        }
+	</script>
+<include file="Public/footer" />

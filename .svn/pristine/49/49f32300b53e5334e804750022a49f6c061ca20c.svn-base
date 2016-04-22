@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            完善信息 | 图解电影，十分钟品味精彩电影
+        </title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="copyright" content="Copyright (c) 2014 MailChimp. All Rights Reserved.">
+        <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="apple-itunes-app" content="app-id=366794783">
+        <!--[if IE 8]>
+            <link rel="stylesheet" type="text/css" href="__CSS__/ie8.css" />
+        <![endif]-->
+        <link rel="stylesheet" type="text/css" href="__CSS__/mcd.css">
+        <script src="__JS__/jquery.min.js"></script>
+        <script src="__JS__/artDialog.js?skin=default"></script>
+        <script src="__JS__/common.js"></script>
+        <link rel="stylesheet" type="text/css" href="__CSS__/theone.css">
+        <link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon-iphone.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/apple-touch-icon-ipad.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/apple-touch-icon-iphone4.png">
+        <link rel="icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
+        <link rel="shortcut icon" href="/favicon.ico">
+        <script>
+        	$(document).ready(function(){
+        		var loading = false;
+        		$('#info-form').submit(function(){
+        			if (loading) {boo_common.showMsg('正在温柔的提交中，请耐心等候。。。');return;}
+        			var name = $('#name').val();
+        			if (name == '') {
+        				boo_common.showMsg('昵称不能为空哦！'); return;
+        			}
+        			loading = true;
+        			$.ajax({
+        				url : '{:U("Public/initInfo")}',
+        				data : $(this).serialize(),
+        				type : 'POST',
+        				success : function(data){
+        					loading = false;
+        					if (typeof data == 'object') {
+        						if (data.rst > 0) {
+        							boo_common.showMsg(data.msg,'',function(){
+        								location.reload();
+        							});
+        						} else {
+        							boo_common.showMsg(data.msg);
+        						}
+        					}else {
+        						boo_common.showMsg('额偶。请刷新页面。。。');
+        					}
+        				},
+        				error : function(){
+        					loading = false;
+        					boo_common.showMsg('额偶。请刷新页面。。。');
+        				}
+        			});
+        		});
+        	});
+        </script>
+    </head>
+    
+    <body id="login" class="new_teal mcd">
+        <div id="login-box">
+            <div id="outer-content">
+                <div id="inner-content">
+                    <div id="av-flash-block">
+                    </div>
+                    <div id="browser-warning" class="feedback-block warning" style="display: none;">
+                        <div class="unit size1of1">
+                            <div class="media">
+                                <div class="media-image">
+                                    <span class="freddicon warning">
+                                    </span>
+                                </div>
+                                <div class="media-body">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="content">
+                        <div id="login-form-wrap">
+                            <div class="freddie">
+                                <a class="block" href="/">
+                                </a>
+                            </div>
+                            <div id="av-content" class="line" style="background-color:#F9F9F9;">
+                                <div class="signup-wrap lastUnit">
+                                    <form action="{:U('Public/initInfo')}" id="info-form" method="POST" onsubmit="return false;" novalidate="novalidate">
+                                        <fieldset>
+                                            <div class="line login-field">
+                                                <div class="field-wrapper">
+                                                    <label for="username" class="">
+                                                        <span class="float-right">
+                                                        </span>
+                                                       	昵称
+                                                    </label>
+                                                    <input type="email" name="name" tabindex="1" autofocus="autofocus" autocorrect="off" autocapitalize="off" class=" av-text" value="" id="name">
+                                                </div>
+                                            </div>
+                                            <div class="line below24 login-controls" style="position:relative;">
+                                                <div class="login-button unit nopadding size1of2 nochange">
+                                                    <button type="submit" value="log in" class="button-large p0 size1of1 hide-mobile" tabindex="3" style="margin:0px;"> 完 成 </button>
+                                                    <button type="submit" value="log in" class="button p0 size1of1 hide-desktop" style="margin:0px;" tabindex="3"> 完 成 </button>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </form>
+                                    <div class="login-footer">
+                                        <a href="http://www.mailchimp.com" target="_blank" tabindex="-1">
+                                            <div class="footer-scripty centered dim-el below36"></div>
+                                        </a>
+                                        <span class="dim-el">
+                                            &copy;2001&ndash;2014 All Rights Reserved.
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+
+</html>

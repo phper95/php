@@ -1,0 +1,103 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<!-- Secondary nav -->
+</div>
+<!-- Sidebar ends -->
+
+<!-- Content begins -->
+<div id="content">
+    <include file="Public:bav" />
+    <!-- Main content -->
+     <div class="wrapper">
+    	<form method="post" action="{:U('Shop/doUploadGoodsImg')}" enctype="multipart/form-data" id="upload_form">
+    	 <div class="widget check">
+    		<div class="whead">
+            	<h6>管理商品图片列表</h6>
+            	<a href="{:getCurrentUrl()}" class="buttonH bBlue mb10 mt5">返回</a>
+            	<div class="clear"></div>
+            </div>
+  			<table cellpadding="0" cellspacing="0" width="100%" class="tDefault checkAll tMedia" id="checkAll">
+                <thead>
+                    <tr>
+                        <td width="150">图片</td>
+                        <td>排序值 *值越大，越靠前，最靠前的一张图片默认做封面图</td>
+                        <td width="50">操作</td>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td colspan="8">
+                        	<input type="hidden" value="{$Think.get.id}" name="g_id"/>
+    						<input id="add_img_submit" class="buttonM bBlack formSubmit" type="submit" value="提 交">
+                        </td>
+                    </tr>
+                </tfoot>
+                <tbody>
+                	<volist name="list" id="vo">
+                		<tr class="js-tr-data">
+                			<td><img src="{$vo.url}" height="80px"></td>
+                			<td><textarea style="font-size:4em;" name="up_sort[{$vo.id}]">{$vo.sort_num}</textarea></td>
+                			<td><a class="redBack" onclick="return(confirm('确定删除么，删除后将不能恢复'));" href="{:U('Shop/delGoodsImg',array('id'=>$vo['id']))}">删除</a></td>
+                		</tr>
+                	</volist>
+                	<tr id="vol_tbody">
+		            	<td colspan="7">
+		            		<span class="greenBack" style="cursor:pointer;" id="add_tr">&nbsp;&nbsp;+&nbsp;&nbsp;</span>
+		            		<div class="clear"></div>
+		            	</td>
+		            </tr>
+                </tbody>
+            </table>
+    	</div>
+    	</form>
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+<script>
+	(function(){
+		var index = 0;
+		$('#add_tr').click(function(){
+			if ($('.js-tr-data').length >= 5) {
+				alert('最多5张图片哟');return;
+			}
+			index ++;
+			var html =
+			'<tr class="js-tr-data">'
+	           	+'<td>'
+	           		+'<img src="__PUBLIC__/images/quetu.jpg" height="120px;" id="images_'+index+'" />'
+	           		+'<input type="file" name="Fileimages-'+index+'" id="file_images_'+index+'">'
+	           	+'</td>'
+	            +'<td><textarea style="font-size:4em;" name="sort['+index+']">0</textarea></td>'
+	            +'<td><span class="redBack" style="cursor:pointer;" onclick="$(this).parent().parent().remove();">删除</span></td>'
+	        +'</tr>';
+			$('#vol_tbody').before(html);
+			file_change(index);
+		});
+		var file_change = function(id){
+			$("#file_images_"+id).uniform();
+			$("#file_images_"+id).change(function(){
+				var objUrl = booGetObjectURL(this.files[0]) ;
+				var file_type = this.files[0]['type'];
+				if (file_type !== 'image/jpeg' && file_type !== 'image/png' && file_type !== 'image/jpg') {
+					alert('图片格式错误，只能允许jpg 和png 格式的'); return false;
+				}
+				if (this.files[0]['size'] > 102400) {
+					if (!confirm('你选择的图片大于100Kb，是否确定上传.')) {
+						return false;
+					}
+				}
+				console.log(this.files[0]);
+				if (objUrl) {
+					$("#images_"+id).attr("src", objUrl);
+				}
+			}) ;
+		};
+		file_change(1);
+	})();
+
+</script>
+<include file="Public:footer" />

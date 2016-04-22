@@ -1,0 +1,68 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<!-- Secondary nav -->
+</div>
+<!-- Sidebar ends -->
+
+<!-- Content begins -->
+<div id="content">
+    <include file="Public:bav" />
+    <!-- Main content -->
+    <div class="wrapper">
+        	<div class="fluid">
+        		<form method='post' id="form1" name="form1" action="{:U('Adv2/update')}"  enctype="multipart/form-data">
+                    <div class="widget ">
+                        <div class="whead">
+                        <h6>编辑广告</h6>
+                        <a href="{:getCurrentUrl()}" class="buttonH bBlue mb10 mt5">返回</a>
+                        <div class="clear"></div></div>
+                        <div class="formRow">
+                            <div class="grid3"><label>广告名称：</label></div>
+                            <div class="grid3"><input type="text" name="name" placeholder="广告名称" value="{$vo.name}"/></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>广告内容：</label></div>
+                            <div class="grid7"><input type="text" name="sub_title" placeholder="广告内容" value="{$vo.sub_title}"/></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>广告类型：</label></div>
+                            <present name="online">
+                            	<div class="grid3">{$vo.area} : {$typeList[$vo['area']]}</div>
+                            <else />
+                            	<div class="grid3">
+	                            	<select name="area">
+	                            		<option value="">-- 请选择广告区域 --</option>
+	                            		<volist name="typeList" id="vo2">
+	                            		<if condition="$key eq $vo['area']">
+	                            		<option selected="selected" value="{$key}">{$key} : {$vo2} </option>
+	                            		<else />
+	                            		<option value="{$key}">{$key} : {$vo2}</option>
+	                            		</if>
+	                            		</volist>
+	                            	</select>
+	                            </div>
+                            </present>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                        	<input type="hidden" value="{$vo.id}" name="id">
+                        	<input type="submit" value="提 交" class="buttonM bBlack formSubmit" /><div class="clear"></div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    </form>
+            </div>
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+
+<include file="Public:footer" />

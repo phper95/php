@@ -1,0 +1,529 @@
+<include file="Public:header" />
+
+<script src="__JS__/dialog/artDialog.js?skin=default"></script>
+<script language="javascript" type="text/javascript" src="__JS__/My97DatePicker/WdatePicker.js"></script>
+
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<!-- Secondary nav -->
+    <div class="secNav">
+        <div class="secWrapper">
+            <!-- Tabs container -->
+            <form method="get" action="{:U('Movie/index')}">
+            <input type="hidden" value="{$Think.MODULE_NAME}" name="m"/>
+            <input type="hidden" value="{$Think.ACTION_NAME}" name="a"/>
+            <div id="tab-container" class="tab-container">
+
+                <ul class="iconsLine ic1 etabs">
+                    <li><a href="#alt2" title="">影片搜索:</a></li>
+                </ul>
+                
+                <div class="divider"><span></span></div>
+                
+                <div id="general"></div>
+                
+                <div id="alt1"></div>
+                <div id="alt2">
+                
+                	<!-- Sidebar forms -->
+                    <div class="sideWidget">
+                        <div class="formRow">
+                            <label>影片ID:</label>
+                            <input type="text" name="id" value="{$Think.get.id}" placeholder="影片ID" />
+                        </div>
+                        <div class="formRow">
+                           <label>影片名称:</label>
+                            <input type="text" name="name" value="{$Think.get.name}" placeholder="影片名称" /> 
+                        </div>
+                        <div class="formRow">
+                            <label>上线状态:</label>
+                            <select name="online" id="movie_search_online_select">
+                                <option value="" <eq name="Think.get.online" value="">selected="selected"</eq> >全部</option>
+                                <option value="1" <eq name="Think.get.online" value="1">selected="selected"</eq> >已上线</option>
+                                <option value="2" <eq name="Think.get.online" value="2">selected="selected"</eq> >未上线</option>
+                                <option value="3" <eq name="Think.get.online" value="3">selected="selected"</eq> >即将上线</option>
+                            </select>
+                        </div>
+                        <div class="formRow" id="movie_search_onlie_show">
+                        <div class="formRow">
+                            <label>平台:</label>
+                            <select name="platform" >
+                                <option value="all">全部</option>
+                                {:getPlatformList($_GET['platform'],'val')}
+                            </select>
+                        </div>
+                        <div class="formRow">
+                            <label>渠道:</label>
+                            <select name="channel" >
+                                <option value="all">全部</option>
+                                {:getChannelList($_GET['channel'],'val')}
+                            </select>
+                        </div>
+                        </div>
+                        
+                        <div class="formRow">
+                           <label>作者ID:</label>
+                            <input type="text" name="grapher_id" value="{$Think.get.grapher_id}" placeholder="作者ID" /> 
+                        </div>
+                        
+                        <div class="formRow">
+                           	<label>小编评级:</label>
+                            <select name="we_score">
+                            	<option value="" selected="selected">全部</option>
+                            	<option value="8" <eq name="Think.get.we_score" value="8">selected="selected"</eq>>S</option>
+                            	<option value="7" <eq name="Think.get.we_score" value="7">selected="selected"</eq>>A</option>
+                            	<option value="6" <eq name="Think.get.we_score" value="6">selected="selected"</eq>>B</option>
+                            </select> 
+                        </div>
+                        
+                        <div class="formRow">
+                            <label>剧集类型:</label>
+                            <select name="vol_count" >
+                                <option value="" <eq name="Think.get.vol_count" value="">selected="selected"</eq>>全部</option>
+                                <option value="2" <eq name="Think.get.vol_count" value="2">selected="selected"</eq>>剧集</option>
+                                <option value="1" <eq name="Think.get.vol_count" value="1">selected="selected"</eq>>电影</option> 
+                            </select>
+                        </div>
+                        
+                        <div class="formRow">
+                            <label>精品:</label>
+                            <select name="jian" >
+                                <option value="" <eq name="Think.get.jian" value="">selected="selected"</eq>>全部</option>
+                                <option value="1" <eq name="Think.get.jian" value="1">selected="selected"</eq>>精品</option> 
+                            </select>
+                        </div>
+                        
+                        <div class="formRow searchDrop">
+                            <label>影片类型:</label>
+                            <select data-placeholder="全部类型..." class="select" name="tags">
+                            	<option value="">全部类型</option>
+                                {:getMovieTypeList($_GET['tags'],'val')}
+                            </select>
+                        </div>
+                        
+                        <div class="formRow searchDrop">
+                            <label>上映地区:</label>
+                            <select data-placeholder="全部地区..." class="select" name="zone">
+                                <option value="">全部地区</option> 
+                                {:getMovieZoneList($_GET['zone'], 'val')} 
+                            </select>
+                        </div>
+                        
+                        <div class="formRow searchDrop">
+                            <label>上映年份:</label>
+                            <select data-placeholder="全部年份..." class="select" name="showtime">
+                                <option value="">全部年份</option> 
+                                {:getMovieShowtimeList($_GET['showtime'], 'val')}
+                            </select>
+                        </div>
+                    
+                        <div class="formRow">
+                            <label class="nopadding">
+                            	<input type="checkbox" name="limit_listshow" <eq name="Think.get.limit_listshow" value="1">checked="checked"</eq> value="1" class="check" />
+                            	限制-列表显示
+                            </label>
+                            <div class="clear"></div>
+                            <label class="nopadding"><input type="checkbox" <eq name="Think.get.limit_search" value="1">checked="checked"</eq> name="limit_search" value="1" class="check" />限制-搜索显示</label>
+                            <div class="clear"></div>
+                            <label class="nopadding"><input type="checkbox" <eq name="Think.get.limit_tag" value="1">checked="checked"</eq> name="limit_tag" value="1" class="check" />限制-Tag显示</label>
+                            <div class="clear"></div>
+                            <label class="nopadding"><input type="checkbox" <eq name="Think.get.limit_qrcode" value="1">checked="checked"</eq> name="limit_qrcode" value="1" class="check" />限制-二维码显示</label>
+                            <div class="clear"></div>
+                            <label class="nopadding"><input type="checkbox" <eq name="Think.get.limit_same" value="1">checked="checked"</eq> name="limit_same" value="1" class="check" />限制-推荐显示</label>
+                            <div class="clear"></div>
+                            <label class="nopadding"><input type="checkbox" <eq name="Think.get.limit_grapher" value="1">checked="checked"</eq> name="limit_grapher" value="1" class="check" />限制-用户作品显示</label>
+                            <div class="clear"></div>
+                            <label class="nopadding"><input type="checkbox" <eq name="Think.get.limit_topic" value="1">checked="checked"</eq> name="limit_topic" value="1" class="check" />限制-专题显示</label>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <label class="nopadding">
+                            	<input type="radio" name="orderby" <eq name="Think.get.orderby" value="id">checked="checked"</eq> value="id"/>排序-按影片ID
+                            </label>
+                            <div class="clear"></div>
+                            <div id="movie_search_orderby_onlietime_show">
+                            <label class="nopadding">
+                            	<input type="radio" name="orderby" <eq name="Think.get.orderby" value="online_time">checked="checked"</eq> value="online_time"/>排序-按上线时间
+                            </label>
+                            </div>
+                            <div class="clear"></div>
+                            <label class="nopadding"><input type="radio" name="orderby" <eq name="Think.get.orderby" value="add_time">checked="checked"</eq> value="add_time"/>排序-按添加时间</label>
+                            <div class="clear"></div>
+                            <label class="nopadding"><input type="radio" name="orderby" <eq name="Think.get.orderby" value="played">checked="checked"</eq> value="played"/>排序-按播放次数</label>
+                            <div class="clear"></div>
+                            <label class="nopadding"><input type="radio" name="orderby" <eq name="Think.get.orderby" value="ding">checked="checked"</eq> value="ding" />排序-按喜欢次数</label>
+                            <div class="clear"></div>
+                        </div>
+                        
+                         <div class="formRow">
+                            <label class="nopadding"><input type="radio" name="order" <eq name="Think.get.order" value="asc">checked="checked"</eq> value="asc"/>排序-升序</label>
+                            <div class="clear"></div>
+                            <label class="nopadding"><input type="radio" name="order" <eq name="Think.get.order" value="desc">checked="checked"</eq> value="desc"/>排序-降序</label>
+                            <div class="clear"></div>
+                        </div>
+                       
+                       
+                        <div class="formRow">
+                            <label class="nopadding"><input type="checkbox" name="bind_douban" <eq name="Think.get.bind_douban" value="1">checked="checked"</eq> value="1" class="check" />未关联[豆瓣]</label>
+                            <div class="clear"></div>
+                            <label class="nopadding"><input type="checkbox" <eq name="Think.get.bind_shiguang" value="1">checked="checked"</eq> name="bind_shiguang" value="1" class="check" />未关联[时光]</label>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <input type="submit" class="buttonS bLightBlue" value="搜索影片" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"><span></span></div>
+            </form>
+            
+       </div> 
+       <div class="clear"></div>
+   </div>
+</div>
+<!-- Sidebar ends -->
+    
+<!-- Content begins -->
+<div id="content">
+    <div class="contentTop">
+        <span class="pageTitle">影片管理</span><!--
+        <ul class="quickStats">
+            <li>
+                <a href="" class="blueImg"><img src="__PUBLIC__/images/icons/quickstats/plus.png" alt="" /></a>
+                <div class="floatR"><strong class="blue">5489</strong><span>部影片</span></div>
+            </li>
+            <li>
+                <a href="" class="redImg"><img src="__PUBLIC__/images/icons/quickstats/plus.png" alt="" /></a>
+                <div class="floatR"><strong class="blue">4658</strong><span>次阅读</span></div>
+            </li>
+            <li>
+                <a href="" class="greenImg"><img src="__PUBLIC__/images/icons/quickstats/money.png" alt="" /></a>
+                <div class="floatR"><strong class="blue">1289</strong><span>个喜欢</span></div>
+            </li>
+        </ul>
+        --><div class="clear"></div>
+    </div>
+    
+    <!-- Breadcrumbs line -->
+    <div class="breadLine">
+        <div class="bc">
+            <ul id="breadcrumbs" class="breadcrumbs">
+                <li><a href="#">主页君</a></li>
+                <li><a href="#">影片列表</a>
+                    
+                </li>
+                
+            </ul>
+        </div>
+        
+        
+    </div>
+    
+    <!-- Main content -->
+    <div class="wrapper">
+        <!-- Media table sample -->
+        <div class="widget check">
+            <div class="whead">
+            	<h6>影片列表</h6>
+            	<a href="{:U('Movie/add')}" class="buttonH bBlue">添加</a>
+            	<notempty name="Think.get.backurl">
+                   <a href="{$Think.get.backurl}" class="buttonH bGreen mb10 mt5">返回</a>
+                </notempty >
+            	<div class="clear"></div>
+            </div>
+            <table cellpadding="0" cellspacing="0" width="100%" class="tDefault checkAll tMedia" id="checkAll">
+                <thead>
+                    <tr>
+                        <td width="10">ID</td>
+                        <td width="50">封面</td>
+                        <td width="480">影片</td>
+                        <td width="70">关联</td>
+                        <td ><div>编者按</div></td>
+                        <td width="120">大小</td>
+                        <td width="150">上线时间(xiaomi)</td>
+                        <td width="80">操作</td>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td colspan="8">
+                        	<empty name="list">
+                        		木油满足您强烈需求的影片，您可以添加一部咩？
+                        	<else />
+                            <div class="tPages">
+                                <ul class="pages">
+                                    {$page}
+                                </ul>
+                            </div>
+                            </empty>
+                        </td>
+                    </tr>
+                </tfoot>
+                <tbody>
+                	<volist name="list" id="vo">
+		            <tr>
+		                <td>{$vo.id}</td>
+		                <td>
+		                	<a href="{:U('Movie/uploadImg', array('id'=>$vo['id']))}" title="点我编辑封面">
+		                		<empty name="vo.bpic">
+		                			<img src="__PUBLIC__/images/quetu.jpg" alt="点我编辑" width="100px" height="70px;" />
+		                		<else />
+		                			<img src="{:getImgServerURL(8)}/graphmovie/{$vo.bpic}" alt="点我编辑" width="100px" height="70px;" />	
+		                		</empty>
+		                	</a>
+		                </td>
+		                <td style="vertical-align: top; position:relative;">
+		                	<div style="text-align:left; line-height:1.5em;">
+								{:getMovieCellcover($vo['cellcover'])}
+		                		<div style="font-weight:700;font-size:20px;">
+		                			<empty name="vo.tuijian_time"><else /><span style="font-size:0.6em;" class="redBack" title="last Time：{$vo.tuijian_time}">荐</span>&nbsp;</empty>
+		                			{$vo.name}<span style="font-size:12px;color:#aaa;"> {$vo.zone} - {$vo.showtime}</span>
+		                		</div>
+								<div>-- {$vo.sub_title}</div><br />
+								<div>添加时间：{$vo.add_time}</div> 
+								<div>{$vo.tags}</div> 
+								<div>
+									[ <a href="http://www.graphmovie.com/BackStage2/kuaikuai/loadmovie_see.php?k={:movieIdOnlineKeyEncode($vo['id'])}" title="点我竖屏浏览哟" target="_blank">{$vo.played}</a> ] 
+									<a target="_blank" title="点我可以在线播放哟！~~" href="http://ser3.graphmovie.com/gmspanel/olr/detail.php?k={:movieIdOnlineKeyEncode($vo['id'])}">播</a> - 
+									[ {$vo.ding} ] 顶 - [ {$vo.share} ] 分享 -
+									[By：<volist name="vo.grapher_str" id="grapher"><a href="{:U('Member/index',array('id'=>$grapher['id'],'backurl'=>urlencode(__SELF__)))}">{$grapher.name}</a> - </volist>]
+								</div>
+								<div>[ <a href="{:U('Comment/showInfo', array('id'=>$vo['id'],'type'=>'movie'))}">{$vo.comment_count}</a> ] 评 - [ <a href="{:U('Poptxt/showInfo', array('id'=>$vo['id'],'type'=>'movie'))}">{$vo.poptxt_count}</a> ] 弹</div>
+								<empty name="vo.season">
+								<else />
+									<div style="line-height:1.8em;"><span class="fileSuccess"></span>绑定剧集：{$vo.season}</div>
+								</empty>
+		                	</div>
+		                </td>
+		                <td>
+		                	<div>
+		                		<if condition="isset($vo['link'][1])" >
+		                			<a href="{$vo['link'][1]}" class="blueBack" target="_blank" title="豆瓣网链接">豆</a>
+		                		<else />
+		                			<span style="text-decoration:line-through;">[ 豆 ]</span>
+		                		</if>
+		                		&nbsp;
+		                		<if condition="isset($vo['link'][2])" >
+		                			 <a class="blueBack" href="{$vo['link'][2]}" target="_blank" title="时光网链接">时</a> 
+		                		<else />
+		                			<span style="text-decoration:line-through;">[ 时 ]</span>
+		                		</if>
+		                	</div>
+		                	<br />
+		                	<div><a href="javascript:void(0);" class="js-bind-movie-url" js-data-id="{$vo.id}" js-data-douban="{$vo['link'][1]|default=''}" js-data-shiguang="{$vo['link'][2]|default=''}">修改</a></div>
+		                </td>
+		                <td style="position:relative;">
+		                	<div style="text-align:left;">{$vo.editor_note}</div>
+		                	<a class="dataNumGrey js-we-score" data-id="{$vo.id}" style="position:absolute;right:0px;top:0px;"><strong>{$ji[$vo['we_score']]}</strong></a>
+		                </td>
+		                <td>{$vo.total_size} MB<br/> ({$vo.total_page} * {$vo.total_page|getItemSize=$vo['total_size'],###} KB)</td>
+		                <td id="online-time-{$vo.id}">{$vo.online_time}</td>
+		                <td>
+		                	<!-- Simple buttons with caret -->
+	                        <div class="btn-group" style="float: left;">
+	                            <a href="#" class="buttonM bDefault opt" data-toggle="dropdown">点我 <span class="caret"></span></a>
+	                            <ul class="dropdown-menu pull-right">
+	                                <li><a href="{:U('Movie/edit',array('id'=>$vo['id']))}"><i class="fa fa-edit"></i> &nbsp;查看</a></li>
+	                                <li><a href="{:U('Movie/grapher',array('id'=>$vo['id'],'grapher'=>$vo['grapher']))}"><i class="fa fa-user-plus"></i>&nbsp;配置作者</a></li>
+	                                <li><a href="{:U('Movie/comment', array('movie_id'=>$vo['id'], 'mname'=>$vo['name'], 'serv'=>$vo['imgserver_use'],'backurl'=>urlencode(__SELF__)))}"><i class="fa fa-video-camera"></i>&nbsp;解说编辑</a></li>
+	                                <li><a href="{:U('Movie/online', array('id'=>$vo['id'],'mname'=>$vo['name']))}"><i class="fa fa-exchange"></i>&nbsp;上/下 线</a></li>
+	                                <li><a href="{:U('Comment/showInfo', array('id'=>$vo['id'],'type'=>'movie'))}"><i class="fa fa-commenting-o"></i>&nbsp;查看评论</a></li>
+	                                <li><a href="{:U('Poptxt/showInfo', array('id'=>$vo['id'],'type'=>'movie'))}"><i class="fa fa-paw"></i>&nbsp;查看弹幕</a></li>
+	                                <li><a href="{:U('Pushnotice/add', array('gm_id'=>$vo['id'],'gm_opt'=>2))}"><i class="fa fa-send"></i>&nbsp;发送通知</a></li>
+	                                <li><a href="{:U('Movie/readBehavior', array('id'=>$vo['id']))}" class="js-read-behavior"><i class="fa fa-pie-chart"></i>&nbsp;阅读行为数据</a></li>
+	                                <li><a href="javascript:void(0);" onclick="alert('点了也没用');"><i class="fa fa-trash"></i>&nbsp;删除</a></li>
+	                                <li><a href="javascript:void(0);" data-id="{$vo.id}" data-type="{$vo.vol_count}" class="js-add-tuijian"><i class="fa fa-bullhorn"></i> &nbsp;推荐至首页</a></li>
+	                            </ul>
+	                        </div>
+		                </td>
+		            </tr>
+		            </volist>
+                </tbody>
+            </table>
+        </div>
+     
+    </div>
+    <!-- Main content ends -->
+    
+    	<div id="xxsdf" style="display:none;width:900px;line-height:24px;" class="fluid">
+            		<div class="fluid">
+            			<div class="widget nomargin">
+            				<form id="bind_link_form" action="{:U('Movie/doBindLink')}" method="POST">
+            				<input type="hidden" value="" name="movie_id" id="js_bind_url_movie_id"/>
+            				<div class="formRow">
+	                            <div class="grid1"><label>豆瓣: </label></div>
+	                            <div class="grid11">
+	                            	<input type="text" name="douban_url" id="js_douban_url" placeholder="豆瓣链接"/>
+	                            	<span class="note">参考：http://movie.douban.com/subject/6533054/?from=showing</span>
+	                            </div>
+	                            <div class="clear"></div>
+	                        </div>
+	                        <div class="formRow">
+	                            <div class="grid1"><label>时光: </label></div>
+	                            <div class="grid11">
+	                            	<input type="text" name="shiguang_url" id="js_shiguang_url" placeholder="时光链接"/>
+	                            	<span class="note">参考：http://movie.mtime.com/174764/</span>
+	                            </div>
+	                            <div class="clear"></div>
+	                        </div>
+	                        </form>
+            			</div>
+            		</div>
+            </div>
+            
+            <div id="edit_we_scroe" style="display:none;width:300px;line-height:24px;" class="fluid">
+            		<div class="fluid">
+            			<div class="widget nomargin">
+	                        <div class="formRow">
+	                            <div class="grid4"><label>评分： </label></div>
+	                            <div class="grid6">
+	                            	<select id="movie_we_score">
+	                            		<option value="8">S</option>
+	                            		<option value="7">A</option>
+	                            		<option value="6">B</option>
+	                            		<option value="5">C</option>
+	                            	</select>
+	                            </div>
+	                            <div class="clear"></div>
+	                        </div>
+            			</div>
+            		</div>
+            </div>
+            
+       		<div id="add_to_tuijian_panel" style="display:none;width:300px;line-height:24px;" class="fluid">
+       			<form method='post' id="tuijian_movie_form" name="form1" action="{:U('HomeOnline/doTuijian')}"  enctype="multipart/form-data">
+       				<input type="hidden" id="movie_tuijian_id" name="id"/>
+       				<input type="hidden" id="movie_tuijian_type" name="type"/>
+            		<div class="fluid">
+            			<div class="widget nomargin">
+	                        <div class="formRow">
+	                            <div class="grid4"><label>推荐时间: </label></div>
+	                            <div class="grid6">
+	                            	<input type="text" name="online_time" id="movie_tuijian_time"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly"/>
+	                            </div>
+	                            <div class="clear"></div>
+	                        </div>
+            			</div>
+            		</div>
+            	</form>
+            </div>
+    
+</div>
+<!-- Content ends -->
+<script>
+(function(){
+	$('.js-read-behavior').click(function(){
+		art.dialog({content: '请耐心等待十几秒，不要关闭！！！', lock: true});
+	});
+	
+	var show = function(b){
+		if (b>0){
+			$('#movie_search_onlie_show').show();
+		}
+		else { 
+			$('#movie_search_onlie_show').hide();
+		}
+		if (b==1 || b==3) {
+			$('#movie_search_orderby_onlietime_show').show();
+		} else {
+			$('#movie_search_orderby_onlietime_show').hide();
+		}
+	};
+	$('#movie_search_online_select').change(function(){
+		show($(this).val());
+	});
+	
+	show($('#movie_search_online_select').val());
+	
+	$('.js-bind-movie-url').click(function(){
+		var douban_url = $(this).attr('js-data-douban');
+		var shiguang_url = $(this).attr('js-data-shiguang');
+		$('#js_douban_url').val(douban_url);
+		$('#js_shiguang_url').val(shiguang_url);
+		$('#js_bind_url_movie_id').val($(this).attr('js-data-id'));
+		art.dialog({
+			id : 'search_img_dialog',
+			padding:0,
+			content:$('#xxsdf')[0],
+			title:'配置网站链接',
+			ok : function(){
+				var new_douban_url = $.trim($('#js_douban_url').val());
+				var new_shiguang_url = $.trim($('#js_shiguang_url').val()); 
+				if (new_douban_url + new_shiguang_url == '') {
+					alert('至少要填一个链接啊，亲！'); return false;
+				}
+				
+				if (new_shiguang_url == shiguang_url && new_douban_url == douban_url) {
+					alert('至少要修改一个啊');return false;
+				}
+				$('#bind_link_form').submit();
+			},
+			cancel : function(){}
+		});
+	});
+	
+	$('.js-we-score').click(function(){
+		var id = ($(this).attr('data-id'));
+		var obj = $(this);
+		art.dialog({
+			id : 'edit_we_score_dialog',
+			padding:0,
+			content:$('#edit_we_scroe')[0],
+			title : '修改评分',
+			ok : function(){
+				$.ajax({
+					url : '{:U("Movie/weScore")}',
+					type : 'POST',
+					data : {id:id,we_score:$('#movie_we_score').val()},
+					success : function(ret){
+						if (typeof ret == 'object') {
+							if (ret.rst == 1) {
+								$.jGrowl('ID：'+id +' 打分成功!');
+								obj.html($('#movie_we_score').find("option:selected").text());
+							} else {
+								alert(rst.msg);
+							}
+						} else {
+							alert('快截图，并且快联系Bobo,'+ret);
+						}
+					},
+					error : function(){
+						$.jGrowl('Ajax 错误');
+					}
+				});
+			}
+		});
+	});
+	
+	$('.js-add-tuijian').click(function(){
+		var id = ($(this).attr('data-id'));
+		var type = ($(this).attr('data-type'));
+		if (type != '1' && type != '2') {alert('类型不支持');return;}
+		if ($('#online-time-'+id).length != 1) {alert('数据错误!');return;}
+		var online_time = $('#online-time-'+id).html();
+		if (online_time.indexOf('未上线') != -1) {
+			alert('请先上线后，再点击推荐吧');return;
+		}
+		$('#movie_tuijian_time').val(online_time);
+		$('#movie_tuijian_id').val(id);
+		$('#movie_tuijian_type').val(type);
+		art.dialog({
+			id: 'add_to_tuijian_dialog',
+			padding:0,
+			content:$('#add_to_tuijian_panel')[0],
+			title:'添加至推荐',
+			ok : function(){
+				$('#tuijian_movie_form').submit();
+			},
+			cancel:true
+		});
+		
+	});
+})();
+</script>
+<include file="Public:footer" />

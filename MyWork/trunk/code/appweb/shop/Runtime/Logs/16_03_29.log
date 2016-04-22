@@ -1,0 +1,29 @@
+[ 2016-03-29T17:41:25+08:00 ] 127.0.0.1 /php/MyWork/trunk/code/appweb/shop/index.php/index/index
+ERR: æ— æ³•åŠ è½½æ¨¡å—:index
+
+[ 2016-03-29T17:42:21+08:00 ] 127.0.0.1 /php/MyWork/trunk/code/appweb/shop/index.php?m=index&a=index&userid=99G3HPA2
+ERR: æ— æ³•åŠ è½½æ¨¡å—:index
+
+[ 2016-03-29T19:14:22+08:00 ] 192.168.0.19 /php/MyWork/trunk/code/appweb/shop/index.php?m=Index&a=index&userid=99G3HPA2
+ERR: ÓÉÓÚÁ¬½Ó·½ÔÚÒ»¶ÎÊ±¼äºóÃ»ÓĞÕıÈ·´ğ¸´»òÁ¬½ÓµÄÖ÷»úÃ»ÓĞ·´Ó¦£¬Á¬½Ó³¢ÊÔÊ§°Ü¡£
+
+
+[ 2016-03-29T19:24:08+08:00 ] 127.0.0.1 /php/MyWork/trunk/code/appweb/shop/index.php?m=Index&a=index&userid=99G3HPA2
+ERR: ÓÉÓÚÁ¬½Ó·½ÔÚÒ»¶ÎÊ±¼äºóÃ»ÓĞÕıÈ·´ğ¸´»òÁ¬½ÓµÄÖ÷»úÃ»ÓĞ·´Ó¦£¬Á¬½Ó³¢ÊÔÊ§°Ü¡£
+
+
+[ 2016-03-29T19:24:16+08:00 ] 127.0.0.1 /php/MyWork/trunk/code/appweb/shop/index.php?m=Index&a=index&userid=99G3HPA2
+ERR: ÓÉÓÚÁ¬½Ó·½ÔÚÒ»¶ÎÊ±¼äºóÃ»ÓĞÕıÈ·´ğ¸´»òÁ¬½ÓµÄÖ÷»úÃ»ÓĞ·´Ó¦£¬Á¬½Ó³¢ÊÔÊ§°Ü¡£
+
+
+[ 2016-03-29T19:24:57+08:00 ] 127.0.0.1 /php/MyWork/trunk/code/appweb/shop/index.php?m=Index&a=index&userid=99G3HPA2
+ERR: ÓÉÓÚÁ¬½Ó·½ÔÚÒ»¶ÎÊ±¼äºóÃ»ÓĞÕıÈ·´ğ¸´»òÁ¬½ÓµÄÖ÷»úÃ»ÓĞ·´Ó¦£¬Á¬½Ó³¢ÊÔÊ§°Ü¡£
+
+
+[ 2016-03-29T19:25:16+08:00 ] 192.168.0.19 /php/MyWork/trunk/code/appweb/shop/index.php?m=Index&a=index&userid=99G3HPA2
+ERR: ÓÉÓÚÁ¬½Ó·½ÔÚÒ»¶ÎÊ±¼äºóÃ»ÓĞÕıÈ·´ğ¸´»òÁ¬½ÓµÄÖ÷»úÃ»ÓĞ·´Ó¦£¬Á¬½Ó³¢ÊÔÊ§°Ü¡£
+
+
+[ 2016-03-29T19:42:11+08:00 ] 192.168.0.19 /php/MyWork/trunk/code/appweb/shop/index.php?m=Index&a=index&userid=99G3HPA2
+ERR: Accès refusé pour l'utilisateur: 'lee'@'@192.168.0.19'. Base 'graphmovie2_db'
+

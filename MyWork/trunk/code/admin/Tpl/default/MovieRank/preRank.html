@@ -1,0 +1,194 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<include file="MovieRank:opt" />
+</div>
+<!-- Sidebar ends -->
+    
+<!-- Content begins -->
+<div id="content">
+    <div class="contentTop">
+        <span class="pageTitle">图解预评级</span>
+        <div class="clear"></div>
+    </div>
+    
+    <!-- Breadcrumbs line -->
+	<include file="Public:bav" />
+	    
+    <!-- Main content -->
+    <div class="wrapper">
+        <div class="widget fluid">
+        	<div class="whead"><h6>图解预评级</h6><div class="clear"></div></div>
+        	<div class="body">
+        		<div class="grid2" style="width:100px;"><label>参与评级图解</label></div>
+        		<div class="grid9">
+        			<label style="float:left;margin-right:30px;"><input type="radio" class="js-rank-type" name="rank_type" value="0"/> 全部图解 {:count($movie_list)} 部</label>
+        			<label style="float:left;margin-right:30px;"><input type="radio" class="js-rank-type" name="rank_type" value="1"/> 电影 {:count($rank_list[1])} 部</label>
+        			<label style="float:left;"><input type="radio" name="rank_type" class="js-rank-type" value="2"/> 剧集 {:count($rank_list[2])} 部</label>
+        		</div>
+        		<div class="clear"></div>
+        	</div>
+        	<table cellpadding="0" cellspacing="0" width="100%" style="border-top:1px solid #cfcfcf;" class="tDefault checkAll tMedia">
+        		<thead>
+                    <tr>
+		                <td width="130"></td>
+		                <td width="200">阅读次数<br />倍数p1,p2,p3</td>
+		                <td width="200">点赞比<br />倍数q1,q2,q3</td>
+		                <td width="200">破格-阅读次数<br />倍数s1,s2,s3</td>
+		                <td width="200">破格-赞次数<br />倍数t1,t2,t3</td>
+		                <td>&nbsp;</td>
+                    </tr>
+                </thead>
+                <tbody>
+                	<tr>
+                		<td>【神作】</td>
+                		<td><div class="formRow nopadding"><input type="text" class="pre_rank_xxx" id="pre_rank_p1"/></div></td>
+                		<td><div class="formRow nopadding"><input type="text" class="pre_rank_xxx" id="pre_rank_q1"/></div></td>
+                		<td><div class="formRow nopadding"><input type="text" class="pre_rank_xxx" id="pre_rank_s1"/></div></td>
+                		<td><div class="formRow nopadding"><input type="text" class="pre_rank_xxx" id="pre_rank_t1"/></div></td>
+                		<td>&nbsp;</td>
+                	</tr>
+                	<tr>
+                		<td>【震精】</td>
+                		<td><div class="formRow nopadding"><input type="text" class="pre_rank_xxx" id="pre_rank_p2"/></div></td>
+                		<td><div class="formRow nopadding"><input type="text" class="pre_rank_xxx" id="pre_rank_q2"/></div></td>
+                		<td><div class="formRow nopadding"><input type="text" class="pre_rank_xxx" id="pre_rank_s2"/></div></td>
+                		<td><div class="formRow nopadding"><input type="text" class="pre_rank_xxx" id="pre_rank_t2"/></div></td>
+                		<td>&nbsp;</td>
+                	</tr>
+                	<tr>
+                		<td>【略屌】</td>
+                		<td><div class="formRow nopadding"><input type="text" class="pre_rank_xxx" id="pre_rank_p3"/></div></td>
+                		<td><div class="formRow nopadding"><input type="text" class="pre_rank_xxx" id="pre_rank_q3"/></div></td>
+                		<td><div class="formRow nopadding"><input type="text" class="pre_rank_xxx" id="pre_rank_s3"/></div></td>
+                		<td><div class="formRow nopadding"><input type="text" class="pre_rank_xxx" id="pre_rank_t3"/></div></td>
+                		<td>&nbsp;</td>
+                	</tr>
+                </tbody>
+        	</table>
+        	<div class="divider nomargin"></div>
+        	<div class="body">
+        		<input class="buttonM bBlack" type="button" id="do_pre_rank" value="开始预评级">
+        	</div>
+        	<div class="body">
+        		<div id="pre_rank_info_log" style="display:none; overflow-y:auto; max-height:400px;">
+        			<div id="pre_rank_load_info">正在预评级《xxx》。。。</div>
+				</div>
+        	</div>
+        	
+        </div>
+     
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+
+<script>
+	(function(){
+		var movie_list = {:json_encode($movie_list)};
+		var rank_list = {:json_encode($rank_list)};
+		var last_list = {:json_encode($last)};
+		var total_num = movie_list.length;
+		var loading = false;
+		var usetime = 0;
+		$('.js-rank-type').click(function(){
+			var val = $(this).val();
+			if (last_list[val] == null) {
+				
+			} else {
+				for (var a in last_list[val]) {
+					$('#pre_rank_'+a).val(parseFloat(last_list[val][a]).toFixed(3));
+				}
+			}
+			
+		});
+		var show = function(data,index){
+			var movie = null;
+			if (data.rank_type == '0') {
+				movie = movie_list[index];
+				total_num = movie_list.length;
+			} else {
+				movie = rank_list[data.rank_type][index];
+				total_num = rank_list[data.rank_type].length;
+			}
+			var img = '<img alt="" style="float: left; margin: 4px 8px 0 0px;" src="__PUBLIC__/images/elements/loaders/4s.gif">';
+			$('#pre_rank_load_info').html(img + "正在预评级 【" + (index+1) + " / " + total_num+"】（ID:" + movie.id + "）《" + movie.name + "》...");
+			data.start = movie.id;
+			data.index = index;
+			data.len = total_num;
+			//console.log(data);return;
+			$.ajax({
+				url : '{:U("MovieRank/doPreRank")}',
+				type : 'POST',
+				data : data,
+				success : function(rst) { 
+					try{
+						if (typeof rst == 'string'){
+							rst = $.parseJSON(rst);
+						}
+						var html = '';
+						if (rst.rst == 0) { // 失败
+							html = '<ul class="liWarning"><li>' + rst.msg + '  【' + rst.usetime + ' s】</li></ul>';
+						} else { // 成功
+							html = '<ul class="liDone"><li>' + rst.msg + '  【' + rst.usetime + ' s】</li></ul>';
+							index++;
+							if (index < total_num) {
+								setTimeout(function(){
+									show(data,index);
+								},20);
+							}
+						}
+						$('#pre_rank_load_info').after(html);
+						$('#pre_rank_load_info').html('biu~biu~biu~~~');
+						if (index == total_num) {
+							usetime = ((new Date()).valueOf() - usetime) / 1000;
+							$('#pre_rank_load_info').html('共 ' + total_num + ' 部电影，耗时：'+ usetime.toFixed(2)+" s");
+						}
+					}catch(ex){
+						alert('服务器错误');
+					}
+				},
+				error : function(ex){
+					alert('Ajax出错。');
+				}
+			});
+		};
+		$('#do_pre_rank').click(function(){
+			if (loading) {alert('正在评级，请耐心等待'); return;}
+			var data = {};
+			$('.js-rank-type').each(function(){
+				if ($(this).attr('checked') == 'checked') {
+					data.rank_type = $(this).val();
+				}
+			});
+			if (typeof data.rank_type == 'undefined') {
+				alert('请选择评级类型！'); return;
+			}
+			var pram = ['p1','p2','p3','q1','q2','q3','s1','s2','s3','t1','t2','t3'];
+			for (a in pram) {
+				var cs = pram[a];
+				var tmp = $.trim($('#pre_rank_'+cs).val());
+				if (tmp == '') {
+					alert('参数 ' + cs + ' 不能为空！'); return;
+				}
+				tmp = parseFloat(tmp,10);
+				if (tmp <= 0) {
+					alert('参数 ' + cs + ' 格式错误！'); return;
+				}
+				data[cs] = tmp;
+			}
+			
+			loading = true;
+			$('.pre_rank_xxx').attr('disabled','disabled');
+			$('#pre_rank_info_log').show();
+			usetime = (new Date()).valueOf();
+			show(data,0);
+		});
+		$('.pre_rank_xxx').attr('disabled',false);
+		
+	})();
+</script>
+
+<include file="Public:footer" />

@@ -1,0 +1,73 @@
+<!-- Secondary nav -->
+    <div class="secNav">
+        <div class="secWrapper">
+            <!-- Tabs container -->
+            <form method="get" action="{:U('Movie/index')}">
+            <input type="hidden" value="{$Think.MODULE_NAME}" name="m"/>
+            <input type="hidden" value="{$Think.ACTION_NAME}" name="a"/>
+            <div id="tab-container" class="tab-container">
+
+                <ul class="iconsLine ic1 etabs">
+                    <li><a href="#alt2" title="">专辑搜索:</a></li>
+                </ul>
+                
+                <div class="divider"><span></span></div>
+                
+                <div id="general"></div>
+                
+                <div id="alt1"></div>
+                <div id="alt2">
+                
+                	<!-- Sidebar forms -->
+                    <div class="sideWidget">
+                        <div class="formRow">
+                            <label>专辑ID:</label>
+                            <input type="text" name="id" value="{$Think.get.id|default=''}" placeholder="专辑ID" />
+                        </div>
+                        <div class="formRow">
+                           <label>专辑名称:</label>
+                            <input type="text" name="name" value="{$Think.get.name|default=''}" placeholder="专辑名称" /> 
+                        </div>
+                        <div class="formRow">
+                            <label>上线状态:</label>
+                            <select name="online" id="movie_search_online_select">
+                                <option value="" <eq name="Think.get.online" value="">selected="selected"</eq> >全部</option>
+                                <option value="1" <eq name="Think.get.online" value="1">selected="selected"</eq> >已上线</option>
+                                <option value="2" <eq name="Think.get.online" value="2">selected="selected"</eq> >未上线</option>
+                            </select>
+                        </div>
+                        <div class="formRow" id="movie_search_onlie_show">
+                        <div class="formRow">
+                            <label>平台:</label>
+                            <select name="platform" >
+                                <option value="all">全部</option>
+                                {:getPlatformList($_GET['platform'],'val')}
+                            </select>
+                        </div>
+                        <div class="formRow">
+                            <label>渠道:</label>
+                            <select name="channel" >
+                                <option value="all">全部</option>
+                                {:getChannelList($_GET['channel'],'val')}
+                            </select>
+                        </div>
+                        </div>
+                        
+                        <div class="formRow searchDrop">
+                            <label>专辑类型:</label>
+                            <input type="text" name="tags" value="{$Think.get.tags|default=''}" placeholder="专辑类型" /> 
+                        </div>
+                       
+                        <div class="formRow">
+                            <input type="submit" class="buttonS bLightBlue" value="搜索专辑" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"><span></span></div>
+            </form>
+            
+       </div> 
+       <div class="clear"></div>
+   </div>

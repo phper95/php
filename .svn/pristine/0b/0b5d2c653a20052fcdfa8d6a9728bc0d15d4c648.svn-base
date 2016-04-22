@@ -1,0 +1,397 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<include file="CreateTeam:opt" />
+</div>
+<!-- Sidebar ends -->
+	<script language="javascript" type="text/javascript" src="__JS__/My97DatePicker/WdatePicker.js"></script>
+    <script src="__JS__/dialog/artDialog.js?skin=default"></script>
+    
+<!-- Content begins -->
+<div id="content">
+    <div class="contentTop">
+        <span class="pageTitle">创作团管理</span>
+        <div class="clear"></div>
+    </div>
+    <include file="Public:bav" />
+    <!-- Main content -->
+    <div class="wrapper">
+        <!-- Media table sample -->
+        <div class="widget check">
+            <div class="whead">
+            <h6>编辑部成员列表</h6>
+            <a href="javascript:void(0);" id="bianji_add" title="添加编辑部成员" class="buttonH bBlue mb10 mt5">添加</a>
+				<div class="clear"></div></div>
+            <table cellpadding="0" cellspacing="0" width="100%" class="tDefault checkAll tMedia" id="checkAll">
+                <thead>
+                    <tr>
+		                <td width="50">编号</td>
+		                <td width="50">用户ID</td>
+		                <td>用户名称</td>
+		                <td width="60">作品数</td>
+		                <td width="60">被阅读数</td>
+		                <td width="60">被赞数</td>
+		                <td width="130">状态</td>
+		                <td width="150">操作</td>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td colspan="11">
+                        <empty name="list">
+                        	额。。。木有咧……
+                        <else/>
+                            <div class="tPages">
+                                <ul class="pages">
+                                	{$page}
+                                </ul>
+                            </div>
+                        </empty>
+                        </td>
+                        
+                    </tr>
+                </tfoot>
+                <tbody>
+                    <volist name="list" id="vo">
+		            <tr>
+		                <td>{$vo.id}</td>
+		                <td><a href="{:U('Member/index',array('id'=>$vo['user_id'],'backurl'=>urlencode(__SELF__)))}" title="点我管理该用户">{$vo.user_id}</a></td>
+		                <td>
+		                	<if condition="$vo['qian_time'] lt date('Y-m-d H:i:s')">
+		                		<strong class="tipW red" original-title="最近发表作品：{$vo.update_time}<br />第一次发表：{$vo.add_time}<br />第一次使用：{$vo.reg_time}<br />进基时间：{$vo.add_time}<br />签约到期：{$vo.qian_time}">{$vo.name}</strong> (签约到期)
+		                	<else />
+		                		<span class="tipW" original-title="最近发表作品：{$vo.update_time}<br />第一次发表：{$vo.add_time}<br />第一次使用：{$vo.reg_time}<br />进基时间：{$vo.add_time}<br />签约到期：{$vo.qian_time}">{$vo.name}</span>
+		                	</if>
+		                </td>
+		                <td><a href="{:U('Movie/index',array('grapher_id'=>$vo['user_id'],'backurl'=>urlencode(__SELF__)))}">{$vo.online_work_count}</a></td>
+		                <td>{$vo.stat_beplayed}</td>
+		                <td>{$vo.stat_belike}</td>
+		                <td>
+		                	身份证：{$idcard_state[$vo['state']]}<br />
+		                	续签：{$qian_state[$vo['qi_state']]}<br />
+		                </td>
+		                <td>
+		                	<if condition="$vo['state'] eq 2 or $vo['state'] eq 0">
+		                		<if condition="$vo['qi_state'] eq 1">
+		                			<a class="js-check-xu" data-id="{$vo.id}" href="javascript:void(0);">续签审核</a>&nbsp;&nbsp;&nbsp;&nbsp;
+		                		</if>
+		                		<if condition="$vo['open'] eq 1">
+		                			<a href="{:U('CreateTeam/pingfen', array('user_id'=>$vo['user_id']))}">评分</a>
+		                		<else />
+		                			<a class="js-xu" data-id="{$vo.id}" href="javascript:void(0);">续签</a>&nbsp;&nbsp;&nbsp;&nbsp;
+		                		</if>
+		                	<elseif condition="$vo['state'] eq 1" />
+		                		<a data-url="{:U('CreateTeam/getContractMember', array('id'=>$vo['user_id']))}" data-id="{$vo.id}" class="js-check-idcard" data-img1="{$vo.img_1}" data-img2="{$vo.img_2}" href="javascript:void(0);">身份证审核</a>
+		                	<elseif condition="$vo['state'] eq 3" />
+		                		身份证审核失败
+		                	<else />
+		                		其他状态
+		                	</if>
+		                </td>
+		            </tr>
+		            </volist>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+   			<div id="xxsdf" style="display:none;width:1000px;line-height:24px;" class="fluid">
+            		<div class="fluid">
+            			<div class="widget nomargin">
+            				<form id="search_img_form" action="" onsubmit="return false;">
+            				<div class="formRow">
+	                            <div class="grid1"><label>用户ID: </label></div>
+	                            <div class="grid3"><input type="text" name="id" id="js_search_user_id" placeholder="通过用户ID查找"/></div>
+	                            <input type="submit" id="search_bianji_user" value="查询" class="buttonM bBlue formSubmit" /><div class="clear"></div>
+	                            <div class="clear"></div>
+	                        </div>
+	                        <!--
+	                        <div class="formRow">
+	                         
+	                            <div class="grid1"><label>用户昵称: </label></div>
+	                            <div class="grid3"><input type="text" name="name" class="js_search_input" placeholder="通过昵称查找"/></div>
+	                            <div class="grid1"><label>用户邮箱: </label></div>
+	                            <div class="grid3"><input type="text" name="email" class="js_search_input" placeholder="通过邮箱查找"/></div>
+	                           
+	                            <input type="submit" id="search_mat_img" value="查询" class="buttonM bBlue formSubmit" /><div class="clear"></div>
+	                            <div class="clear"></div>
+	                        </div>
+	                        -->
+	                        </form>
+	                        <div style="width:100%;height:400px;border-top:1px solid #ccc;position:relative;overflow:hidden;" id="mat_img_list">
+	                        	<div style="width:75%;height:400px;border-top:1px solid #ccc;position:relative;overflow-x:hidden;overflow-y:auto;">
+	                        	<table cellpadding="0" cellspacing="0" width="100%" class="tDefault checkAll tMedia" id="checkAll">
+	                        		<thead>
+					                    <tr>
+							                <td width="50">用户ID</td>
+							                <td>用户名称</td>
+							                <td width="60">作品数</td>
+							                <td width="60">被阅读数</td>
+							                <td width="60">被赞数</td>
+							                <td width="180">最近发表作品时间</td>
+							                <td width="60">进基得分</td>
+					                    </tr>
+					                </thead>
+					                <tbody id="create_team_user_list"></tbody>
+	                        	</table>
+	                        	</div>
+	                        	<div style="border-left:1px solid #ccc;height:100%;overflow-y:auto;overflow-x:hidden;width:25%;position:absolute;top:0px;right:0px;">
+	                        		<form id="submit_add_bianji_form" action="{:U('CreateTeam/doAddBianji')}" method="POST">
+	                        			<span class="red">已选择用户：</span>
+	                        		</form>
+	                        	</div>
+	                        </div>
+	                        <div id="create_team_more" style="text-align:center;padding:5px;float:left;width:100%;font-size:2em;font-weight:900;color:#999;cursor:pointer;"> - 点击加载更多 - </div>
+            			</div>
+            		</div>
+            </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+
+<script>
+var choose_user = {};
+function addBianjiUser (id,name){
+	if (typeof choose_user[id] !== 'undefined') {alert(name+' 用户已经被选择过了哟！');return;}
+	choose_user[id] = true;
+	var html = '<div style="line-height:2.2em;padding:2px 5px;color:#666;border-bottom:1px solid #ddd;"><label>'+name+' ('+id+')'+'</label> <input type="hidden" name="user_id[]" value="'+id+'"/><a href="javascript:void(0);" onclick="$(this).parent().remove(); delete choose_user['+id+'];" style="float:right;">删除</a></div>';
+	$('#submit_add_bianji_form').append(html);
+}
+(function(){
+	var p = 1;
+	var loading = false;
+	var pre_url = 'http://ser3.graphmovie.com/pit/';
+	
+	var examine_loading = false;
+	var examine = function(data, url, dialog){
+		if (examine_loading) {alert('正在提交');return;}
+		examine_loading = true;
+		$.ajax({
+			url : url,
+			type : 'POST',
+			data : data,
+			success : function(rst) {
+				examine_loading = false;
+				dialog.close();
+				if (typeof rst == 'object') {
+					if (rst.status == 1) {
+						alert(rst.info);
+						location.reload();
+					} else {
+						alert(rst.info);
+					}
+				} else {
+					alert(rst);
+				}
+			},
+			error : function (ex) {
+				examine_loading = false;
+				alert('ajax 错误');
+			}
+		});
+	}
+	
+	$('.js-xu').click(function(){
+		var html = '<div style="line-height:3em;">合约到期时间：<br />'
+		 	+ '<input id="qian_time" type="text" value="{:date("Y-m-d 00:00:00",strtotime("+3 month"))}" onClick="WdatePicker({dateFmt:'+"'yyyy-MM-dd 00:00:00'"+'})" readonly="readonly" style="width:100%;border:1px solid #ccc; background-color:#fff;line-height:20px;"/>'
+		 	+ '<br /><label onclick="$(\'#qian_time\').val(\'{:date("Y-m-d 00:00:00",strtotime("+1 month"))}\')"><input type="radio" name="month"/> 1个月</label>&nbsp;&nbsp;'
+		 	+ '<label onclick="$(\'#qian_time\').val(\'{:date("Y-m-d 00:00:00",strtotime("+2 month"))}\')"><input type="radio" name="month"/> 2个月</label>&nbsp;&nbsp;'
+		 	+ '<label onclick="$(\'#qian_time\').val(\'{:date("Y-m-d 00:00:00",strtotime("+3 month"))}\')"><input checked="checked" type="radio" name="month"/> 3个月</label>&nbsp;&nbsp;'
+		 + '</div>';
+		var id = $(this).attr('data-id');
+		var dialog_id = id+'_check_xu_dialog';
+		var examin_url = '{:U("CreateTeam/examineXuQian")}';
+		art.dialog({
+			id : dialog_id,
+			title : '续签',
+			content:html,
+			ok : function(){
+				var qian_time = $('#qian_time').val();
+				if (qian_time == '') {alert('请选择合约到期时间');return false;}
+				examine({id:id,qi_state:2,qian_time:qian_time,xu:1},examin_url,art.dialog({id:dialog_id}));
+				return false;
+			},
+			cancel:true
+		});
+	});
+	
+	$('.js-check-xu').click(function(){
+		var html = '<div style="line-height:3em;">合约到期时间：<br />'
+		 	+ '<input id="qian_time" type="text" value="{:date("Y-m-d 00:00:00",strtotime("+3 month"))}" onClick="WdatePicker({dateFmt:'+"'yyyy-MM-dd 00:00:00'"+'})" readonly="readonly" style="width:50%;border:1px solid #ccc; background-color:#fff;line-height:20px;"/>'
+		 	+ '<br /><label onclick="$(\'#qian_time\').val(\'{:date("Y-m-d 00:00:00",strtotime("+1 month"))}\')"><input type="radio" name="month"/> 1个月</label>&nbsp;&nbsp;'
+		 	+ '<label onclick="$(\'#qian_time\').val(\'{:date("Y-m-d 00:00:00",strtotime("+2 month"))}\')"><input type="radio" name="month"/> 2个月</label>&nbsp;&nbsp;'
+		 	+ '<label onclick="$(\'#qian_time\').val(\'{:date("Y-m-d 00:00:00",strtotime("+3 month"))}\')"><input checked="checked" type="radio" name="month"/> 3个月</label>&nbsp;&nbsp;'
+		 + '</div>';
+		 html += '<br /><div <div style="line-height:3em;">原因：<input id="no_pass_reason" type="text" style="width:100%;border:1px solid #ccc; background-color:#fff;line-height:20px;"/></div>';
+		html += '<br />是否通过该信息的审核呢？如果不通过，请在上面填入原因，通过的话，则无视上面的原因';
+		var id = $(this).attr('data-id');
+		var dialog_id = id+'_check_xu_dialog';
+		var examin_url = '{:U("CreateTeam/examineXuQian")}';
+		art.dialog({
+			id : dialog_id,
+			title : '审核信息',
+			content:html,
+			button:[{name:'通过',callback:function(){
+				var qian_time = $('#qian_time').val();
+				if (qian_time == '') {alert('请选择合约到期时间');return false;}
+				examine({id:id,qi_state:2,qian_time:qian_time},examin_url,art.dialog({id:dialog_id}));
+				return false;
+			}},{name:'不通过',callback:function(){
+				var reason = $('#no_pass_reason').val();
+				if (reason == '') {alert('请输入原因哟');return false;}
+				examine({id:id,qi_state:3,reason:reason},examin_url,art.dialog({id:dialog_id}));
+				return false;
+			}}]
+		});
+	});
+	
+	$('.js-check-idcard').click(function(){
+		var html = '';
+		for (var i=1; i<=2; i++) {
+			html += '<div style="position:relative;background:url('+pre_url+$(this).attr('data-img'+i)+') no-repeat center;background-size:100% 100%; float:left;height:200px;width:300px;">'
+					+ '<div style="opacity:0.58;background:url(__PUBLIC__/images/p.png);position:absolute;top:0;left:0;width:100%;height:100%;"/></div>'
+				 +  '</div>'
+		}
+		var id = $(this).attr('data-id');
+		var url = $(this).attr('data-url');
+		var dialog_id = id+'_check_dialog';
+		art.dialog({
+			id : dialog_id,
+			title : '审核信息',
+		});
+		var info = {realname:'真实姓名',id_card:'身份证号',phone:'电话号码',qq:'作者扣扣'};
+		var examin_url = '{:U("CreateTeam/examineIdCard")}';
+		$.ajax({
+			url : url,
+			type : 'GET',
+			success : function(data){
+				for (var a in info) {
+					html = '<div style="padding:3px 0px;">'+info[a]+': '+data[a]+'</div>' + html;
+				}
+				html += '<br /><div style="line-height:3em;">合约到期时间：<br />'
+					 	+ '<input id="qian_time" type="text" value="{:date("Y-m-d 00:00:00",strtotime("+3 month"))}" onClick="WdatePicker({dateFmt:'+"'yyyy-MM-dd 00:00:00'"+'})" readonly="readonly" style="width:50%;border:1px solid #ccc; background-color:#fff;line-height:20px;"/>'
+					 	+ '<br /><label onclick="$(\'#qian_time\').val(\'{:date("Y-m-d 00:00:00",strtotime("+1 month"))}\')"><input type="radio" name="month"/> 1个月</label>&nbsp;&nbsp;'
+					 	+ '<label onclick="$(\'#qian_time\').val(\'{:date("Y-m-d 00:00:00",strtotime("+2 month"))}\')"><input type="radio" name="month"/> 2个月</label>&nbsp;&nbsp;'
+					 	+ '<label onclick="$(\'#qian_time\').val(\'{:date("Y-m-d 00:00:00",strtotime("+3 month"))}\')"><input checked="checked" type="radio" name="month"/> 3个月</label>&nbsp;&nbsp;'
+					 + '</div>';
+				html += '<br /><div <div style="line-height:3em;">原因：<input id="no_pass_reason" type="text" style="width:100%;border:1px solid #ccc; background-color:#fff;line-height:20px;"/></div>';
+				html += '<br />是否通过该信息的审核呢？如果不通过，请在上面填入原因，通过的话，则无视上面的原因';
+				art.dialog({id:dialog_id}).content(html).button([{name:'通过',callback:function(){
+					var qian_time = $('#qian_time').val();
+					if (qian_time == '') {alert('请选择合约到期时间');return false;}
+					examine({id:id,state:2,qian_time:qian_time},examin_url,art.dialog({id:dialog_id}));
+					return false;
+				}},{name:'不通过',callback:function(){
+					var reason = $('#no_pass_reason').val();
+					if (reason == '') {alert('请输入原因哟');return false;}
+					examine({id:id,state:3,reason:reason},examin_url,art.dialog({id:dialog_id}));
+					return false;
+				}}]);
+			}
+		});
+	});
+	
+	
+	
+	function getUserList(){
+		if (loading) {alert('正在加载，稍后再试'); return;}
+		loading = true;
+		$.ajax({
+			url : '{:U("CreateTeam/teamList",array("js"=>true))}',
+			type : 'GET',
+			data : {p:p},
+			success : function(data) {
+				loading = false;
+				if (typeof data === 'object') {
+					var html = '';
+					for (var a in data) {
+						html += '<tr style="cursor:pointer;" id="search_rst_list_'+data[a].user_id+'" onclick="addBianjiUser(\''+data[a].user_id+'\',\''+data[a].name+'\');">'
+							  + '<td>'+data[a].user_id+'</td>'
+							  + '<td>'+data[a].name+'</td>'
+							  + '<td>'+data[a].online_work_count+'</td>'
+							  + '<td>'+data[a].stat_beplayed+'</td>'
+							  + '<td>'+data[a].stat_belike+'</td>'
+							  + '<td>'+data[a].update_time+'</td>'
+							  + '<td>'+data[a].jinji_score+'</td>'
+							  + '</tr>';
+					}
+					$('#create_team_user_list').append(html);
+					p++;
+				} else {
+					alert(data);
+				}
+			},
+			error : function(e) {
+				alert('网络错误');
+			}
+		});
+	}
+	
+	$('#create_team_more').click(function(){
+		getUserList();
+	});
+	$('#bianji_add').click(function(){
+		if ($('#create_team_user_list').html() == '') { // 啥都没有，加载创作团信息
+			getUserList();
+		}
+		
+		art.dialog({
+			title : '添加编辑部成员',
+			padding:0,
+			content:$('#xxsdf')[0],
+			ok : function(){
+				for (var a in choose_user) {
+					$('#submit_add_bianji_form').submit();
+					return false;
+				}
+				alert('要先选择 people，再点击“确定” 啊！');
+				return false;
+			}
+		});
+	});
+	
+	$('#search_bianji_user').click(function(){
+		var user_id = $.trim($('#js_search_user_id').val());
+		try {
+			user_id = parseInt(user_id);
+			$.ajax({
+				type : 'POST',
+				url : '{:U("CreateTeam/getMemberList")}',
+				data : {id:user_id},
+				success : function(data){
+					if (typeof data === 'object') {
+						if (data.rst == 0) {
+							alert(data.msg);
+						} else {
+							var rst = data.data;
+							if ($('#search_rst_list_'+rst.user_id).length == 0) {
+								html = '<tr style="cursor:pointer;" id="search_rst_list_'+rst.user_id+'" onclick="addBianjiUser(\''+rst.user_id+'\',\''+rst.name+'\');">'
+								  + '<td>'+rst.user_id+'</td>'
+								  + '<td>'+rst.name+'</td>'
+								  + '<td>'+rst.online_work_count+'</td>'
+								  + '<td>'+rst.stat_beplayed+'</td>'
+								  + '<td>'+rst.stat_belike+'</td>'
+								  + '<td>'+rst.update_time+'</td>'
+								  + '</tr>';
+								$('#create_team_user_list').append(html);
+							}
+							$('#search_rst_list_'+rst.user_id).click();
+						}
+					} else {
+						alert(data);
+					}
+				},
+				error : function(e){
+					alert('ajax 错误');
+				}
+			});
+		}catch(ex) {
+			
+		}
+	});
+})();
+</script>
+
+<include file="Public:footer" />

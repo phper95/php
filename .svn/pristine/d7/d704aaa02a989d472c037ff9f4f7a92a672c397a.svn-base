@@ -1,0 +1,513 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<include file="Statistic:opt" />
+</div>
+<!-- Sidebar ends -->
+    
+<!-- Content begins -->
+<div id="content">
+    <div class="contentTop">
+        <span class="pageTitle">电影列表习惯统计</span>
+        <div class="clear"></div>
+    </div>
+    
+    <!-- Breadcrumbs line -->
+    <include file="Public:bav" />
+    
+    <!-- Main content -->
+    <div class="wrapper">
+    	<div class="widget">
+    		<div class="whead fluid">
+    			<h6>查询</h6>
+				<div class="clear"></div>
+    		</div>
+    		<script language="javascript" type="text/javascript" src="__JS__/My97DatePicker/WdatePicker.js"></script>
+    		<form method='post' id="form1" name="form1" action="{:U('Statistic/movieList')}"  enctype="multipart/form-data">
+    		<div class="formRow">
+            	<div style="float:left;"><label>日期：</label></div>
+                <div style="float:left;width:120px;">
+                     <span class="grid12"><input type="text" onClick="WdatePicker()" name="day" value="{$Think.post.day|default=''}"></span>
+                </div>
+                <input type="submit" value="提 交" class="buttonM bBlack formSubmit" /><div class="clear"></div>
+                <div class="clear"></div>
+            </div>
+            </form>
+    	</div>
+    <empty name="error_info">
+    	<div class="widget fluid">
+    		<div class="formRow">
+            	<!--<div style="float:left;"><label>日期：</label></div>
+                <div style="float:left;width:120px;">
+                     <span class="grid12"><input type="text" onClick="WdatePicker()" value=""></span>
+                </div>
+                -->
+                <div style="float:left;">
+                	<label>平台：</label>
+                    <select id="statistic_movie_list_to_platform" >
+                 	</select>
+                </div>
+                <div style="float:left;width:30px;">&nbsp;</div>
+                <div style="float:left;">
+                	<label>渠道：</label>
+                    <select id="statistic_movie_list_to_channel" >
+            		</select>
+                </div>
+                
+                <div style="float:left;width:30px;">&nbsp;</div>
+                <div style="float:left;">
+                	<label>版本：</label>
+                    <select id="statistic_movie_list_to_verson" >
+            		</select>
+                </div>
+                
+                <div style="float:left;width:30px;">&nbsp;</div>
+                <div style="float:left;">
+                	<label>精?：</label>
+                    <select id="statistic_movie_list_to_jin" >
+                    <option value="0">全部</option>
+                    <option value="1">精品</option>
+            		</select>
+                </div>
+                
+                <div style="float:left;width:30px;">&nbsp;</div>
+                <div style="float:left;">
+                	<label>排序：</label>
+                    <select id="statistic_movie_list_to_sort" >
+                    <option value="0">最新</option>
+                    <option value="1">最热</option>
+                    <option value="2">最赞</option>
+                    <option value="3">热评</option>
+                    <option value="4">电影</option>
+                    <option value="5">新番</option>
+                    <option value="6">推荐</option>
+            		</select>
+                </div>
+                
+                <div class="clear"></div>
+                <div style="float:left;">
+                	<label>地区：</label>
+                    <select id="statistic_movie_list_to_zone" >
+            		</select>
+                </div>
+                
+                <div style="float:left;width:30px;">&nbsp;</div>
+                <div style="float:left;">
+                	<label>上映：</label>
+                    <select id="statistic_movie_list_to_showtime" >
+            		</select>
+                </div>
+                
+                <div style="float:left;width:30px;">&nbsp;</div>
+                <div style="float:left;">
+                	<label>类型：</label>
+                    <select id="statistic_movie_list_to_tag" >
+            		</select>
+                </div>
+                
+                <div style="float:left;width:30px;">&nbsp;</div>
+                <div style="float:left;">
+                	<label>时间：</label>
+                    <select id="statistic_movie_list_to_day" >
+                    <option value="day">全天</option>
+            		</select>
+                </div>
+                
+                <div style="float:left;width:30px;">&nbsp;</div>
+                <div style="float:left;">
+                	<label>数据：</label>
+                    <select id="statistic_movie_list_to_data" >
+                    <option value="post">请求次数</option>
+                    <option value="user">请求用户数</option>
+                    <option value="u_max">单个用户最大请求数</option>
+            		</select>
+                </div>
+                
+                <a href="javascript:void(0);" id="statistic_movie_list_to_search" class="buttonH bBlue mb10">查询</a>
+                <div class="clear"></div>
+            </div>
+    		<div id="boo"></div>
+    		<div id="boo2"></div>
+    	</div>
+    	
+    	<div class="widget fluid">
+    		<table cellpadding="0" cellspacing="0" width="100%" class="tDefault" id="resize">
+                <thead>
+                    <tr>
+		                <td width="100" class="sortCol">地区<span></span></td>
+		                <td width="100" class="sortCol">上映时间<span></span></td>
+		                <td width="100" class="sortCol">类型<span></span></td>
+		                <td width="100" class="sortCol">精品<span></span></td>
+		                <td width="100" class="sortCol">排序<span></span></td>
+		                <td width="80" class="sortCol">请求次数<span></span></td>
+		                <td width="80">占总数百分比</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <volist name="list" id="vo">
+		            <tr>
+		                <td><eq name="vo.z_id" value="0">全部<else/>{$zone[$vo['z_id']]}</eq></td>
+		                <td><eq name="vo.st_id" value="0">全部<else/>{$showtime[$vo['st_id']]}</eq></td>
+		                <td><eq name="vo.t_id" value="0">全部<else/>{$tag[$vo['t_id']]}</eq></td>
+		                <td><eq name="vo.jin" value="1">精品<else/>全部</eq></td>
+		                <td>
+		                <switch name="vo.l_px" >
+							<case value="0" >最新</case>
+							<case value="1">最热</case>
+							<case value="2">最赞</case>
+							<case value="3">热评</case>
+							<case value="4">电影</case>
+							<case value="5">新番</case>
+							<case value="6">推荐</case>
+							<default />XX
+						</switch>
+		                </td>
+		                <td>{$vo.post}</td>
+		                <td>≈ {:round(($vo['post'] / $total) * 100,2)}%</td>
+		            </tr>
+		            </volist>
+                </tbody>
+            </table>
+    	</div>
+    	
+    <else />
+    	<div class="widget">
+    	<div class="body">{$error_info}</div>
+    	</div>
+    </empty>
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+
+<empty name="error_info">
+	<script src="http://echarts.baidu.com/build/echarts-plain.js"></script>
+    <script type="text/javascript">
+    (function(){
+    	var need_key = {:json_encode($need_key)};
+    	var data = {:json_encode($rst)};
+    	var _showtime = {:json_encode($showtime)};
+    	var _zone = {:json_encode($zone)};
+    	var _tag = {:json_encode($tag)};
+    	//console.log(_showtime);
+    	
+    	var initSelect = function(){
+    		var init_value = '<option value="all">全部</option>';
+    		var plat = $('#statistic_movie_list_to_platform');
+    		var chan = $('#statistic_movie_list_to_channel');
+    		var ver = $('#statistic_movie_list_to_verson');
+    		var day = $('#statistic_movie_list_to_day');
+    		var zone = $('#statistic_movie_list_to_zone');
+    		var showtime = $('#statistic_movie_list_to_showtime');
+    		var tag = $('#statistic_movie_list_to_tag');
+    		plat.html(init_value);
+    		chan.html(init_value);
+    		ver.html(init_value);
+    		var xp = {}, xc={}, xv={}, xz={}, xs={}, xt={};
+    		
+    		for (var i=0; i<24; i++){
+    			$('<option value="'+i+'">'+i+' h</option>').appendTo(day);
+    		}
+    		
+    		for (var p_num in data) {
+        		for (var pvc in data[p_num]) {
+        			var tmp = pvc.split(' | ');
+        			if (tmp.length != 3) {alert('数据错误，请重新获取'); return;}
+        			var p = tmp[0];
+        			var c = tmp[1];
+        			var v = tmp[2];
+        			if (typeof xp[p] == 'undefined') {
+        				xp[p] = true;
+        				$('<option value="'+p+'">'+p+'</option>').appendTo(plat);
+        			}
+        			if (typeof xc[c] == 'undefined') {
+        				xc[c] = true;
+        				$('<option value="'+c+'">'+c+'</option>').appendTo(chan);
+        			}
+        			if (typeof xv[v] == 'undefined') {
+        				xv[v] = true;
+        				$('<option value="'+v+'">'+v+'</option>').appendTo(ver);
+        			}
+        			var lev2 = data[p_num][pvc];
+        			for (var t in lev2) {
+        				for (var i in lev2[t]) {
+        					var tmp_zone = lev2[t][i]['z_id'];
+        					var tmp_showtime = lev2[t][i]['st_id'];
+        					var tmp_tag = lev2[t][i]['t_id'];
+        					if (typeof xz[tmp_zone] == 'undefined') {
+        						xz[tmp_zone] = true;
+        						var tmp_value = _zone[tmp_zone] || (tmp_zone==0 ? '全部' : tmp_zone);
+        						$('<option value="'+tmp_zone+'">'+tmp_value+'</option>').appendTo(zone);
+        					}
+        					if (typeof xs[tmp_showtime] == 'undefined') {
+        						xs[tmp_showtime] = true;
+        						var tmp_value = _showtime[tmp_showtime] || (tmp_showtime==0 ? '全部' : tmp_showtime);
+        						$('<option value="'+tmp_showtime+'">'+tmp_value+'</option>').appendTo(showtime);
+        					}
+        					if (typeof xt[tmp_tag] == 'undefined') {
+        						xt[tmp_tag] = true;
+        						var tmp_value = _tag[tmp_tag] || (tmp_tag==0 ? '全部' : tmp_tag);
+        						$('<option value="'+tmp_tag+'">'+tmp_value+'</option>').appendTo(tag);
+        					}
+        				}
+        			}
+        		}
+        	}
+    		
+    		sortSelect(zone);
+    		sortSelect(showtime);
+    		sortSelect(tag);
+    	};
+    	
+    	function sortSelect($obj){
+    		var $options = $obj.find('option'); // get all options
+    		$options = $options.sort(function(a,b){ // sort by value of options
+    			return a.value - b.value;
+    		});
+    		$obj.html($options); // add new sorted options to select
+    		$obj.prop('selectedIndex', 0);
+    	}
+    	
+    	initSelect();
+    	
+    	var display = function(option, type, p, c, v, zone, showtime, tag, time, jin, s){
+    		var opt = {
+    				radius : '50%',
+    	            center: ['50%', '60%'],
+    	            selectedOffset :10
+    		};
+    		opt.name = '访问次数';
+    		opt.type = 'pie';
+    		opt.data = [];
+        	for (var p_num in data) {
+        		//option.xAxis[0].data.push(p_num);
+        		var lev1 = data[p_num];
+        		var data_num = 0;
+        		for (var pvc in lev1) {
+        			var tmp = pvc.split(' | ');
+        			if (tmp.length != 3) {alert('数据错误，请重新获取'); return;}
+        			var lev2 = lev1[pvc];
+        			for (var t in lev2) {
+        				var x = parseInt(t.substring(t.length-2));
+        				if (time == 'day' || time == x) {
+        					if (p == 'all' || p == tmp[0]){
+            					if (c == 'all' || c==tmp[1]) {
+            						if (v == 'all' || v==tmp[2]) {
+            							var lev3 = lev2[t];
+            							for (var i in lev3) {
+            								var l3 = lev3[i];
+            								if (l3['z_id'] == zone && l3['st_id'] == showtime && l3['t_id'] == tag && l3['jin'] == jin && l3['l_px'] == s) {
+            									var num = parseInt(l3[type]);
+                    							if (type=='u_max' || type=='t_max') { // 这里求最大值
+                    								data_num = data_num==0 ? num : Math.max(data_num,num);  
+                    							} else {
+                    								data_num += num;
+                    							}
+            								}
+            							}
+            						}
+            					}
+            				}
+        				}
+        			}
+        		}
+        		/*a.splice(0,0,-2,-1);
+        		opt.data.splice(0,0,{
+        			value:data_num, 
+        			name:'第 '+p_num+' 屏'
+        		});
+        		*/
+        		if (data_num == 0) continue;
+        		opt.data.push({
+        			value:data_num, 
+        			name:'第 '+p_num+' 屏'
+        		});
+        	}
+        	if (opt.data.length==0) {alert('木油');}
+        	option.series.push(opt);
+        	
+        	$('#boo').height('700px');
+        	// 基于准备好的dom，初始化echarts图表
+            var myChart = echarts.init(document.getElementById('boo')); 
+         	// 为echarts对象加载数据 
+            myChart.setOption(option);
+    	}
+    	
+    	var displayDay = function(type, p, c, v, zone, showtime, tag, time, jin, s){
+    		var option = {
+            		title : {
+                	    text: '全天每小时分布图',
+                	    subtext: ''
+                	},
+                	tooltip : {
+                	    trigger: 'axis',
+                	    axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                	        type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                	    }
+                	},
+                	animation:false,
+                	grid :{
+                	  	x2 : 120
+                	},
+                    toolbox: {
+                        show : true,
+                        feature : {
+                            mark : {show: true},
+                            dataView : {show: true, readOnly: false},
+                            magicType : {show: true, type: ['line', 'bar']},
+                            restore : {show: true},
+                            saveAsImage : {show: true}
+                        }
+                    },
+                    legend: {
+                    	 orient: 'vertical', // 'vertical'
+                         x: 'right', // 'center' | 'left' | {number},
+                         y: '40', // 'center' | 'bottom' | {number}
+                        data:[]
+                    },
+                    xAxis : [{
+                            type : 'category',
+                            data : []
+                        }
+                    ],
+                    yAxis : [{
+                            type : 'value'
+                        }
+                    ],
+                    series : [
+                    ]
+                };
+    		for (var i =0; i<24; i++) { // 全天 0~23 小时 , x 轴
+        		option.xAxis[0].data.push(i);
+        	}
+        	for (var p_num in data) { 
+        		var xx_name = '第'+p_num+'屏';
+        		option.legend.data.push(xx_name); // 有多少条线条
+        		var opt = {markPoint : {
+                    data : [
+                            {type : 'max', name: '最大值'},
+                            {type : 'min', name: '最小值'}
+                        ]
+                    },markLine : {
+                        data : [
+                                {type : 'average', name: '平均值'}
+                            ]
+                        }
+        		};
+        		opt.name = xx_name;
+        		opt.type = 'line';
+        		opt.data = [];
+        		for (var i =0; i<24; i++) { // 数据填充0
+        			opt.data.push(0);
+        		}
+        		var lev1 = data[p_num];
+        		for (var pvc in lev1) {
+        			var tmp = pvc.split(' | ');
+        			if (tmp.length != 3) {alert('数据错误，请重新获取'); return;}
+        			var lev2 = lev1[pvc];
+        			for (var t in lev2) {
+        				if (time == 'day') {
+        					if (p == 'all' || p == tmp[0]){
+            					if (c == 'all' || c==tmp[1]) {
+            						if (v == 'all' || v==tmp[2]) {
+            							var lev3 = lev2[t];
+            							for (var i in lev3) {
+            								var l3 = lev3[i];
+            								if (l3['z_id'] == zone && l3['st_id'] == showtime && l3['t_id'] == tag && l3['jin'] == jin && l3['l_px'] == s) {
+            									var x = parseInt(t.substring(t.length-2));
+            									var num = parseInt(l3[type]);
+                    							if (type=='u_max' || type=='t_max') { // 这里求最大值
+                    								opt.data[x] = opt.data[x]==0 ? num : Math.max(opt.data[x],num); 
+                    							} else {
+                    								opt.data[x] += num;
+                    							}
+            								}
+            							}
+            						}
+            					}
+            				}
+        				}
+        			}
+        		}
+        		option.series.push(opt);
+        	}
+        	
+        	if (option.legend.data.length > 27) {
+        		option.grid.x2 = 240;
+        		option.tooltip.formatter = function(params,ticket,callback) {
+        			var st = {};
+        			var key = [];
+                    var res = params[0][1] + '小时';
+                    for (var i = 0, l = params.length; i < l; i++) {
+                    	if (params[i][2] > 0) {
+                    		key.push(params[i][2]);
+                    		var k = params[i][2];
+                    		st[k] = typeof(st[k]) == 'undefined' ? [] : st[k];
+                        	st[k].push(params[i][0] + ' : ' + params[i][2]);
+                    	}
+                    }
+                    key = key.sort(function(a,b){return b-a;});
+                    for (var a in key) {
+                    	res += '<br/>' + st[key[a]].pop() ;
+                    	//res += '<br/>' + eval('st.opt'+key[a] +'.pop()') ;
+                    }
+                    return res;
+                }
+        	}
+        	
+        	$('#boo2').height('700px');
+        	// 基于准备好的dom，初始化echarts图表
+            var myChart = echarts.init(document.getElementById('boo2')); 
+         	// 为echarts对象加载数据 
+            myChart.setOption(option);
+    	}
+    	
+    	$('#statistic_movie_list_to_search').click(function(){
+    		var p = $('#statistic_movie_list_to_platform').val();
+    		var c = $('#statistic_movie_list_to_channel').val();
+    		var d = $('#statistic_movie_list_to_data').val();
+    		var v = $('#statistic_movie_list_to_verson').val();
+    		var zone = $('#statistic_movie_list_to_zone').val();
+    		var showtime = $('#statistic_movie_list_to_showtime').val();
+    		var tag = $('#statistic_movie_list_to_tag').val();
+    		var time = $('#statistic_movie_list_to_day').val();
+    		var jin = $('#statistic_movie_list_to_jin').val();
+    		var s = $('#statistic_movie_list_to_sort').val();
+    		
+    		var d_txt = $('#statistic_movie_list_to_data option:selected').text();
+    		var option = {
+        		title : {
+            	    text: '{$Think.post.day|default=''} 电影列表用户习惯-'+d_txt+'-情况分析',
+            	    subtext: p + ' 平台  ' + c + ' 渠道 '
+            	},
+            	tooltip : {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c} ({d}%)"
+                },
+            	
+            	toolbox: {
+                    show : true,
+                    feature : {
+                        mark : {show: true},
+                        dataView : {show: true, readOnly: false},
+                        restore : {show: true},
+                        saveAsImage : {show: true}
+                    }
+                },
+                series : [
+                ]
+            };
+    		if (time == 'day') {
+    			displayDay(d,p,c,v,zone,showtime,tag,time,jin,s);
+    		} else {
+    			$('#boo2').hide(1000);
+    		}
+    		display(option,d,p,c,v,zone,showtime,tag,time,jin,s);
+    	});
+    	 
+    })();
+    </script>
+</empty>
+<include file="Public:footer" />

@@ -1,0 +1,97 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<!-- Secondary nav -->
+</div>
+<!-- Sidebar ends -->
+
+<script language="javascript" type="text/javascript" src="__JS__/My97DatePicker/WdatePicker.js"></script>
+
+<!-- Content begins -->
+<div id="content">
+    <include file="Public:bav" />
+    <!-- Main content -->
+    <div class="wrapper">
+        	<div class="fluid">
+        		<form method='post' id="form1" name="form1" action="{:U('News/doAddDayPic')}"  enctype="multipart/form-data">
+                    <div class="widget ">
+                        <div class="whead">
+                        		<h6>添加每日一图</h6>
+                        	<empty name="Think.get.backurl">
+	                        	<a href="{:getCurrentUrl()}" class="buttonH bBlue mb10 mt5">返回</a>
+	                        <else />
+	                        	<a href="{$Think.get.backurl}" class="buttonH bBlue mb10 mt5">返回</a>
+	                        </empty>
+                        	<div class="clear"></div>
+                        </div>
+                        <div>
+                        </div>
+                        <div class="formRow">
+                            <div class="grid3"><label>名称:</label></div>
+                            <div class="grid4">
+                            	<input type="text" name="name" value="" placeholder="图片名称"/>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="formRow">
+                            <div class="grid3"><label>副标题:</label></div>
+                            <div class="grid4">
+                            	<input type="text" name="subtitle" value="" placeholder="图片副标题"/>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="formRow">
+                            <div class="grid3"><label>图片:</label></div>
+                            <div class="grid9">
+                            	<img src="" title="" id="day_pic_img" width="320" >
+                            	 <div class="clear"></div>
+                            	<input type="file" name="image_url" id="day_pic_file" />
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>上线时间:</label></div>
+                            <div class="grid4"><input type="text" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:00'})" name="online_time" value=""></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>是否启用:</label></div>
+                            <div class="grid1">
+                            	<label><input type="radio" name="open" value="1" checked="checked"/>是</label>
+                            </div>
+                            <div class="grid4">
+                            	<label><input type="radio" name="open" value="0" />否</label>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                        	<input type="submit" value="提 交" class="buttonM bBlack formSubmit" /><div class="clear"></div>
+                        </div>
+                        <div class="clear"></div>
+                    
+                    </div>
+                    </form>
+            </div>
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+<script>
+$("#day_pic_file").change(function(){
+	var objUrl = booGetObjectURL(this.files[0]) ;
+	if (objUrl) {
+		if (this.files[0]['size'] > 307200) {
+			if (!confirm('你选择的图片大于300Kb，是否确定上传.')) {
+				return false;
+			}
+		}
+		$("#day_pic_img").attr("src", objUrl) ;
+	}
+}) ;
+</script>
+<include file="Public:footer" />

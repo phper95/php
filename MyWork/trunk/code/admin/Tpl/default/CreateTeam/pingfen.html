@@ -1,0 +1,988 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<!-- Secondary nav -->
+</div>
+<!-- Sidebar ends -->
+
+<script language="javascript" type="text/javascript" src="__JS__/My97DatePicker/WdatePicker.js"></script>
+<script src="__JS__/dialog/artDialog.js?skin=default"></script>
+
+
+<!-- Content begins -->
+<div id="content">
+
+    <include file="Public:bav" />
+    
+    <!-- Main content -->
+    <div class="wrapper">
+        	<div class="fluid">
+                    <div class="widget ">
+                    	<a href="{:getCurrentUrl()}" class="buttonH bBlue mb10 mt5">返回</a>
+                        <div class="invoice">
+			                <div class="inHead">
+			                    <span class="inLogo"><h4>{$Think.get.name} 用户作品评分</h5></span>
+			                    <div class="inInfo">
+			                        <span class="invoiceNum"></span><br />
+			                        <span>----</span>
+			                    </div>
+			                    <div class="clear"></div>
+			                </div>
+			                <form method="get" action="{:U('CreateTeam/pingfen')}">
+			                <volist name="get" id="g">
+			                	<input name="{$key}" value="{$g}" type="hidden"/>
+			                </volist>
+			                <input type="hidden" value="{$Think.MODULE_NAME}" name="m"/>
+		            		<input type="hidden" value="{$Think.ACTION_NAME}" name="a"/>
+			               	<div class="formRow">
+	                            <div class="grid3" style="width:90px;"><label>评分月份：<span class="req">*</span></label></div>
+	                            <div class="grid2"><input type="text" name="p_month" value="{$p_month}" placeholder="评分月份" onClick="WdatePicker({dateFmt:'yyyy-MM'})" readonly="readonly" /></div>
+	                            <div class="grid4"  style="width:250px;">
+	                            	<label><input type="checkbox" class="check js-p-type" id="js-p-type-movie" name="p_type[]" value="movie"/>电影&nbsp;&nbsp;</label>
+	                            	<label><input type="checkbox" class="check js-p-type" id="js-p-type-fan" name="p_type[]" value="fan"/>剧集&nbsp;&nbsp;</label>
+	                            	<label><input type="checkbox" class="check js-p-type" id="js-p-type-wei" name="p_type[]" value="wei"/>微图解&nbsp;&nbsp;</label>
+	                            	<label><input type="checkbox" class="check js-p-type" id="js-p-type-news" name="p_type[]" value="news"/>资讯&nbsp;&nbsp;</label>
+	                            </div>
+	                            <div class="grid3" style="width:90px;"><input type="submit" value="查询" class="buttonM bBlue formSubmit" /></div>
+	                            <div class="clear"></div>
+	                        </div>
+	                        </form>
+	                    <empty name="xxx">
+			                <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tLight" style="border-top:3px solid #ccc;">
+			                	<present name="movieList">
+			                    <thead>
+			                        <tr>
+			                            <td>电影</td>
+			                            <td width="40">页数</td>
+			                            <td width="230">类型</td>
+			                            <td width="200">评分项目</td>
+			                            <td width="50">得分</td>
+			                            <td width="50"> </td>
+			                        </tr>
+			                    </thead>
+			                    <tbody>
+			                        <volist name="movieList" id="m">
+			                        <tr>
+			                        	<td>{$m.name}</td>
+			                        	<td>{$m.total_page}</td>
+			                        	<td>
+			                        		<label style="float:left;padding-right:30px;"><input type="radio" name="movie_type[{$m.id}]" value="0" class="movie_type" js-data-id="{$m.id}"/>固定交稿</label>
+			                        		<label style="float:left;"><input type="radio" name="movie_type[{$m.id}]" value="1" class="movie_type" js-data-id="{$m.id}" js-data-page="{$m.total_page}"/>额外交稿</label>
+			                        	</td>
+			                        	<td id="movie_tr_choose_{$m.id}">
+			                        	</td>
+			                        	<td>
+			                        		<span id="movie_rst_{$m.id}" class="pingfen_rst" js-type="movie" js-fen="0" js-fen-plus="0" js-id="{$m.id}"></span>
+			                        	</td>
+			                        	<td>
+			                        		<a href="javascript:void(0);" onclick="$(this).parent().parent().remove();totalPingfen();">删除</a>
+			                        	</td>
+			                        </tr>
+			                        </volist>
+			                        <tr><td colspan="10" align="center"><a class="greenBack js-add-movie"> + 添加电影</a></td></tr>
+			                    </tbody>
+			                    </present>
+			                    <present name="fanList">
+			                    <thead style="border-top:3px solid #ccc;">
+			                        <tr>
+			                            <td>剧集</td>
+			                            <td width="40">页数</td>
+			                            <td width="230">类型</td>
+			                            <td width="200">评分项目</td>
+			                            <td width="50">得分</td>
+			                            <td width="50"> </td>
+			                        </tr>
+			                    </thead>
+			                    <tbody>
+			                        <volist name="fanList" id="f">
+			                        <tr>
+			                        	<td>{$f.name}</td>
+			                        	<td>{$f.total_page}</td>
+			                        	<td>
+			                        		<label style="float:left;padding-right:30px;"><input type="radio" name="fan_type[{$f.id}]" value="0" class="fan_type" js-data-id="{$f.id}"/>固定交稿</label>
+			                        		<label style="float:left;"><input type="radio" name="fan_type[{$f.id}]" value="1" class="fan_type" js-data-id="{$f.id}" js-data-page="{$f.total_page}"/>额外交稿</label>
+			                        	</td>
+			                        	<td id="fan_tr_choose_{$f.id}">
+			                        	</td>
+			                        	<td>
+			                        		<span id="fan_rst_{$f.id}" class="pingfen_rst" js-type="fan" js-fen="0" js-fen-plus="0" js-id="{$f.id}"></span>
+			                        	</td>
+			                        	<td>
+			                        		<a href="javascript:void(0);" onclick="$(this).parent().parent().remove();totalPingfen();">删除</a>
+			                        	</td>
+			                        </tr>
+			                        </volist>
+			                        <tr><td colspan="10" align="center"><a class="greenBack js-add-fan"> + 添加剧集</a></td></tr>
+			                    </tbody>
+			                    </present>
+			                </table>
+			                
+			                 <present name="weiList">
+			                <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tLight" style="border-top:3px solid #ccc;">
+			                    <thead>
+			                        <tr>
+			                            <td>微图解</td>
+			                            <td width="230">类型</td>
+			                             <td width="200">评分项目</td>
+			                            <td width="50">得分</td>
+			                            <td width="50"> </td>
+			                        </tr>
+			                    </thead>
+			                    <tbody>
+			                        <volist name="weiList" id="w">
+			                        <tr>
+			                        	<td>{$w.title}</td>
+			                        	<td>
+			                        		<label style="float:left;padding-right:30px;"><input type="radio" name="wei_type[{$w.id}]" value="0" class="wei_type" js-data-id="{$w.id}"/>固定交稿</label>
+			                        		<label style="float:left;"><input type="radio" name="wei_type[{$w.id}]" value="1" class="wei_type" js-data-id="{$w.id}"/>额外交稿</label>
+			                        	</td>
+			                        	<td id="wei_tr_choose_{$w.id}">
+			                        	</td>
+			                        	<td>
+			                        		<span id="wei_rst_{$w.id}" class="pingfen_rst" js-type="wei" js-fen="0" js-fen-plus="0" js-id="{$w.id}"></span>
+			                        	</td>
+			                        	<td>
+			                        		<a href="javascript:void(0);" onclick="$(this).parent().parent().remove();totalPingfen();">删除</a>
+			                        	</td>
+			                        </tr>
+			                        </volist>
+			                        <tr><td colspan="10" align="center"><a class="greenBack js-add-wei"> + 添加微图解</a></td></tr>
+			                    </tbody>
+			                </table>
+			                </present>
+			                
+			                
+			                <present name="newsList">
+			                <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tLight" style="border-top:3px solid #ccc;">
+			                    <thead>
+			                        <tr>
+			                            <td>资讯</td>
+			                            <td width="230">类型</td>
+			                            <td width="200">评分项目</td>
+			                            <td width="50">得分</td>
+			                            <td width="50"> </td>
+			                        </tr>
+			                    </thead>
+			                    <tbody>
+			                        <volist name="newsList" id="n">
+			                        <tr>
+			                        	<td>{$n.name}</td>
+			                        	<td>
+			                        		<label style="float:left;padding-right:30px;"><input type="radio" name="news_type[{$n.id}]" value="0" class="news_type" js-data-id="{$n.id}"/>固定交稿</label>
+			                        		<label style="float:left;"><input type="radio" name="news_type[{$n.id}]" value="1" class="news_type" js-data-id="{$n.id}"/>额外交稿</label>
+			                        	</td>
+			                        	<td id="news_tr_choose_{$n.id}"></td>
+			                        	<td>
+			                        		<span id="news_rst_{$n.id}" class="pingfen_rst" js-type="news" js-fen="0" js-fen-plus="0" js-id="{$n.id}"></span>
+			                        	</td>
+			                        	<td>
+			                        		<a href="javascript:void(0);" onclick="$(this).parent().parent().remove();totalPingfen();">删除</a>
+			                        	</td>
+			                        </tr>
+			                        </volist>
+			                        <tr><td colspan="10" align="center"><a class="greenBack js-add-news"> + 添加资讯</a></td></tr>
+			                    </tbody>
+			                </table>
+			                </present>
+			                
+			                <div>
+			                    <div class="total">
+			                        <span id="rst_total_pingfen">总计：------</span>
+			                        <span id="rst_dec_pingfen">减去：------</span>
+			                        <span>------------------</span>
+			                        <form method='post' id="form1" name="form1" action="{:U('CreateTeam/doAddPingfen')}"  enctype="multipart/form-data">
+			                        	<div style="display:none;" id="submit_form_pingfen">
+			                        	</div>
+			                        	<input type="hidden" name="user_id" value="{$Think.get.user_id}"/>
+				                        <span><label><input type="checkbox" name="open" value="1" checked="checked"/> 参与排名</label></span>
+				                        <span>人工加（减）分：<input type="text" onkeyup="totalPingfen();" style="text-align:right;padding:2px 8px;border:1px solid #ccc;" name="plus_fen" value="0" id="dec_rst_txt"/></span>
+				                        <strong class="red" id="rst_pingfen_final">最终得分：</strong>
+				                        <div class="clear"></div>
+				                        <span>--------------------------------------------</span>
+				                        <span>
+				                        备注：
+				                        <textarea name="remark"></textarea>
+				                        </span>
+				                        <input type="hidden" value="0" name="fen"  id="pingfen_rst_fen"/>
+				                        <input type="hidden" value="{$p_month}" name="p_month" />
+				                        <input type="submit" value="提 交" class="buttonM bBlack formSubmit" onclick="if (!parseFloat($('#pingfen_rst_fen').val())>0){alert('总分数为0 啊');return false;}" /><div class="clear"></div>
+			                        </form>
+			                    </div>
+			                    <div class="clear"></div>
+			                </div>
+			                
+			                
+		                <else />
+	                        <div>
+			                	<span class="red">{$xxx}</span>
+			                </div>
+                        </empty>
+			                
+			                <div class="inFooter">
+			                    <div class="footnote" style="font-size:5px;"></div>
+			                    <div class="clear"></div>
+			                </div>
+			            </div>
+                    </div>
+            </div>
+            
+            <div id="xxsdf" style="display:none;width:1000px;line-height:24px;" class="fluid">
+            		<div class="fluid">
+            			<div class="widget nomargin">
+            				<form id="search_img_form" action="" onsubmit="return false;">
+            				<div class="formRow">
+	                            <div class="grid1"><label>电影ID: </label></div>
+	                            <div class="grid3"><input type="text" name="id" id="js_search_movie_id" placeholder="通过电影ID查找"/></div>
+	                            <div class="grid1"><label>电影名称: </label></div>
+	                            <div class="grid3"><input type="text" name="name" id="js_search_movie_name" placeholder="通过电影名称查找"/></div>
+	                            <div class="clear"></div>
+	                        </div>
+	                        <div class="formRow">
+	                            <div class="grid1"><label>添加时段: </label></div>
+	                            <div class="grid3"><input type="text" name="start_time" id="js_search_movie_start_time" placeholder="开始时间" onClick="WdatePicker({dateFmt:'yyyy-MM-dd 00:00:00'})" readonly="readonly" /></div>
+	                            <div style="float:left"><label>&nbsp;&nbsp;&nbsp;~ </label></div>
+	                            <div class="grid3"><input type="text" name="end_time" id="js_search_movie_end_time" placeholder="结束时间" onClick="WdatePicker({dateFmt:'yyyy-MM-dd 23:59:59'})" readonly="readonly" /></div>
+	                           
+	                            <input type="submit" id="search_pingfen_movie" value="查询" class="buttonM bBlue formSubmit" /><div class="clear"></div>
+	                            <div class="clear"></div>
+	                        </div>
+	                        </form>
+	                        <div style="width:100%;height:400px;border-top:1px solid #ccc;position:relative;overflow:hidden;" id="mat_img_list">
+	                        	<div style="width:75%;height:400px;border-top:1px solid #ccc;position:relative;overflow-x:hidden;overflow-y:auto;">
+	                        	<table cellpadding="0" cellspacing="0" width="100%" class="tDefault checkAll tMedia" id="checkAll">
+	                        		<thead>
+					                    <tr>
+							                <td width="50">电影ID</td>
+							                <td>电影名称</td>
+							                <td width="60">页数</td>
+							                <td width="60">被阅读数</td>
+							                <td width="60">被赞数</td>
+							                <td width="180">添加时间</td>
+					                    </tr>
+					                </thead>
+					                <tbody id="create_team_rst_list"></tbody>
+	                        	</table>
+	                        	</div>
+	                        	<div style="border-left:1px solid #ccc;height:100%;overflow-y:auto;overflow-x:hidden;width:25%;position:absolute;top:0px;right:0px;">
+	                        		<form id="submit_add_bianji_form_movie" action="" method="POST" onsubmit="return false;">
+	                        			<span class="red">已选择电影：</span>
+	                        		</form>
+	                        	</div>
+	                        </div>
+            			</div>
+            		</div>
+            </div>
+            
+            <div id="xxsdf_fan" style="display:none;width:1000px;line-height:24px;" class="fluid">
+            		<div class="fluid">
+            			<div class="widget nomargin">
+            				<form id="search_img_form" action="" onsubmit="return false;">
+            				<div class="formRow">
+	                            <div class="grid1"><label>剧集ID: </label></div>
+	                            <div class="grid3"><input type="text" name="id" id="js_search_fan_id" placeholder="通过剧集ID查找"/></div>
+	                            <div class="grid1"><label>剧集名称: </label></div>
+	                            <div class="grid3"><input type="text" name="name" id="js_search_fan_name" placeholder="通过剧集名称查找"/></div>
+	                            <div class="clear"></div>
+	                        </div>
+	                        <div class="formRow">
+	                            <div class="grid1"><label>添加时段: </label></div>
+	                            <div class="grid3"><input type="text" name="start_time" id="js_search_fan_start_time" placeholder="开始时间" onClick="WdatePicker({dateFmt:'yyyy-MM-dd 00:00:00'})" readonly="readonly" /></div>
+	                            <div style="float:left"><label>&nbsp;&nbsp;&nbsp;~ </label></div>
+	                            <div class="grid3"><input type="text" name="end_time" id="js_search_fan_end_time" placeholder="结束时间" onClick="WdatePicker({dateFmt:'yyyy-MM-dd 23:59:59'})" readonly="readonly" /></div>
+	                           
+	                            <input type="submit" id="search_pingfen_fan" value="查询" class="buttonM bBlue formSubmit" /><div class="clear"></div>
+	                            <div class="clear"></div>
+	                        </div>
+	                        </form>
+	                        <div style="width:100%;height:400px;border-top:1px solid #ccc;position:relative;overflow:hidden;" id="mat_img_list">
+	                        	<div style="width:75%;height:400px;border-top:1px solid #ccc;position:relative;overflow-x:hidden;overflow-y:auto;">
+	                        	<table cellpadding="0" cellspacing="0" width="100%" class="tDefault checkAll tMedia" id="checkAll">
+	                        		<thead>
+					                    <tr>
+							                <td width="50">剧集ID</td>
+							                <td>剧集名称</td>
+							                <td width="60">页数</td>
+							                <td width="60">被阅读数</td>
+							                <td width="60">被赞数</td>
+							                <td width="180">添加时间</td>
+					                    </tr>
+					                </thead>
+					                <tbody id="create_team_rst_list"></tbody>
+	                        	</table>
+	                        	</div>
+	                        	<div style="border-left:1px solid #ccc;height:100%;overflow-y:auto;overflow-x:hidden;width:25%;position:absolute;top:0px;right:0px;">
+	                        		<form id="submit_add_bianji_form_fan" action="" method="POST" onsubmit="return false;">
+	                        			<span class="red">已选择剧集：</span>
+	                        		</form>
+	                        	</div>
+	                        </div>
+            			</div>
+            		</div>
+            </div>
+            
+            
+            <div id="xxsdf_wei" style="display:none;width:1000px;line-height:24px;" class="fluid">
+            		<div class="fluid">
+            			<div class="widget nomargin">
+            				<form id="search_img_form" action="" onsubmit="return false;">
+            				<div class="formRow">
+	                            <div class="grid1"><label>微图解ID: </label></div>
+	                            <div class="grid3"><input type="text" name="id" id="js_search_wei_id" placeholder="通过微图解ID查找"/></div>
+	                            <div class="grid1"><label>微图解名称: </label></div>
+	                            <div class="grid3"><input type="text" name="title" id="js_search_wei_name" placeholder="通过微图解名称查找"/></div>
+	                            <div class="clear"></div>
+	                        </div>
+	                        <div class="formRow">
+	                            <div class="grid1"><label>添加时段: </label></div>
+	                            <div class="grid3"><input type="text" name="start_time" id="js_search_wei_start_time" placeholder="开始时间" onClick="WdatePicker({dateFmt:'yyyy-MM-dd 00:00:00'})" readonly="readonly" /></div>
+	                            <div style="float:left"><label>&nbsp;&nbsp;&nbsp;~ </label></div>
+	                            <div class="grid3"><input type="text" name="end_time" id="js_search_wei_end_time" placeholder="结束时间" onClick="WdatePicker({dateFmt:'yyyy-MM-dd 23:59:59'})" readonly="readonly" /></div>
+	                           
+	                            <input type="submit" id="search_pingfen_wei" value="查询" class="buttonM bBlue formSubmit" /><div class="clear"></div>
+	                            <div class="clear"></div>
+	                        </div>
+	                        </form>
+	                        <div style="width:100%;height:400px;border-top:1px solid #ccc;position:relative;overflow:hidden;" id="mat_img_list">
+	                        	<div style="width:75%;height:400px;border-top:1px solid #ccc;position:relative;overflow-x:hidden;overflow-y:auto;">
+	                        	<table cellpadding="0" cellspacing="0" width="100%" class="tDefault checkAll tMedia" id="checkAll">
+	                        		<thead>
+					                    <tr>
+							                <td width="50">微图解ID</td>
+							                <td>微图解名称</td>
+							                <td width="60">被阅读数</td>
+							                <td width="60">被赞数</td>
+							                <td width="180">添加时间</td>
+					                    </tr>
+					                </thead>
+					                <tbody id="create_team_rst_list"></tbody>
+	                        	</table>
+	                        	</div>
+	                        	<div style="border-left:1px solid #ccc;height:100%;overflow-y:auto;overflow-x:hidden;width:25%;position:absolute;top:0px;right:0px;">
+	                        		<form id="submit_add_bianji_form_wei" action="" method="POST" onsubmit="return false;">
+	                        			<span class="red">已选择微图解：</span>
+	                        		</form>
+	                        	</div>
+	                        </div>
+            			</div>
+            		</div>
+            </div>
+            
+            
+            <div id="xxsdf_news" style="display:none;width:1000px;line-height:24px;" class="fluid">
+            		<div class="fluid">
+            			<div class="widget nomargin">
+            				<form id="search_img_form" action="" onsubmit="return false;">
+            				<div class="formRow">
+	                            <div class="grid1"><label>资讯ID: </label></div>
+	                            <div class="grid3"><input type="text" name="id" id="js_search_news_id" placeholder="通过资讯ID查找"/></div>
+	                            <div class="grid1"><label>资讯名称: </label></div>
+	                            <div class="grid3"><input type="text" name="title" id="js_search_news_name" placeholder="通过资讯名称查找"/></div>
+	                            <div class="clear"></div>
+	                        </div>
+	                        <div class="formRow">
+	                            <div class="grid1"><label>添加时段: </label></div>
+	                            <div class="grid3"><input type="text" name="start_time" id="js_search_news_start_time" placeholder="开始时间" onClick="WdatePicker({dateFmt:'yyyy-MM-dd 00:00:00'})" readonly="readonly" /></div>
+	                            <div style="float:left"><label>&nbsp;&nbsp;&nbsp;~ </label></div>
+	                            <div class="grid3"><input type="text" name="end_time" id="js_search_news_end_time" placeholder="结束时间" onClick="WdatePicker({dateFmt:'yyyy-MM-dd 23:59:59'})" readonly="readonly" /></div>
+	                           
+	                            <input type="submit" id="search_pingfen_news" value="查询" class="buttonM bBlue formSubmit" /><div class="clear"></div>
+	                            <div class="clear"></div>
+	                        </div>
+	                        </form>
+	                        <div style="width:100%;height:400px;border-top:1px solid #ccc;position:relative;overflow:hidden;" id="mat_img_list">
+	                        	<div style="width:75%;height:400px;border-top:1px solid #ccc;position:relative;overflow-x:hidden;overflow-y:auto;">
+	                        	<table cellpadding="0" cellspacing="0" width="100%" class="tDefault checkAll tMedia" id="checkAll">
+	                        		<thead>
+					                    <tr>
+							                <td width="50">资讯ID</td>
+							                <td>资讯名称</td>
+							                <td width="60">被阅读数</td>
+							                <td width="60">被赞数</td>
+							                <td width="180">添加时间</td>
+					                    </tr>
+					                </thead>
+					                <tbody id="create_team_rst_list"></tbody>
+	                        	</table>
+	                        	</div>
+	                        	<div style="border-left:1px solid #ccc;height:100%;overflow-y:auto;overflow-x:hidden;width:25%;position:absolute;top:0px;right:0px;">
+	                        		<form id="submit_add_bianji_form_news" action="" method="POST" onsubmit="return false;">
+	                        			<span class="red">已选择资讯：</span>
+	                        		</form>
+	                        	</div>
+	                        </div>
+            			</div>
+            		</div>
+            </div>
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+
+
+<script>
+function sabcPingfen (id,type,val){
+	$('#'+type+'_rst_'+id).html(val).attr('js-fen',val);
+	totalPingfen();
+}
+
+function plusPingfen (id,val,obj){
+	var b_rst = $('#'+id).html();
+	var plus_rst = $('#'+id).attr('js-fen-plus');
+	b_rst = parseFloat(b_rst);
+	plus_rst = parseFloat(plus_rst);
+	if (obj.checked) {
+		$('#'+id).html((b_rst+val).toFixed(3));
+		$('#'+id).attr('js-fen-plus',(plus_rst+val).toFixed(3));
+	} else {
+		$('#'+id).html((b_rst-val).toFixed(3));
+		$('#'+id).attr('js-fen-plus',(plus_rst-val).toFixed(3));
+	}
+	totalPingfen();
+}
+
+function totalPingfen (){
+	var total = 0;
+	var html = '';
+	$('.pingfen_rst').each(function(){
+		if ($(this).html() !== ''){
+			total += parseFloat($(this).html());
+		}
+		var type = $(this).attr('js-type');
+		var fen = $(this).attr('js-fen');
+		var fen_plus = $(this).attr('js-fen-plus');
+		var p_id = $(this).attr('js-id');
+		var p_jg_typ = $(this).attr('js-jg-type');
+		if (typeof p_jg_typ == 'undefined') {return;} // 如果没有评分，则不记录该条记录
+		var key = type+','+p_id + ',' + p_jg_typ;
+		html += 
+			  '<input type="text" name="keys[]" value="'+key+'">'
+			+ '<input type="text" name="p_fen['+key+']" value="'+fen+'">'
+			+ '<input type="text" name="p_fen_plus['+key+']" value="'+fen_plus+'">'
+		;
+	});
+	
+	$('#submit_form_pingfen').html(html);
+	
+	var total_dec = 0;
+	$('.pingfen_rst_fan').each(function(){
+		if ($(this).html() !== ''){total_dec += parseFloat($(this).html());}
+	});
+	total_dec = total_dec > 15 ? (total_dec-15) : 0;
+	$('#rst_total_pingfen').html('总计：'+total.toFixed(3));
+	$('#rst_dec_pingfen').html('- '+total_dec.toFixed(3) + (total_dec>0 ? '<br />（剧集额外交稿超过15分额度）':''));
+	
+	dec_rst = 0;
+	try{
+		var xx = $.trim($('#dec_rst_txt').val());
+		if (xx !== '' && xx !== '-') {
+			var dec_rst = parseFloat(xx);
+		}
+	}catch(ex){
+		alert('输入字符有误哟，请填入数字');
+	}
+	
+	var rst_fen = (total-total_dec + dec_rst).toFixed(3);
+	$('#rst_pingfen_final').html('最终得分：' + rst_fen);
+	$('#pingfen_rst_fen').val(rst_fen);
+}
+
+(function(){
+	var p_type = '{$p_type}';
+	$('.js-p-type').attr('checked',false);
+	if (p_type != '') {
+		var tmp_type = p_type.split(',');
+		for (var a in tmp_type) {
+			$('#js-p-type-'+tmp_type[a]).attr('checked','checked');
+		}
+	}
+		
+	var movie_click = function(id){
+		$(id).click(function(){
+			var value = $(this).val();
+			var rst = 0;
+			var m_id = $(this).attr('js-data-id');
+			if (value == '1') { // 额外交稿
+				var page_count = parseInt($(this).attr('js-data-page'));
+				var init_rst = page_count * 0.01;
+				init_rst = init_rst > 5 ? 5.0 : init_rst.toFixed(3);
+				$('#movie_rst_'+m_id).html(init_rst).attr('js-fen',init_rst).attr('js-jg-type',1);
+				var deep_rst = init_rst;
+				var wenyi_rst = page_count * 0.006;
+				wenyi_rst = wenyi_rst > 3 ? 3.0 : wenyi_rst.toFixed(3);
+				$('#movie_tr_choose_'+m_id).html(
+						'<label style="float:left;padding-right:30px;"><input type="checkbox" name="movie_plus['+m_id+']" onclick="plusPingfen(\'movie_rst_'+m_id+'\','+deep_rst+',this)" value="1"/> 有深度</label>'
+			    		+'<label style="float:left;"><input type="checkbox" name="movie_plus['+m_id+']" onclick="plusPingfen(\'movie_rst_'+m_id+'\','+wenyi_rst+',this)" value="2" /> 文艺向</label>'
+			    );
+			} else {
+				$('#movie_rst_'+m_id).html(0).attr('js-fen',0).attr('js-jg-type',0);
+				$('#movie_tr_choose_'+m_id).html(
+						'<label style="float:left;padding-right:20px;"><input type="radio" onclick="sabcPingfen('+m_id+',\'movie\',10)" name="fan_pingfen['+m_id+']" value="10"/> S</label>'
+	        		   +'<label style="float:left;padding-right:20px;"><input type="radio" onclick="sabcPingfen('+m_id+',\'movie\',8)" name="fan_pingfen['+m_id+']" value="8"/> A</label>'
+	        		   +'<label style="float:left;padding-right:20px;"><input type="radio" onclick="sabcPingfen('+m_id+',\'movie\',6)" name="fan_pingfen['+m_id+']" value="6"/> B</label>'
+				);
+			}
+			totalPingfen();
+		});
+	};
+	movie_click('.movie_type');
+	
+	var fan_click = function(id){
+		$(id).click(function(){
+			var value = $(this).val();
+			var rst = 0;
+			var m_id = $(this).attr('js-data-id');
+			if (value == '1') {
+				var page_count = parseInt($(this).attr('js-data-page'));
+				var init_rst = page_count * 0.01;
+				init_rst = init_rst > 3 ? 3.0 : init_rst.toFixed(3);
+				$('#fan_rst_'+m_id).html(init_rst).attr('js-fen',init_rst).addClass('pingfen_rst_fan').attr('js-jg-type',1);
+				var deep_rst = init_rst > 2 ? 2.0 : init_rst;
+				var wenyi_rst = page_count * 0.006;
+				wenyi_rst = wenyi_rst > 1 ? 1.0 : wenyi_rst.toFixed(3);
+				$('#fan_tr_choose_'+m_id).html(
+						'<label style="float:left;padding-right:30px;"><input type="checkbox" name="fan_plus['+m_id+']" onclick="plusPingfen(\'fan_rst_'+m_id+'\','+deep_rst+',this)" value="1"/> 有深度</label>'
+			    		+'<label style="float:left;"><input type="checkbox" name="fan_plus['+m_id+']" onclick="plusPingfen(\'fan_rst_'+m_id+'\','+wenyi_rst+',this)" value="2" /> 文艺向</label>'
+			    );
+			} else {
+				$('#fan_rst_'+m_id).html(0).attr('js-fen',0).removeClass('pingfen_rst_fan').attr('js-jg-type',0);
+				$('#fan_tr_choose_'+m_id).html(
+						'<label style="float:left;padding-right:20px;"><input type="radio" onclick="sabcPingfen('+m_id+',\'fan\',10)" name="fan_pingfen['+m_id+']" value="10"/> S</label>'
+	        		   +'<label style="float:left;padding-right:20px;"><input type="radio" onclick="sabcPingfen('+m_id+',\'fan\',8)" name="fan_pingfen['+m_id+']" value="8"/> A</label>'
+	        		   +'<label style="float:left;padding-right:20px;"><input type="radio" onclick="sabcPingfen('+m_id+',\'fan\',6)" name="fan_pingfen['+m_id+']" value="6"/> B</label>'
+				);
+			}
+			totalPingfen();
+		});
+	};
+	fan_click('.fan_type');
+	
+	var wei_click = function(id){
+		$(id).click(function(){
+			var value = $(this).val();
+			var rst = 0;
+			var m_id = $(this).attr('js-data-id');
+			if (value == '1') {
+				$('#wei_rst_'+m_id).html(0).attr('js-fen',0).attr('js-jg-type',1);
+				$('#wei_tr_choose_'+m_id).html(
+						'<label style="float:left;padding-right:20px;"><input type="radio" onclick="sabcPingfen('+m_id+',\'wei\',7)" name="wei_pingfen['+m_id+']" value="7"/> S</label>'
+	        		   +'<label style="float:left;padding-right:20px;"><input type="radio" onclick="sabcPingfen('+m_id+',\'wei\',5)" name="wei_pingfen['+m_id+']" value="5"/> A</label>'
+	        		   +'<label style="float:left;padding-right:20px;"><input type="radio" onclick="sabcPingfen('+m_id+',\'wei\',2)" name="wei_pingfen['+m_id+']" value="2"/> B</label>'
+	        		   +'<label style="float:left;padding-right:20px;"><input type="radio" onclick="sabcPingfen('+m_id+',\'wei\',0)" name="wei_pingfen['+m_id+']" value="0"/> C</label>'
+				);
+			} else {
+				$('#wei_rst_'+m_id).html(0).attr('js-fen',0).attr('js-jg-type',0);
+				$('#wei_tr_choose_'+m_id).html(
+						'<label style="float:left;padding-right:20px;"><input type="radio" onclick="sabcPingfen('+m_id+',\'wei\',7)" name="wei_pingfen['+m_id+']" value="7"/> S</label>'
+		        		   +'<label style="float:left;padding-right:20px;"><input type="radio" onclick="sabcPingfen('+m_id+',\'wei\',5)" name="wei_pingfen['+m_id+']" value="5"/> A</label>'
+		        		   +'<label style="float:left;padding-right:20px;"><input type="radio" onclick="sabcPingfen('+m_id+',\'wei\',3)" name="wei_pingfen['+m_id+']" value="3"/> B</label>'
+		        		   +'<label style="float:left;padding-right:20px;"><input type="radio" onclick="sabcPingfen('+m_id+',\'wei\',1)" name="wei_pingfen['+m_id+']" value="1"/> C</label>'
+				);
+			}
+		});
+	};
+	wei_click('.wei_type');
+	
+	
+	var news_click = function(id){
+		$(id).click(function(){
+			var value = $(this).val();
+			var rst = 0;
+			var m_id = $(this).attr('js-data-id');
+			if (value == '0') {
+				$('#news_rst_'+m_id).html(0).attr('js-fen',0).attr('js-jg-type',0);
+				$('#news_tr_choose_'+m_id).html(
+						'<label style="float:left;padding-right:20px;"><input type="radio" onclick="sabcPingfen('+m_id+',\'news\',7)" name="news_pingfen['+m_id+']" value="7"/> S</label>'
+	        		   +'<label style="float:left;padding-right:20px;"><input type="radio" onclick="sabcPingfen('+m_id+',\'news\',5)" name="news_pingfen['+m_id+']" value="5"/> A</label>'
+	        		   +'<label style="float:left;padding-right:20px;"><input type="radio" onclick="sabcPingfen('+m_id+',\'news\',2)" name="news_pingfen['+m_id+']" value="2"/> B</label>'
+				);
+			} else {
+				$('#news_rst_'+m_id).html(0).attr('js-fen',0).attr('js-jg-type',1);
+				$('#news_tr_choose_'+m_id).html(
+						'<label style="float:left;padding-right:20px;"><input type="radio" onclick="sabcPingfen('+m_id+',\'news\',7)" name="news_pingfen['+m_id+']" value="7"/> S</label>'
+		        		   +'<label style="float:left;padding-right:20px;"><input type="radio" onclick="sabcPingfen('+m_id+',\'news\',4)" name="news_pingfen['+m_id+']" value="4"/> A</label>'
+		        		   +'<label style="float:left;padding-right:20px;"><input type="radio" onclick="sabcPingfen('+m_id+',\'news\',1)" name="news_pingfen['+m_id+']" value="1"/> B</label>'
+				);
+			}
+		});
+	};
+	news_click('.news_type');
+	
+	
+	$('.js-add-movie').click(function(){ // 手动添加电影
+		var ojb = $(this).parent().parent();
+		var timestamp = (new Date()).valueOf();
+		art.dialog({
+			title : '手动添加电影',
+			padding:0,
+			content:$('#xxsdf')[0],
+			ok : function(){
+				var i=0; 
+				var html = '';
+				for (var a in choose_movie) {
+					html += '<tr>'
+                    	 +  '<td>'+choose_movie[a].name+'</td>'
+                    	 +  '<td>'+choose_movie[a].total_page+'</td>'
+                    	 +  '<td>'
+                    		+ '<label style="float:left;padding-right:30px;"><input type="radio" name="movie_type['+choose_movie[a].id+']" value="0" class="movie_type movie_type_'+timestamp+'" js-data-id="'+choose_movie[a].id+'"/>固定交稿</label>'
+                    		+ '<label style="float:left;"><input type="radio" name="movie_type['+choose_movie[a].id+']" value="1" class="movie_type movie_type_'+timestamp+'" js-data-id="'+choose_movie[a].id+'" js-data-page="'+choose_movie[a].total_page+'"/>额外交稿</label>'
+                    	+  '</td>'
+                    	+  '<td id="movie_tr_choose_'+choose_movie[a].id+'">'
+                    	+  '</td>'
+                    	+  '<td>'
+                    		+ '<span id="movie_rst_'+choose_movie[a].id+'" class="pingfen_rst" js-type="movie" js-fen="0" js-fen-plus="0" js-id="'+choose_movie[a].id+'"></span>'
+                    	+  '</td>'
+                    	+  '<td>'
+                    		+ '<a href="javascript:void(0);" onclick="$(this).parent().parent().remove();totalPingfen();">删除</a>'
+                    	+  '</td>'
+                    	+  '</tr>';
+				}
+				ojb.before(html);
+				choose_movie = {};
+				$('#submit_add_bianji_form_movie').html('');
+				movie_click('.movie_type_'+timestamp);
+				$('.movie_type_'+timestamp).uniform();
+			}
+		});
+	});
+	
+	$('#search_pingfen_movie').click(function(){
+		var data = {
+				'id' : $('#js_search_movie_id').val(),
+				'name' : $('#js_search_movie_name').val(),
+				'user_id' : '{$Think.get.user_id}',
+				'start_time' : $('#js_search_movie_start_time').val(),
+				'end_time' : $('#js_search_movie_end_time').val(),
+				'type' : 'movie'
+		};
+		$.ajax({
+			url : '{:U("CreateTeam/getInfo")}',
+			type : 'post',
+			data : data,
+			success : function(data){
+				if(typeof data =='object') {
+					if (data.rst == 0) {
+						alert(data.msg);
+					} else {
+						var rst = data.data;
+						if (rst) {
+							var html = '';
+							for (var a in rst) {
+								html += '<tr style="cursor:pointer;" id="search_rst_list_'+rst[a].id+'" onclick="pingfenAddMovie('+rst[a].id+',\''+rst[a].name+'\',\''+rst[a].total_page+'\');">'
+									 + '<td>'+rst[a].id+'</td>'
+									 + '<td>'+rst[a].name+'</td>'
+									 + '<td>'+rst[a].total_page+'</td>'
+									 + '<td>'+rst[a].played+'</td>'
+									 + '<td>'+rst[a].ding+'</td>'
+									 + '<td>'+rst[a].add_time+'</td>'
+									 + '</tr>';
+							}
+							$('#create_team_rst_list').html(html);
+						}else {
+							alert('查不到');
+						}
+					}
+				} else {
+					alert(data);
+				}
+			},
+			error : function(ex) {
+				alert('Ajax 错误');
+			}
+		});
+	});
+	
+	
+	$('.js-add-fan').click(function(){ // 手动添加剧集
+		var ojb = $(this).parent().parent();
+		var timestamp = (new Date()).valueOf();
+		art.dialog({
+			title : '手动添加剧集',
+			padding:0,
+			content:$('#xxsdf_fan')[0],
+			ok : function(){
+				var i=0; 
+				var html = '';
+				for (var a in choose_fan) {
+					html += '<tr>'
+                    	 +  '<td>'+choose_fan[a].name+'</td>'
+                    	 +  '<td>'+choose_fan[a].total_page+'</td>'
+                    	 +  '<td>'
+                    		+ '<label style="float:left;padding-right:30px;"><input type="radio" name="fan_type['+choose_fan[a].id+']" value="0" class="fan_type fan_type_'+timestamp+'" js-data-id="'+choose_fan[a].id+'"/>固定交稿</label>'
+                    		+ '<label style="float:left;"><input type="radio" name="fan_type['+choose_fan[a].id+']" value="1" class="fan_type fan_type_'+timestamp+'" js-data-id="'+choose_fan[a].id+'" js-data-page="'+choose_fan[a].total_page+'"/>额外交稿</label>'
+                    	+  '</td>'
+                    	+  '<td id="fan_tr_choose_'+choose_fan[a].id+'">'
+                    	+  '</td>'
+                    	+  '<td>'
+                    		+ '<span id="fan_rst_'+choose_fan[a].id+'" class="pingfen_rst" js-type="fan" js-fen="0" js-fen-plus="0" js-id="'+choose_fan[a].id+'"></span>'
+                    	+  '</td>'
+                    	+  '<td>'
+                    		+ '<a href="javascript:void(0);" onclick="$(this).parent().parent().remove();totalPingfen();">删除</a>'
+                    	+  '</td>'
+                    	+  '</tr>';
+				}
+				ojb.before(html);
+				choose_fan = {};
+				$('#submit_add_bianji_form_fan').html('');
+				fan_click('.fan_type_'+timestamp);
+				$('.fan_type_'+timestamp).uniform();
+			}
+		});
+	});
+	
+	//* 手动添加剧集
+	$('#search_pingfen_fan').click(function(){
+		var data = {
+				'id' : $('#js_search_fan_id').val(),
+				'name' : $('#js_search_fan_name').val(),
+				'user_id' : '{$Think.get.user_id}',
+				'start_time' : $('#js_search_fan_start_time').val(),
+				'end_time' : $('#js_search_fan_end_time').val(),
+				'type' : 'fan'
+		};
+		$.ajax({
+			url : '{:U("CreateTeam/getInfo")}',
+			type : 'post',
+			data : data,
+			success : function(data){
+				if(typeof data =='object') {
+					if (data.rst == 0) {
+						alert(data.msg);
+					} else {
+						var rst = data.data;
+						if (rst) {
+							var html = '';
+							for (var a in rst) {
+								html += '<tr style="cursor:pointer;" id="search_rst_list_'+rst[a].id+'" onclick="pingfenAddFan('+rst[a].id+',\''+rst[a].name+'\',\''+rst[a].total_page+'\');">'
+									 + '<td>'+rst[a].id+'</td>'
+									 + '<td>'+rst[a].name+'</td>'
+									 + '<td>'+rst[a].total_page+'</td>'
+									 + '<td>'+rst[a].played+'</td>'
+									 + '<td>'+rst[a].ding+'</td>'
+									 + '<td>'+rst[a].add_time+'</td>'
+									 + '</tr>';
+							}
+							$('#create_team_rst_list').html(html);
+						}else {
+							alert('查不到');
+						}
+					}
+				} else {
+					alert(data);
+				}
+			},
+			error : function(ex) {
+				alert('Ajax 错误');
+			}
+		});
+	});
+	
+	
+	$('.js-add-wei').click(function(){ // 手动添加微图解
+		var ojb = $(this).parent().parent();
+		var timestamp = (new Date()).valueOf();
+		art.dialog({
+			title : '手动添加微图解',
+			padding:0,
+			content:$('#xxsdf_wei')[0],
+			ok : function(){
+				var i=0; 
+				var html = '';
+				for (var a in choose_wei) {
+					html += '<tr>'
+                    	 +  '<td>'+choose_wei[a].title+'</td>'
+                    	 +  '<td>'
+                    		+ '<label style="float:left;padding-right:30px;"><input type="radio" name="wei_type['+choose_wei[a].id+']" value="0" class="wei_type wei_type_'+timestamp+'" js-data-id="'+choose_wei[a].id+'"/>固定交稿</label>'
+                    		+ '<label style="float:left;"><input type="radio" name="wei_type['+choose_wei[a].id+']" value="1" class="wei_type wei_type_'+timestamp+'" js-data-id="'+choose_wei[a].id+'"/>额外交稿</label>'
+                    	+  '</td>'
+                    	+  '<td id="wei_tr_choose_'+choose_wei[a].id+'">'
+                    	+  '</td>'
+                    	+  '<td>'
+                    		+ '<span id="wei_rst_'+choose_wei[a].id+'" class="pingfen_rst" js-type="wei" js-fen="0" js-fen-plus="0" js-id="'+choose_wei[a].id+'"></span>'
+                    	+  '</td>'
+                    	+  '<td>'
+                    		+ '<a href="javascript:void(0);" onclick="$(this).parent().parent().remove();totalPingfen();">删除</a>'
+                    	+  '</td>'
+                    	+  '</tr>';
+				}
+				ojb.before(html);
+				choose_wei = {};
+				$('#submit_add_bianji_form_wei').html('');
+				wei_click('.wei_type_'+timestamp);
+				$('.wei_type_'+timestamp).uniform();
+			}
+		});
+	});
+	
+	//* 手动添加微图解
+	$('#search_pingfen_wei').click(function(){
+		var data = {
+				'id' : $('#js_search_wei_id').val(),
+				'user_id' : '{$Think.get.user_id}',
+				'name' : $('#js_search_wei_name').val(),
+				'start_time' : $('#js_search_wei_start_time').val(),
+				'end_time' : $('#js_search_wei_end_time').val(),
+				'type' : 'wei'
+		};
+		$.ajax({
+			url : '{:U("CreateTeam/getInfo")}',
+			type : 'post',
+			data : data,
+			success : function(data){
+				if(typeof data =='object') {
+					if (data.rst == 0) {
+						alert(data.msg);
+					} else {
+						var rst = data.data;
+						if (rst) {
+							var html = '';
+							for (var a in rst) {
+								html += '<tr style="cursor:pointer;" id="search_rst_list_'+rst[a].id+'" onclick="pingfenAddWei('+rst[a].id+',\''+rst[a].title+'\');">'
+									 + '<td>'+rst[a].id+'</td>'
+									 + '<td>'+rst[a].title+'</td>'
+									 + '<td>'+rst[a].played+'</td>'
+									 + '<td>'+rst[a].ding+'</td>'
+									 + '<td>'+rst[a].add_time+'</td>'
+									 + '</tr>';
+							}
+							$('#create_team_rst_list').html(html);
+						}else {
+							alert('查不到');
+						}
+					}
+				} else {
+					alert(data);
+				}
+			},
+			error : function(ex) {
+				alert('Ajax 错误');
+			}
+		});
+	});
+	
+	
+	
+	$('.js-add-news').click(function(){ // 手动添加资讯
+		var ojb = $(this).parent().parent();
+		var timestamp = (new Date()).valueOf();
+		art.dialog({
+			title : '手动添加资讯',
+			padding:0,
+			content:$('#xxsdf_news')[0],
+			ok : function(){
+				var i=0; 
+				var html = '';
+				for (var a in choose_news) {
+					html += '<tr>'
+                    	 +  '<td>'+choose_news[a].name+'</td>'
+                    	 +  '<td>'
+                    		+ '<label style="float:left;padding-right:30px;"><input type="radio" name="news_type['+choose_news[a].id+']" value="0" class="news_type news_type_'+timestamp+'" js-data-id="'+choose_news[a].id+'"/>固定交稿</label>'
+                    		+ '<label style="float:left;"><input type="radio" name="news_type['+choose_news[a].id+']" value="1" class="news_type news_type_'+timestamp+'" js-data-id="'+choose_news[a].id+'" js-data-page="'+choose_news[a].total_page+'"/>额外交稿</label>'
+                    	+  '</td>'
+                    	+  '<td id="news_tr_choose_'+choose_news[a].id+'">'
+                    	+  '</td>'
+                    	+  '<td>'
+                    		+ '<span id="news_rst_'+choose_news[a].id+'" class="pingfen_rst" js-type="news" js-fen="0" js-fen-plus="0" js-id="'+choose_news[a].id+'"></span>'
+                    	+  '</td>'
+                    	+  '<td>'
+                    		+ '<a href="javascript:void(0);" onclick="$(this).parent().parent().remove();totalPingfen();">删除</a>'
+                    	+  '</td>'
+                    	+  '</tr>';
+				}
+				ojb.before(html);
+				choose_news = {};
+				$('#submit_add_bianji_form_news').html('');
+				news_click('.news_type_'+timestamp);
+				$('.news_type_'+timestamp).uniform();
+			}
+		});
+	});
+	
+	//* 手动添加资讯
+	$('#search_pingfen_news').click(function(){
+		var data = {
+				'id' : $('#js_search_news_id').val(),
+				'name' : $('#js_search_news_name').val(),
+				'user_id' : '{$Think.get.user_id}',
+				'start_time' : $('#js_search_news_start_time').val(),
+				'end_time' : $('#js_search_news_end_time').val(),
+				'type' : 'news'
+		};
+		$.ajax({
+			url : '{:U("CreateTeam/getInfo")}',
+			type : 'post',
+			data : data,
+			success : function(data){
+				if(typeof data =='object') {
+					if (data.rst == 0) {
+						alert(data.msg);
+					} else {
+						var rst = data.data;
+						if (rst) {
+							var html = '';
+							for (var a in rst) {
+								html += '<tr style="cursor:pointer;" id="search_rst_list_'+rst[a].id+'" onclick="pingfenAddNews('+rst[a].id+',\''+rst[a].name+'\',\''+rst[a].total_page+'\');">'
+									 + '<td>'+rst[a].id+'</td>'
+									 + '<td>'+rst[a].name+'</td>'
+									 + '<td>'+rst[a].played+'</td>'
+									 + '<td>'+rst[a].ding+'</td>'
+									 + '<td>'+rst[a].add_time+'</td>'
+									 + '</tr>';
+							}
+							$('#create_team_rst_list').html(html);
+						} else {
+							alert('查不到');
+						}
+					}
+				} else {
+					alert(data);
+				}
+			},
+			error : function(ex) {
+				alert('Ajax 错误');
+			}
+		});
+	});
+	
+})();
+
+
+choose_movie = {};
+function pingfenAddMovie (id,name,total_page){
+	if (typeof choose_movie[id] !== 'undefined' || $('#movie_rst_'+id).length > 0) {alert(name+' 电影已经在列表里了哟！');return;}
+	choose_movie[id] = {id:id,name:name,total_page:total_page};
+	var html = '<div style="line-height:2.2em;padding:2px 5px;color:#666;border-bottom:1px solid #ddd;"><label>'+name+' ('+id+')'+'</label> <input type="hidden" name="user_id[]" value="'+id+'"/><a href="javascript:void(0);" onclick="$(this).parent().remove(); delete choose_movie['+id+'];" style="float:right;">删除</a></div>';
+	$('#submit_add_bianji_form_movie').append(html);
+}
+
+
+
+choose_fan = {};
+function pingfenAddFan (id,name,total_page){
+	if (typeof choose_fan[id] !== 'undefined' || $('#fan_rst_'+id).length > 0) {alert(name+' 剧集已经在列表里了哟！');return;}
+	choose_fan[id] = {id:id,name:name,total_page:total_page};
+	var html = '<div style="line-height:2.2em;padding:2px 5px;color:#666;border-bottom:1px solid #ddd;"><label>'+name+' ('+id+')'+'</label> <input type="hidden" name="user_id[]" value="'+id+'"/><a href="javascript:void(0);" onclick="$(this).parent().remove(); delete choose_fan['+id+'];" style="float:right;">删除</a></div>';
+	$('#submit_add_bianji_form_fan').append(html);
+}
+
+
+choose_wei = {};
+function pingfenAddWei (id,title){
+	if (typeof choose_wei[id] !== 'undefined' || $('#wei_rst_'+id).length > 0) {alert(title+' 微图解已经在列表里了哟！');return;}
+	choose_wei[id] = {id:id,title:title};
+	var html = '<div style="line-height:2.2em;padding:2px 5px;color:#666;border-bottom:1px solid #ddd;"><label>'+title+' ('+id+')'+'</label> <input type="hidden" name="user_id[]" value="'+id+'"/><a href="javascript:void(0);" onclick="$(this).parent().remove(); delete choose_wei['+id+'];" style="float:right;">删除</a></div>';
+	$('#submit_add_bianji_form_wei').append(html);
+}
+
+
+choose_news = {};
+function pingfenAddNews (id,name,total_page){
+	if (typeof choose_news[id] !== 'undefined' || $('#news_rst_'+id).length > 0) {alert(name+' 资讯已经在列表里了哟！');return;}
+	choose_news[id] = {id:id,name:name,total_page:total_page};
+	var html = '<div style="line-height:2.2em;padding:2px 5px;color:#666;border-bottom:1px solid #ddd;"><label style="max-width:100px;white-space:nowrap;">'+name+' ('+id+')'+'</label> <input type="hidden" name="user_id[]" value="'+id+'"/><br /><a href="javascript:void(0);" onclick="$(this).parent().remove(); delete choose_news['+id+'];">删除</a></div>';
+	$('#submit_add_bianji_form_news').append(html);
+}
+</script>
+
+<include file="Public:footer" />

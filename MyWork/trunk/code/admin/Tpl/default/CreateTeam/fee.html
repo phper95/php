@@ -1,0 +1,172 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<include file="CreateTeam:opt" />
+</div>
+<!-- Sidebar ends -->
+    
+<!-- Content begins -->
+<div id="content">
+    <div class="contentTop">
+        <span class="pageTitle">创作团管理</span>
+        <div class="clear"></div>
+    </div>
+    <include file="Public:bav" />
+    <!-- Main content -->
+    <div class="wrapper">
+    <form method='post' id="form1" name="form1" action=""  enctype="multipart/form-data">
+        <div class="widget" id="js-ctrl-checkbox">
+        	<div class="whead"><h6>稿费</h6><div class="clear"></div></div>
+	        <table cellpadding="0" cellspacing="0" width="100%" class="tDefault tMedia">
+	        	<thead>
+	                <tr>
+	                	<td width="180">用户名称</td>
+	                	<td>说明</td>
+			            <td width="40">应付款</td>
+	                </tr>
+	            </thead>
+	            <empty name="list">
+	            	<tfoot>
+                    	<tr>
+                        <td colspan="3">
+                        	没有啦啦啦啦
+                        </td>
+                        </tr>
+                    </tfoot>
+	           	<else />
+	            <tbody>
+	            	<volist name="list" id="vo">
+	            	<tr id="fee_total_line_{$key}">
+	            		<td>
+	            			<img onclick="$('#create_team_user_info_{$key}').fadeToggle(300);" alt="" src="{$graphers[$key]['avatar']}" style="width:30px;height:30px;float:left;border-radius:20px;border:2px solid #fefefe;cursor:pointer;">
+	            			<span style="float:left;width:78%;padding:10px 0px;">{$graphers[$key]['name']}</span>
+	            			<div class="clear"></div>
+	            			<div id="create_team_user_info_{$key}" style="display:none;">
+	            				<table style="border:1px solid #dcdcdc;">
+	            					<tr><td>登录邮箱</td><td>{$graphers[$key]['email2']}</td></tr>
+	            				<if condition="isset($graphers[$key]['address'])">
+	            					<tr><td>Email</td><td>{$graphers[$key]['email']}</td></tr>
+	            					<tr><td>真名</td><td>{$graphers[$key]['realname']}</td></tr>
+	            					<tr><td>电话</td><td>{$graphers[$key]['phone']}</td></tr>
+	            					<tr><td>地址</td><td>{$graphers[$key]['address']}</td></tr>
+	            					<tr><td>支付</td><td>{$graphers[$key]['yh_card']}</td></tr>
+	            				</if>
+	            				</table>
+	            			</div>
+	            		</td>
+	            		<td>
+	            			<foreach name="cellcover" item='c' key="i">
+	            				<if condition="isset($vo['cellcover'][$i])">
+	            					<div style="padding:0px 5px 5px 5px;position:relative;min-height:20px; float:left;">
+	            					<span style="cursor:pointer;float:left;" onclick="$('#fee_movie_info_{$key}_{$i}').fadeToggle(300);" class="{$c.color}">{$c.str} <span id="fee_total_count_{$key}_{$i}">{$vo['cellcover'][$i]|count=###}</span> 部 应结算  ￥<span id="fee_total_cost_{$key}_{$i}">{$vo[$i]['cost']}</span></span>
+	            					<div class="clear"></div>
+	            					<table id="fee_movie_info_{$key}_{$i}" style="display:none;border:1px solid #dcdcdc;float:left;margin-top:3px;">
+	            					<thead><tr><td><input type="checkbox" class="js-checkall" data-tr-key="{$key}" data-i-key="{$i}" data-ctrlclass="js-{$key}-{$i}" checked="checked"/></td><td>电影名称</td><td>页码*单页费率</td><td>应结 </td></tr></thead>
+	            					<tbody>
+	            					<?php 
+										foreach ($vo['cellcover'][$i] as $mvo) {
+											echo '<tr>'
+												.'<td><input class="js-'.$key.'-'.$i.' js-cbx-value" data-tr-key="'.$key.'" data-i-key="'.$i.'" data-text-id="txt_'.$mvo['movie_id'].'-'.$key.'-'.$i.'" type="checkbox" value="'.$mvo['movie_id'].','.$key.','.$i.'" checked="checked" name="fee_ckb[]"/></td>'
+												.'<td>'.$mvo['movie_id'].' -《'.$mvo['name'].'》</td>'
+												.'<td>'.$mvo['total_page'].' * '.$mvo['fee'] .'</td>'
+												.'<td>'.$mvo['cost'].' - '.$mvo['history_fee'].' = ￥<input style="width:40px;" type="text" id="txt_'.$mvo['movie_id'].'-'.$key.'-'.$i.'" name="fee['.$mvo['movie_id'].','.$key.','.$i.']" value="'.($mvo['cost']-$mvo['history_fee']).' "/></td>'
+												.'</tr>';
+										}
+	            					?>
+	            					</tbody>
+	            					</table>
+	            					<div class="clear"></div>
+	            					</div>
+	            				</if>
+	            			</foreach>
+	            		</td>
+	            		<td data-cost="{$vo.cost}" id="fee_total_cost_{$key}">{$vo.cost}</td>
+	            	</tr>
+	            	</volist>
+	            </tbody>
+	            </empty>
+	        </table>
+	        <empty name="list">
+	        <else/>
+	        <div class="formRow">
+            	<input type="submit" value="提交并清算" id="create_team_fee_submit" onclick="return false;" class="buttonM bBlack formSubmit" />
+            	<span style="float:right;padding-left:10px;height:5px;"></span>
+            	<input type="submit" value="生成对账Excel" id="create_team_fee_excel_submit" onclick="return false;" class="buttonM bBlue formSubmit" />
+            	<div class="clear"></div>
+            </div>
+            </empty>
+        </div>
+    </form>
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+<empty name="list">
+<else />
+<script>
+(function(){
+	$('.js-checkall').change(function(){
+		var tr_key = $(this).attr('data-tr-key');
+		var i_key  = $(this).attr('data-i-key');
+		if (typeof $(this).attr('checked') == 'undefined') {
+			$('.'+$(this).attr('data-ctrlclass')).attr('checked',false);
+		} else {
+			$('.'+$(this).attr('data-ctrlclass')).attr('checked','checked');
+		}
+		js_tr_total(tr_key,i_key);
+		
+	});
+	$('.js-cbx-value').change(function(){
+		var tr_key = $(this).attr('data-tr-key');
+		var i_key  = $(this).attr('data-i-key');
+		js_tr_total(tr_key,i_key);
+	});
+	$('#js-ctrl-checkbox input[type="checkbox"]').attr('checked','checked');
+	
+	var js_tr_total = function(tr_key,i_key){
+		var total = 0;
+		$('#fee_total_line_' + tr_key + ' .js-cbx-value').each(function(){
+			if ($(this).attr('checked') == 'checked')
+				total += parseFloat($('#'+$(this).attr('data-text-id')).val());
+		});
+		$('#fee_total_cost_' + tr_key).html(total.toFixed(2));
+		total = 0;
+		var i=0;
+		$('#fee_movie_info_' + tr_key + '_' + i_key + ' .js-cbx-value').each(function(){
+			if ($(this).attr('checked') == 'checked'){
+				i++;
+				total += parseFloat($('#'+$(this).attr('data-text-id')).val());
+			}
+		});
+		$('#fee_total_count_'+tr_key+'_'+i_key).html(i);
+		$('#fee_total_cost_'+tr_key+'_'+i_key).html(total.toFixed(2));
+	};
+	
+	var js_total = function(){
+		var total = 0;
+		$('.js-cbx-value').each(function(){
+			var val = 0;
+			if ($(this).attr('checked') == 'checked') {
+				var txt_id = $(this).attr('data-text-id');
+				val = $('#' + txt_id).val();
+			}
+			total += parseFloat(val);
+		});
+		return (total.toFixed(2));
+	};
+	
+	$('#create_team_fee_submit').click(function(){
+		if (confirm('确定已付总款 ￥'+js_total())){
+			$('#form1').attr('action',"{:U('CreateTeam/doFee')}").submit();
+		}
+	});
+	
+	$('#create_team_fee_excel_submit').click(function(){
+		$('#form1').attr('action',"{:U('CreateTeam/execFeeExcel')}").submit();
+	});
+})();
+</script>
+</empty>
+<include file="Public:footer" />

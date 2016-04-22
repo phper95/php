@@ -1,0 +1,766 @@
+[ 2016-04-12T10:01:09+08:00 ] 192.168.0.19 /php/mywork/trunk/code/appweb/shop/index.php?m=index&a=index&userid=99g3hpa2&k=gm0x1jzc1c6sg9g
+ERR: 无法加载模块:index
+
+[ 2016-04-12T10:01:20+08:00 ] 192.168.0.19 /php/mywork/trunk/code/appweb/shop/index.php?m=index&a=index&userid=99g3hpa2&k=gm0x1jzc1c6sg9g
+ERR: 无法加载模块:index
+
+[ 2016-04-12T10:06:38+08:00 ] 192.168.0.190 /php/MyWork/trunk/code/appweb/shop/index.php?m=Index&a=doRotateLottery&userid=99G3HPA2
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002001s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead D:\wamp\www\boo\Core\Lib\Driver\Db\DbMysql.class.php 第 55 行.
+SQL: SHOW COLUMNS FROM `shop_goods` [ RunTime:0.004000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_goods` WHERE ( `cat_id` = 2 ) AND ( `ku_cun` > 0 ) LIMIT 8   [ RunTime:0.001000s ]
+NOTIC: [8] Use of undefined constant id - assumed 'id' D:\wamp\www\php\MyWork\trunk\code\appweb\shop\Lib\Action\IndexAction.class.php 第 187 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_goods` WHERE ( `id` = 61 ) LIMIT 1   [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `shop_lottery` [ RunTime:0.003000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_lottery` WHERE ( `g_id` = 61 ) LIMIT 1   [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `shop_user_lottery` [ RunTime:0.019001s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_user_lottery` WHERE ( `lot_id` = 17 ) AND ( `user_id` = 4005788 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_v_gold` [ RunTime:0.003000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `user_v_gold` WHERE ( `user_id` = 4005788 ) LIMIT 1   [ RunTime:0.001000s ]
+SQL: UPDATE `user_v_gold` SET `gold`=gold-50.00 WHERE ( `user_id` = 4005788 ) [ RunTime:0.000000s ]
+SQL: UPDATE `shop_user_lottery` SET `total_times`=total_times+1 WHERE ( `id` = 7 ) [ RunTime:0.028001s ]
+SQL: UPDATE `shop_user_lottery` SET `succ_times`=succ_times+1 WHERE ( `id` = 7 ) [ RunTime:0.019001s ]
+SQL: UPDATE `shop_goods` SET `ku_cun`=ku_cun-1 WHERE ( `id` = 61 ) [ RunTime:0.019001s ]
+SQL: SHOW COLUMNS FROM `shop_user_lottery_succ` [ RunTime:0.073004s ]
+SQL: INSERT INTO `shop_user_lottery_succ` (`order_id`,`user_id`,`lot_id`,`cost`,`add_time`) VALUES ('DJGULCT7P16',4005788,17,'50.00','2016-04-12 10:06:38') [ RunTime:0.021001s ]
+SQL: SHOW COLUMNS FROM `shop_lottery_record` [ RunTime:0.019001s ]
+SQL: INSERT INTO `shop_lottery_record` (`user_id`,`lot_id`,`rand_num`,`rst`,`cost`,`remark`,`add_time`) VALUES (4005788,17,28,1,'50.00','','2016-04-12 10:06:38') [ RunTime:0.020002s ]
+NOTIC: [8] Undefined index: msg D:\wamp\www\php\MyWork\trunk\code\appweb\shop\Lib\Action\CommonAction.class.php 第 40 行.
+
+[ 2016-04-12T10:06:49+08:00 ] 192.168.0.190 /php/MyWork/trunk/code/appweb/shop/index.php?m=Index&a=doRotateLottery&userid=99G3HPA2
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead D:\wamp\www\boo\Core\Lib\Driver\Db\DbMysql.class.php 第 55 行.
+SQL: SHOW COLUMNS FROM `shop_goods` [ RunTime:0.004000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_goods` WHERE ( `cat_id` = 2 ) AND ( `ku_cun` > 0 ) LIMIT 8   [ RunTime:0.001000s ]
+NOTIC: [8] Use of undefined constant id - assumed 'id' D:\wamp\www\php\MyWork\trunk\code\appweb\shop\Lib\Action\IndexAction.class.php 第 187 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_goods` WHERE ( `id` = 60 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `shop_lottery` [ RunTime:0.003001s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_lottery` WHERE ( `g_id` = 60 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `shop_user_lottery` [ RunTime:0.004000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_user_lottery` WHERE ( `lot_id` = 16 ) AND ( `user_id` = 4005788 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_v_gold` [ RunTime:0.003000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `user_v_gold` WHERE ( `user_id` = 4005788 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: UPDATE `user_v_gold` SET `gold`=gold-30.00 WHERE ( `user_id` = 4005788 ) [ RunTime:0.000000s ]
+SQL: UPDATE `shop_user_lottery` SET `total_times`=total_times+1 WHERE ( `id` = 6 ) [ RunTime:0.018001s ]
+SQL: UPDATE `shop_user_lottery` SET `succ_times`=succ_times+1 WHERE ( `id` = 6 ) [ RunTime:0.019001s ]
+SQL: UPDATE `shop_goods` SET `ku_cun`=ku_cun-1 WHERE ( `id` = 60 ) [ RunTime:0.013000s ]
+SQL: SHOW COLUMNS FROM `shop_user_lottery_succ` [ RunTime:0.005001s ]
+SQL: INSERT INTO `shop_user_lottery_succ` (`order_id`,`user_id`,`lot_id`,`cost`,`add_time`) VALUES ('DJZ7LZD2VRW',4005788,16,'30.00','2016-04-12 10:06:49') [ RunTime:0.019001s ]
+SQL: SHOW COLUMNS FROM `shop_lottery_record` [ RunTime:0.003000s ]
+SQL: INSERT INTO `shop_lottery_record` (`user_id`,`lot_id`,`rand_num`,`rst`,`cost`,`remark`,`add_time`) VALUES (4005788,16,99,1,'30.00','','2016-04-12 10:06:49') [ RunTime:0.009001s ]
+NOTIC: [8] Undefined index: msg D:\wamp\www\php\MyWork\trunk\code\appweb\shop\Lib\Action\CommonAction.class.php 第 40 行.
+
+[ 2016-04-12T10:06:59+08:00 ] 192.168.0.190 /php/MyWork/trunk/code/appweb/shop/index.php?m=Index&a=doRotateLottery&userid=99G3HPA2
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead D:\wamp\www\boo\Core\Lib\Driver\Db\DbMysql.class.php 第 55 行.
+SQL: SHOW COLUMNS FROM `shop_goods` [ RunTime:0.004000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_goods` WHERE ( `cat_id` = 2 ) AND ( `ku_cun` > 0 ) LIMIT 8   [ RunTime:0.000000s ]
+NOTIC: [8] Use of undefined constant id - assumed 'id' D:\wamp\www\php\MyWork\trunk\code\appweb\shop\Lib\Action\IndexAction.class.php 第 187 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_goods` WHERE ( `id` = 60 ) LIMIT 1   [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `shop_lottery` [ RunTime:0.003001s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_lottery` WHERE ( `g_id` = 60 ) LIMIT 1   [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `shop_user_lottery` [ RunTime:0.003000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_user_lottery` WHERE ( `lot_id` = 16 ) AND ( `user_id` = 4005788 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_v_gold` [ RunTime:0.002000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `user_v_gold` WHERE ( `user_id` = 4005788 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: UPDATE `user_v_gold` SET `gold`=gold-30.00 WHERE ( `user_id` = 4005788 ) [ RunTime:0.000000s ]
+SQL: UPDATE `shop_user_lottery` SET `total_times`=total_times+1 WHERE ( `id` = 6 ) [ RunTime:0.033002s ]
+SQL: UPDATE `shop_user_lottery` SET `succ_times`=succ_times+1 WHERE ( `id` = 6 ) [ RunTime:0.014001s ]
+SQL: UPDATE `shop_goods` SET `ku_cun`=ku_cun-1 WHERE ( `id` = 60 ) [ RunTime:0.019001s ]
+SQL: SHOW COLUMNS FROM `shop_user_lottery_succ` [ RunTime:0.010001s ]
+SQL: INSERT INTO `shop_user_lottery_succ` (`order_id`,`user_id`,`lot_id`,`cost`,`add_time`) VALUES ('D5Z2LCD2VSD',4005788,16,'30.00','2016-04-12 10:06:59') [ RunTime:0.008000s ]
+SQL: SHOW COLUMNS FROM `shop_lottery_record` [ RunTime:0.004001s ]
+SQL: INSERT INTO `shop_lottery_record` (`user_id`,`lot_id`,`rand_num`,`rst`,`cost`,`remark`,`add_time`) VALUES (4005788,16,2,1,'30.00','','2016-04-12 10:06:59') [ RunTime:0.013000s ]
+NOTIC: [8] Undefined index: msg D:\wamp\www\php\MyWork\trunk\code\appweb\shop\Lib\Action\CommonAction.class.php 第 40 行.
+
+[ 2016-04-12T10:07:13+08:00 ] 192.168.0.190 /php/MyWork/trunk/code/appweb/shop/index.php?m=Index&a=doRotateLottery&userid=99G3HPA2
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead D:\wamp\www\boo\Core\Lib\Driver\Db\DbMysql.class.php 第 55 行.
+SQL: SHOW COLUMNS FROM `shop_goods` [ RunTime:0.003000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_goods` WHERE ( `cat_id` = 2 ) AND ( `ku_cun` > 0 ) LIMIT 8   [ RunTime:0.001000s ]
+NOTIC: [8] Use of undefined constant id - assumed 'id' D:\wamp\www\php\MyWork\trunk\code\appweb\shop\Lib\Action\IndexAction.class.php 第 187 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_goods` WHERE ( `id` = 59 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `shop_lottery` [ RunTime:0.002000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_lottery` WHERE ( `g_id` = 59 ) LIMIT 1   [ RunTime:0.000000s ]
+
+[ 2016-04-12T10:09:40+08:00 ] 192.168.0.19 /php/MyWork/trunk/code/appweb/shop/index.php?m=Index&a=doRotateLottery&userid=99G3HPA2
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead D:\wamp\www\boo\Core\Lib\Driver\Db\DbMysql.class.php 第 55 行.
+SQL: SHOW COLUMNS FROM `shop_goods` [ RunTime:0.003001s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_goods` WHERE ( `cat_id` = 2 ) AND ( `ku_cun` > 0 ) LIMIT 8   [ RunTime:0.000000s ]
+NOTIC: [8] Use of undefined constant id - assumed 'id' D:\wamp\www\php\MyWork\trunk\code\appweb\shop\Lib\Action\IndexAction.class.php 第 187 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_goods` WHERE ( `id` = 59 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `shop_lottery` [ RunTime:0.002000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_lottery` WHERE ( `g_id` = 59 ) LIMIT 1   [ RunTime:0.000000s ]
+
+[ 2016-04-12T10:10:47+08:00 ] 192.168.0.19 /php/MyWork/trunk/code/appweb/shop/index.php?m=Index&a=doRotateLottery&userid=99G3HPA2
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead D:\wamp\www\boo\Core\Lib\Driver\Db\DbMysql.class.php 第 55 行.
+SQL: SHOW COLUMNS FROM `shop_goods` [ RunTime:0.003000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_goods` WHERE ( `cat_id` = 2 ) AND ( `ku_cun` > 0 ) LIMIT 8   [ RunTime:0.000000s ]
+NOTIC: [8] Use of undefined constant id - assumed 'id' D:\wamp\www\php\MyWork\trunk\code\appweb\shop\Lib\Action\IndexAction.class.php 第 187 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_goods` WHERE ( `id` = 57 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `shop_lottery` [ RunTime:0.002000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_lottery` WHERE ( `g_id` = 57 ) LIMIT 1   [ RunTime:0.001000s ]
+
+[ 2016-04-12T10:20:41+08:00 ] 192.168.0.19 /php/MyWork/trunk/code/appweb/shop/index.php?m=Index&a=doRotateLottery&userid=99G3HPA2
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead D:\wamp\www\boo\Core\Lib\Driver\Db\DbMysql.class.php 第 55 行.
+SQL: SHOW COLUMNS FROM `shop_goods` [ RunTime:0.003000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_goods` WHERE ( `cat_id` = 2 ) AND ( `ku_cun` > 0 ) LIMIT 8   [ RunTime:0.000000s ]
+NOTIC: [8] Use of undefined constant id - assumed 'id' D:\wamp\www\php\MyWork\trunk\code\appweb\shop\Lib\Action\IndexAction.class.php 第 192 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_goods` WHERE ( `id` = 56 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `shop_lottery` [ RunTime:0.002000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_lottery` WHERE ( `g_id` = 56 ) LIMIT 1   [ RunTime:0.000000s ]
+
+[ 2016-04-12T10:20:58+08:00 ] 192.168.0.19 /php/MyWork/trunk/code/appweb/shop/index.php?m=Index&a=doRotateLottery&userid=99G3HPA2
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead D:\wamp\www\boo\Core\Lib\Driver\Db\DbMysql.class.php 第 55 行.
+SQL: SHOW COLUMNS FROM `shop_goods` [ RunTime:0.004000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_goods` WHERE ( `cat_id` = 2 ) AND ( `ku_cun` > 0 ) LIMIT 8   [ RunTime:0.000000s ]
+NOTIC: [8] Use of undefined constant id - assumed 'id' D:\wamp\www\php\MyWork\trunk\code\appweb\shop\Lib\Action\IndexAction.class.php 第 192 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_goods` WHERE ( `id` = 58 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `shop_lottery` [ RunTime:0.003000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_lottery` WHERE ( `g_id` = 58 ) LIMIT 1   [ RunTime:0.001000s ]
+
+[ 2016-04-12T10:21:53+08:00 ] 192.168.0.19 /php/MyWork/trunk/code/appweb/shop/index.php?m=Index&a=doRotateLottery&userid=99G3HPA2
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead D:\wamp\www\boo\Core\Lib\Driver\Db\DbMysql.class.php 第 55 行.
+SQL: SHOW COLUMNS FROM `shop_goods` [ RunTime:0.002000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_goods` WHERE ( `cat_id` = 2 ) AND ( `ku_cun` > 0 ) LIMIT 8   [ RunTime:0.001000s ]
+NOTIC: [8] Use of undefined constant id - assumed 'id' D:\wamp\www\php\MyWork\trunk\code\appweb\shop\Lib\Action\IndexAction.class.php 第 192 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_goods` WHERE ( `id` = 57 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `shop_lottery` [ RunTime:0.002000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_lottery` WHERE ( `g_id` = 57 ) LIMIT 1   [ RunTime:0.000000s ]
+
+[ 2016-04-12T10:22:58+08:00 ] 192.168.0.19 /php/MyWork/trunk/code/appweb/shop/index.php?m=Index&a=doRotateLottery&userid=99G3HPA2
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead D:\wamp\www\boo\Core\Lib\Driver\Db\DbMysql.class.php 第 55 行.
+SQL: SHOW COLUMNS FROM `shop_goods` [ RunTime:0.002000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_goods` WHERE ( `cat_id` = 2 ) AND ( `ku_cun` > 0 ) LIMIT 8   [ RunTime:0.000000s ]
+NOTIC: [8] Use of undefined constant id - assumed 'id' D:\wamp\www\php\MyWork\trunk\code\appweb\shop\Lib\Action\IndexAction.class.php 第 192 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_goods` WHERE ( `id` = 57 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `shop_lottery` [ RunTime:0.002000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_lottery` WHERE ( `g_id` = 57 ) LIMIT 1   [ RunTime:0.001000s ]
+
+[ 2016-04-12T10:24:12+08:00 ] 192.168.0.19 /php/MyWork/trunk/code/appweb/shop/index.php?m=Index&a=doRotateLottery&userid=99G3HPA2
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.004001s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead D:\wamp\www\boo\Core\Lib\Driver\Db\DbMysql.class.php 第 55 行.
+SQL: SHOW COLUMNS FROM `shop_goods` [ RunTime:0.021002s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_goods` WHERE ( `cat_id` = 2 ) AND ( `ku_cun` > 0 ) LIMIT 8   [ RunTime:0.001000s ]
+NOTIC: [8] Use of undefined constant id - assumed 'id' D:\wamp\www\php\MyWork\trunk\code\appweb\shop\Lib\Action\IndexAction.class.php 第 192 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_goods` WHERE ( `id` = 58 ) LIMIT 1   [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `shop_lottery` [ RunTime:0.002000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_lottery` WHERE ( `g_id` = 58 ) LIMIT 1   [ RunTime:0.000000s ]
+
+[ 2016-04-12T10:24:50+08:00 ] 192.168.0.19 /php/MyWork/trunk/code/appweb/shop/index.php?m=Index&a=doRotateLottery&userid=99G3HPA2
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead D:\wamp\www\boo\Core\Lib\Driver\Db\DbMysql.class.php 第 55 行.
+SQL: SHOW COLUMNS FROM `shop_goods` [ RunTime:0.003000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_goods` WHERE ( `cat_id` = 2 ) AND ( `ku_cun` > 0 ) LIMIT 8   [ RunTime:0.000000s ]
+NOTIC: [8] Use of undefined constant id - assumed 'id' D:\wamp\www\php\MyWork\trunk\code\appweb\shop\Lib\Action\IndexAction.class.php 第 192 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_goods` WHERE ( `id` = 61 ) LIMIT 1   [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `shop_lottery` [ RunTime:0.004000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_lottery` WHERE ( `g_id` = 61 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `shop_user_lottery` [ RunTime:0.002000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_user_lottery` WHERE ( `lot_id` = 17 ) AND ( `user_id` = 4005788 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_v_gold` [ RunTime:0.002000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `user_v_gold` WHERE ( `user_id` = 4005788 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: UPDATE `user_v_gold` SET `gold`=gold-50.00 WHERE ( `user_id` = 4005788 ) [ RunTime:0.000000s ]
+SQL: UPDATE `shop_user_lottery` SET `total_times`=total_times+1 WHERE ( `id` = 7 ) [ RunTime:0.023002s ]
+SQL: UPDATE `shop_user_lottery` SET `succ_times`=succ_times+1 WHERE ( `id` = 7 ) [ RunTime:0.013001s ]
+SQL: UPDATE `shop_goods` SET `ku_cun`=ku_cun-1 WHERE ( `id` = 61 ) [ RunTime:0.019001s ]
+SQL: SHOW COLUMNS FROM `shop_user_lottery_succ` [ RunTime:0.010000s ]
+SQL: INSERT INTO `shop_user_lottery_succ` (`order_id`,`user_id`,`lot_id`,`cost`,`add_time`) VALUES ('DSZ73GTPF4R',4005788,17,'50.00','2016-04-12 10:24:50') [ RunTime:0.016000s ]
+SQL: SHOW COLUMNS FROM `shop_lottery_record` [ RunTime:0.009000s ]
+SQL: INSERT INTO `shop_lottery_record` (`user_id`,`lot_id`,`rand_num`,`rst`,`cost`,`remark`,`add_time`) VALUES (4005788,17,83,1,'50.00','','2016-04-12 10:24:50') [ RunTime:0.020001s ]
+NOTIC: [8] Undefined index: msg D:\wamp\www\php\MyWork\trunk\code\appweb\shop\Lib\Action\CommonAction.class.php 第 40 行.
+
+[ 2016-04-12T10:26:59+08:00 ] 192.168.0.19 /php/MyWork/trunk/code/appweb/shop/index.php?m=Index&a=doRotateLottery&userid=99G3HPA2
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead D:\wamp\www\boo\Core\Lib\Driver\Db\DbMysql.class.php 第 55 行.
+SQL: SHOW COLUMNS FROM `shop_goods` [ RunTime:0.004000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_goods` WHERE ( `cat_id` = 2 ) AND ( `ku_cun` > 0 ) LIMIT 8   [ RunTime:0.000000s ]
+NOTIC: [8] Use of undefined constant id - assumed 'id' D:\wamp\www\php\MyWork\trunk\code\appweb\shop\Lib\Action\IndexAction.class.php 第 192 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_goods` WHERE ( `id` = 56 ) LIMIT 1   [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `shop_lottery` [ RunTime:0.004000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_lottery` WHERE ( `g_id` = 56 ) LIMIT 1   [ RunTime:0.001000s ]
+
+[ 2016-04-12T10:29:33+08:00 ] 192.168.0.19 /php/MyWork/trunk/code/appweb/shop/index.php?m=Index&a=doRotateLottery&userid=99G3HPA2
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead D:\wamp\www\boo\Core\Lib\Driver\Db\DbMysql.class.php 第 55 行.
+SQL: SHOW COLUMNS FROM `shop_goods` [ RunTime:0.003000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_goods` WHERE ( `cat_id` = 2 ) AND ( `ku_cun` > 0 ) LIMIT 8   [ RunTime:0.000000s ]
+NOTIC: [8] Use of undefined constant id - assumed 'id' D:\wamp\www\php\MyWork\trunk\code\appweb\shop\Lib\Action\IndexAction.class.php 第 192 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_goods` WHERE ( `id` = 57 ) LIMIT 1   [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `shop_lottery` [ RunTime:0.003000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_lottery` WHERE ( `g_id` = 57 ) LIMIT 1   [ RunTime:0.000000s ]
+
+[ 2016-04-12T10:29:51+08:00 ] 192.168.0.19 /php/MyWork/trunk/code/appweb/shop/index.php?m=Index&a=doRotateLottery&userid=99G3HPA2
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead D:\wamp\www\boo\Core\Lib\Driver\Db\DbMysql.class.php 第 55 行.
+SQL: SHOW COLUMNS FROM `shop_goods` [ RunTime:0.003001s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_goods` WHERE ( `cat_id` = 2 ) AND ( `ku_cun` > 0 ) LIMIT 8   [ RunTime:0.000000s ]
+NOTIC: [8] Use of undefined constant id - assumed 'id' D:\wamp\www\php\MyWork\trunk\code\appweb\shop\Lib\Action\IndexAction.class.php 第 192 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_goods` WHERE ( `id` = 60 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `shop_lottery` [ RunTime:0.003000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_lottery` WHERE ( `g_id` = 60 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `shop_user_lottery` [ RunTime:0.003000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_user_lottery` WHERE ( `lot_id` = 16 ) AND ( `user_id` = 4005788 ) LIMIT 1   [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `user_v_gold` [ RunTime:0.002000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `user_v_gold` WHERE ( `user_id` = 4005788 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: UPDATE `user_v_gold` SET `gold`=gold-30.00 WHERE ( `user_id` = 4005788 ) [ RunTime:0.000000s ]
+SQL: UPDATE `shop_user_lottery` SET `total_times`=total_times+1 WHERE ( `id` = 6 ) [ RunTime:0.024001s ]
+SQL: UPDATE `shop_user_lottery` SET `succ_times`=succ_times+1 WHERE ( `id` = 6 ) [ RunTime:0.021001s ]
+SQL: UPDATE `shop_goods` SET `ku_cun`=ku_cun-1 WHERE ( `id` = 60 ) [ RunTime:0.019001s ]
+SQL: SHOW COLUMNS FROM `shop_user_lottery_succ` [ RunTime:0.009001s ]
+SQL: INSERT INTO `shop_user_lottery_succ` (`order_id`,`user_id`,`lot_id`,`cost`,`add_time`) VALUES ('DJZURZTVJD5',4005788,16,'30.00','2016-04-12 10:29:51') [ RunTime:0.019001s ]
+SQL: SHOW COLUMNS FROM `shop_lottery_record` [ RunTime:0.011001s ]
+SQL: INSERT INTO `shop_lottery_record` (`user_id`,`lot_id`,`rand_num`,`rst`,`cost`,`remark`,`add_time`) VALUES (4005788,16,99,1,'30.00','','2016-04-12 10:29:51') [ RunTime:0.014001s ]
+NOTIC: [8] Undefined index: msg D:\wamp\www\php\MyWork\trunk\code\appweb\shop\Lib\Action\CommonAction.class.php 第 40 行.
+
+[ 2016-04-12T10:30:07+08:00 ] 192.168.0.19 /php/MyWork/trunk/code/appweb/shop/index.php?m=Index&a=doRotateLottery&userid=99G3HPA2
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead D:\wamp\www\boo\Core\Lib\Driver\Db\DbMysql.class.php 第 55 行.
+SQL: SHOW COLUMNS FROM `shop_goods` [ RunTime:0.004000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_goods` WHERE ( `cat_id` = 2 ) AND ( `ku_cun` > 0 ) LIMIT 8   [ RunTime:0.000000s ]
+NOTIC: [8] Use of undefined constant id - assumed 'id' D:\wamp\www\php\MyWork\trunk\code\appweb\shop\Lib\Action\IndexAction.class.php 第 192 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_goods` WHERE ( `id` = 57 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `shop_lottery` [ RunTime:0.003001s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_lottery` WHERE ( `g_id` = 57 ) LIMIT 1   [ RunTime:0.001000s ]
+
+[ 2016-04-12T15:01:44+08:00 ] 192.168.0.19 /php/MyWork/trunk/code/appweb/shop/index.php?m=Index&a=doRotateLottery&userid=99G3HPA2
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead D:\wamp\www\boo\Core\Lib\Driver\Db\DbMysql.class.php 第 55 行.
+SQL: SHOW COLUMNS FROM `shop_goods` [ RunTime:0.003000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_goods` WHERE ( `cat_id` = 2 ) AND ( `ku_cun` > 0 ) LIMIT 8   [ RunTime:0.000000s ]
+NOTIC: [8] Use of undefined constant id - assumed 'id' D:\wamp\www\php\MyWork\trunk\code\appweb\shop\Lib\Action\IndexAction.class.php 第 192 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_goods` WHERE ( `id` = 56 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `shop_lottery` [ RunTime:0.004001s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_lottery` WHERE ( `g_id` = 56 ) LIMIT 1   [ RunTime:0.000000s ]
+
+[ 2016-04-12T16:52:39+08:00 ] 192.168.0.19 /php/MyWork/trunk/code/appweb/shop/index.php?m=Index&a=lottery
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead D:\wamp\www\boo\Core\Lib\Driver\Db\DbMysql.class.php 第 55 行.
+SQL: SHOW COLUMNS FROM `shop_goods` [ RunTime:0.003000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_goods` WHERE ( `goods_id` = 'GM0X15ZEJ9D1V2C' ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `shop_lottery` [ RunTime:0.002000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_lottery` WHERE ( `g_id` = 39 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `shop_user_lottery` [ RunTime:0.003001s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_user_lottery` WHERE ( `lot_id` = 4 ) AND ( `user_id` = 4005788 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_v_gold` [ RunTime:0.003000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `user_v_gold` WHERE ( `user_id` = 4005788 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: UPDATE `user_v_gold` SET `gold`=gold-50.00 WHERE ( `user_id` = 4005788 ) [ RunTime:0.066004s ]
+SQL: UPDATE `shop_user_lottery` SET `total_times`=total_times+1 WHERE ( `id` = 5 ) [ RunTime:0.097006s ]
+SQL: SHOW COLUMNS FROM `mdb_wisdom` [ RunTime:0.094005s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `mdb_wisdom` WHERE ( `id` = 739 ) LIMIT 1   [ RunTime:0.001000s ]
+NOTIC: [8] Undefined variable: rand D:\wamp\www\php\MyWork\trunk\code\appweb\shop\Lib\Action\IndexAction.class.php 第 144 行.
+SQL: SHOW COLUMNS FROM `shop_lottery_record` [ RunTime:0.012001s ]
+SQL: INSERT INTO `shop_lottery_record` (`user_id`,`lot_id`,`rand_num`,`rst`,`cost`,`remark`,`add_time`) VALUES (4005788,4,null,0,'50.00','{\"wisdomId\":\"739\"}','2016-04-12 16:52:39') [ RunTime:0.025001s ]
+ERR: 1048:Le champ 'rand_num' ne peut être vide (null)
+ [ SQL语句 ] : INSERT INTO `shop_lottery_record` (`user_id`,`lot_id`,`rand_num`,`rst`,`cost`,`remark`,`add_time`) VALUES (4005788,4,null,0,'50.00','{\"wisdomId\":\"739\"}','2016-04-12 16:52:39')
+NOTIC: [8] Undefined index: msg D:\wamp\www\php\MyWork\trunk\code\appweb\shop\Lib\Action\CommonAction.class.php 第 40 行.
+
+[ 2016-04-12T16:52:43+08:00 ] 192.168.0.19 /php/MyWork/trunk/code/appweb/shop/index.php?m=Index&a=lottery
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead D:\wamp\www\boo\Core\Lib\Driver\Db\DbMysql.class.php 第 55 行.
+SQL: SHOW COLUMNS FROM `shop_goods` [ RunTime:0.003000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_goods` WHERE ( `goods_id` = 'GM0X15ZEJ9D1V2C' ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `shop_lottery` [ RunTime:0.002000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_lottery` WHERE ( `g_id` = 39 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `shop_user_lottery` [ RunTime:0.002000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_user_lottery` WHERE ( `lot_id` = 4 ) AND ( `user_id` = 4005788 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_v_gold` [ RunTime:0.003000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `user_v_gold` WHERE ( `user_id` = 4005788 ) LIMIT 1   [ RunTime:0.001000s ]
+SQL: UPDATE `user_v_gold` SET `gold`=gold-50.00 WHERE ( `user_id` = 4005788 ) [ RunTime:0.000000s ]
+SQL: UPDATE `shop_user_lottery` SET `total_times`=total_times+1 WHERE ( `id` = 5 ) [ RunTime:0.036002s ]
+SQL: SHOW COLUMNS FROM `mdb_wisdom` [ RunTime:0.009001s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `mdb_wisdom` WHERE ( `id` = 2868 ) LIMIT 1   [ RunTime:0.005000s ]
+NOTIC: [8] Undefined variable: rand D:\wamp\www\php\MyWork\trunk\code\appweb\shop\Lib\Action\IndexAction.class.php 第 144 行.
+SQL: SHOW COLUMNS FROM `shop_lottery_record` [ RunTime:0.011001s ]
+SQL: INSERT INTO `shop_lottery_record` (`user_id`,`lot_id`,`rand_num`,`rst`,`cost`,`remark`,`add_time`) VALUES (4005788,4,null,0,'50.00','{\"wisdomId\":\"2868\"}','2016-04-12 16:52:43') [ RunTime:0.000000s ]
+ERR: 1048:Le champ 'rand_num' ne peut être vide (null)
+ [ SQL语句 ] : INSERT INTO `shop_lottery_record` (`user_id`,`lot_id`,`rand_num`,`rst`,`cost`,`remark`,`add_time`) VALUES (4005788,4,null,0,'50.00','{\"wisdomId\":\"2868\"}','2016-04-12 16:52:43')
+NOTIC: [8] Undefined index: msg D:\wamp\www\php\MyWork\trunk\code\appweb\shop\Lib\Action\CommonAction.class.php 第 40 行.
+
+[ 2016-04-12T16:54:08+08:00 ] 192.168.0.19 /php/MyWork/trunk/code/appweb/shop/index.php?m=Index&a=lottery
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead D:\wamp\www\boo\Core\Lib\Driver\Db\DbMysql.class.php 第 55 行.
+SQL: SHOW COLUMNS FROM `shop_goods` [ RunTime:0.009001s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_goods` WHERE ( `goods_id` = 'GM0X15ZEJ9D1V2C' ) LIMIT 1   [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `shop_lottery` [ RunTime:0.008000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_lottery` WHERE ( `g_id` = 39 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `shop_user_lottery` [ RunTime:0.005000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_user_lottery` WHERE ( `lot_id` = 4 ) AND ( `user_id` = 4005788 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_v_gold` [ RunTime:0.005000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `user_v_gold` WHERE ( `user_id` = 4005788 ) LIMIT 1   [ RunTime:0.001001s ]
+SQL: UPDATE `user_v_gold` SET `gold`=gold-50.00 WHERE ( `user_id` = 4005788 ) [ RunTime:0.001000s ]
+SQL: UPDATE `shop_user_lottery` SET `total_times`=total_times+1 WHERE ( `id` = 5 ) [ RunTime:0.019001s ]
+SQL: UPDATE `shop_user_lottery` SET `succ_times`=succ_times+1 WHERE ( `id` = 5 ) [ RunTime:0.014001s ]
+SQL: UPDATE `shop_goods` SET `ku_cun`=ku_cun-1 WHERE ( `id` = 39 ) [ RunTime:0.043002s ]
+SQL: SHOW COLUMNS FROM `shop_user_lottery_succ` [ RunTime:0.011001s ]
+SQL: INSERT INTO `shop_user_lottery_succ` (`order_id`,`user_id`,`lot_id`,`cost`,`add_time`) VALUES ('DSC7LGEJTGV',4005788,4,'50.00','2016-04-12 16:54:08') [ RunTime:0.056003s ]
+SQL: SHOW COLUMNS FROM `shop_lottery_record` [ RunTime:0.006000s ]
+SQL: INSERT INTO `shop_lottery_record` (`user_id`,`lot_id`,`rand_num`,`rst`,`cost`,`remark`,`add_time`) VALUES (4005788,4,430,1,'50.00','','2016-04-12 16:54:08') [ RunTime:0.012001s ]
+NOTIC: [8] Undefined index: msg D:\wamp\www\php\MyWork\trunk\code\appweb\shop\Lib\Action\CommonAction.class.php 第 40 行.
+
+[ 2016-04-12T16:54:11+08:00 ] 192.168.0.19 /php/MyWork/trunk/code/appweb/shop/index.php?m=Index&a=setAddr&userid=99G3HPA2
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead D:\wamp\www\boo\Core\Lib\Driver\Db\DbMysql.class.php 第 55 行.
+SQL: SHOW COLUMNS FROM `shop_user_addr` [ RunTime:0.145008s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_user_addr` WHERE ( `user_id` = 4005788 ) LIMIT 1   [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 273 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 168 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 273 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 168 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 399 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 399 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 399 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 399 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 399 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 399 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 399 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 399 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 399 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 197 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 399 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 399 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 399 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 399 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 399 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 399 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 399 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 399 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 399 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 404 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 197 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Template\ThinkTemplate.class.php 第 137 行.
+NOTIC: [2] Illegal string offset 'id' D:\wamp\www\php\MyWork\trunk\code\appweb\shop\Runtime\Cache\1e5824ec51d0ab5f74cfe799067bb2ef.php 第 32 行.
+NOTIC: [2] Illegal string offset 'addr' D:\wamp\www\php\MyWork\trunk\code\appweb\shop\Runtime\Cache\1e5824ec51d0ab5f74cfe799067bb2ef.php 第 32 行.
+NOTIC: [2] Illegal string offset 'id' D:\wamp\www\php\MyWork\trunk\code\appweb\shop\Runtime\Cache\1e5824ec51d0ab5f74cfe799067bb2ef.php 第 32 行.
+NOTIC: [2] Illegal string offset 'addr' D:\wamp\www\php\MyWork\trunk\code\appweb\shop\Runtime\Cache\1e5824ec51d0ab5f74cfe799067bb2ef.php 第 32 行.
+NOTIC: [2] Illegal string offset 'id' D:\wamp\www\php\MyWork\trunk\code\appweb\shop\Runtime\Cache\1e5824ec51d0ab5f74cfe799067bb2ef.php 第 32 行.
+NOTIC: [2] Illegal string offset 'addr' D:\wamp\www\php\MyWork\trunk\code\appweb\shop\Runtime\Cache\1e5824ec51d0ab5f74cfe799067bb2ef.php 第 32 行.
+NOTIC: [2] Illegal string offset 'id' D:\wamp\www\php\MyWork\trunk\code\appweb\shop\Runtime\Cache\1e5824ec51d0ab5f74cfe799067bb2ef.php 第 32 行.
+NOTIC: [2] Illegal string offset 'addr' D:\wamp\www\php\MyWork\trunk\code\appweb\shop\Runtime\Cache\1e5824ec51d0ab5f74cfe799067bb2ef.php 第 32 行.
+NOTIC: [2] Illegal string offset 'id' D:\wamp\www\php\MyWork\trunk\code\appweb\shop\Runtime\Cache\1e5824ec51d0ab5f74cfe799067bb2ef.php 第 32 行.
+NOTIC: [8] Uninitialized string offset: 0 D:\wamp\www\php\MyWork\trunk\code\appweb\shop\Runtime\Cache\1e5824ec51d0ab5f74cfe799067bb2ef.php 第 32 行.
+NOTIC: [2] Illegal string offset 'addr' D:\wamp\www\php\MyWork\trunk\code\appweb\shop\Runtime\Cache\1e5824ec51d0ab5f74cfe799067bb2ef.php 第 32 行.
+NOTIC: [8] Uninitialized string offset: 0 D:\wamp\www\php\MyWork\trunk\code\appweb\shop\Runtime\Cache\1e5824ec51d0ab5f74cfe799067bb2ef.php 第 32 行.
+NOTIC: [2] Illegal string offset 'id' D:\wamp\www\php\MyWork\trunk\code\appweb\shop\Runtime\Cache\1e5824ec51d0ab5f74cfe799067bb2ef.php 第 32 行.
+NOTIC: [2] Illegal string offset 'addr' D:\wamp\www\php\MyWork\trunk\code\appweb\shop\Runtime\Cache\1e5824ec51d0ab5f74cfe799067bb2ef.php 第 32 行.
+NOTIC: [2] Illegal string offset 'id' D:\wamp\www\php\MyWork\trunk\code\appweb\shop\Runtime\Cache\1e5824ec51d0ab5f74cfe799067bb2ef.php 第 32 行.
+NOTIC: [8] Uninitialized string offset: 0 D:\wamp\www\php\MyWork\trunk\code\appweb\shop\Runtime\Cache\1e5824ec51d0ab5f74cfe799067bb2ef.php 第 32 行.
+NOTIC: [2] Illegal string offset 'addr' D:\wamp\www\php\MyWork\trunk\code\appweb\shop\Runtime\Cache\1e5824ec51d0ab5f74cfe799067bb2ef.php 第 32 行.
+NOTIC: [8] Uninitialized string offset: 0 D:\wamp\www\php\MyWork\trunk\code\appweb\shop\Runtime\Cache\1e5824ec51d0ab5f74cfe799067bb2ef.php 第 32 行.
+NOTIC: [2] Illegal string offset 'id' D:\wamp\www\php\MyWork\trunk\code\appweb\shop\Runtime\Cache\1e5824ec51d0ab5f74cfe799067bb2ef.php 第 32 行.
+NOTIC: [2] Illegal string offset 'addr' D:\wamp\www\php\MyWork\trunk\code\appweb\shop\Runtime\Cache\1e5824ec51d0ab5f74cfe799067bb2ef.php 第 32 行.
+INFO: ParseTemplate Behavior ::run [ RunTime:0.072004s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.072004s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.001000s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.001000s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.004000s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2016-04-12T16:54:16+08:00 ] 192.168.0.19 /php/MyWork/trunk/code/appweb/shop/index.php?m=Index&a=doSetAddr
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead D:\wamp\www\boo\Core\Lib\Driver\Db\DbMysql.class.php 第 55 行.
+SQL: SHOW COLUMNS FROM `shop_user_addr` [ RunTime:0.004000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_user_addr` WHERE ( `user_id` = 4005788 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: UPDATE `shop_user_addr` SET `user_id`=4005788,`phone`='13242930866',`addr`='的郭德纲的第三方第三方斯蒂芬第三方第三方斯蒂芬第三方的说法是否撒范德萨发生',`name`='李勇' WHERE ( `id` = 16 ) [ RunTime:0.044003s ]
+NOTIC: [8] Undefined index: msg D:\wamp\www\php\MyWork\trunk\code\appweb\shop\Lib\Action\CommonAction.class.php 第 40 行.
+
+[ 2016-04-12T16:54:18+08:00 ] 192.168.0.19 /php/MyWork/trunk/code/appweb/shop/index.php?m=Index&a=bindAddr&userid=99G3HPA2
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead D:\wamp\www\boo\Core\Lib\Driver\Db\DbMysql.class.php 第 55 行.
+SQL: SHOW COLUMNS FROM `shop_user_addr` [ RunTime:0.002000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_user_addr` WHERE ( `id` = 16 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `shop_user_lottery_succ` [ RunTime:0.003000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_user_lottery_succ` WHERE ( `id` = 2487 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: UPDATE `shop_user_lottery_succ` SET `order_id`='DSC7LGEJTGV',`user_id`=4005788,`lot_id`=4,`addr_id`=16,`addr_info`='{\"name\":\"\\u674e\\u52c7\",\"phone\":\"13242930866\",\"phone2\":\"\",\"addr\":\"\\u7684\\u90ed\\u5fb7\\u7eb2\\u7684\\u7b2c\\u4e09\\u65b9\\u7b2c\\u4e09\\u65b9\\u65af\\u8482\\u82ac\\u7b2c\\u4e09\\u65b9\\u7b2c\\u4e09\\u65b9\\u65af\\u8482\\u82ac\\u7b2c\\u4e09\\u65b9\\u7684\\u8bf4\\u6cd5\\u662f\\u5426\\u6492\\u8303\\u5fb7\\u8428\\u53d1\\u751f\",\"post_code\":\"\"}',`state`=1,`cost`='50.00',`remark`='',`add_time`='2016-04-12 16:54:08' WHERE ( `id` = 2487 ) [ RunTime:0.038003s ]
+
+[ 2016-04-12T16:54:21+08:00 ] 192.168.0.19 /php/MyWork/trunk/code/appweb/shop/index.php?m=Index&a=lottery
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead D:\wamp\www\boo\Core\Lib\Driver\Db\DbMysql.class.php 第 55 行.
+SQL: SHOW COLUMNS FROM `shop_goods` [ RunTime:0.005001s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_goods` WHERE ( `goods_id` = 'GM0X15ZEJ9D1V2C' ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `shop_lottery` [ RunTime:0.004000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_lottery` WHERE ( `g_id` = 39 ) LIMIT 1   [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `shop_user_lottery` [ RunTime:0.004000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_user_lottery` WHERE ( `lot_id` = 4 ) AND ( `user_id` = 4005788 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_v_gold` [ RunTime:0.004000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `user_v_gold` WHERE ( `user_id` = 4005788 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: UPDATE `user_v_gold` SET `gold`=gold-50.00 WHERE ( `user_id` = 4005788 ) [ RunTime:0.000000s ]
+SQL: UPDATE `shop_user_lottery` SET `total_times`=total_times+1 WHERE ( `id` = 5 ) [ RunTime:0.017001s ]
+SQL: SHOW COLUMNS FROM `mdb_wisdom` [ RunTime:0.005000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `mdb_wisdom` WHERE ( `id` = 3685 ) LIMIT 1   [ RunTime:0.006001s ]
+NOTIC: [8] Undefined variable: rand D:\wamp\www\php\MyWork\trunk\code\appweb\shop\Lib\Action\IndexAction.class.php 第 144 行.
+SQL: SHOW COLUMNS FROM `shop_lottery_record` [ RunTime:0.005000s ]
+SQL: INSERT INTO `shop_lottery_record` (`user_id`,`lot_id`,`rand_num`,`rst`,`cost`,`remark`,`add_time`) VALUES (4005788,4,null,0,'50.00','{\"wisdomId\":\"3685\"}','2016-04-12 16:54:21') [ RunTime:0.000000s ]
+ERR: 1048:Le champ 'rand_num' ne peut être vide (null)
+ [ SQL语句 ] : INSERT INTO `shop_lottery_record` (`user_id`,`lot_id`,`rand_num`,`rst`,`cost`,`remark`,`add_time`) VALUES (4005788,4,null,0,'50.00','{\"wisdomId\":\"3685\"}','2016-04-12 16:54:21')
+NOTIC: [8] Undefined index: msg D:\wamp\www\php\MyWork\trunk\code\appweb\shop\Lib\Action\CommonAction.class.php 第 40 行.
+
+[ 2016-04-12T16:54:24+08:00 ] 192.168.0.19 /php/MyWork/trunk/code/appweb/shop/index.php?m=Index&a=lottery
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead D:\wamp\www\boo\Core\Lib\Driver\Db\DbMysql.class.php 第 55 行.
+SQL: SHOW COLUMNS FROM `shop_goods` [ RunTime:0.003001s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_goods` WHERE ( `goods_id` = 'GM0X15ZEJ9D1V2C' ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `shop_lottery` [ RunTime:0.003000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_lottery` WHERE ( `g_id` = 39 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `shop_user_lottery` [ RunTime:0.004000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_user_lottery` WHERE ( `lot_id` = 4 ) AND ( `user_id` = 4005788 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_v_gold` [ RunTime:0.003000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `user_v_gold` WHERE ( `user_id` = 4005788 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: UPDATE `user_v_gold` SET `gold`=gold-50.00 WHERE ( `user_id` = 4005788 ) [ RunTime:0.001001s ]
+SQL: UPDATE `shop_user_lottery` SET `total_times`=total_times+1 WHERE ( `id` = 5 ) [ RunTime:0.029001s ]
+SQL: SHOW COLUMNS FROM `mdb_wisdom` [ RunTime:0.004000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `mdb_wisdom` WHERE ( `id` = 3222 ) LIMIT 1   [ RunTime:0.006001s ]
+NOTIC: [8] Undefined variable: rand D:\wamp\www\php\MyWork\trunk\code\appweb\shop\Lib\Action\IndexAction.class.php 第 144 行.
+SQL: SHOW COLUMNS FROM `shop_lottery_record` [ RunTime:0.008000s ]
+SQL: INSERT INTO `shop_lottery_record` (`user_id`,`lot_id`,`rand_num`,`rst`,`cost`,`remark`,`add_time`) VALUES (4005788,4,null,0,'50.00','{\"wisdomId\":\"3222\"}','2016-04-12 16:54:24') [ RunTime:0.001000s ]
+ERR: 1048:Le champ 'rand_num' ne peut être vide (null)
+ [ SQL语句 ] : INSERT INTO `shop_lottery_record` (`user_id`,`lot_id`,`rand_num`,`rst`,`cost`,`remark`,`add_time`) VALUES (4005788,4,null,0,'50.00','{\"wisdomId\":\"3222\"}','2016-04-12 16:54:24')
+NOTIC: [8] Undefined index: msg D:\wamp\www\php\MyWork\trunk\code\appweb\shop\Lib\Action\CommonAction.class.php 第 40 行.
+
+[ 2016-04-12T16:54:28+08:00 ] 192.168.0.19 /php/MyWork/trunk/code/appweb/shop/index.php?m=Index&a=lottery
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead D:\wamp\www\boo\Core\Lib\Driver\Db\DbMysql.class.php 第 55 行.
+SQL: SHOW COLUMNS FROM `shop_goods` [ RunTime:0.005000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_goods` WHERE ( `goods_id` = 'GM0X15ZEJ9D1V2C' ) LIMIT 1   [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `shop_lottery` [ RunTime:0.004000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_lottery` WHERE ( `g_id` = 39 ) LIMIT 1   [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `shop_user_lottery` [ RunTime:0.005001s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `shop_user_lottery` WHERE ( `lot_id` = 4 ) AND ( `user_id` = 4005788 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `user_v_gold` [ RunTime:0.004000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `user_v_gold` WHERE ( `user_id` = 4005788 ) LIMIT 1   [ RunTime:0.000000s ]
+SQL: UPDATE `user_v_gold` SET `gold`=gold-50.00 WHERE ( `user_id` = 4005788 ) [ RunTime:0.000000s ]
+SQL: UPDATE `shop_user_lottery` SET `total_times`=total_times+1 WHERE ( `id` = 5 ) [ RunTime:0.023002s ]
+SQL: SHOW COLUMNS FROM `mdb_wisdom` [ RunTime:0.003000s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\boo\Core\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `mdb_wisdom` WHERE ( `id` = 4008 ) LIMIT 1   [ RunTime:0.001000s ]
+NOTIC: [8] Undefined variable: rand D:\wamp\www\php\MyWork\trunk\code\appweb\shop\Lib\Action\IndexAction.class.php 第 144 行.
+SQL: SHOW COLUMNS FROM `shop_lottery_record` [ RunTime:0.004000s ]
+SQL: INSERT INTO `shop_lottery_record` (`user_id`,`lot_id`,`rand_num`,`rst`,`cost`,`remark`,`add_time`) VALUES (4005788,4,null,0,'50.00','{\"wisdomId\":\"4008\"}','2016-04-12 16:54:28') [ RunTime:0.001000s ]
+ERR: 1048:Le champ 'rand_num' ne peut être vide (null)
+ [ SQL语句 ] : INSERT INTO `shop_lottery_record` (`user_id`,`lot_id`,`rand_num`,`rst`,`cost`,`remark`,`add_time`) VALUES (4005788,4,null,0,'50.00','{\"wisdomId\":\"4008\"}','2016-04-12 16:54:28')
+NOTIC: [8] Undefined index: msg D:\wamp\www\php\MyWork\trunk\code\appweb\shop\Lib\Action\CommonAction.class.php 第 40 行.
+

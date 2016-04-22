@@ -1,0 +1,61 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<!-- Secondary nav -->
+</div>
+<!-- Sidebar ends -->
+
+<!-- Content begins -->
+<div id="content">
+    <include file="Public:bav" />
+    <!-- Main content -->
+    <div class="wrapper">
+        	<div class="fluid">
+        		<form method='post' id="form1" name="form1" action="{:U('HomeOnline/doAddHomeDialog')}"  enctype="multipart/form-data">
+                    <div class="widget ">
+                        <div class="whead">
+                        <h6>添加首页【弹窗】配置</h6>
+                        <a href="{:getCurrentUrl()}" class="buttonH bBlue mb10 mt5">返回</a>
+                        <div class="clear"></div></div>
+                        <div class="formRow">
+                            <div class="grid3"><label>名称：<span class="req">*</span> </label></div>
+                            <div class="grid3"><input type="text" id="js_dialog_name" name="name" placeholder="名称"/></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>图片：<span class="req">*</span></label></div>
+                            <div class="grid7">
+                            	<img id="img_up_img_file" src="" height="220px" style="float:left;margin-right:8px;">
+                            	<input type="file" id="up_img_file" style="float:left;" name="up_img_0" size="24" style="opacity: 0;">
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>图片按钮文字：<span class="req">*</span></label></div>
+                            <div class="grid7"><input type="text" name="btn_txt" id="" placeholder="按钮文字"/></div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="formRow"><input type="submit" value="提 交" class="buttonM bBlack formSubmit" /><div class="clear"></div></div>
+                        <div class="clear"></div>
+                    </div>
+                    </form>
+            </div>
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<script>
+(function(){
+	$("#up_img_file").change(function(){
+		var objUrl = booGetObjectURL(this.files[0]) ;
+		if (objUrl) {
+			$("#img_up_img_file").attr("src", objUrl) ;
+		}
+	}) ;
+})();
+</script>
+<!-- Content ends -->
+<include file="Public:footer" />

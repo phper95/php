@@ -1,0 +1,135 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<script src="__JS__/dialog/artDialog.js?skin=default"></script>
+<div id="sidebar">
+	<include file="Public:left" />
+	<!-- Secondary nav -->
+    <div class="secNav">
+        <div class="secWrapper">
+            <!-- Tabs container -->
+            <form method="get" action="{:U('Wei/material')}">
+            <input type="hidden" value="{$Think.MODULE_NAME}" name="m"/>
+            <input type="hidden" value="{$Think.ACTION_NAME}" name="a"/>
+            <div id="tab-container" class="tab-container">
+				<ul class="iconsLine ic1 etabs">
+                    <li><a href="#alt2" title="">图册搜索:</a></li>
+                </ul>
+                <div class="divider"><span></span></div>
+                <div id="alt2">
+                	<!-- Sidebar forms -->
+                    <div class="sideWidget">
+                        <div class="formRow">
+                            <label>图册ID:</label>
+                            <input type="text" name="id" value="{$Think.get.id}" placeholder="图册ID" />
+                        </div>
+                        <div class="formRow">
+                           <label>图册标题:</label>
+                            <input type="text" name="title" value="{$Think.get.title}" placeholder="图册标题" /> 
+                        </div>
+                        <div class="formRow">
+                            <input type="submit" class="buttonS bLightBlue" value="搜索图册" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"><span></span></div>
+            </form>
+            <include file="Wei:opt" />
+       </div> 
+       <div class="clear"></div>
+   </div>
+</div>
+<!-- Sidebar ends -->
+    
+<!-- Content begins -->
+<div id="content">
+    <div class="contentTop">
+        <span class="pageTitle">图册管理</span>
+       	<div class="clear"></div>
+    </div>
+    
+    <include file="Public:bav" />
+    
+    <!-- Main content -->
+    <div class="wrapper">
+        <!-- Media table sample -->
+        <div class="widget check">
+            <div class="whead">
+            	<h6>图册列表</h6>
+            		<a href="{:U('Wei/addMaterial')}" class="buttonH bBlue">添加</a>
+            		<notempty name="Think.get.backurl">
+                   		<a href="{$Think.get.backurl}" class="buttonH bBlue mb10 mt5">返回</a>
+                 	</notempty >
+            	<div class="clear"></div>
+            </div>
+            <table cellpadding="0" cellspacing="0" width="100%" class="tDefault checkAll tMedia" id="checkAll">
+                <thead>
+                    <tr>
+                        <td width="10">ID</td>
+                        <td width="100">名称</td>
+                        <td width="50">封面</td>
+                        <td>关键词</td>
+                        <td>标签</td>
+                        <td width="60">图片数量</td>
+                        <td width="60">排序权重</td>
+                        <td width="60">状态</td>
+                        <td width="80">操作</td>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td colspan="9">
+                        	<empty name="list">
+                        		木油满足您强烈需求的图册了。。
+                        	<else />
+                            <div class="tPages">
+                                <ul class="pages">
+                                    {$page}
+                                </ul>
+                            </div>
+                            </empty>
+                        </td>
+                    </tr>
+                </tfoot>
+                <tbody>
+                	<volist name="list" id="vo">
+		            <tr>
+		                <td>{$vo.id}</td>
+		                <td>{$vo.name}</td>
+		                <td><a href="{:U('Wei/uploadMatPic',array('id'=>$vo['id']))}"><img src="{$vo.img_url|default='__PUBLIC__/images/quetu.jpg'}" height="70px;" /></a></td>
+		                <td>{$vo.keywords}</td>
+		                <td>{$vo.tags}</td>
+		                <td>{$vo.imgs}</td>
+		                <td>{$vo.sort}</td>
+		                <td>
+		                	<eq name="vo.open" value="1"><span class="greenBack">OK</span> <else /><span class="redBack">NO</span></eq>
+		                </td>
+		                <td>
+		                	<!-- Simple buttons with caret -->
+	                        <div class="btn-group" style="float: left;">
+	                            <a href="#" class="buttonM bDefault opt" data-toggle="dropdown">点我 <span class="caret"></span></a>
+	                            <ul class="dropdown-menu pull-right">
+	                                <li><a href="{:U('Wei/editMaterial',array('id'=>$vo['id']))}"><span class="icos-view"></span>查看</a></li>
+	                                <li><a href="{:U('Wei/materialImgList',array('id'=>$vo['id'],'backurl'=>urlencode(__SELF__)))}"><span class="icos-view"></span>图片列表</a></li>
+	                                <eq name="vo.open" value="1">
+	                                	<li><a href="{:U('Wei/closeMaterial',array('id'=>$vo['id']))}" onclick="return confirm('确认关闭么？');"><span class="icos-trash"></span>关闭</a></li>
+	                                <else />
+	                                	<li><a href="{:U('Wei/openMaterial',array('id'=>$vo['id']))}" onclick="return confirm('确认开启么？');"><span class="icos-view"></span>开启</a></li>
+	                                </eq>
+	                            </ul>
+	                        </div>
+		                </td>
+		            </tr>
+		            </volist>
+                </tbody>
+            </table>
+            <div id="xxsdf" style="display:none;min-width:600px;" class="fluid">sdfsdf</div>
+        </div>
+     
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+<include file="Public:footer" />

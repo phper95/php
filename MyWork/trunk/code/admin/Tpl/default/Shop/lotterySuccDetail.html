@@ -1,0 +1,76 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<!-- Secondary nav -->
+</div>
+<!-- Sidebar ends -->
+
+<!-- Content begins -->
+<div id="content">
+    <include file="Public:bav" />
+    <!-- Main content -->
+    <div class="wrapper">
+        	<div class="fluid">
+        		<form method='post' id="form1" name="form1" action="{:U('Shop/doLotterySuccEdit')}"  enctype="multipart/form-data">
+                    <div class="widget ">
+                        <div class="whead">
+                        <h6>中奖结果处理</h6>
+                        <a href="{:getCurrentUrl()}" class="buttonH bBlue mb10 mt5">返回</a>
+                        <div class="clear"></div></div>
+                        <div class="formRow">
+                            <div class="grid3"><label>奖品信息</label></div>
+                            <div class="grid9">
+                            	<div>商品名称：{$vo.goods.name}</div>
+                            	<div>中奖用户：{$vo.member.name} ({$vo.user_id})</div>
+                            	<div>配送信息：
+                            		<empty name="vo.addr">
+                            			无
+                            		<else />
+                            			{$vo.addr.name} &nbsp;&nbsp;&nbsp;&nbsp; 
+                            			{$vo.addr.phone}&nbsp;&nbsp;&nbsp;&nbsp;
+                            			{$vo.addr.addr}
+                            		</empty>
+								</div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>状态:</label></div>
+                            <div class="grid1">
+                            	<select name="state">
+		                            <volist name="state" id="st">
+		                            	<if condition="$key == $vo['state']">
+		                            		<option selected="selected" value="{$key}">{$st}</option>
+		                            	<else />
+		                            		<option value="{$key}">{$st}</option>
+		                            	</if>
+		                            </volist>
+	                        	</select>
+                        	</div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                            <div class="grid3"><label>处理结果:</label></div>
+                            <div class="grid9"><textarea rows="8" cols="" name="remark">{$vo.remark}</textarea></div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                         <div class="formRow">
+                        	<input type="hidden" name="id" value="{$vo.id}" >
+                        	<input type="submit" value="提 交" class="buttonM bBlack formSubmit" /><div class="clear"></div>
+                        </div>
+                        <div class="clear"></div>
+                    
+                    </div>
+                    </form>
+            </div>
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<!-- Content ends -->
+
+<include file="Public:footer" />

@@ -1,0 +1,101 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<!-- Secondary nav -->
+</div>
+<!-- Sidebar ends -->
+
+<!-- Content begins -->
+<div id="content">
+     <div class="contentTop">
+        <span class="pageTitle">活动管理</span>
+       	<div class="clear"></div>
+    </div>
+    
+    <include file="Public:bav" />
+    
+    <!-- Main content -->
+    <div class="wrapper">
+        <!-- Media table sample -->
+        <div class="widget check">
+            <div class="whead">
+            	<h6>题库列表</h6>
+            	<a href="http://ser3.graphmovie.com/gmspanel/controlboard/eggmvrank_test.html" target="_blank" class="buttonH bGreen">生成</a>
+            	<notempty name="Think.get.backurl">
+                   	<a href="{$Think.get.backurl}" class="buttonH bBlue mb10 mt5">返回</a>
+                 </notempty >
+            	<div class="clear"></div>
+            </div>
+           <form method='post' id="form1" name="form1" action="{:U('Active/doChooseExam')}"  enctype="multipart/form-data">
+            <table cellpadding="0" cellspacing="0" width="100%" class="tDefault checkAll tMedia" id="checkAll">
+                <thead>
+                    <tr>
+                        <td width="10">ID</td>
+                        <td width="50">图片</td>
+                        <td width="200">字</td>
+                        <td>词</td>
+                        <td>答案</td>
+                        <td width="10"> </td>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td colspan="7">
+                        	<empty name="list">
+                        		木油满足您强烈需求的Game，您可以添加一部咩？
+                        	<else />
+                        	<input type="submit" value="提 交" class="buttonM bBlack formSubmit" /><div class="clear"></div>
+                            <div class="tPages" style="float:left;">
+                                <ul class="pages">
+                                    {$page}
+                                </ul>
+                            </div>
+                            </empty>
+                        </td>
+                    </tr>
+                </tfoot>
+                <tbody>
+                	<volist name="list" id="vo">
+		            <tr>
+		                <td>{$vo.id}<input type="hidden" name="ids[]" value="{$vo.id}"/></td>
+		                <td><img src="{$vo.image|default='__PUBLIC__/images/quetu.jpg'}" height="180px;" /></td>
+		                <td>
+		                	<volist name="vo.fonts" id="f">
+		                		<span class="blueBack">{$f}</span>&nbsp;
+		                	</volist>
+		                	<br /><br />
+		                	<span style="display:none;" class="js-script-data">{$vo.script|json_encode}</span>
+		                </td>
+		                <td>
+		                	<volist name="vo.names" id="n">
+		                		<span class="greenBack">{$n}</span><br /><br />
+		                	</volist>
+		                </td>
+		                <td>{$vo.answer}</td>
+		                <td><input type="checkbox" <eq name="vo.open" value="1">checked="checked"</eq> name="check-{$vo.id}" value="1"/></td>
+		            </tr>
+		            </volist>
+                </tbody>
+            </table>
+            </form>
+        </div>
+     
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<script>
+(function(){
+	
+	function json2str(o) {
+		return "{a:'"+o.a+"',l:"+o.l+",f:["+o.f+"]}";
+	}
+	$('.js-script-data').each(function(){
+		var script = $.parseJSON($(this).html());
+		$(this).html(json2str(script)).show();
+	});
+})();
+</script>
+<!-- Content ends -->
+<include file="Public:footer" />

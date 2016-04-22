@@ -1,0 +1,117 @@
+<include file="Public:header" />
+<!-- Sidebar begins -->
+<div id="sidebar">
+	<include file="Public:left" />
+	<include file="Statistic:opt" />
+</div>
+<!-- Sidebar ends -->
+    
+<!-- Content begins -->
+<div id="content">
+	<div class="contentTop">
+        <span class="pageTitle">影片播放情况统计</span>
+        <div class="clear"></div>
+    </div>
+    <!-- Breadcrumbs line -->
+    <include file="Public:bav" />
+    
+    <!-- Main content -->
+    <div class="wrapper">
+    	<div class="widget">
+    		<div class="whead fluid">
+    			<h6>查询</h6>
+				<div class="clear"></div>
+    		</div>
+    		<script language="javascript" type="text/javascript" src="__JS__/My97DatePicker/WdatePicker.js"></script>
+    		<form method='post' id="form1" name="form1" action="{:U('Statistic/moviePlayed')}"  enctype="multipart/form-data">
+    		<div class="formRow">
+            	<div style="float:left;"><label>日期：</label></div>
+                <div style="float:left;width:120px;">
+                     <span class="grid12"><input type="text" onClick="WdatePicker()" name="s_day" value="{$Think.post.s_day|default=''}"></span>
+                </div>
+                <!--<div style="float:left;padding:0px 5px;"><label>&nbsp;到</label></div>
+                <div style="float:left;width:120px;">
+                     <span class="grid12"><input type="text" onClick="WdatePicker()" name="e_day" value="{$Think.post.e_day|default=''}"></span>
+                </div>
+                --><input type="submit" value="提 交" class="buttonM bBlack formSubmit" /><div class="clear"></div>
+                <div class="clear"></div>
+            </div>
+            </form>
+    	</div>
+    	
+    	<div class="widget fluid">
+    		<div class="whead fluid">
+    			<h6 id="statistic_movie_play_table_head">结果 </h6>
+				<div class="clear"></div>
+    		</div>
+    		<table cellpadding="0" cellspacing="0" width="100%" class="tDefault" id="resize" style="max-height:100px;">
+                <thead>
+                    <tr>
+                    	<td width="40" class="sortCol">ID<span></span></td>
+		                <td >影片</td>
+		                <td width="40" class="sortCol">共计<span></span></td>
+		                <for start="0" end="24">
+							<td width="40" class="sortCol">{$i}<span></span></td>
+						</for>
+                    </tr>
+                </thead>
+                <tfoot>
+                	<tr>
+                		<td colspan="27"><a id="statistic_movie_play_more">加载更多？</a></td>
+                	</tr>
+                </tfoot>
+                <tbody id="statistic_movie_play_list">
+                </tbody>
+            </table>
+    	</div>   
+    	
+    </div>
+    <!-- Main content ends -->
+    
+</div>
+<script>
+(function(){
+	var rst = {:json_encode($rst)};
+	var movies = {:json_encode($movies)};
+	var $obj = $('#statistic_movie_play_list');
+	var total_count =  count = {:count($rst)};
+	
+	var num = 100;
+	var color = ['','#ff6666','#e55c5c','#cc5252','#b34747','#993d3d','#803333','#662929','#4d1f1f','#331414','#1a0a0a'];
+	
+	function show(){
+		var mimica = num; // 每次的条数
+		var html = '';
+		var len = color.length-1;
+		for (var id in rst) {
+			mimica --;
+			if (mimica<0) {
+				//setTimeout(show,500);
+				break;
+			}
+			html = html + '<tr>'
+					 + '<td>' + id + '</td>'
+					 + '<td>' + movies[id] + '</td>'
+					 + '<td>' + rst[id].t_p + '</td>';
+			for (var i=0; i<24; i++) {
+				var td_num = (typeof rst[id][i] != 'undefined' ? rst[id][i].play : 0);
+				var back_color = td_num == 0 ? 0 : Math.ceil(parseInt(td_num) / 10);
+				back_color  = back_color > len  ? len : back_color;
+				var style = 'style="'+(color[back_color] == ''? '': ('color:#fff;background-color:'+color[back_color]))+'"';
+				html = html + '<td '+style+'>' + td_num + '</td>';
+			}
+				html += '</tr>'
+			delete(rst[id]);
+		}
+		$obj.append(html);
+		count -= (num-mimica);
+		$('#statistic_movie_play_table_head').html('结果，共（'+total_count+'）--(还有'+count+'条未展示)');
+		$('#statistic_movie_play_more').html('再加载'+Math.min(count,num)+'条？');
+	}
+	$('#statistic_movie_play_more').click(function(){
+		show();
+	});
+	show();
+})();
+</script>
+<include file="Public:footer" />
