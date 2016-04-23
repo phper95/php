@@ -12,7 +12,7 @@ class IndexAction extends CommonAction {
 		$Model=new Model();
 		//$list = $Model->table('shop_goods,shop_lottery')->field("shop_goods.*,".'"'.NOW_DATE.'"'." - shop_lottery.start_time,shop_lottery.end_time-".'"'.NOW_DATE.'"')->where('shop_goods.id = shop_lottery.g_id' )->where(array('shop_goods.on_sale_time'=>array('lt',NOW_DATE),'shop_goods.off_sale_time'=>array('gt',NOW_DATE),'shop_goods.cat_id'=>array('eq',1)))->order('13,14 desc')->limit(20)->select();
 		//$list = $Model->table('shop_goods,shop_lottery')->field("shop_goods.*,CASE WHEN NOW() - shop_lottery.start_time>0 and shop_lottery.end_time-NOW() >0 THEN 0 END")->where('shop_goods.id = shop_lottery.g_id' )->where(array('shop_goods.on_sale_time'=>array('lt',NOW_DATE),'shop_goods.off_sale_time'=>array('gt',NOW_DATE),'shop_goods.cat_id'=>array('eq',1)))->order('13')->limit(20)->select();
-		$sql = "SELECT shop_goods.*,CASE WHEN shop_goods.ku_cun = 0 THEN 3 WHEN NOW() - shop_lottery.end_time > 0 THEN 4 WHEN shop_lottery.start_time - NOW() > 0 THEN 2 ELSE 1 END as tm FROM `shop_goods`, `shop_lottery` WHERE ( shop_goods.id = shop_lottery.g_id ) AND ( shop_goods.on_sale_time < NOW() ) AND ( shop_goods.off_sale_time > NOW() ) AND (shop_goods.cat_id = 1) ORDER BY 14 LIMIT 20";
+		$sql = "SELECT shop_goods.*,CASE WHEN shop_goods.ku_cun = 0 THEN 3 WHEN NOW() - shop_lottery.end_time > 0 THEN 4 WHEN shop_lottery.start_time - NOW() > 0 THEN 2 ELSE 1 END as tm FROM `shop_goods`, `shop_lottery` WHERE ( shop_goods.id = shop_lottery.g_id ) AND ( shop_goods.on_sale_time < NOW() ) AND ( shop_goods.off_sale_time > NOW() ) AND (shop_goods.cat_id = 1 OR shop_goods.cat_id = 2) ORDER BY 14 LIMIT 22";
 		$list =$Model->query($sql);
 		//dump($Model->getLastSql());
 		//dump($list);exit;
@@ -25,6 +25,8 @@ class IndexAction extends CommonAction {
 				$list[$key]['lottery'] = $Lottery->where($map)->find();
 			}
 		}
+
+		//dump($list);exit;
 		$this->assign('list',$list);
 		
 		$user_id = userIdKeyDecode(I('userid'));
