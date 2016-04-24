@@ -85,8 +85,14 @@ text-overflow:ellipsis;      /* 当对象内文本溢出时显示省略标记(..
 	clear:both;
 }
 .content .line {
-	height:30px; background-color:#eee;
+	height:30px;
+	background-color:#eee;
+	position:relative;
+	z-index:0;
+
 }
+
+
 .narror {
 	position:relative;
 }
@@ -102,6 +108,8 @@ text-overflow:ellipsis;      /* 当对象内文本溢出时显示省略标记(..
 	height: 72px;
 	padding:0px;
 	background-color: #ebf0f2;
+	z-index: 0;
+	overflow: visible;
 }
 .banner-words-left{
 	height:24px;
@@ -109,7 +117,6 @@ text-overflow:ellipsis;      /* 当对象内文本溢出时显示省略标记(..
 	margin:24px 0px 24px 20px;
 	line-height:24px;
 	font-size:22px;
-	overflow:hidden;
 	color: #6e6e75;
 }
 .banner-words-right{
@@ -118,7 +125,6 @@ text-overflow:ellipsis;      /* 当对象内文本溢出时显示省略标记(..
 	margin:24px 20px 24px 0px;
 	line-height:24px;
 	font-size:22px;
-	overflow:hidden;
 	color: #19191e;
 }
 #shop_icon_guide{
@@ -126,11 +132,13 @@ text-overflow:ellipsis;      /* 当对象内文本溢出时显示省略标记(..
 	height:24px;
 	float: right;
 	margin:24px 10px 24px 0px;
-	overflow:hidden;
 }
-.mark{
+.content .swip-img .mark{
 	width:96px;
 	height:90px;
+	position: absolute;
+	top:-10px;
+	z-index: 9999999;
 }
 </style>
 </head>
@@ -164,7 +172,7 @@ text-overflow:ellipsis;      /* 当对象内文本溢出时显示省略标记(..
 			<?php if(empty($list)): ?><h1>还没上架任何商品哦，请稍后再进来吧。</h1><?php endif; ?>
 			<?php if(is_array($list)): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><div class="line"></div>
 			<div class="item" data-t="<?php echo ($vo["name"]); ?>" data-url='<?php echo U("Index/detail",array("k"=>$vo["goods_id"]),false,false,true);?>'>
-				<div class="swiper-container">
+				<div class="swiper-container" style="overflow:visible">
 					<div class="swiper-wrapper">
 						<?php if(is_array($vo["img_list"])): $i = 0; $__LIST__ = $vo["img_list"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$img): $mod = ($i % 2 );++$i;?><div class="swip-img swiper-slide">
 							<?php if($vo['cat_id'] == 1): ?><img class="mark" src="__PUBLIC__/image/shop_icon_lottery.png" alt="shop_icon_lottery">
