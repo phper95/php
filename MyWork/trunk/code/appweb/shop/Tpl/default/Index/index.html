@@ -39,7 +39,7 @@ body,html {font-size:0.8em;}
 	background:url('__PUBLIC__/image/shop_icont.png.png') no-repeat left center;background-size:auto 100%;
 	padding-left:1.5em;
 }
-.content {overflow:hidden;}
+.content {overflow:visible;}
 .content .swip-img{
 	line-height:0;
 }
@@ -59,7 +59,7 @@ body,html {font-size:0.8em;}
 }
 .bar .timer {
 	font-size:0.9em;
-	background:url('__PUBLIC__/image/shop_icon_time.png') no-repeat left center;background-size: auto 90%;
+	background:url('__PUBLIC__/image/shop_icon_time2.png') no-repeat left center;background-size: auto 90%;
 	padding:0.6em 0 0.6em 2.4em;float:left;color:#999;
 }
 .bar .timer span{
@@ -162,7 +162,7 @@ text-overflow:ellipsis;      /* 当对象内文本溢出时显示省略标记(..
 				<if condition="NOW_TIME elt 1456696800 and $_GET['pub_platform'] eq 'android'">
 					<!-- <div data-t="给梦想一个机会" data-url="http://caipiao.163.com/nfop/tgwdownload/index.htm?from=tgwweidong4" class="item swiper-slide" data-upvc="0" style="background-image:url(news/4/b.jpg);"> </div> -->
 				</if>
-				<div data-t="转盘抽奖" data-url="http://192.168.0.19/php/MyWork/trunk/code/appweb/shop/index.php?m=Index&a=rotateLottery&k=GM0X15ZEJ9D1V2C&userid=99G3HPA2" class="item swiper-slide" style="background-image:url(news/1/b.jpg);"> </div>
+				<div data-t="转盘抽奖" data-url='{:U("Index/rotateLottery",array("k"=>$vo["goods_id"]),false,false,true)}' class="item swiper-slide" style="background-image:url(news/1/b.jpg);"> </div>
 			</div>
 
 			<div class="banner">
@@ -178,45 +178,51 @@ text-overflow:ellipsis;      /* 当对象内文本溢出时显示省略标记(..
 			</empty>
 			<volist name="list" id="vo">
 			<div class="line"></div>
-			<div class="item" data-t="{$vo.name}" data-url='{:U("Index/detail",array("k"=>$vo["goods_id"]),false,false,true)}'>
-				<div class="swiper-container" style="overflow:visible">
-					<div class="swiper-wrapper">
-						<volist name="vo.img_list" id="img">
-						<div class="swip-img swiper-slide">
-							<if condition="$vo['cat_id'] eq 1" >
-								<img class="mark" src="__PUBLIC__/image/shop_icon_lottery.png" alt="shop_icon_lottery">
-							<elseif condition="$vo['cat_id'] eq 2" />
-								<img  class="mark" src="__PUBLIC__/image/shop_img_seckilling.png" alt="shop_img_seckilling">
-							</if>
-							<img data-src="{:str_replace('ser3.graphmovie.com','avatar.graphmovie.com',$img['url'])}" class="swiper-lazy">
-			                <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+			<if condition="$vo['cat_id'] eq 1">
+				<div class="item" data-t="{$vo.name}" data-url='{:U("Index/detail",array("k"=>$vo["goods_id"]),false,false,true)}'>
+			<elseif condition="$vo['cat_id'] eq 2" />
+				<div class="item" data-t="{$vo.name}" data-url='{:U("Index/exchangeDetail",array("k"=>$vo["goods_id"]),false,false,true)}'>
+			</if>
+
+
+					<div class="swiper-container" style="overflow:visible">
+						<div class="swiper-wrapper">
+							<volist name="vo.img_list" id="img">
+							<div class="swip-img swiper-slide">
+								<if condition="$vo['cat_id'] eq 1" >
+									<img class="mark" src="__PUBLIC__/image/shop_icon_lottery.png" alt="shop_icon_lottery">
+								<elseif condition="$vo['cat_id'] eq 2" />
+									<img  class="mark" src="__PUBLIC__/image/shop_img_seckilling.png" alt="shop_img_seckilling">
+								</if>
+								<img data-src="{:str_replace('ser3.graphmovie.com','avatar.graphmovie.com',$img['url'])}" class="swiper-lazy">
+								<div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+							</div>
+							</volist>
 						</div>
-						</volist>
+					</div>
+					<div class="info">
+						<h4 class="in-line">{$vo.name}</h4>
+						<div>{$vo.desc}</div>
+						<div>{:formartDate($vo['lottery']['start_time'],'Y-m-d H:i')} 总共{$vo.total_num}件，等你来抽</div>
+					</div>
+					<div class="bar">
+							<if condition="strtotime($vo['lottery']['start_time']) gt NOW_TIME" >
+								<div class="timer"><span class="js-timer" data-t="{:strtotime($vo['lottery']['start_time'])}"></span>  后开始</div>
+								<span class="btn blue">{:Intval($vo['price'])} 金币</span>
+							<elseif condition="strtotime($vo['lottery']['end_time']) gt NOW_TIME"  />
+								<div class="timer"><span class="js-timer" style="color:#999;" data-t="{:strtotime($vo['lottery']['end_time'])}"></span>  后结束</div>
+								<if condition="$vo['ku_cun'] gt 0">
+									<span class="btn blue">{:Intval($vo['price'])} 金币</span>
+								<else />
+									<span class="btn grery">已抽完</span>
+								</if>
+							<else />
+								<div class="timer">已结束</div>
+								<span class="btn grery">{:Intval($vo['price'])} 金币</span>
+							</if>
+						<div class="clear"></div>
 					</div>
 				</div>
-				<div class="info">
-					<h4 class="in-line">{$vo.name}</h4>
-					<div>{$vo.desc}</div>
-					<div>{:formartDate($vo['lottery']['start_time'],'Y-m-d H:i')} 总共{$vo.total_num}件，等你来抽</div>
-				</div>
-				<div class="bar">
-						<if condition="strtotime($vo['lottery']['start_time']) gt NOW_TIME" >
-							<div class="timer"><span class="js-timer" data-t="{:strtotime($vo['lottery']['start_time'])}"></span>  后开始</div>
-							<span class="btn blue">{:Intval($vo['price'])} 金币</span>
-						<elseif condition="strtotime($vo['lottery']['end_time']) gt NOW_TIME"  />
-							<div class="timer"><span class="js-timer" style="color:#999;" data-t="{:strtotime($vo['lottery']['end_time'])}"></span>  后结束</div>
-							<if condition="$vo['ku_cun'] gt 0">
-								<span class="btn blue">{:Intval($vo['price'])} 金币</span>
-							<else />
-								<span class="btn grery">已抽完</span>
-							</if>
-						<else />
-							<div class="timer">已结束</div>
-							<span class="btn grery">{:Intval($vo['price'])} 金币</span>
-						</if>
-					<div class="clear"></div>
-				</div>
-			</div>
 			</volist>
 		</div>
 	</div>

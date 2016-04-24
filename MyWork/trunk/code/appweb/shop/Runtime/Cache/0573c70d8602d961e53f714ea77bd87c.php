@@ -39,7 +39,7 @@ body,html {font-size:0.8em;}
 	background:url('__PUBLIC__/image/shop_icont.png.png') no-repeat left center;background-size:auto 100%;
 	padding-left:1.5em;
 }
-.content {overflow:hidden;}
+.content {overflow:visible;}
 .content .swip-img{
 	line-height:0;
 }
@@ -59,7 +59,7 @@ body,html {font-size:0.8em;}
 }
 .bar .timer {
 	font-size:0.9em;
-	background:url('__PUBLIC__/image/shop_icon_time.png') no-repeat left center;background-size: auto 90%;
+	background:url('__PUBLIC__/image/shop_icon_time2.png') no-repeat left center;background-size: auto 90%;
 	padding:0.6em 0 0.6em 2.4em;float:left;color:#999;
 }
 .bar .timer span{
@@ -158,7 +158,7 @@ text-overflow:ellipsis;      /* 当对象内文本溢出时显示省略标记(..
 
 			<div class="swiper-wrapper" id="nav_head1">
 				<?php if(NOW_TIME <= 1456696800 and $_GET['pub_platform'] == 'android'): ?><!-- <div data-t="给梦想一个机会" data-url="http://caipiao.163.com/nfop/tgwdownload/index.htm?from=tgwweidong4" class="item swiper-slide" data-upvc="0" style="background-image:url(news/4/b.jpg);"> </div> --><?php endif; ?>
-				<div data-t="转盘抽奖" data-url="http://192.168.0.19/php/MyWork/trunk/code/appweb/shop/index.php?m=Index&a=rotateLottery&k=GM0X15ZEJ9D1V2C&userid=99G3HPA2" class="item swiper-slide" style="background-image:url(news/1/b.jpg);"> </div>
+				<div data-t="转盘抽奖" data-url='<?php echo U("Index/rotateLottery",array("k"=>$vo["goods_id"]),false,false,true);?>' class="item swiper-slide" style="background-image:url(news/1/b.jpg);"> </div>
 			</div>
 
 			<div class="banner">
@@ -171,37 +171,41 @@ text-overflow:ellipsis;      /* 当对象内文本溢出时显示省略标记(..
 		<div class="content">
 			<?php if(empty($list)): ?><h1>还没上架任何商品哦，请稍后再进来吧。</h1><?php endif; ?>
 			<?php if(is_array($list)): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><div class="line"></div>
-			<div class="item" data-t="<?php echo ($vo["name"]); ?>" data-url='<?php echo U("Index/detail",array("k"=>$vo["goods_id"]),false,false,true);?>'>
-				<div class="swiper-container" style="overflow:visible">
-					<div class="swiper-wrapper">
-						<?php if(is_array($vo["img_list"])): $i = 0; $__LIST__ = $vo["img_list"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$img): $mod = ($i % 2 );++$i;?><div class="swip-img swiper-slide">
-							<?php if($vo['cat_id'] == 1): ?><img class="mark" src="__PUBLIC__/image/shop_icon_lottery.png" alt="shop_icon_lottery">
-							<?php elseif($vo['cat_id'] == 2): ?>
-								<img  class="mark" src="__PUBLIC__/image/shop_img_seckilling.png" alt="shop_img_seckilling"><?php endif; ?>
-							<img data-src="<?php echo str_replace('ser3.graphmovie.com','avatar.graphmovie.com',$img['url']);?>" class="swiper-lazy">
-			                <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-						</div><?php endforeach; endif; else: echo "" ;endif; ?>
+			<?php if($vo['cat_id'] == 1): ?><div class="item" data-t="<?php echo ($vo["name"]); ?>" data-url='<?php echo U("Index/detail",array("k"=>$vo["goods_id"]),false,false,true);?>'>
+			<?php elseif($vo['cat_id'] == 2): ?>
+				<div class="item" data-t="<?php echo ($vo["name"]); ?>" data-url='<?php echo U("Index/exchangeDetail",array("k"=>$vo["goods_id"]),false,false,true);?>'><?php endif; ?>
+
+
+					<div class="swiper-container" style="overflow:visible">
+						<div class="swiper-wrapper">
+							<?php if(is_array($vo["img_list"])): $i = 0; $__LIST__ = $vo["img_list"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$img): $mod = ($i % 2 );++$i;?><div class="swip-img swiper-slide">
+								<?php if($vo['cat_id'] == 1): ?><img class="mark" src="__PUBLIC__/image/shop_icon_lottery.png" alt="shop_icon_lottery">
+								<?php elseif($vo['cat_id'] == 2): ?>
+									<img  class="mark" src="__PUBLIC__/image/shop_img_seckilling.png" alt="shop_img_seckilling"><?php endif; ?>
+								<img data-src="<?php echo str_replace('ser3.graphmovie.com','avatar.graphmovie.com',$img['url']);?>" class="swiper-lazy">
+								<div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+							</div><?php endforeach; endif; else: echo "" ;endif; ?>
+						</div>
 					</div>
-				</div>
-				<div class="info">
-					<h4 class="in-line"><?php echo ($vo["name"]); ?></h4>
-					<div><?php echo ($vo["desc"]); ?></div>
-					<div><?php echo formartDate($vo['lottery']['start_time'],'Y-m-d H:i');?> 总共<?php echo ($vo["total_num"]); ?>件，等你来抽</div>
-				</div>
-				<div class="bar">
-						<?php if(strtotime($vo['lottery']['start_time']) > NOW_TIME): ?><div class="timer"><span class="js-timer" data-t="<?php echo strtotime($vo['lottery']['start_time']);?>"></span>  后开始</div>
-							<span class="btn blue"><?php echo Intval($vo['price']);?> 金币</span>
-						<?php elseif(strtotime($vo['lottery']['end_time']) > NOW_TIME): ?>
-							<div class="timer"><span class="js-timer" style="color:#999;" data-t="<?php echo strtotime($vo['lottery']['end_time']);?>"></span>  后结束</div>
-							<?php if($vo['ku_cun'] > 0): ?><span class="btn blue"><?php echo Intval($vo['price']);?> 金币</span>
+					<div class="info">
+						<h4 class="in-line"><?php echo ($vo["name"]); ?></h4>
+						<div><?php echo ($vo["desc"]); ?></div>
+						<div><?php echo formartDate($vo['lottery']['start_time'],'Y-m-d H:i');?> 总共<?php echo ($vo["total_num"]); ?>件，等你来抽</div>
+					</div>
+					<div class="bar">
+							<?php if(strtotime($vo['lottery']['start_time']) > NOW_TIME): ?><div class="timer"><span class="js-timer" data-t="<?php echo strtotime($vo['lottery']['start_time']);?>"></span>  后开始</div>
+								<span class="btn blue"><?php echo Intval($vo['price']);?> 金币</span>
+							<?php elseif(strtotime($vo['lottery']['end_time']) > NOW_TIME): ?>
+								<div class="timer"><span class="js-timer" style="color:#999;" data-t="<?php echo strtotime($vo['lottery']['end_time']);?>"></span>  后结束</div>
+								<?php if($vo['ku_cun'] > 0): ?><span class="btn blue"><?php echo Intval($vo['price']);?> 金币</span>
+								<?php else: ?>
+									<span class="btn grery">已抽完</span><?php endif; ?>
 							<?php else: ?>
-								<span class="btn grery">已抽完</span><?php endif; ?>
-						<?php else: ?>
-							<div class="timer">已结束</div>
-							<span class="btn grery"><?php echo Intval($vo['price']);?> 金币</span><?php endif; ?>
-					<div class="clear"></div>
-				</div>
-			</div><?php endforeach; endif; else: echo "" ;endif; ?>
+								<div class="timer">已结束</div>
+								<span class="btn grery"><?php echo Intval($vo['price']);?> 金币</span><?php endif; ?>
+						<div class="clear"></div>
+					</div>
+				</div><?php endforeach; endif; else: echo "" ;endif; ?>
 		</div>
 	</div>
 </div>

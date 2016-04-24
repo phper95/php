@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -238,56 +238,48 @@ a{text-decoration:none;}
 			<div class="item">
 				<div class="swiper-container">
 					<div class="swiper-wrapper">
-						<volist name="vo.img_list" id="img">
-						<div class="swip-img swiper-slide">
+						<?php if(is_array($vo["img_list"])): $i = 0; $__LIST__ = $vo["img_list"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$img): $mod = ($i % 2 );++$i;?><div class="swip-img swiper-slide">
 							<img src="__PUBLIC__/image/shop_img_seckilling.png" id="shop_img_seckilling" alt="shop_img_seckilling" />
-							<img data-src="{:str_replace('ser3.graphmovie.com','avatar.graphmovie.com',$img['url'])}" class="swiper-lazy">
+							<img data-src="<?php echo str_replace('ser3.graphmovie.com','avatar.graphmovie.com',$img['url']);?>" class="swiper-lazy">
 			                <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-						</div>
-						</volist>
+						</div><?php endforeach; endif; else: echo "" ;endif; ?>
 					</div>
 				</div>
 				<div class="info">
-					<h4 class="in-line">{$vo.name}</h4>
-					<div>{$vo.desc}</div>
-					<div>{:formartDate($vo['lottery']['start_time'],'Y-m-d H:i')} 总共{$vo.total_num}件，等你来抽</div>
+					<h4 class="in-line"><?php echo ($vo["name"]); ?></h4>
+					<div><?php echo ($vo["desc"]); ?></div>
+					<div><?php echo formartDate($vo['lottery']['start_time'],'Y-m-d H:i');?> 总共<?php echo ($vo["total_num"]); ?>件，等你来抽</div>
 				</div>
 				<div class="bar">
-						<if condition="strtotime($vo['lottery']['start_time']) gt NOW_TIME" >
-							<div class="timer"><span class="js-timer" data-t="{:strtotime($vo['lottery']['start_time'])}"></span>  后开始</div>
-						<elseif condition="strtotime($vo['lottery']['end_time']) gt NOW_TIME"  />
-							<div class="timer"><span class="js-timer" style="color:#999;" data-s="1" data-t="{:strtotime($vo['lottery']['end_time'])}"></span>  后结束</div>
-						<else />
-							<div class="timer">已结束</div>
-						</if>
-						<span class="price">{:Intval($vo['price'])} 金币 / 次</span>
+						<?php if(strtotime($vo['lottery']['start_time']) > NOW_TIME): ?><div class="timer"><span class="js-timer" data-t="<?php echo strtotime($vo['lottery']['start_time']);?>"></span>  后开始</div>
+						<?php elseif(strtotime($vo['lottery']['end_time']) > NOW_TIME): ?>
+							<div class="timer"><span class="js-timer" style="color:#999;" data-s="1" data-t="<?php echo strtotime($vo['lottery']['end_time']);?>"></span>  后结束</div>
+						<?php else: ?>
+							<div class="timer">已结束</div><?php endif; ?>
+						<span class="price"><?php echo Intval($vo['price']);?> 金币 / 次</span>
 					<div class="clear"></div>
 				</div>
 			</div>
 			<div class="line"></div>
 			<div class="detail">
-				{$vo.intro}
+				<?php echo ($vo["intro"]); ?>
 			</div>
 			<div class="foot-bar">
-				<if condition="strtotime($vo['lottery']['start_time']) gt NOW_TIME" >
-					<a id="go_lottery" href="javascript:void(0);" class="btn blue" data-t="{$vo.lottery_times}">
+				<?php if(strtotime($vo['lottery']['start_time']) > NOW_TIME): ?><a id="go_lottery" href="javascript:void(0);" class="btn blue" data-t="<?php echo ($vo["lottery_times"]); ?>">
 						兑换（还未开始）
 			 		</a>
-				<elseif condition="strtotime($vo['lottery']['end_time']) gt NOW_TIME"  />
-					<if condition="$vo['ku_cun'] gt 0">
-						<a id="go_lottery" href="javascript:void(0);" class="btn blue" data-t="{$vo.lottery_times}">
-							兑换（还有{$vo.lottery_times}次机会）
+				<?php elseif(strtotime($vo['lottery']['end_time']) > NOW_TIME): ?>
+					<?php if($vo['ku_cun'] > 0): ?><a id="go_lottery" href="javascript:void(0);" class="btn blue" data-t="<?php echo ($vo["lottery_times"]); ?>">
+							兑换（还有<?php echo ($vo["lottery_times"]); ?>次机会）
 					 	</a>
-					<else />
-						<a id="go_no_more" href="javascript:void(0);" class="btn grery" data-t="{$vo.lottery_times}">
+					<?php else: ?>
+						<a id="go_no_more" href="javascript:void(0);" class="btn grery" data-t="<?php echo ($vo["lottery_times"]); ?>">
 							兑换（已兑完）
-					 	</a>
-					</if>
-				<else />
-					<a id="go_lottery_over" href="javascript:void(0);" class="btn grery" data-t="{$vo.lottery_times}">
+					 	</a><?php endif; ?>
+				<?php else: ?>
+					<a id="go_lottery_over" href="javascript:void(0);" class="btn grery" data-t="<?php echo ($vo["lottery_times"]); ?>">
 						兑换（已经结束）
-				 	</a>
-				</if>
+				 	</a><?php endif; ?>
 				
 			</div>
 			<div class="line"></div>
@@ -348,7 +340,7 @@ $('document').ready(function(){
 			$('body').append('<div id="'+id+'" style="top:0;left:0;width:100%;height:100%;background-color:rgba(0,0,0,0.8);position:fixed;z-index:50;"></div>');
 		}
 		if ($('#'+id).html() == '') {
-			$('#'+id).load("{:U('Index/setAddr',array('userid'=>$_GET['userid']))}");
+			$('#'+id).load("<?php echo U('Index/setAddr',array('userid'=>$_GET['userid']));?>");
 		}
 	});
 	
@@ -362,7 +354,7 @@ $('document').ready(function(){
 			booAlert('error'); return;
 		}
 		$.ajax({
-			url : '{:U("Index/bindAddr",array("userid"=>$_GET["userid"]))}',
+			url : '<?php echo U("Index/bindAddr",array("userid"=>$_GET["userid"]));?>',
 			type :'post',
 			data :{userid:userid, k:k, addr_k:addr_k, succ_k:succ_k},
 			success : function (data) {
@@ -396,7 +388,7 @@ $('document').ready(function(){
 				$(this).removeClass('blue').addClass('grery');
 				loading = true;
 				$.ajax({
-					url:'{:U("Index/doExchangeLottery")}',
+					url:'<?php echo U("Index/doExchangeLottery");?>',
 					type:'post',
 					data : {userid:userid, k:k},
 					success : function(data){
@@ -454,6 +446,16 @@ $('document').ready(function(){
 	});
 });
 </script>
-<include file="Public:bdtj" />
+<div style="display: none;">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?37321f95a4f926d7977d276c8c3280b6";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script></div>
+
 </body>
 </html>
